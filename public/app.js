@@ -447,13 +447,13 @@ function renderHeritagePage(cfg) {
     const url = optimizeCloudinaryUrl(cfg.image, 1400);
     bg.style.backgroundImage = `url('${url}')`;
   }
-  const t = document.querySelector('.heritage-title');
+  const t = document.querySelector('.heritage-inner .heritage-title');
   if (t && cfg.title) t.innerHTML = cfg.title; // allows <br/> in JSON
 
-  const b = document.querySelector('.heritage-body');
+  const b = document.querySelector('.heritage-inner .heritage-body');
   if (b && cfg.body) b.textContent = cfg.body;
 
-  const cta = document.querySelector('.heritage-cta');
+  const cta = document.querySelector('.heritage-inner .heritage-cta');
   if (cta) {
     if (cfg.cta_text) cta.textContent = cfg.cta_text;
     if (cfg.cta_href) cta.href = cfg.cta_href;
@@ -1920,6 +1920,23 @@ async function askLuvzAI() {
     lcInit();
   }
 
+})();
+
+// Hero parallax — desktop only, passive scroll
+(function initLuxuryHeroParallax() {
+  function bindHeroParallax() {
+    const heroImg = document.querySelector('#hero img, .hero-bg, .hero-image, .hero-img');
+    if (!heroImg || window.innerWidth <= 768) return;
+    window.addEventListener('scroll', function () {
+      heroImg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.28) + 'px)';
+    }, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindHeroParallax);
+  } else {
+    bindHeroParallax();
+  }
 })();
 
 window.LUVZ_CHAT_API_URL = window.LUVZ_CHAT_API_URL || 'http://127.0.0.1:8000/chat';
