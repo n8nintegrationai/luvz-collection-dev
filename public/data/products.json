@@ -470,7 +470,7 @@
   "new_collection": [
     {
       "badge": "new",
-      "price": 2000,
+      "price": 20000,
       "name": "Lotus Haaram",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Lotus%20Haaram%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
       "images": [
@@ -485,7 +485,7 @@
     },
     {
       "badge": "new",
-      "price": -2,
+      "price": 25000,
       "name": "Peacock Vanki",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Peacock%20Vanki%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
       "images": [
@@ -510,7 +510,7 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Kundan%20Maang%20Tikka%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": 0
+      "price": 5000
     },
     {
       "id": "nc4",
@@ -524,7 +524,7 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Kundan%20Maang%20Tikka%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": -1
+      "price": 45000
     },
     {
       "id": "nc5",
@@ -538,7 +538,7 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Kundan%20Maang%20Tikka%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": 0
+      "price": 15000
     },
     {
       "id": "nc6",
@@ -552,7 +552,7 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Kundan%20Maang%20Tikka%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": 0
+      "price": 25000
     }
   ],
   "heritage": {
