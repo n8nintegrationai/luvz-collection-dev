@@ -16,9 +16,9 @@
     },
     {
       "id": "bg2",
-      "name": "Floral Vanki Bangle",
+      "name": "Mayura Floral Kadas",
       "category": "Bangles",
-      "description": "Elegant floral design bangle. Lightweight and perfect for everyday and festive wear.",
+      "description": "Elegant Mayura Floral Kadas bangle. Lightweight and perfect for everyday and festive wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
@@ -26,13 +26,13 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588578/1.2_yz5wvn.jpg"
       ],
-      "price": 1200
+      "price": 8400
     },
     {
       "id": "bg3",
-      "name": "Floral Vanki Bangle",
+      "name": "Rajputi Gokhru Bangles",
       "category": "Bangles",
-      "description": "Elegant floral design bangle. Lightweight and perfect for everyday and festive wear.",
+      "description": "Elegant Rajputi Gokhru Bangles. Lightweight and perfect for everyday and festive wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
@@ -40,7 +40,7 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588603/3.2_cfrxvk.jpg"
       ],
-      "price": 1200
+      "price": 14999
     }
   ],
   "jhumkas": [
@@ -68,33 +68,33 @@
         "",
         ""
       ],
-      "price": 0
+      "price": 10000
     },
     {
       "id": "jh3",
-      "name": "Pearl Drop Jhumka",
+      "name": "Meenakari Peacock Jhumkis",
       "category": "Jhumkas",
-      "description": "Delicate jhumkas with freshwater pearl drops. Light-weight and perfect for daily wear.",
+      "description": "Delicate Meenakari Peacock Jhumkis. Light-weight and perfect for daily wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436177/2_skq8p9.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 6400
     },
     {
       "id": "jh4",
-      "name": "Pearl Drop Jhumka",
+      "name": "Padma Lotus Studs",
       "category": "Jhumkas",
-      "description": "Delicate jhumkas with freshwater pearl drops. Light-weight and perfect for daily wear.",
+      "description": "Padma Lotus Studs. Light-weight and perfect for daily wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436169/4_aanvyw.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 2100
     }
   ],
   "theme": "earth",
@@ -115,8 +115,8 @@
       "category": "Necklace"
     },
     {
-      "price": -3,
-      "name": "Lakshmi Pendant Set",
+      "price": 18500,
+      "name": "Navratna Aura Haar",
       "scarcity": "Only 3 left",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Lakshmi%20Pendant%20Set%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
       "images": [
@@ -126,13 +126,13 @@
       ],
       "id": "ts2",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773263396/2_yx2iae.jpg",
-      "description": "Intricate Lakshmi pendant in 92.5 silver with gold polish & ruby accents.",
+      "description": "Intricate Navratna Aura Haar in 92.5 silver with gold polish & ruby accents.",
       "category": "Earrings"
     },
     {
       "badge": "limited",
-      "price": 0,
-      "name": "Jhumka Earrings",
+      "price": 28000,
+      "name": "Rani Haar Grandeur",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Jhumka%20Earrings%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773263398/3_lxwxat.jpg",
@@ -141,14 +141,14 @@
       ],
       "id": "ts3",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773263398/3_lxwxat.jpg",
-      "description": "Antique gold-finish jhumkas with pearl drops. Lightweight for all-day .",
+      "description": "Antique Rani Haar Grandeur gold-finish jhumkas with pearl drops. Lightweight for all-day .",
       "category": "Necklace"
     },
     {
       "id": "ts4",
-      "name": "Jhumka Earrings",
+      "name": "Mulla Motu Jasmine Set",
       "category": "Earrings",
-      "description": "Antique gold-finish jhumkas with pearl drops. Lightweight for all-day wear.",
+      "description": "Mulla Motu Jasmine Set",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377677/4_ituvje.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377677/4_ituvje.jpg",
@@ -156,13 +156,13 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Jhumka%20Earrings%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": 0
+      "price": 16800
     },
     {
       "id": "ts5",
-      "name": "Jhumka",
+      "name": "Jhimikki Kammal Jhumkas",
       "category": "Earrings",
-      "description": "Antique gold-finish jhumkas with pearl drops. Lightweight for all-day wear.",
+      "description": "Jhimikki Kammal Jhumkas",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377676/5_wiskac.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377676/5_wiskac.jpg",
@@ -170,13 +170,13 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Jhumka%20Earrings%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": -1
+      "price": 5500
     },
     {
       "id": "ts6",
-      "name": "Jhumka Earrings",
+      "name": "Chandbali Noor",
       "category": "Jhumkas",
-      "description": "Antique gold-finish jhumkas with pearl drops. Lightweight for all-day wear.",
+      "description": "Chandbali Noor",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377676/6_dqnw48.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773377677/4_ituvje.jpg",
@@ -184,7 +184,7 @@
         ""
       ],
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Jhumka%20Earrings%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "price": 0
+      "price": 7500
     }
   ],
   "earrings": [
@@ -199,7 +199,7 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588639/1.1_u09uai.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg"
       ],
-      "price": 1650
+      "price": 5500
     },
     {
       "id": "er2",
@@ -212,20 +212,20 @@
         "",
         ""
       ],
-      "price": -3
+      "price": 7400
     },
     {
       "id": "er3",
-      "name": "Ruby Chandbali Earrings",
+      "name": "Trisha Ear Cuffs",
       "category": "Earrings",
-      "description": "Classic chandbali design with ruby-coloured stone accents and delicate filigree work.",
+      "description": "Classic Trisha Ear Cuffs.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436020/3_s1mmup.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 3300
     }
   ],
   "about": {
@@ -305,9 +305,9 @@
     },
     {
       "id": "nl3",
-      "name": "Guttapusalu Haram",
+      "name": "Manga Mala Choker",
       "category": "Necklace",
-      "description": "Traditional South Indian beaded necklace with 92.5 silver and 22K gold polish.",
+      "description": "Traditional South Indian beaded Manga Mala Choker",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/3_jojgit.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/3_jojgit.jpg",
@@ -315,13 +315,13 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589631/3.2_iawid6.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589635/3.3_w3b732.jpg"
       ],
-      "price": 4200
+      "price": 12000
     },
     {
       "id": "nl4",
-      "name": "Guttapusalu Haram",
+      "name": "Tara Layered Chain",
       "category": "Necklace",
-      "description": "Traditional South Indian beaded necklace with 92.5 silver and 22K gold polish.",
+      "description": "Tara Layered Chain",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/4_cvwv20.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/4_cvwv20.jpg",
@@ -329,13 +329,13 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589643/4.2_sbys7u.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589646/4.3_wk3kph.jpg"
       ],
-      "price": 5000
+      "price": 8800
     },
     {
       "id": "nl5",
-      "name": "Guttapusalu Haram",
+      "name": "Navratna Aura Haar",
       "category": "Necklace",
-      "description": "Traditional South Indian beaded necklace with 92.5 silver and 22K gold polish.",
+      "description": "Navratna Aura Haar",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/5_bauirw.jpg",
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/5_bauirw.jpg",
@@ -343,7 +343,7 @@
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589752/5.2_sqebsy.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773589757/5.3_qhrbxd.jpg"
       ],
-      "price": 0
+      "price": 16000
     }
   ],
   "reviews": [
@@ -429,42 +429,42 @@
     },
     {
       "id": "pd2",
-      "name": "Peacock Pendant Set",
+      "name": "Padma Lotus Studs",
       "category": "Pendant",
-      "description": "Stunning peacock motif pendant with matching earrings. Vivid enamel and 22K finish.",
+      "description": "Stunning Padma Lotus Studs with matching earrings. Vivid enamel and 22K finish.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435934/2_e8ts69.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 2100
     },
     {
       "id": "pd3",
-      "name": "Peacock Pendant Set",
+      "name": "Sia Pearl Clusters",
       "category": "Pendant",
-      "description": "Stunning peacock motif pendant with matching earrings. Vivid enamel and 22K finish.",
+      "description": "Sia Pearl Clusters. Bunch of Pearls Earring",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435933/3_yfwmof.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 4899
     },
     {
       "id": "pd4",
-      "name": "Peacock Pendant Set",
+      "name": "Devi Temple Earrings",
       "category": "Pendant",
-      "description": "Stunning peacock motif pendant with matching earrings. Vivid enamel and 22K finish.",
+      "description": "Stunning Devi Temple Earrings. Goddess Lakshmi Motif",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435933/4_swoe3l.jpg",
       "images": [
         "",
         "",
         ""
       ],
-      "price": 0
+      "price": 8500
     }
   ],
   "new_collection": [
