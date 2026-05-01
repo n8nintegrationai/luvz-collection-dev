@@ -1,0 +1,699 @@
+/* =============================================
+   LUVZ COLLECTION — AI Chat Widget v3
+   Black & Gold Luxury | Mobile Fullscreen
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap');
+
+/* ---------- Floating Trigger Button ---------- */
+#luvz-chat-trigger {
+  /* === Layout (keep as-is from original) === */
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  /* === Glassmorphism base === */
+  background: rgba(20, 12, 4, 0.55);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  /* === Gold border === */
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 50px;
+  padding: 12px 20px;
+
+  /* === Glowing gold drop-shadow (pulsing via animation) === */
+  box-shadow:
+    0 0 18px rgba(212, 175, 55, 0.35),
+    0 4px 24px rgba(170, 119, 28, 0.25),
+    inset 0 1px 0 rgba(251, 245, 183, 0.08);
+
+  /* === Float + glow animation === */
+  animation: luvzFloat 3.6s ease-in-out infinite,
+    luvzGoldPulse 3.6s ease-in-out infinite;
+
+  /* === Hover transition === */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#luvz-chat-trigger:hover {
+  animation-play-state: paused;
+  transform: scale(1.06) translateY(-2px);
+  box-shadow:
+    0 0 32px rgba(212, 175, 55, 0.6),
+    0 8px 40px rgba(170, 119, 28, 0.4),
+    inset 0 1px 0 rgba(251, 245, 183, 0.12);
+}
+
+.luvz-trigger-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  animation: luvzStarSpin 12s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
+}
+
+/* Pause star spin on button hover */
+#luvz-chat-trigger:hover .luvz-trigger-icon {
+  animation-play-state: paused;
+}
+
+.luvz-trigger-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #FBF5B7 0%, #D4AF37 50%, #AA771C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+#luvz-chat-trigger .luvz-trigger-label span {
+  color: #c9a84c;
+}
+
+#luvz-chat-trigger .luvz-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: #c9a84c;
+  border-radius: 50%;
+  border: 2px solid #0a0a0a;
+  animation: luvzPulse 2s infinite;
+}
+
+@keyframes luvzPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}
+
+/* Gentle float up/down */
+@keyframes luvzFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Gold glow pulse on box-shadow */
+@keyframes luvzGoldPulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 18px rgba(212, 175, 55, 0.35),
+      0 4px 24px rgba(170, 119, 28, 0.25),
+      inset 0 1px 0 rgba(251, 245, 183, 0.08);
+  }
+
+  50% {
+    box-shadow:
+      0 0 32px rgba(212, 175, 55, 0.65),
+      0 8px 36px rgba(170, 119, 28, 0.45),
+      inset 0 1px 0 rgba(251, 245, 183, 0.14);
+  }
+}
+
+/* Slow star rotation */
+@keyframes luvzStarSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- DESKTOP Popup ---------- */
+#luvz-chat-popup {
+  position: fixed;
+  bottom: 140px;
+  right: 16px;
+  z-index: 9998;
+  width: 370px;
+  height: 540px;
+  background: #0d0d0d;
+  border: 1px solid rgba(201, 168, 76, 0.32);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#luvz-chat-popup.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+/* ---------- MOBILE: True fullscreen ---------- */
+@media (max-width: 600px) {
+  #luvz-chat-trigger {
+    bottom: 80px;
+    right: 16px;
+  }
+
+  #luvz-chat-popup {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    border: none;
+    opacity: 1;
+    transform: translateY(100%);
+    z-index: 99999;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #luvz-chat-popup.is-visible {
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Header ---------- */
+.luvz-chat-header {
+  padding: 14px 16px;
+  padding-top: max(14px, env(safe-area-inset-top));
+  background: linear-gradient(135deg, #111 0%, #1a1505 100%);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+}
+
+.luvz-chat-avatar {
+  width: 36px;
+  height: 36px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.luvz-chat-avatar svg {
+  width: 16px;
+  height: 16px;
+  fill: #c9a84c;
+}
+
+.luvz-chat-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.luvz-chat-header-text h3 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: #e8d5a3;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.luvz-chat-header-text p {
+  margin: 2px 0 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(201, 168, 76, 0.5);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.luvz-online-dot {
+  width: 7px;
+  height: 7px;
+  background: #4caf7a;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Close button — always in header, never overlaps input */
+.luvz-close-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.luvz-close-btn:hover {
+  background: rgba(201, 168, 76, 0.12);
+}
+
+.luvz-close-btn svg {
+  width: 13px;
+  height: 13px;
+  fill: rgba(201, 168, 76, 0.7);
+}
+
+/* ---------- Messages Area ---------- */
+.luvz-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px 13px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.15) transparent;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent content from ever overflowing horizontally */
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.luvz-chat-messages::-webkit-scrollbar {
+  width: 3px;
+}
+
+.luvz-chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.15);
+  border-radius: 3px;
+}
+
+/* ---------- Message Bubbles ---------- */
+.luvz-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 86%;
+  animation: luvzMsgIn 0.22s ease;
+  /* Prevent messages from ever pushing layout wider */
+  min-width: 0;
+}
+
+@keyframes luvzMsgIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.luvz-msg.bot {
+  align-self: flex-start;
+}
+
+.luvz-msg.user {
+  align-self: flex-end;
+}
+
+.luvz-msg-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  /* Never exceed the message container width */
+  min-width: 0;
+  max-width: 100%;
+}
+
+.luvz-msg.bot .luvz-msg-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.14);
+  color: #d4c5a9;
+  border-bottom-left-radius: 4px;
+}
+
+.luvz-msg.user .luvz-msg-bubble {
+  background: rgba(201, 168, 76, 0.14);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  color: #e8d5a3;
+  border-bottom-right-radius: 4px;
+}
+
+.luvz-msg-bubble p {
+  margin: 0 0 8px;
+}
+
+.luvz-msg-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.luvz-msg-bubble strong {
+  font-weight: 500;
+  color: #e8d5a3;
+}
+
+.luvz-msg-bubble ul {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+
+.luvz-msg-bubble li {
+  margin-bottom: 6px;
+}
+
+/* Regular inline links */
+.luvz-msg-bubble a {
+  color: #c9a84c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+
+.luvz-source-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  /* Ensure the grid is at least as wide as the button + padding */
+  min-width: 200px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.luvz-source-card {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 168, 76, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.luvz-source-image {
+  width: 72px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.luvz-source-body {
+  /* min-width: 0; */
+  width: auto !important;
+  min-width: max-content;
+}
+
+.luvz-source-title {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #efe1bf;
+}
+
+.luvz-source-price {
+  margin-top: 4px;
+  color: #c9a84c;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.luvz-source-desc {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbbd9e;
+}
+
+.luvz-source-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+  color: #25d366;
+  text-decoration: none !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.luvz-source-cta:hover {
+  text-decoration: underline !important;
+}
+
+/* ---------- WhatsApp CTA Button ---------- */
+/* Issue 1 fix: clean small button, no background logo */
+.luvz-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 7px 12px;
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.28);
+  border-radius: 8px;
+  color: #25d366;
+  text-decoration: none !important;
+  font-family: 'Jost', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: background 0.18s;
+  /* No background image, no logo watermark */
+  background-image: none;
+  white-space: nowrap;
+  width: auto !important;
+  min-width: max-content;
+}
+
+.luvz-wa-btn:hover {
+  background: rgba(37, 211, 102, 0.18);
+  color: #25d366;
+}
+
+/* ---------- Typing Indicator ---------- */
+.luvz-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 11px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.11);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  animation: luvzMsgIn 0.22s ease;
+}
+
+.luvz-typing span {
+  width: 6px;
+  height: 6px;
+  background: rgba(201, 168, 76, 0.5);
+  border-radius: 50%;
+  animation: luvzBounce 1.2s infinite;
+}
+
+.luvz-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.luvz-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes luvzBounce {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* ---------- Suggestion Chips ---------- */
+.luvz-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 13px 4px;
+  flex-shrink: 0;
+}
+
+.luvz-chip {
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(201, 168, 76, 0.8);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  background: transparent;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  letter-spacing: 0.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.luvz-chip:hover {
+  background: rgba(201, 168, 76, 0.1);
+  color: #c9a84c;
+}
+
+/* ---------- Input Row ----------
+   Issue 2 fix: box-sizing + min-width:0 on input
+   ensures send button is NEVER pushed off screen
+   when mobile keyboard opens and viewport shrinks
+   -------------------------------------------- */
+.luvz-chat-input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 8px;
+  /* Critical: constrain to popup width */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  /* Never overflow the popup */
+  overflow: hidden;
+}
+
+#luvz-chat-input {
+  /* flex:1 + min-width:0 is the key fix —
+     without min-width:0, flex children can overflow */
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  /* forces flex to control width */
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 10px;
+  padding: 10px 13px;
+  color: #e8d5a3;
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  /* 16px prevents iOS auto-zoom on focus */
+  font-weight: 300;
+  outline: none;
+  resize: none;
+  min-height: 42px;
+  max-height: 110px;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+#luvz-chat-input::placeholder {
+  color: rgba(201, 168, 76, 0.28);
+}
+
+#luvz-chat-input:focus {
+  border-color: rgba(201, 168, 76, 0.48);
+}
+
+/* Send button — fixed size, never shrinks */
+#luvz-chat-send {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  /* never compress */
+  flex-shrink: 0;
+  /* never compress */
+  background: #c9a84c;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, transform 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#luvz-chat-send:hover {
+  background: #d4b55e;
+}
+
+#luvz-chat-send:active {
+  transform: scale(0.93);
+}
+
+#luvz-chat-send:disabled {
+  background: rgba(201, 168, 76, 0.22);
+  cursor: not-allowed;
+}
+
+#luvz-chat-send svg {
+  width: 16px;
+  height: 16px;
+  fill: #0a0a0a;
+  flex-shrink: 0;
+}
+
+/* === FIX 1: Hide floating Ask AI button on mobile === */
+@media (max-width: 480px) {
+  #luvz-chat-trigger {
+    padding: 14px;
+    border-radius: 50%;
+    gap: 0;
+  }
+
+  .luvz-trigger-label {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #luvz-chat-trigger {
+    display: none !important;
+  }
+}

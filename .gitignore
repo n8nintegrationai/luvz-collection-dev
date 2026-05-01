@@ -4,3 +4,5 @@
 !.dev.vars.example
 .env*
 !.env.example
+job_context.json
+HERO_ENHANCEMENT.md
