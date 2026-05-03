@@ -6836,22 +6836,122 @@
     #hero::before {
       content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        linear-gradient(105deg,
-          rgba(18,10,5,0.96) 0%, rgba(18,10,5,0.88) 18%, rgba(18,10,5,0.72) 32%,
-          rgba(18,10,5,0.40) 48%, rgba(18,10,5,0.10) 62%, transparent 75%),
-        linear-gradient(to top,
-          rgba(18,10,5,0.85) 0%, rgba(18,10,5,0.30) 25%, transparent 55%),
-        linear-gradient(to bottom,
-          rgba(18,10,5,0.40) 0%, transparent 20%);
+        linear-gradient(
+          108deg,
+          rgba(14, 8, 3, 0.93) 0%,
+          rgba(16, 9, 4, 0.84) 15%,
+          rgba(18, 10, 5, 0.70) 28%,
+          rgba(18, 10, 5, 0.38) 44%,
+          rgba(18, 10, 5, 0.10) 58%,
+          transparent 72%
+        ),
+        radial-gradient(
+          ellipse 70% 60% at 8% 55%,
+          rgba(30, 14, 4, 0.55) 0%,
+          rgba(20, 10, 4, 0.20) 50%,
+          transparent 75%
+        ),
+        linear-gradient(
+          to top,
+          rgba(12, 7, 2, 0.88) 0%,
+          rgba(14, 8, 3, 0.42) 20%,
+          rgba(16, 9, 4, 0.12) 40%,
+          transparent 60%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(10, 6, 2, 0.50) 0%,
+          rgba(14, 8, 3, 0.15) 12%,
+          transparent 25%
+        );
     }
 
     #hero::after {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background:
-        radial-gradient(ellipse 55% 50% at 22% 45%,
-          rgba(160,90,20,0.18) 0%, rgba(140,70,10,0.08) 40%, transparent 70%),
-        radial-gradient(ellipse 30% 35% at 18% 52%,
-          rgba(196,136,44,0.10) 0%, transparent 60%);
+        radial-gradient(
+          ellipse 75% 65% at 28% 42%,
+          rgba(155, 85, 18, 0.16) 0%,
+          rgba(135, 65, 10, 0.08) 40%,
+          transparent 68%
+        ),
+        radial-gradient(
+          ellipse 55% 50% at 48% 50%,
+          rgba(190, 130, 40, 0.07) 0%,
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 40% 55% at 72% 38%,
+          rgba(180, 120, 30, 0.10) 0%,
+          rgba(160, 100, 20, 0.04) 50%,
+          transparent 72%
+        ),
+        radial-gradient(
+          ellipse 35% 30% at 20% 56%,
+          rgba(196, 136, 44, 0.09) 0%,
+          transparent 60%
+        );
+    }
+
+    /* CHANGE 2: Atmospheric texture haze on left content area */
+    #hero .hero-content::before {
+      content: '';
+      position: absolute;
+      inset: -40px -60px -40px -80px;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          ellipse 90% 70% at 40% 50%,
+          rgba(22, 12, 4, 0.28) 0%,
+          rgba(18, 10, 4, 0.12) 45%,
+          transparent 75%
+        ),
+        radial-gradient(
+          ellipse 55% 45% at 15% 65%,
+          rgba(28, 14, 5, 0.20) 0%,
+          transparent 65%
+        ),
+        repeating-linear-gradient(
+          47deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 200, 100, 0.012) 2px,
+          rgba(255, 200, 100, 0.012) 3px
+        ),
+        repeating-linear-gradient(
+          -31deg,
+          transparent,
+          transparent 3px,
+          rgba(180, 120, 40, 0.008) 3px,
+          rgba(180, 120, 40, 0.008) 4px
+        );
+    }
+
+    /* CHANGE 4: Jewelry focal point — active when img.hero-img gains a wrapper class */
+    #hero .hero-right,
+    #hero .hero-image-wrap,
+    #hero .jewelry-wrap { position: relative; }
+    #hero .hero-right::after,
+    #hero .hero-image-wrap::after,
+    #hero .jewelry-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          ellipse 40% 35% at 82% 18%,
+          rgba(255, 220, 140, 0.10) 0%,
+          rgba(220, 170, 80, 0.04) 50%,
+          transparent 75%
+        ),
+        radial-gradient(
+          ellipse 55% 35% at 70% 88%,
+          rgba(196, 136, 44, 0.10) 0%,
+          transparent 65%
+        );
     }
 
     #hero img, #hero .hero-bg, #hero video {
@@ -6977,13 +7077,29 @@
       color: rgba(240,220,170,0.95) !important;
     }
 
-    /* ── CHANGE 3H: Mobile hero overlay override ── */
+    /* ── CHANGE 3H + CHANGE 8: Mobile hero overlay ── */
     @media (max-width: 768px) {
       #hero::before {
         background:
-          linear-gradient(to bottom,
-            rgba(18,10,5,0.55) 0%, rgba(18,10,5,0.25) 30%,
-            rgba(18,10,5,0.60) 65%, rgba(18,10,5,0.92) 100%) !important;
+          linear-gradient(
+            to bottom,
+            rgba(10, 6, 2, 0.60) 0%,
+            rgba(12, 7, 3, 0.28) 25%,
+            rgba(14, 8, 4, 0.18) 50%,
+            rgba(12, 7, 3, 0.65) 72%,
+            rgba(10, 6, 2, 0.94) 100%
+          ) !important;
+      }
+      #hero::after {
+        background:
+          radial-gradient(
+            ellipse 80% 50% at 50% 40%,
+            rgba(155, 85, 18, 0.12) 0%,
+            transparent 70%
+          ) !important;
+      }
+      #hero .hero-content::before {
+        display: none !important;
       }
     }
 
@@ -7053,38 +7169,44 @@
 
     /* ── HERO FIX v1.3 ── */
 
-    /* FIX 2: LUVZ title — high-contrast warm gold */
+    /* FIX 2 + CHANGE 5: LUVZ title — atmospheric diffuse glow */
     #hero h1,
     #hero .hero-title {
       color: #F0C96A !important;
       text-shadow:
-        0 0 60px rgba(240,180,60,0.55),
-        0 0 120px rgba(220,150,30,0.30),
-        0 2px 8px rgba(0,0,0,0.95),
-        0 4px 32px rgba(0,0,0,0.70) !important;
+        0 0 120px rgba(240, 175, 50, 0.28),
+        0 0 60px rgba(230, 160, 40, 0.22),
+        0 0 24px rgba(215, 145, 30, 0.18),
+        0 2px 10px rgba(0, 0, 0, 0.97),
+        0 6px 48px rgba(0, 0, 0, 0.65) !important;
+      letter-spacing: 0.09em !important;
+      margin-top: clamp(8px, 2vw, 16px) !important;
     }
     #hero .hero-title span:first-child {
       background: none !important;
       -webkit-text-fill-color: #F0C96A !important;
       filter: none !important;
       text-shadow:
-        0 0 60px rgba(240,180,60,0.55),
-        0 0 120px rgba(220,150,30,0.30),
-        0 2px 8px rgba(0,0,0,0.95),
-        0 4px 32px rgba(0,0,0,0.70) !important;
+        0 0 120px rgba(240, 175, 50, 0.28),
+        0 0 60px rgba(230, 160, 40, 0.22),
+        0 0 24px rgba(215, 145, 30, 0.18),
+        0 2px 10px rgba(0, 0, 0, 0.97),
+        0 6px 48px rgba(0, 0, 0, 0.65) !important;
     }
     #hero .hero-sub-title,
     #hero h2.collection-word,
     #hero .collection-text,
     #hero .hero-title span:last-child {
       color: #D4A84B !important;
-      letter-spacing: 0.35em !important;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.9) !important;
+      letter-spacing: 0.38em !important;
+      text-shadow:
+        0 0 40px rgba(200, 140, 40, 0.18),
+        0 1px 8px rgba(0, 0, 0, 0.95) !important;
       -webkit-text-fill-color: #D4A84B !important;
       background: none !important;
     }
 
-    /* FIX 3: Supporting text contrast */
+    /* FIX 3 + CHANGE 5: Supporting text contrast */
     #hero .hero-eyebrow,
     #hero .hero-label,
     #hero .hero-descriptor,
@@ -7093,7 +7215,10 @@
     #hero small,
     #hero .lc-eyebrow {
       color: rgba(240,210,140,0.90) !important;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.95), 0 0 20px rgba(0,0,0,0.7) !important;
+      text-shadow:
+        0 1px 10px rgba(0, 0, 0, 0.97),
+        0 0 30px rgba(0, 0, 0, 0.60) !important;
+      letter-spacing: 0.22em !important;
       opacity: 1 !important;
     }
     #hero .hero-features,
@@ -7108,31 +7233,40 @@
       opacity: 1 !important;
     }
 
-    /* FIX 4: Primary button — ghost gold glass */
+    /* FIX 4 + CHANGE 6: Primary button — ultra-restrained ghost */
     #hero a[href*="wa.me"],
     #hero .hero-btn-primary,
     #hero .btn-primary {
-      background: linear-gradient(135deg, rgba(196,136,44,0.22) 0%, rgba(160,100,20,0.12) 100%) !important;
-      border: 1.5px solid rgba(220,170,60,0.80) !important;
-      color: #F5DFA0 !important;
-      font-size: 11px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.30em !important;
+      background: transparent !important;
+      border: 1px solid rgba(210, 160, 55, 0.60) !important;
+      color: rgba(240, 215, 155, 0.90) !important;
+      font-size: 10px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.32em !important;
       text-transform: uppercase !important;
-      padding: 16px 36px !important;
-      border-radius: 2px !important;
-      box-shadow: 0 0 18px rgba(196,136,44,0.25), inset 0 1px 0 rgba(255,220,100,0.15) !important;
+      padding: 15px 38px !important;
+      border-radius: 1px !important;
+      box-shadow:
+        0 0 14px rgba(196, 136, 44, 0.12),
+        inset 0 1px 0 rgba(255, 215, 100, 0.08) !important;
       position: relative !important;
       overflow: hidden !important;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease !important;
+      transition:
+        border-color 0.7s ease,
+        color 0.7s ease,
+        box-shadow 0.7s ease,
+        background 0.7s ease !important;
     }
     #hero a[href*="wa.me"]:hover,
     #hero .hero-btn-primary:hover,
     #hero .btn-primary:hover {
-      border-color: rgba(240,190,70,1) !important;
-      color: #fff !important;
-      box-shadow: 0 0 32px rgba(196,136,44,0.45), 0 0 8px rgba(196,136,44,0.20), inset 0 1px 0 rgba(255,220,100,0.25) !important;
-      background: linear-gradient(135deg, rgba(196,136,44,0.32) 0%, rgba(160,100,20,0.20) 100%) !important;
+      border-color: rgba(230, 180, 70, 0.90) !important;
+      color: rgba(255, 235, 175, 1) !important;
+      box-shadow:
+        0 0 28px rgba(196, 136, 44, 0.28),
+        0 0 8px rgba(196, 136, 44, 0.12),
+        inset 0 1px 0 rgba(255, 215, 100, 0.15) !important;
+      background: rgba(196, 136, 44, 0.06) !important;
     }
     #hero a[href*="wa.me"]::before,
     #hero .hero-btn-primary::before {
@@ -7147,27 +7281,28 @@
     #hero a[href*="wa.me"]:hover::before,
     #hero .hero-btn-primary:hover::before { left: 150%; }
 
-    /* FIX 4: Secondary button */
+    /* FIX 4 + CHANGE 6: Secondary button */
     #hero .hero-btn-secondary,
     #hero .btn-secondary,
     #hero .browse-btn {
       background: transparent !important;
-      border: 1.5px solid rgba(240,210,140,0.40) !important;
-      color: rgba(240,210,140,0.85) !important;
-      font-size: 11px !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.30em !important;
+      border: 1px solid rgba(230, 200, 130, 0.22) !important;
+      color: rgba(230, 200, 130, 0.62) !important;
+      font-size: 10px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.32em !important;
       text-transform: uppercase !important;
-      padding: 16px 36px !important;
-      border-radius: 2px !important;
+      padding: 15px 38px !important;
+      border-radius: 1px !important;
       box-shadow: none !important;
-      transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease !important;
+      transition:
+        border-color 0.7s ease,
+        color 0.7s ease !important;
     }
     #hero .hero-btn-secondary:hover,
     #hero .btn-secondary:hover {
-      border-color: rgba(240,210,140,0.75) !important;
-      color: #fff !important;
-      background: rgba(240,210,140,0.06) !important;
+      border-color: rgba(230, 200, 130, 0.55) !important;
+      color: rgba(240, 220, 165, 0.95) !important;
     }
 
     /* FIX 5: Mobile — button spacing / scroll indicator stacking */
@@ -7257,6 +7392,33 @@
         0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.85; }
         50%       { transform: rotate(45deg) translateY(5px); opacity: 0.45; }
       }
+    }
+
+    /* CHANGE 7: Navbar blends into hero on initial load */
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) {
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 6, 2, 0.55) 0%,
+        rgba(10, 6, 2, 0.20) 70%,
+        transparent 100%
+      ) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+    }
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-link,
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) a {
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85) !important;
+      opacity: 0.88;
+    }
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-link:hover,
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) a:hover {
+      opacity: 1;
+    }
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-separator,
+    #nav:not(.stuck):not(.scrolled):not(.is-scrolled) hr {
+      opacity: 0.15 !important;
     }
 
     /* FIX 7: Remove gap between hero and proof-bar */
