@@ -279,75 +279,6 @@ const ro = new IntersectionObserver(es => {
 }, { threshold: .07 });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-/* ── Category meta ──────────────────── */
-const CAT_META = {
-  necklace: { icon: '📿', label: 'Necklace' },
-  pendant: { icon: '💎', label: 'Pendant' },
-  earrings: { icon: '✨', label: 'Earrings' },
-  bangles: { icon: '⭕', label: 'Bangles' },
-  jhumkas: { icon: '🔔', label: 'Jhumkas' },
-  sets: { icon: '👑', label: 'Sets' },
-};
-
-function initCategoryAutoScroll() {
-  const outer = document.querySelector('.cat-carousel-outer');
-  const track = document.getElementById('cat-grid');
-  if (!outer || !track) return;
-
-  // Touch device detection — reliable across all mobile browsers
-  const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-
-  // Desktop: CSS catScroll animation handles it. Nothing to do.
-  if (!isTouch) return;
-
-  // ── MOBILE ONLY ──────────────────────────────────────────────────
-  // CSS transform animation is unreliable on iOS Safari when the parent
-  // has overflow:hidden. Switch to setInterval + scrollLeft instead.
-
-  // Stop the CSS animation — JS takes over
-  track.style.animation = 'none';
-  track.style.webkitAnimation = 'none';
-
-  // Make outer scrollable (required for scrollLeft to work)
-  outer.style.overflowX = 'auto';
-  outer.style.overflowY = 'hidden';
-  // Hide scrollbar visually
-  outer.style.scrollbarWidth = 'none'; // Firefox
-  outer.style.msOverflowStyle = 'none'; // IE
-  // Webkit scrollbar hidden via existing CSS rule
-
-  let timer = null;
-  let isTouching = false;
-
-  function startScroll() {
-    if (timer) return; // prevent duplicate intervals
-    timer = setInterval(function () {
-      if (isTouching) return;
-      var half = track.scrollWidth / 2;
-      if (half <= 0) return;
-      outer.scrollLeft += 1;
-      if (outer.scrollLeft >= half) {
-        outer.scrollLeft = 0; // seamless loop: jump back to start
-      }
-    }, 20); // 20ms = ~50 fps, smooth but not heavy
-  }
-
-  function stopScroll() {
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-
-  outer.addEventListener('touchstart', function () {
-    isTouching = true;
-  }, { passive: true });
-
-  outer.addEventListener('touchend', function () {
-    // Short delay so momentum scroll settles before auto resumes
-    setTimeout(function () { isTouching = false; }, 800);
-  }, { passive: true });
-
-  // Start — delay one tick so scrollWidth is fully calculated
-  setTimeout(startScroll, 100);
-}
 
 /* ── Section meta ───────────────────── */
 const SM = {
@@ -723,25 +654,75 @@ function buildCard(p, sec) {
   </div></div>`;
 }
 
-/* ── Build category tile ────────────── */
-function buildCatTile(cat) {
-  const key = (cat.key || '').toLowerCase();
-  const meta = CAT_META[key] || { icon: '💍', label: cat.name || key };
-  const name = cat.name || meta.label;
-  // Always link to the category's own section
-  const anchor = cat.anchor || `category-${key}`;
-  const href = `#${anchor}`;
-  const fb = `https://placehold.co/300x400/141210/D4AF37?text=${encodeURIComponent(name)}`;
-  return `<a class="cat-tile reveal" href="${href}" aria-label="${name}" onclick="smoothScrollTo('${anchor}')">
-    <div class="cat-tile-img">
-      ${cat.image ? `<img loading="lazy" src="${optimizeCloudinaryUrl(cat.image, 500)}" srcset="${generateSrcset(cat.image, [300, 400, 500])}" sizes="(max-width: 768px) 90vw, 180px" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='${optimizeCloudinaryUrl(fb, 500)}'" decoding="async"/>` :
-      `<div class="cat-placeholder">${meta.icon}</div>`}
-    </div>
-    <div class="cat-tile-body">
-      <span class="cat-tile-name">${name}</span>
-      <span class="cat-tile-arrow">→</span>
-    </div>
-  </a>`;
+/* ── Build category bento ───────────── */
+function buildCategoryBento(data) {
+  const catConfig = [
+    { sectionKey: 'necklace',       anchor: 'category-necklace', imgIdx: 0, isNew: false },
+    { sectionKey: 'pendant',        anchor: 'category-pendant',  imgIdx: 0, isNew: false },
+    { sectionKey: 'earrings',       anchor: 'category-earrings', imgIdx: 0, isNew: false },
+    { sectionKey: 'sets',           anchor: 'category-sets',     imgIdx: 0, isNew: false },
+    { sectionKey: 'new_collection', anchor: 'new_collection',    imgIdx: 0, isNew: true  },
+    { sectionKey: 'bangles',        anchor: 'category-bangles',  imgIdx: 0, isBangles: true },
+    { sectionKey: 'jhumkas',        anchor: 'category-jhumkas',  imgIdx: 0, isNew: false },
+  ];
+
+  catConfig.forEach(function (cfg) {
+    var tile = document.querySelector('#cat-bento [data-anchor="' + cfg.anchor + '"]');
+    if (!tile) return;
+
+    var products = data[cfg.sectionKey] || [];
+    var prod0 = products[0];
+
+    if (cfg.isBangles) {
+      var halves = tile.querySelectorAll('.cat-bangles-half img');
+      var img0 = prod0 && prod0.images && prod0.images[0];
+      var img1 = (prod0 && prod0.images && prod0.images[1]) || img0;
+      if (img0 && halves[0]) {
+        halves[0].src    = optimizeCloudinaryUrl(img0, 600, 85);
+        halves[0].srcset = generateSrcset(img0, [400, 600, 800]);
+        halves[0].sizes  = '(max-width:768px) 25vw, 20vw';
+      } else if (halves[0]) {
+        halves[0].closest('.cat-bangles-half').innerHTML = '';
+      }
+      if (img1 && halves[1]) {
+        halves[1].src    = optimizeCloudinaryUrl(img1, 600, 85);
+        halves[1].srcset = generateSrcset(img1, [400, 600, 800]);
+        halves[1].sizes  = '(max-width:768px) 25vw, 20vw';
+      } else if (halves[1]) {
+        halves[1].closest('.cat-bangles-half').innerHTML = '';
+      }
+      var bBadge = tile.querySelector('[data-badge]');
+      if (bBadge) bBadge.textContent = products.length + ' PCS';
+      tile.addEventListener('click', function () {
+        var t = document.getElementById(cfg.anchor);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return;
+    }
+
+    var imgUrl = (prod0 && prod0.images && prod0.images[cfg.imgIdx]) || (prod0 && prod0.image);
+    var img = tile.querySelector('.cat-tile-img');
+
+    if (imgUrl && img) {
+      img.src    = optimizeCloudinaryUrl(imgUrl, 600, 85);
+      img.srcset = generateSrcset(imgUrl, [400, 600, 800]);
+      img.sizes  = '(max-width:768px) 50vw, 33vw';
+    } else if (img) {
+      img.remove();
+      var fb = document.createElement('div');
+      fb.className = 'cat-tile-noimg';
+      fb.textContent = tile.querySelector('.cat-glass-name').textContent;
+      tile.appendChild(fb);
+    }
+
+    var badge = tile.querySelector('[data-badge]');
+    if (badge && !cfg.isNew) badge.textContent = products.length + ' PCS';
+
+    tile.addEventListener('click', function () {
+      var t = document.getElementById(cfg.anchor);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 }
 
 /* ── Smooth scroll to section ───────── */
@@ -942,14 +923,7 @@ async function load() {
     renderHeritagePage(d.heritage || null);
     renderAboutSection(d.about || null);
 
-    const cg = document.getElementById('cat-grid');
-    if (cg && d.categories && d.categories.length) {
-
-      const tilesHTML = d.categories.map(buildCatTile).join('');
-      cg.innerHTML = tilesHTML + tilesHTML;
-      cg.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-      initCategoryAutoScroll();
-    }
+    buildCategoryBento(d);
     ['top_sellers', 'new_collection'].forEach(sec => {
       if (d[sec] && d[sec].length) {
         buildCarousel(sec, d[sec]);

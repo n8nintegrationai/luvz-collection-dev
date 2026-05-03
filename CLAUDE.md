@@ -194,7 +194,7 @@ Loaded from Google Fonts with `preconnect` for performance. Font-size `16px` on 
 - **Objective:** Execute the Full Cinematic Redesign (v1.2).
 - **Scope:** Includes Hero section cleanup, "Jewellery Stylist" rebranding, and Luxury Motion System implementation.
 - **Priority:** Ensure 100% adherence to the "PROTECTED" list in the main prompt.
-- **Status:** ✅ cinematic-luxury-polish-pass
+- **Status:** ✅ replace-carousel-bento-grid
 
 ---
 
@@ -203,3 +203,4 @@ Loaded from Google Fonts with `preconnect` for performance. Font-size `16px` on 
 * **2026-05-02:** Applied Hero Micropolish (8 CSS-only changes to `#hero` and `#nav`): (1) `#hero::before` replaced with 4-layer cinematic atmospheric gradient (108° diagonal pull + warm haze pocket + bottom/top fades); (2) new `#hero .hero-content::before` organic haze + CSS grain for left-side texture depth; (3) `#hero::after` amber bloom widened to 4 radial layers bleeding across the center divide; (4) jewelry wrapper focal glow rules added (inert until HTML wraps `img.hero-img`); (5) title text-shadow diffused to 120px outer glow, `letter-spacing: 0.09em`, "COLLECTION" span gets atmospheric shadow; (6) buttons thinned to `border: 1px`, `border-radius: 1px`, slower `0.7s` transitions; (7) `#nav:not(.stuck)` made transparent gradient over hero, normal on scroll; (8) mobile `@media (768px)` simplified overlay and texture layer disabled.
 * **2026-05-02:** Applied Hero Fix v1.3. Eight surgical fixes to `#hero` and cursor glow: (1) removed "Real silver. Real craft. Made for you." tagline; (2) LUVZ title overridden to warm gold #F0C96A with glow text-shadow (cleared gradient background-clip); (3) eyebrow + descriptor line contrast boosted; (4) buttons restyled to ghost gold glass with shimmer sweep on hover; (5) mobile buttons stack vertically with 56px margin clearing the discover indicator; (6) desktop discover indicator made fully visible with bouncing chevron; (7) hero/proof-bar gap removed; (8) cursor glow fixed (z-index 0→9999, opacity 4%→9%, idempotent element lookup).
 * **2026-05-02:** Optimized mobile performance and stability by removing heavy animations and jitter, while ensuring full accessibility for reduced-motion settings. Refined the luxury brand aesthetic by restoring Cinzel typography and adding subtle gold hairline separators for a cleaner, editorial feel.
+* **2026-05-03:** Replaced "Shop by Category" auto-scroll carousel with a static asymmetric CSS Grid bento mosaic — 6 tiles, glass-bar labels with `backdrop-filter`, GPU-composited hover, click-to-scroll anchors; removed `initCategoryAutoScroll`, `buildCatTile`, and all `.cat-carousel-*` / `.cat-tile*` CSS.

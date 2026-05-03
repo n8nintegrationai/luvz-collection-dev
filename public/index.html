@@ -1489,200 +1489,237 @@
       margin-right: auto
     }
 
-    /* ═══════════════════ CATEGORY CAROUSEL ═══════════════════ */
-    .cat-carousel-outer {
-      overflow: hidden;
-      padding: 18px 0 22px;
+    /* ── SHOP BY CATEGORY BENTO ─────────────────────────── */
+    #categories { padding: 64px 0 72px; }
+
+    .ai-style-change-1 {
+      max-width: 100%;
+      width: 100%;
     }
 
-
-    .cat-carousel-track {
-      display: flex;
-      gap: 18px;
-      width: max-content;
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 400px repeat(3, 300px);
+      gap: 7px;
+      width: 100%;
     }
 
-    /* CSS animation runs on ALL devices — GPU-accelerated, works on mobile */
-    .cat-carousel-track {
-      animation: catScroll 32s linear infinite;
-    }
-
-    @media(max-width:768px) {
-      .cat-carousel-outer {
-        padding: 12px 0 18px;
-      }
-
-      .cat-carousel-track {
-        gap: 12px;
-        padding: 0 16px;
-      }
-
-      .cat-tile {
-        flex: 0 0 auto;
-      }
-    }
-
-    /* Pause on hover only for real hover devices (prevents mobile tap-stuck hover) */
-    @media (hover:hover) and (pointer:fine) {
-      .cat-carousel-track:hover {
-        animation-play-state: paused
-      }
-    }
-
-    @keyframes catScroll {
-      0% {
-        transform: translateX(0)
-      }
-
-      100% {
-        transform: translateX(-50%)
-      }
-    }
+    .cat-tile[data-anchor="category-necklace"]   { grid-column: 1; grid-row: 1 / 3; }
+    .cat-tile[data-anchor="category-pendant"]    { grid-column: 2; grid-row: 1; }
+    .cat-tile[data-anchor="category-earrings"]   { grid-column: 3; grid-row: 1; }
+    .cat-tile[data-anchor="category-sets"]       { grid-column: 2; grid-row: 2; }
+    .cat-tile[data-anchor="new_collection"]      { grid-column: 3; grid-row: 2 / 4; }
+    .cat-tile[data-anchor="category-bangles"]    { grid-column: 1; grid-row: 3; }
+    .cat-tile[data-anchor="category-jhumkas"]    { grid-column: 2; grid-row: 3; }
 
     .cat-tile {
       position: relative;
+      height: 100%;
+      border-radius: 9px;
       overflow: hidden;
+      background: #1c1208;
+      border: 1px solid rgba(240,201,106,0.04);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--card);
-      width: 180px;
-      flex-shrink: 0;
-      transition: border-color .35s, box-shadow .4s;
-      box-shadow: var(--sh);
-      text-decoration: none;
-      color: inherit;
+      transform: translateZ(0);
+      will-change: transform;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
     }
 
-
-
-
-
-
-
-
-
-
-
-    @keyframes catFloat {
-
-      0%,
-      100% {
-        transform: translateY(0)
-      }
-
-      50% {
-        transform: translateY(-6px)
-      }
-    }
-
-    @media (hover:hover) and (pointer:fine) {
-      .cat-tile:hover {
-        border-color: var(--border-h);
-        transform: translateY(-10px) scale(1.03) !important;
-        box-shadow: var(--sh-h);
-        animation-play-state: paused
-      }
-    }
-
-    @media(max-width:768px) {
-      .cat-tile {
-        width: 148px
-      }
-    }
-
-    @media(max-width:480px) {
-      .cat-tile {
-        width: 132px
-      }
+    @media (hover: hover) {
+      .cat-tile:hover { transform: translateY(-1.5px) translateZ(0); }
+      .cat-tile:hover .cat-glass { background: rgba(10,6,2,0.62); }
+      .cat-tile:hover .cat-tile-img { transform: scale(1.025) translateZ(0); }
     }
 
     .cat-tile-img {
-      overflow: hidden;
-      position: relative;
-      border-radius: 4px 4px 0 0
-        /* Luxury Soft-Edges */
-      ;
-      aspect-ratio: 3/4
-    }
-
-    .cat-tile-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .65s
-    }
-
-    .cat-tile:hover .cat-tile-img img {
-      transform: scale(1.12)
-    }
-
-    .cat-tile-img::after {
-      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 42%, rgba(0, 0, 0, .5));
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      transform: translateZ(0);
+      will-change: transform;
+    }
+
+    .cat-fade-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 65%;
+      background: linear-gradient(to top,
+        rgba(6,3,1,0.72) 0%,
+        rgba(6,3,1,0.28) 45%,
+        transparent 100%);
       pointer-events: none;
-      transition: opacity .35s
+      z-index: 1;
+    }
+    .cat-tile[data-anchor="category-necklace"] .cat-fade-bottom,
+    .cat-tile[data-anchor="new_collection"] .cat-fade-bottom {
+      height: 55%;
+      background: linear-gradient(to top,
+        rgba(6,3,1,0.68) 0%,
+        rgba(6,3,1,0.22) 40%,
+        transparent 100%);
+    }
+    .cat-fade-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom, rgba(6,3,1,0.18) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .cat-shine {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(240,201,106,0.12) 50%, transparent 100%);
+      z-index: 2;
     }
 
-    .cat-tile:hover .cat-tile-img::after {
-      opacity: .72
-    }
-
-    [data-theme="light"] .cat-tile-img::after {
-      background: linear-gradient(to bottom, transparent 48%, rgba(0, 0, 0, .28))
-    }
-
-    .cat-placeholder {
-      width: 100%;
-      height: 100%;
-      background: var(--card2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.8rem;
-      opacity: .25
-    }
-
-    .cat-tile-body {
-      padding: 10px 12px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .cat-tile-name {
-      font-family: 'Cinzel', serif;
-      font-size: .67rem;
-      font-weight: 600;
-      letter-spacing: .1em;
+    .cat-badge {
+      position: absolute;
+      top: 9px; right: 9px;
+      z-index: 4;
+      font-size: 8px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--txt)
+      color: rgba(240,201,106,0.50);
+      background: rgba(12,7,2,0.55);
+      border: 1px solid rgba(240,201,106,0.08);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-family: 'Jost', sans-serif;
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .cat-badge { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    }
+    .cat-badge-new {
+      background: rgba(160,45,45,0.50);
+      border-color: rgba(255,120,120,0.18);
+      color: #ffcaca;
     }
 
-    .cat-tile-arrow {
-      width: 20px;
-      height: 20px;
+    .cat-glass {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 4;
+      background: rgba(10,6,2,0.82);
+      border-top: 1px solid rgba(240,201,106,0.10);
+      padding: 9px 13px 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: background 0.5s ease;
+    }
+    @supports (backdrop-filter: blur(1px)) {
+      .cat-glass {
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background: rgba(10,6,2,0.42);
+      }
+    }
+    .cat-tile[data-anchor="category-necklace"] .cat-glass,
+    .cat-tile[data-anchor="new_collection"] .cat-glass {
+      padding: 13px 16px 15px;
+    }
+    .cat-glass-eyebrow {
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,201,106,0.50);
+      margin-bottom: 2px;
+      font-family: 'Jost', sans-serif;
+    }
+    .cat-glass-name {
+      font-size: 12px;
+      color: #f0e8d5;
+      letter-spacing: 0.06em;
+      font-family: 'Cinzel', serif;
+      font-weight: 400;
+    }
+    .cat-tile[data-anchor="category-necklace"] .cat-glass-name,
+    .cat-tile[data-anchor="new_collection"] .cat-glass-name { font-size: 14px; }
+    .cat-glass-arrow {
+      width: 24px; height: 24px;
       border-radius: 50%;
-      border: 1px solid var(--border-h);
+      flex-shrink: 0;
+      border: 1px solid rgba(240,201,106,0.18);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold);
-      font-size: .6rem;
-      transition: all .3s;
-      flex-shrink: 0
     }
 
-    .cat-tile:hover .cat-tile-arrow {
-      background: var(--gold);
-      color: var(--btn-fg);
-      border-color: var(--gold)
+    .cat-bangles-split {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
+    .cat-bangles-half { position: relative; overflow: hidden; }
+    .cat-bangles-half img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .cat-bangles-divider {
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 1px;
+      background: rgba(240,201,106,0.08);
+      z-index: 2;
+    }
+
+    .cat-tile-noimg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: rgba(240,201,106,0.35);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 768px) {
+      #categories { padding: 44px 0 52px; }
+      .cat-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 240px repeat(3, 148px);
+        gap: 6px;
+      }
+      .cat-tile[data-anchor="category-necklace"]   { grid-column: span 2; grid-row: 1; }
+      .cat-tile[data-anchor="category-pendant"]    { grid-column: unset; grid-row: unset; }
+      .cat-tile[data-anchor="category-earrings"]   { grid-column: unset; grid-row: unset; }
+      .cat-tile[data-anchor="category-sets"]       { grid-column: unset; grid-row: unset; }
+      .cat-tile[data-anchor="new_collection"]      { grid-column: unset; grid-row: unset; }
+      .cat-tile[data-anchor="category-bangles"]    { grid-column: unset; grid-row: unset; }
+      .cat-tile[data-anchor="category-jhumkas"]    { grid-column: unset; grid-row: unset; }
+      .cat-fade-bottom {
+        background: linear-gradient(to top,
+          rgba(6,3,1,0.60) 0%,
+          rgba(6,3,1,0.22) 45%,
+          transparent 100%);
+      }
+      .cat-glass { background: rgba(10,6,2,0.40); }
+      @supports (backdrop-filter: blur(1px)) {
+        .cat-glass { background: rgba(10,6,2,0.38); }
+      }
+      .cat-glass-name { font-size: 11px; }
+      .cat-tile[data-anchor="category-necklace"] .cat-glass-name { font-size: 13px; }
+      .cat-tile[data-anchor="new_collection"] .cat-glass-name { font-size: 13px; }
+      .cat-glass-eyebrow { font-size: 7px; }
+      .cat-badge { font-size: 7px; }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /* ═══════════════════ CAROUSEL ═══════════════════ */
     .carousel-wrap {
@@ -7721,48 +7758,103 @@
   <!-- TRUST STRIP — SVG Quality Pillars -->
 
 
-  <!-- SHOP BY CATEGORY -->
+  <!-- SHOP BY CATEGORY — BENTO MOSAIC -->
   <section id="categories" class="sec reveal">
-    <div style="max-width:1260px;margin:0 auto">
+    <div style="max-width:min(1560px,94vw);margin-inline:auto;padding-inline:0;padding-block:64px 72px">
       <div class="sec-head">
-        <div class="eyebrow">Browse by Type</div>
-        <h2 class="sec-title gold-text">Shop by Category</h2>
-        <p>From everyday elegance to bridal statement pieces — find what speaks to you.</p>
+        <div style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,201,106,0.48);font-family:'Jost',sans-serif;margin-bottom:6px">COLLECTIONS</div>
+        <h2 class="sec-title" style="font-family:'Cinzel',serif;font-size:clamp(22px,3.5vw,38px);font-weight:400;letter-spacing:0.08em;color:#f0ead8">Shop by Category</h2>
+        <div style="width:36px;height:1px;background:rgba(240,201,106,0.28);margin:10px auto 22px"></div>
       </div>
-      <div class="cat-carousel-outer">
-        <div class="cat-carousel-track" id="cat-grid">
-          <!-- skeleton tiles duplicated for seamless loop appearance -->
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
-          </div>
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
-          </div>
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
-          </div>
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
-          </div>
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
-          </div>
-          <div class="cat-tile">
-            <div class="cat-tile-img sk cat-tile-img-sk"></div>
-            <div class="cat-tile-body"><span class="cat-tile-name sk"
-                style="width:70%;height:10px;border-radius:3px"></span></div>
+
+      <div class="cat-grid" id="cat-bento">
+
+        <!-- Necklaces — hero, spans rows 1–2 -->
+        <div class="cat-tile" data-anchor="category-necklace">
+          <img class="cat-tile-img" loading="lazy" alt="Necklaces" style="object-position:center 30%;filter:brightness(1.00)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div>
+              <div class="cat-glass-eyebrow">Signature</div>
+              <div class="cat-glass-name">Necklaces</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           </div>
         </div>
+
+        <!-- Pendants -->
+        <div class="cat-tile" data-anchor="category-pendant">
+          <img class="cat-tile-img" loading="lazy" alt="Pendants" style="object-position:center top;filter:brightness(0.92)">
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Everyday</div><div class="cat-glass-name">Pendants</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Earrings -->
+        <div class="cat-tile" data-anchor="category-earrings">
+          <img class="cat-tile-img" loading="lazy" alt="Earrings" style="object-position:center top;filter:brightness(0.96)">
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Statement</div><div class="cat-glass-name">Earrings</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Sets -->
+        <div class="cat-tile" data-anchor="category-sets">
+          <img class="cat-tile-img" loading="lazy" alt="Sets" style="object-position:center center;filter:brightness(0.88)">
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Bridal</div><div class="cat-glass-name">Sets</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- New Collection — hero, spans rows 2–3 -->
+        <div class="cat-tile" data-anchor="new_collection">
+          <img class="cat-tile-img" loading="lazy" alt="New Collection" style="object-position:center top;filter:brightness(1.04)">
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge cat-badge-new">New</div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Latest</div><div class="cat-glass-name">New Collection</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Bangles — two-image split -->
+        <div class="cat-tile" data-anchor="category-bangles">
+          <div class="cat-bangles-split">
+            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles" style="object-position:center center;filter:brightness(0.94)"></div>
+            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles" style="object-position:center center;filter:brightness(0.90)"></div>
+          </div>
+          <div class="cat-bangles-divider"></div>
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Stacking</div><div class="cat-glass-name">Bangles</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Jhumkas -->
+        <div class="cat-tile" data-anchor="category-jhumkas">
+          <img class="cat-tile-img" loading="lazy" alt="Jhumkas" style="object-position:center 20%;filter:brightness(0.96)">
+          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-badge" data-badge></div>
+          <div class="cat-glass">
+            <div><div class="cat-glass-eyebrow">Heritage</div><div class="cat-glass-name">Jhumkas</div></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
