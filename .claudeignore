@@ -1,0 +1,13 @@
+# Keep Claude away from heavy system folders
+node_modules/
+.git/
+.vscode/
+
+# Ignore logs and environment files (security)
+*.log
+.env
+.env.production
+
+# Ignore build outputs (if any)
+dist/
+build/

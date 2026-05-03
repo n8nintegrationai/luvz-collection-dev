@@ -2204,3 +2204,78 @@ window.streamLuvzResponse = streamLuvzResponse;
   }
 })();
 
+// ── LUVZ CINEMATIC MOTION v1.2 ──
+(function () {
+  function initMotion() {
+    // 1. Observer for .stagger-text and .reveal-img
+    // (.cinematic-heritage already handled by existing .reveal observer)
+    var motionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          motionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.stagger-text, .reveal-img').forEach(function (el) {
+      motionObserver.observe(el);
+    });
+
+    // 2. Section heading stagger — wrap section headings not already in .stagger-text
+    document.querySelectorAll('section > h2, section > .section-title, section > .sec-title').forEach(function (heading) {
+      if (!heading.parentElement.classList.contains('stagger-text')) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'stagger-text reveal';
+        heading.parentNode.insertBefore(wrapper, heading);
+        wrapper.appendChild(heading);
+        var next = wrapper.nextSibling;
+        if (next && next.nodeType === 1 && (next.tagName === 'P' || (next.classList && (next.classList.contains('section-sub') || next.classList.contains('sec-sub'))))) {
+          wrapper.appendChild(next);
+        }
+        motionObserver.observe(wrapper);
+      }
+    });
+
+    // ── CURSOR AMBIENT GLOW (DESKTOP ONLY) ──
+    if (window.innerWidth > 768) {
+      var glowEl = document.getElementById('luvz-cursor-glow');
+      if (!glowEl) {
+        glowEl = document.createElement('div');
+        glowEl.id = 'luvz-cursor-glow';
+      }
+      glowEl.style.cssText = [
+        'position:fixed',
+        'pointer-events:none',
+        'width:500px',
+        'height:500px',
+        'border-radius:50%',
+        'background:radial-gradient(circle, rgba(196,136,44,0.09) 0%, rgba(196,136,44,0.04) 35%, transparent 70%)',
+        'transform:translate(-50%,-50%)',
+        'transition:left 0.9s cubic-bezier(0.16,1,0.3,1), top 0.9s cubic-bezier(0.16,1,0.3,1)',
+        'z-index:9999',
+        'top:50%',
+        'left:50%',
+        'will-change:left,top'
+      ].join(';');
+      document.body.appendChild(glowEl);
+
+      var glowX = window.innerWidth / 2;
+      var glowY = window.innerHeight / 2;
+
+      document.addEventListener('mousemove', function(e) {
+        glowX = e.clientX;
+        glowY = e.clientY;
+        glowEl.style.left = glowX + 'px';
+        glowEl.style.top  = glowY + 'px';
+      }, { passive: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMotion);
+  } else {
+    initMotion();
+  }
+})();
+

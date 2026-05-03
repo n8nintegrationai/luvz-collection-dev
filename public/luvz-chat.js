@@ -398,7 +398,7 @@
       if (history && history.length) {
         history.forEach(function (m) { addMessage(m.role, m.text, false); });
       } else {
-        addMessage('bot', 'Welcome to Luvz Collection \u2746\n\nI\'m your personal jewellery advisor. Ask me anything \u2014 from finding the perfect piece to shipping and return policies.', true);
+        addMessage('bot', 'Welcome. I\'m your jewellery stylist \u2014 here to help you find the perfect piece for any occasion.', true);
       }
     }
     setTimeout(function () { inputEl.focus(); }, 350);
