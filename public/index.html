@@ -7738,6 +7738,560 @@
         opacity: 0.5;
       }
     }
+
+    /* ═══════════════════ NEW: NAV REDESIGN ═══════════════════ */
+    #nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1px solid rgba(180,130,40,0.18);
+      position: relative;
+    }
+
+    #nav::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(196,136,44,0.5), transparent);
+      pointer-events: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      color: rgba(200,160,70,0.55);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-icon-btn {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(180,130,40,0.25);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .nav-stylist-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      border: 1px solid rgba(180,130,40,0.45);
+      padding: 0 18px;
+      height: 34px;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      #nav {
+        padding: 0 20px;
+      }
+    }
+
+    /* ═══════════════════ NEW: HOW IT WORKS REDESIGN ═══════════════════ */
+    .how-steps {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+      gap: 0;
+      max-width: 820px;
+      margin: 0 auto 52px;
+    }
+
+    .how-step {
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .how-num {
+      font-family: 'Cinzel', serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: rgba(180,130,40,0.14);
+      line-height: 1;
+      margin-bottom: 18px;
+      letter-spacing: 0.04em;
+    }
+
+    .how-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin: 0 auto 16px;
+    }
+
+    .how-step-title {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .how-step-desc {
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(180,150,90,0.5);
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    .how-connector {
+      display: flex;
+      align-items: center;
+      padding-top: 22px;
+    }
+
+    .how-line {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(180,130,40,0.3), rgba(180,130,40,0.08));
+    }
+
+    .how-arrow {
+      width: 5px;
+      height: 5px;
+      transform: rotate(45deg);
+      border-top: 1px solid rgba(180,130,40,0.35);
+      border-right: 1px solid rgba(180,130,40,0.35);
+      margin-left: -2px;
+      flex-shrink: 0;
+    }
+
+    .how-cta-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      border: 1px solid rgba(180,130,40,0.45);
+      padding: 14px 36px;
+      text-transform: uppercase;
+      background: transparent;
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .how-cta-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .how-steps {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+      }
+      .how-connector {
+        justify-content: center;
+        padding: 8px 0;
+        transform: rotate(90deg);
+      }
+      .how-step {
+        padding: 16px 0;
+      }
+    }
+
+    /* ═══════════════════ NEW: INSTAGRAM CTA REDESIGN ═══════════════════ */
+    .ig-cta-section {
+      padding: 52px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 0;
+      border-top: 1px solid rgba(180,130,40,0.1);
+      border-bottom: 1px solid rgba(180,130,40,0.1);
+    }
+
+    .ig-cta-left {
+      padding-right: 48px;
+      border-right: 1px solid rgba(180,130,40,0.12);
+    }
+
+    .sec-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      color: rgba(180,130,40,0.4);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .ig-cta-quote {
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(232,213,176,0.6);
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+    }
+
+    .ig-cta-right {
+      padding-left: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ig-cta-handle {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .ig-cta-sub {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(180,150,90,0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .ig-cta-btn {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      border: 1px solid rgba(180,130,40,0.35);
+      padding: 13px 24px;
+      text-decoration: none;
+      text-transform: uppercase;
+      align-self: flex-start;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .ig-cta-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .ig-cta-section {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+      }
+      .ig-cta-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(180,130,40,0.12);
+        padding-right: 0;
+        padding-bottom: 28px;
+        margin-bottom: 28px;
+      }
+      .ig-cta-right {
+        padding-left: 0;
+      }
+      .ig-cta-quote {
+        font-size: 20px;
+      }
+    }
+
+    /* ═══════════════════ NEW: POLICY REDESIGN ═══════════════════ */
+    .policy-body {
+      max-width: 700px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(180,130,40,0.2);
+      padding-top: 32px;
+    }
+
+    .policy-para {
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(200,170,100,0.6);
+      line-height: 2;
+      text-align: center;
+      letter-spacing: 0.03em;
+      margin-bottom: 28px;
+    }
+
+    .policy-tags {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .policy-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .policy-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .policy-tag-text {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: rgba(180,130,40,0.45);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .policy-para {
+        font-size: 15px;
+      }
+      .policy-tags {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+    }
+
+    /* ═══════════════════ NEW: FOOTER REDESIGN ═══════════════════ */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(180,130,40,0.15);
+    }
+
+    .footer-grid {
+      padding: 60px 56px 0;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1.1fr;
+      gap: 0;
+      align-items: start;
+    }
+
+    .footer-brand {
+      padding-right: 48px;
+      border-right: 1px solid rgba(180,130,40,0.1);
+    }
+
+    .footer-brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.14em;
+      margin-bottom: 3px;
+      margin-top: 10px;
+    }
+
+    .footer-brand-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 8px;
+      letter-spacing: 0.32em;
+      color: rgba(180,130,40,0.4);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-tagline {
+      font-size: 13.5px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(200,170,100,0.4);
+      line-height: 1.85;
+      max-width: 220px;
+      margin-bottom: 24px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(180,130,40,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .footer-social-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .footer-nav {
+      padding: 0 40px;
+      border-right: 1px solid rgba(180,130,40,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .footer-col-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.32em;
+      color: rgba(180,130,40,0.4);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .footer-link {
+      font-size: 13.5px;
+      font-style: italic;
+      color: rgba(200,170,100,0.45);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+
+    .footer-link:hover {
+      color: var(--gold);
+    }
+
+    .footer-contact {
+      padding-left: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .footer-contact > .footer-col-label {
+      margin-bottom: 20px;
+    }
+
+    .footer-contact-item {
+      padding: 14px 0;
+    }
+
+    .footer-contact-title {
+      font-family: 'Cinzel', serif;
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      color: var(--gold-l, #c8962e);
+      margin-bottom: 4px;
+    }
+
+    .footer-contact-detail {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(200,170,100,0.4);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-contact-sep {
+      height: 1px;
+      background: rgba(180,130,40,0.08);
+    }
+
+    .footer-policy-strip {
+      margin: 44px 56px 0;
+      border-top: 1px solid rgba(180,130,40,0.12);
+      border-bottom: 1px solid rgba(180,130,40,0.08);
+      padding: 18px 0;
+    }
+
+    .footer-policy-text {
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(180,150,90,0.35);
+      text-align: center;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+    }
+
+    .footer-copyright {
+      padding: 18px 56px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy-left,
+    .footer-copy-right {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      color: rgba(180,130,40,0.28);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        padding: 40px 24px 0;
+        gap: 40px;
+      }
+      .footer-brand {
+        border-right: none;
+        border-bottom: 1px solid rgba(180,130,40,0.1);
+        padding-right: 0;
+        padding-bottom: 32px;
+      }
+      .footer-nav {
+        border-right: none;
+        border-bottom: 1px solid rgba(180,130,40,0.1);
+        padding: 0 0 32px 0;
+      }
+      .footer-contact {
+        padding-left: 0;
+      }
+      .footer-policy-strip {
+        margin: 32px 24px 0;
+      }
+      .footer-copyright {
+        padding: 16px 24px 32px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
   </style>
 
 <body>
@@ -7800,49 +8354,39 @@
 
   <!-- NAVBAR -->
   <nav id="nav" aria-label="Primary navigation">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo-wrap" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
-        <img src="images/logo_gif.webp" alt="LUVZ Collection logo" class="nav-logo-img" loading="eager"
-          fetchpriority="low" decoding="async" width="36" height="36" />
-        <div>
-          <div class="nav-brand gold-text">LUVZ Collection</div>
-          <div class="nav-brand-sub">Designer Boutique</div>
-        </div>
-      </a>
-      <div class="nav-links">
-        <a href="#categories" class="nav-link">Categories</a>
-        <a href="#top-sellers" class="nav-link">Top Sellers</a>
-        <a href="#new-collection" class="nav-link">New</a>
-        <a href="#customer-love" class="nav-link">Customer Love</a>
-        <a href="#heritage" class="nav-link">Our Story</a>
-        <a href="#contact" class="nav-link">Contact</a>
+    <a href="#" class="nav-logo-wrap" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
+      <img src="images/logo_gif.webp" alt="LUVZ Collection logo" class="nav-logo-img" loading="eager"
+        fetchpriority="low" decoding="async" width="36" height="36" />
+      <div>
+        <div class="nav-brand gold-text">LUVZ Collection</div>
+        <div class="nav-brand-sub">Designer Boutique</div>
       </div>
-      <a href="https://wa.me/918919359961?text=Hi!%20I%20found%20LUVZ%20Collection%20%F0%9F%A4%A9" target="_blank"
-        rel="noopener noreferrer" class="nav-wa">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-        WhatsApp Us
-      </a>
-      <button class="nav-wish-btn" onclick="openWishlist()" aria-label="Wishlist">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path
-            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </a>
+    <div class="nav-links">
+      <a href="#categories" class="nav-link">Categories</a>
+      <a href="#top-sellers" class="nav-link">Top Sellers</a>
+      <a href="#customer-love" class="nav-link">Customer Love</a>
+      <a href="#heritage" class="nav-link">Our Story</a>
+    </div>
+    <div class="nav-actions">
+      <button class="nav-wish-btn nav-icon-btn" onclick="openWishlist()" aria-label="Wishlist">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
         <span class="nav-wish-count" id="nav-wish-count">0</span>
       </button>
       <button
         id="nav-askai-icon"
+        class="nav-stylist-btn"
         onclick="window.openLuvzChat(event);"
         aria-label="Ask Jewellery Stylist"
       >
-        <!-- Sparkle emoji icon -->
-        <span class="nav-askai-sparkle" aria-hidden="true">✨</span>
-        <!-- Text label - hidden on mobile -->
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8">
+          <path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z"/>
+        </svg>
         <span class="nav-askai-label">Stylist</span>
       </button>
-      <button class="nav-ham" onclick="toggleMenu()" aria-label="Menu">
+      <button class="nav-ham nav-icon-btn" onclick="toggleMenu()" aria-label="Menu">
         <svg width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -8412,21 +8956,19 @@
 
   <!-- INSTAGRAM CTA -->
   <section class="ig-cta-sec">
-    <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer" class="ig-cta-link">
-      <span class="ig-cta-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-          <circle cx="12" cy="12" r="4" />
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-        </svg>
-      </span>
-      <div>
-        <div class="ig-cta-handle">@luvz_collection</div>
-        <div class="ig-cta-sub">📸 See real customer styles on Instagram</div>
+    <div class="ig-cta-section">
+      <div class="ig-cta-left">
+        <span class="sec-label">Follow Along</span>
+        <p class="ig-cta-quote">"Real customer styles, daily arrivals &amp; the craft behind every piece."</p>
       </div>
-      <span class="ig-cta-arrow">→</span>
-    </a>
+      <div class="ig-cta-right">
+        <div>
+          <div class="ig-cta-handle">@luvz_collection</div>
+          <div class="ig-cta-sub">Instagram · See real customer styles</div>
+        </div>
+        <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer" class="ig-cta-btn">Open Instagram →</a>
+      </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -8463,33 +9005,41 @@
         <div class="eyebrow">Simple &amp; Fast</div>
         <h2 class="sec-title gold-text">How It Works</h2>
       </div>
-      <div class="hiw-grid">
-        <div class="hiw-step">
-          <div class="hiw-num gold-text">01</div>
-          <div class="hiw-icon">👁️</div>
-          <h3 class="hiw-title">Browse</h3>
-          <p class="hiw-body">Explore our collection of handcrafted 92.5 silver jewellery.</p>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="how-num">01</div>
+          <div class="how-dot"></div>
+          <div class="how-step-title">Browse</div>
+          <p class="how-step-desc">Explore our handcrafted 92.5 silver jewellery collection</p>
         </div>
-        <div class="hiw-step">
-          <div class="hiw-num gold-text">02</div>
-          <div class="hiw-icon">💬</div>
-          <h3 class="hiw-title">WhatsApp Us</h3>
-          <p class="hiw-body">Tap "Order on WhatsApp" — we respond within hours.</p>
+
+        <div class="how-connector">
+          <div class="how-line"></div>
+          <div class="how-arrow"></div>
         </div>
-        <div class="hiw-step">
-          <div class="hiw-num gold-text">03</div>
-          <div class="hiw-icon">✨</div>
-          <h3 class="hiw-title">Customise &amp; Order</h3>
-          <p class="hiw-body">Share your requirements, confirm, and we craft it for you.</p>
+
+        <div class="how-step">
+          <div class="how-num">02</div>
+          <div class="how-dot"></div>
+          <div class="how-step-title">WhatsApp Us</div>
+          <p class="how-step-desc">Tap "Order on WhatsApp" — we respond within hours</p>
+        </div>
+
+        <div class="how-connector">
+          <div class="how-line"></div>
+          <div class="how-arrow"></div>
+        </div>
+
+        <div class="how-step">
+          <div class="how-num">03</div>
+          <div class="how-dot"></div>
+          <div class="how-step-title">Customise &amp; Order</div>
+          <p class="how-step-desc">Share your requirements — we craft it for you</p>
         </div>
       </div>
       <div style="text-align:center;margin-top:32px">
         <a href="https://wa.me/918919359961?text=Hi!%20I%20want%20to%20place%20an%20order%20%F0%9F%A4%A9"
-          target="_blank" rel="noopener noreferrer" class="btn-gold">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
+          target="_blank" rel="noopener noreferrer" class="how-cta-btn">
           Start Your Order
         </a>
       </div>
@@ -8503,24 +9053,23 @@
         <div class="eyebrow">Good to Know</div>
         <h2 class="sec-title gold-text">Our Policy</h2>
       </div>
-      <div class="policy-cards">
-        <div class="policy-card">
-          <span class="policy-icon">🔨</span>
-          <h3 class="policy-title">Made to Order</h3>
-          <p class="policy-body">Made just for you — so we don't accept returns. But if it arrives damaged, we'll
-            replace it within 48 hours. No questions.</p>
-        </div>
-        <div class="policy-card">
-          <span class="policy-icon">🛡️</span>
-          <h3 class="policy-title">Damage Protection</h3>
-          <p class="policy-body">If your jewellery arrives damaged during shipping, we will replace it. Just share a
-            photo within 48 hours of delivery.</p>
-        </div>
-        <div class="policy-card">
-          <span class="policy-icon">🚚</span>
-          <h3 class="policy-title">Free Shipping</h3>
-          <p class="policy-body">Free delivery on all orders above ₹999 across India. Secure, tracked packaging every
-            time.</p>
+      <div class="policy-body">
+        <p class="policy-para">
+          Each piece is made to order with care — we don't accept returns, but if your jewellery arrives damaged, we replace it within 48 hours, no questions asked. Free tracked shipping across India on all orders above ₹999.
+        </p>
+        <div class="policy-tags">
+          <div class="policy-tag">
+            <span class="policy-dot"></span>
+            <span class="policy-tag-text">Made to Order</span>
+          </div>
+          <div class="policy-tag">
+            <span class="policy-dot"></span>
+            <span class="policy-tag-text">Damage Protection</span>
+          </div>
+          <div class="policy-tag">
+            <span class="policy-dot"></span>
+            <span class="policy-tag-text">Free Shipping</span>
+          </div>
         </div>
       </div>
     </div>
@@ -8530,87 +9079,77 @@
   <div class="gem-bar"><span class="g5"></span><span class="g4"></span><span class="g3"></span><span
       class="g2"></span><span class="g1"></span><span class="g6"></span></div>
   <footer>
-    <div class="footer-inner">
-
-      <!-- Col 1: Brand -->
+    <div class="footer-grid">
+      <!-- LEFT: Brand -->
       <div class="footer-brand">
         <img loading="lazy" src="images/logo_gif.webp" alt="LUVZ Collection footer brand logo" class="footer-logo"
           loading="lazy" decoding="async" />
-        <div class="footer-name gold-text">LUVZ Collection</div>
-        <p class="footer-tagline">Handcrafted 92.5 silver jewellery with 22 carat gold polish. Made for women who wear
-          tradition beautifully.</p>
-        <div class="footer-social">
-          <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer"
-            aria-label="Instagram">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+        <div class="footer-brand-name">LUVZ Collection</div>
+        <div class="footer-brand-sub">Designer Boutique</div>
+        <p class="footer-tagline">Handcrafted 92.5 silver jewellery with 22 carat gold polish. Made for women who wear tradition beautifully.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/luvz_collection" class="footer-social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
             </svg>
           </a>
-          <a href="https://wa.me/918919359961" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          <a href="https://wa.me/918919359961" class="footer-social-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(180,130,40,0.7)">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.882l6.198-1.625A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.002-1.368l-.358-.214-3.718.975.992-3.624-.233-.372A9.78 9.78 0 0 1 2.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
             </svg>
           </a>
         </div>
       </div>
 
-      <!-- Col 2: Quick Links -->
-      <div>
-        <div class="footer-col-title">Explore</div>
-        <ul class="footer-links">
-          <li><a href="#categories">Shop by Category</a></li>
-          <li><a href="#top-sellers">Top Sellers</a></li>
-          <li><a href="#new-collection">New Collection</a></li>
-          <li><a href="#why-luvz">Why LUVZ?</a></li>
-          <li><a href="#customer-love">Customer Love</a></li>
-          <li><a href="#story">Our Story</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
+      <!-- CENTRE: Explore -->
+      <div class="footer-nav">
+        <div class="footer-col-label">Explore</div>
+        <a href="#categories" class="footer-link">Shop by Category</a>
+        <a href="#top-sellers" class="footer-link">Top Sellers</a>
+        <a href="#new-collection" class="footer-link">New Collection</a>
+        <a href="#why-luvz" class="footer-link">Why LUVZ?</a>
+        <a href="#customer-love" class="footer-link">Customer Love</a>
+        <a href="#heritage" class="footer-link">Our Story</a>
+        <a href="#contact" class="footer-link">Contact Us</a>
       </div>
 
-      <!-- Col 3: Contact -->
-      <div>
-        <div class="footer-col-title">Get in Touch</div>
-        <div class="footer-contact-line">
-          <span>💬</span>
-          <span><a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9"
-              target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:none">WhatsApp
-              Us</a><br />+91
-            89193 59961</span>
+      <!-- RIGHT: Get in Touch -->
+      <div class="footer-contact">
+        <div class="footer-col-label">Get in Touch</div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-title">WhatsApp Us</div>
+          <div class="footer-contact-detail">+91 89193 59961</div>
         </div>
-        <div class="footer-contact-line">
-          <span>📸</span>
-          <span><a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer"
-              style="color:var(--gold);text-decoration:none">@luvz_collection</a><br />DMs always open</span>
+        <div class="footer-contact-sep"></div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-title">@luvz_collection</div>
+          <div class="footer-contact-detail">DMs always open</div>
         </div>
-        <div class="footer-contact-line">
-          <span>📍</span>
-          <span>Online Across India<br />Free shipping above ₹999</span>
+        <div class="footer-contact-sep"></div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-title">Online Across India</div>
+          <div class="footer-contact-detail">Free shipping above ₹999</div>
         </div>
-        <div class="footer-contact-line">
-          <span>🕐</span>
-          <span>Mon – Sat, 10am – 8pm<br />Usually replies in under 1 hour</span>
+        <div class="footer-contact-sep"></div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-title">Mon – Sat, 10am – 8pm</div>
+          <div class="footer-contact-detail">Usually replies within 1 hour</div>
         </div>
       </div>
-
     </div>
 
-    <!-- No Return Notice -->
-    <div class="no-return-notice"
-      style="max-width:1100px;margin:0 auto 0;border-radius:0;border-left:none;border-right:none;border-bottom:none;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 8v4m0 4h.01" />
-      </svg>
-      <p><strong>Custom-made with care.</strong> Each piece is crafted to order — returns aren't possible. We gladly
-        replace items damaged during shipping.</p>
+    <!-- Policy strip -->
+    <div class="footer-policy-strip">
+      <p class="footer-policy-text">Custom-made with care. Each piece is crafted to order — returns aren't possible. We gladly replace items damaged during shipping.</p>
     </div>
-    <!-- Bottom bar -->
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 LUVZ Collection · All Rights Reserved · Handcrafted in India</p>
-      <p class="footer-copy">92.5 Silver · 22K Gold Polish · Designer Boutique</p>
+
+    <!-- Copyright bar -->
+    <div class="footer-copyright">
+      <span class="footer-copy-left">© 2026 LUVZ Collection · All Rights Reserved · Handcrafted in India</span>
+      <span class="footer-copy-right">92.5 Silver · 22K Gold Polish · Designer Boutique</span>
     </div>
   </footer>
 
