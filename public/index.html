@@ -64,68 +64,6 @@
   <!-- tailwind.config removed with Tailwind CDN -->
   <style>
     /* ═══════════════════ THEMES ═══════════════════ */
-    [data-theme="dark"] {
-      --bg: #080807;
-      --bg2: #0E0D09;
-      --bg3: #131108;
-      --card: #141210;
-      --card2: #1C1916;
-      --border: rgba(212, 175, 55, .12);
-      --border-h: rgba(212, 175, 55, .42);
-      --txt: #F2EDE0;
-      --txt2: #B8AB90;
-      --txt3: rgba(184, 171, 144, .32);
-      --gold: #D4AF37;
-      --gold-d: #A8860A;
-      --gold-l: #F0CF6A;
-      --gold-xl: #F8E8A0;
-      --nav-bg: rgba(8, 8, 7, .97);
-      --modal-bg: #0E0D09;
-      --btn-fg: #080807;
-      --sk1: #1A1714;
-      --sk2: #252018;
-      --hero-glow: rgba(212, 175, 55, .065);
-      --trust-bg: #0B0A07;
-      --cat-hover: rgba(212, 175, 55, .055);
-      --sh: 0 2px 20px rgba(0, 0, 0, .45);
-      --sh-h: 0 14px 52px rgba(0, 0, 0, .65), 0 0 0 1px rgba(212, 175, 55, .14);
-      --sh-modal: 0 40px 120px rgba(0, 0, 0, .82);
-      --wa-green: #25D366;
-      --wa-icon: #FFFFFF;
-      --wa-shadow: rgba(37, 211, 102, .4);
-    }
-
-    [data-theme="light"] {
-      --bg: #FAF7F2;
-      --bg2: #F2EDE2;
-      --bg3: #EAE2D0;
-      --card: #FFFFFF;
-      --card2: #F8F4EC;
-      --border: rgba(140, 100, 8, .14);
-      --border-h: rgba(140, 100, 8, .48);
-      --txt: #1A1508;
-      --txt2: #5A4A28;
-      --txt3: rgba(90, 74, 40, .32);
-      --gold: #9A7008;
-      --gold-d: #7A5400;
-      --gold-l: #B8900A;
-      --gold-xl: #D4AF37;
-      --nav-bg: rgba(250, 247, 242, .97);
-      --modal-bg: #FFFFFF;
-      --btn-fg: #FAF7F2;
-      --sk1: #E8E0D0;
-      --sk2: #D5CCBA;
-      --hero-glow: rgba(140, 100, 8, .045);
-      --trust-bg: #F2EDE2;
-      --cat-hover: rgba(140, 100, 8, .048);
-      --sh: 0 2px 16px rgba(0, 0, 0, .07);
-      --sh-h: 0 10px 40px rgba(0, 0, 0, .13), 0 0 0 1px rgba(140, 100, 8, .17);
-      --sh-modal: 0 40px 120px rgba(0, 0, 0, .22);
-      --wa-green: #25D366;
-      --wa-icon: #FFFFFF;
-      --wa-shadow: rgba(37, 211, 102, .4);
-    }
-
     [data-theme="earth"] {
       --bg: #18110A;
       --bg2: #1E160D;
@@ -434,18 +372,6 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Per-theme nav background tints */
-    [data-theme="dark"] #nav {
-      background: rgba(8, 8, 7, 0.82);
-    }
-
-    [data-theme="light"] #nav {
-      background: rgba(250, 247, 242, 0.88);
-    }
-
-    [data-theme="earth"] #nav {
-      background: rgba(18, 13, 8, 0.82);
-    }
 
     #nav.stuck {
       background: var(--nav-bg);
@@ -2702,99 +2628,6 @@
       transform: translateY(-1.5px)
     }
 
-    /* ═══════════════════ THEME SWITCHER ═══════════════════ */
-    #tsw {
-      position: fixed;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      background: var(--nav-bg);
-      border: 1px solid var(--border);
-      border-right: none;
-      border-radius: 10px 0 0 10px;
-      box-shadow: -3px 0 18px rgba(0, 0, 0, .3);
-      overflow: hidden
-    }
-
-    @media (max-width: 768px) {
-
-      #tsw,
-      .theme-selector {
-        display: none !important;
-      }
-    }
-
-    .tb {
-      width: 36px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      transition: background .2s;
-      position: relative
-    }
-
-    .tb:hover,
-    .tb.on {
-      background: rgba(212, 175, 55, .08)
-    }
-
-    .tb::after {
-      content: attr(data-tip);
-      position: absolute;
-      right: calc(100% + 8px);
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--txt);
-      font-family: 'Cinzel', serif;
-      font-size: 7.5px;
-      letter-spacing: .1em;
-      padding: 4px 10px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .2s;
-      border-radius: 4px;
-      box-shadow: var(--sh)
-    }
-
-    .tb:hover::after {
-      opacity: 1
-    }
-
-    .td {
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      border: 2px solid rgba(128, 128, 128, .18)
-    }
-
-    .td-dark {
-      background: conic-gradient(#D4AF37 0deg 180deg, #080807 180deg)
-    }
-
-    .td-light {
-      background: conic-gradient(#9A7008 0deg 180deg, #FAF7F2 180deg)
-    }
-
-    .td-earth {
-      background: conic-gradient(#C88C2C 0deg 180deg, #18110A 180deg)
-    }
-
-    .tw-div {
-      height: 1px;
-      background: var(--border);
-      margin: 0 5px
-    }
-
     /* ═══════════════════ FLOATING WA ═══════════════════ */
     #fwa {
       position: fixed;
@@ -4044,15 +3877,6 @@
       backdrop-filter: blur(18px) saturate(140%);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
       box-shadow: 0 18px 54px rgba(0, 0, 0, .32), 0 1px 0 rgba(196, 136, 44, .1), inset 0 1px 0 rgba(255, 244, 210, .045);
-    }
-
-    [data-theme="dark"] #nav.stuck {
-      background: rgba(8, 8, 7, .9);
-    }
-
-    [data-theme="light"] #nav.stuck {
-      background: rgba(250, 247, 242, .93);
-      box-shadow: 0 14px 42px rgba(49, 34, 9, .13), 0 1px 0 rgba(140, 100, 8, .12), inset 0 1px 0 rgba(255, 255, 255, .55);
     }
 
     #nav::before {
@@ -8615,21 +8439,6 @@
           style="opacity:.35">·</span> 22K Gold Polish <span style="opacity:.35">·</span> Handcrafted in India <span
           style="opacity:.35">·</span> Enquire on WhatsApp</span>
     </div>
-  </div>
-
-  <!-- THEME SWITCHER -->
-  <div id="tsw" role="group" aria-label="Switch theme">
-    <button class="tb on" data-t="dark" data-tip="Black Velvet" onclick="setTheme('dark')" aria-label="Dark">
-      <div class="td td-dark"></div>
-    </button>
-    <div class="tw-div"></div>
-    <button class="tb" data-t="light" data-tip="Pearl White" onclick="setTheme('light')" aria-label="Light">
-      <div class="td td-light"></div>
-    </button>
-    <div class="tw-div"></div>
-    <button class="tb" data-t="earth" data-tip="Earthy Gold" onclick="setTheme('earth')" aria-label="Earth">
-      <div class="td td-earth"></div>
-    </button>
   </div>
 
   <!-- FLOATING WHATSAPP -->

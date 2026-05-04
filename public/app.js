@@ -7,12 +7,7 @@ const VIS = 4; // cards per page on desktop
 // ╚══════════════════════════════════════╝
 
 /* ── Theme ─────────────────────────── */
-function setTheme(t, save = true) {
-  document.documentElement.setAttribute('data-theme', t);
-  document.querySelectorAll('.tb').forEach(b => b.classList.toggle('on', b.dataset.t === t));
-  if (save) localStorage.setItem('luvz-theme-user-choice', t);
-}
-setTheme(localStorage.getItem('luvz-theme-user-choice') || 'earth', false);
+document.documentElement.setAttribute('data-theme', 'earth');
 
 /* ── Navbar ─────────────────────────── */
 // Keep --modal-h accurate on orientation change
@@ -914,7 +909,6 @@ async function load() {
         d = MOCK_DATA;
       }
     }
-    if (d.theme && !localStorage.getItem('luvz-theme-user-choice')) setTheme(d.theme, false);
     // Store valid referral codes (case-insensitive — normalise to uppercase)
     if (Array.isArray(d.referral_codes)) {
       _validReferralCodes = d.referral_codes.map(c => String(c).trim().toUpperCase());
