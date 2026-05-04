@@ -252,7 +252,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(18px);
-      transition: opacity 1.1s cubic-bezier(0.16,1,0.3,1), transform 1.1s cubic-bezier(0.16,1,0.3,1)
+      transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1)
     }
 
     .reveal.in {
@@ -1490,7 +1490,9 @@
     }
 
     /* ── SHOP BY CATEGORY BENTO ─────────────────────────── */
-    #categories { padding: 64px 0 72px; }
+    #categories {
+      padding: 64px 0 72px;
+    }
 
     .ai-style-change-1 {
       max-width: 100%;
@@ -1505,13 +1507,40 @@
       width: 100%;
     }
 
-    .cat-tile[data-anchor="category-necklace"]   { grid-column: 1; grid-row: 1 / 3; }
-    .cat-tile[data-anchor="category-pendant"]    { grid-column: 2; grid-row: 1; }
-    .cat-tile[data-anchor="category-earrings"]   { grid-column: 3; grid-row: 1; }
-    .cat-tile[data-anchor="category-sets"]       { grid-column: 2; grid-row: 2; }
-    .cat-tile[data-anchor="new_collection"]      { grid-column: 3; grid-row: 2 / 4; }
-    .cat-tile[data-anchor="category-bangles"]    { grid-column: 1; grid-row: 3; }
-    .cat-tile[data-anchor="category-jhumkas"]    { grid-column: 2; grid-row: 3; }
+    .cat-tile[data-anchor="category-necklace"] {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    .cat-tile[data-anchor="category-pendant"] {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .cat-tile[data-anchor="category-earrings"] {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .cat-tile[data-anchor="category-sets"] {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .cat-tile[data-anchor="new_collection"] {
+      grid-column: 3;
+      grid-row: 2 / 4;
+    }
+
+    .cat-tile[data-anchor="category-bangles"] {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .cat-tile[data-anchor="category-jhumkas"] {
+      grid-column: 2;
+      grid-row: 3;
+    }
 
     .cat-tile {
       position: relative;
@@ -1519,93 +1548,119 @@
       border-radius: 9px;
       overflow: hidden;
       background: #1c1208;
-      border: 1px solid rgba(240,201,106,0.04);
+      border: 1px solid rgba(240, 201, 106, 0.04);
       cursor: pointer;
       transform: translateZ(0);
       will-change: transform;
-      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     @media (hover: hover) {
-      .cat-tile:hover { transform: translateY(-1.5px) translateZ(0); }
-      .cat-tile:hover .cat-glass { background: rgba(10,6,2,0.62); }
-      .cat-tile:hover .cat-tile-img { transform: scale(1.025) translateZ(0); }
+      .cat-tile:hover {
+        transform: translateY(-1.5px) translateZ(0);
+      }
+
+      .cat-tile:hover .cat-glass {
+        background: rgba(10, 6, 2, 0.62);
+      }
+
+      .cat-tile:hover .cat-tile-img {
+        transform: scale(1.025) translateZ(0);
+      }
     }
 
     .cat-tile-img {
       position: absolute;
       inset: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transform: translateZ(0);
       will-change: transform;
     }
 
     .cat-fade-bottom {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 65%;
       background: linear-gradient(to top,
-        rgba(6,3,1,0.72) 0%,
-        rgba(6,3,1,0.28) 45%,
-        transparent 100%);
+          rgba(6, 3, 1, 0.72) 0%,
+          rgba(6, 3, 1, 0.28) 45%,
+          transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
+
     .cat-tile[data-anchor="category-necklace"] .cat-fade-bottom,
     .cat-tile[data-anchor="new_collection"] .cat-fade-bottom {
       height: 55%;
       background: linear-gradient(to top,
-        rgba(6,3,1,0.68) 0%,
-        rgba(6,3,1,0.22) 40%,
-        transparent 100%);
+          rgba(6, 3, 1, 0.68) 0%,
+          rgba(6, 3, 1, 0.22) 40%,
+          transparent 100%);
     }
+
     .cat-fade-top {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 30%;
-      background: linear-gradient(to bottom, rgba(6,3,1,0.18) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(6, 3, 1, 0.18) 0%, transparent 100%);
       pointer-events: none;
       z-index: 1;
     }
+
     .cat-shine {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(240,201,106,0.12) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(240, 201, 106, 0.12) 50%, transparent 100%);
       z-index: 2;
     }
 
     .cat-badge {
       position: absolute;
-      top: 9px; right: 9px;
+      top: 9px;
+      right: 9px;
       z-index: 4;
       font-size: 8px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(240,201,106,0.50);
-      background: rgba(12,7,2,0.55);
-      border: 1px solid rgba(240,201,106,0.08);
+      color: rgba(240, 201, 106, 0.50);
+      background: rgba(12, 7, 2, 0.55);
+      border: 1px solid rgba(240, 201, 106, 0.08);
       border-radius: 20px;
       padding: 2px 8px;
       font-family: 'Jost', sans-serif;
     }
+
     @supports (backdrop-filter: blur(1px)) {
-      .cat-badge { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+      .cat-badge {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
     }
+
     .cat-badge-new {
-      background: rgba(160,45,45,0.50);
-      border-color: rgba(255,120,120,0.18);
+      background: rgba(160, 45, 45, 0.50);
+      border-color: rgba(255, 120, 120, 0.18);
       color: #ffcaca;
     }
 
     .cat-glass {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: 4;
-      background: rgba(10,6,2,0.82);
-      border-top: 1px solid rgba(240,201,106,0.10);
+      background: rgba(10, 6, 2, 0.82);
+      border-top: 1px solid rgba(240, 201, 106, 0.10);
       padding: 9px 13px 11px;
       display: flex;
       align-items: center;
@@ -1613,25 +1668,29 @@
       gap: 8px;
       transition: background 0.5s ease;
     }
+
     @supports (backdrop-filter: blur(1px)) {
       .cat-glass {
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        background: rgba(10,6,2,0.42);
+        background: rgba(10, 6, 2, 0.42);
       }
     }
+
     .cat-tile[data-anchor="category-necklace"] .cat-glass,
     .cat-tile[data-anchor="new_collection"] .cat-glass {
       padding: 13px 16px 15px;
     }
+
     .cat-glass-eyebrow {
       font-size: 8px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(240,201,106,0.50);
+      color: rgba(240, 201, 106, 0.50);
       margin-bottom: 2px;
       font-family: 'Jost', sans-serif;
     }
+
     .cat-glass-name {
       font-size: 12px;
       color: #f0e8d5;
@@ -1639,75 +1698,147 @@
       font-family: 'Cinzel', serif;
       font-weight: 400;
     }
+
     .cat-tile[data-anchor="category-necklace"] .cat-glass-name,
-    .cat-tile[data-anchor="new_collection"] .cat-glass-name { font-size: 14px; }
+    .cat-tile[data-anchor="new_collection"] .cat-glass-name {
+      font-size: 14px;
+    }
+
     .cat-glass-arrow {
-      width: 24px; height: 24px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       flex-shrink: 0;
-      border: 1px solid rgba(240,201,106,0.18);
+      border: 1px solid rgba(240, 201, 106, 0.18);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .cat-bangles-split {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
-    .cat-bangles-half { position: relative; overflow: hidden; }
+
+    .cat-bangles-half {
+      position: relative;
+      overflow: hidden;
+    }
+
     .cat-bangles-half img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
+
     .cat-bangles-divider {
       position: absolute;
-      top: 0; bottom: 0; left: 50%;
+      top: 0;
+      bottom: 0;
+      left: 50%;
       width: 1px;
-      background: rgba(240,201,106,0.08);
+      background: rgba(240, 201, 106, 0.08);
       z-index: 2;
     }
 
     .cat-tile-noimg {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Cinzel', serif;
       font-size: 13px;
-      color: rgba(240,201,106,0.35);
+      color: rgba(240, 201, 106, 0.35);
       letter-spacing: 0.08em;
     }
 
     @media (max-width: 768px) {
-      #categories { padding: 44px 0 52px; }
+      #categories {
+        padding: 44px 0 52px;
+      }
+
       .cat-grid {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 240px repeat(3, 148px);
         gap: 6px;
       }
-      .cat-tile[data-anchor="category-necklace"]   { grid-column: span 2; grid-row: 1; }
-      .cat-tile[data-anchor="category-pendant"]    { grid-column: unset; grid-row: unset; }
-      .cat-tile[data-anchor="category-earrings"]   { grid-column: unset; grid-row: unset; }
-      .cat-tile[data-anchor="category-sets"]       { grid-column: unset; grid-row: unset; }
-      .cat-tile[data-anchor="new_collection"]      { grid-column: unset; grid-row: unset; }
-      .cat-tile[data-anchor="category-bangles"]    { grid-column: unset; grid-row: unset; }
-      .cat-tile[data-anchor="category-jhumkas"]    { grid-column: unset; grid-row: unset; }
+
+      .cat-tile[data-anchor="category-necklace"] {
+        grid-column: span 2;
+        grid-row: 1;
+      }
+
+      .cat-tile[data-anchor="category-pendant"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
+      .cat-tile[data-anchor="category-earrings"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
+      .cat-tile[data-anchor="category-sets"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
+      .cat-tile[data-anchor="new_collection"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
+      .cat-tile[data-anchor="category-bangles"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
+      .cat-tile[data-anchor="category-jhumkas"] {
+        grid-column: unset;
+        grid-row: unset;
+      }
+
       .cat-fade-bottom {
         background: linear-gradient(to top,
-          rgba(6,3,1,0.60) 0%,
-          rgba(6,3,1,0.22) 45%,
-          transparent 100%);
+            rgba(6, 3, 1, 0.60) 0%,
+            rgba(6, 3, 1, 0.22) 45%,
+            transparent 100%);
       }
-      .cat-glass { background: rgba(10,6,2,0.40); }
+
+      .cat-glass {
+        background: rgba(10, 6, 2, 0.40);
+      }
+
       @supports (backdrop-filter: blur(1px)) {
-        .cat-glass { background: rgba(10,6,2,0.38); }
+        .cat-glass {
+          background: rgba(10, 6, 2, 0.38);
+        }
       }
-      .cat-glass-name { font-size: 11px; }
-      .cat-tile[data-anchor="category-necklace"] .cat-glass-name { font-size: 13px; }
-      .cat-tile[data-anchor="new_collection"] .cat-glass-name { font-size: 13px; }
-      .cat-glass-eyebrow { font-size: 7px; }
-      .cat-badge { font-size: 7px; }
+
+      .cat-glass-name {
+        font-size: 11px;
+      }
+
+      .cat-tile[data-anchor="category-necklace"] .cat-glass-name {
+        font-size: 13px;
+      }
+
+      .cat-tile[data-anchor="new_collection"] .cat-glass-name {
+        font-size: 13px;
+      }
+
+      .cat-glass-eyebrow {
+        font-size: 7px;
+      }
+
+      .cat-badge {
+        font-size: 7px;
+      }
     }
 
 
@@ -2213,12 +2344,12 @@
       transform: translateX(-50%);
       width: 600px;
       height: 300px;
-      background: radial-gradient(ellipse at center, rgba(196,136,44,0.07), transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(196, 136, 44, 0.07), transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
 
-    #why-luvz > * {
+    #why-luvz>* {
       position: relative;
       z-index: 1;
     }
@@ -2234,7 +2365,7 @@
 
     .why-left {
       padding: 0 40px 0 0;
-      border-right: 1px solid rgba(180,130,40,0.18);
+      border-right: 1px solid rgba(180, 130, 40, 0.18);
     }
 
     .why-statement {
@@ -2263,7 +2394,7 @@
 
     .why-material-tag {
       display: inline-block;
-      border: 1px solid rgba(180,130,40,0.3);
+      border: 1px solid rgba(180, 130, 40, 0.3);
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 0.3em;
@@ -2284,7 +2415,7 @@
     }
 
     .why-proof-card {
-      background: linear-gradient(145deg, rgba(40,20,8,0.92), rgba(18,9,3,0.98));
+      background: linear-gradient(145deg, rgba(40, 20, 8, 0.92), rgba(18, 9, 3, 0.98));
       padding: 24px 22px;
       border-radius: 2px;
       position: relative;
@@ -2297,7 +2428,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(180,130,40,0.25), transparent);
+      background: linear-gradient(90deg, transparent, rgba(180, 130, 40, 0.25), transparent);
     }
 
     .why-proof-title {
@@ -2325,8 +2456,8 @@
 
     .why-strip-item {
       padding: 16px 18px;
-      background: rgba(30,15,5,0.6);
-      border-top: 1px solid rgba(180,130,40,0.12);
+      background: rgba(30, 15, 5, 0.6);
+      border-top: 1px solid rgba(180, 130, 40, 0.12);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -2355,7 +2486,7 @@
 
       .why-left {
         border-right: none;
-        border-bottom: 1px solid rgba(180,130,40,0.18);
+        border-bottom: 1px solid rgba(180, 130, 40, 0.18);
         padding-right: 0;
         padding-bottom: 32px;
         margin-bottom: 32px;
@@ -2371,6 +2502,7 @@
     }
 
     @media (max-width: 480px) {
+
       .why-proof-grid,
       .why-strip {
         grid-template-columns: 1fr;
@@ -2388,8 +2520,8 @@
     }
 
     .contact-wa {
-      background: linear-gradient(145deg, rgba(44,22,6,0.95), rgba(22,11,3,0.99));
-      border: 1px solid rgba(180,130,40,0.2);
+      background: linear-gradient(145deg, rgba(44, 22, 6, 0.95), rgba(22, 11, 3, 0.99));
+      border: 1px solid rgba(180, 130, 40, 0.2);
       padding: 44px 40px;
       border-radius: 2px;
       overflow: hidden;
@@ -2403,13 +2535,13 @@
       right: -60px;
       width: 200px;
       height: 200px;
-      background: radial-gradient(circle, rgba(196,136,44,0.08), transparent 70%);
+      background: radial-gradient(circle, rgba(196, 136, 44, 0.08), transparent 70%);
       pointer-events: none;
     }
 
     .contact-ig {
-      background: rgba(20,10,3,0.5);
-      border: 1px solid rgba(180,130,40,0.12);
+      background: rgba(20, 10, 3, 0.5);
+      border: 1px solid rgba(180, 130, 40, 0.12);
       padding: 36px 30px;
       border-radius: 2px;
       display: flex;
@@ -2447,7 +2579,7 @@
     .contact-ghost-btn {
       display: inline-block;
       background: transparent;
-      border: 1px solid rgba(180,130,40,0.5);
+      border: 1px solid rgba(180, 130, 40, 0.5);
       font-family: 'Cinzel', serif;
       font-size: 10px;
       letter-spacing: 0.3em;
@@ -2461,12 +2593,12 @@
     }
 
     .contact-ghost-btn:hover {
-      background: rgba(180,130,40,0.08);
-      border-color: rgba(180,130,40,0.8);
+      background: rgba(180, 130, 40, 0.08);
+      border-color: rgba(180, 130, 40, 0.8);
     }
 
     .contact-ghost-btn-quiet {
-      border-color: rgba(180,130,40,0.2);
+      border-color: rgba(180, 130, 40, 0.2);
       color: var(--txt2);
       opacity: 0.6;
       align-self: flex-start;
@@ -6307,6 +6439,7 @@
         font-size: 16px;
       }
     }
+
     /* Luxury editorial redesign overrides */
     *,
     *::before,
@@ -7018,24 +7151,54 @@
 
     /* ── CHANGE 2: Section edge fades ── */
     section:not(#hero):not(.cinematic-heritage):not(footer)::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 80px;
       background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; z-index: 2;
+      pointer-events: none;
+      z-index: 2;
     }
-    section:not(#hero) { position: relative; }
+
+    section:not(#hero) {
+      position: relative;
+    }
+
     .cinematic-heritage::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100px;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
       background: linear-gradient(to bottom, var(--bg), transparent);
-      pointer-events: none; z-index: 2;
+      pointer-events: none;
+      z-index: 2;
     }
+
     .cinematic-heritage::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
       background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; z-index: 2;
+      pointer-events: none;
+      z-index: 2;
     }
-    section:last-of-type::after { display: none; }
-    .proof-bar { margin-top: -60px; position: relative; z-index: 1; }
+
+    section:last-of-type::after {
+      display: none;
+    }
+
+    .proof-bar {
+      margin-top: -60px;
+      position: relative;
+      z-index: 1;
+    }
 
     /* ── CHANGE 3A: Remove dark box from hero content ── */
     .hero-content {
@@ -7049,66 +7212,60 @@
     }
 
     /* ── CHANGE 3B: Cinematic overlay ── */
-    .hero-veil { display: none !important; }
+    .hero-veil {
+      display: none !important;
+    }
 
     #hero::before {
-      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
       background:
-        linear-gradient(
-          108deg,
+        linear-gradient(108deg,
           rgba(14, 8, 3, 0.93) 0%,
           rgba(16, 9, 4, 0.84) 15%,
           rgba(18, 10, 5, 0.70) 28%,
           rgba(18, 10, 5, 0.38) 44%,
           rgba(18, 10, 5, 0.10) 58%,
-          transparent 72%
-        ),
-        radial-gradient(
-          ellipse 70% 60% at 8% 55%,
+          transparent 72%),
+        radial-gradient(ellipse 70% 60% at 8% 55%,
           rgba(30, 14, 4, 0.55) 0%,
           rgba(20, 10, 4, 0.20) 50%,
-          transparent 75%
-        ),
-        linear-gradient(
-          to top,
+          transparent 75%),
+        linear-gradient(to top,
           rgba(12, 7, 2, 0.88) 0%,
           rgba(14, 8, 3, 0.42) 20%,
           rgba(16, 9, 4, 0.12) 40%,
-          transparent 60%
-        ),
-        linear-gradient(
-          to bottom,
+          transparent 60%),
+        linear-gradient(to bottom,
           rgba(10, 6, 2, 0.50) 0%,
           rgba(14, 8, 3, 0.15) 12%,
-          transparent 25%
-        );
+          transparent 25%);
     }
 
     #hero::after {
-      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
       background:
-        radial-gradient(
-          ellipse 75% 65% at 28% 42%,
+        radial-gradient(ellipse 75% 65% at 28% 42%,
           rgba(155, 85, 18, 0.16) 0%,
           rgba(135, 65, 10, 0.08) 40%,
-          transparent 68%
-        ),
-        radial-gradient(
-          ellipse 55% 50% at 48% 50%,
+          transparent 68%),
+        radial-gradient(ellipse 55% 50% at 48% 50%,
           rgba(190, 130, 40, 0.07) 0%,
-          transparent 65%
-        ),
-        radial-gradient(
-          ellipse 40% 55% at 72% 38%,
+          transparent 65%),
+        radial-gradient(ellipse 40% 55% at 72% 38%,
           rgba(180, 120, 30, 0.10) 0%,
           rgba(160, 100, 20, 0.04) 50%,
-          transparent 72%
-        ),
-        radial-gradient(
-          ellipse 35% 30% at 20% 56%,
+          transparent 72%),
+        radial-gradient(ellipse 35% 30% at 20% 56%,
           rgba(196, 136, 44, 0.09) 0%,
-          transparent 60%
-        );
+          transparent 60%);
     }
 
     /* CHANGE 2: Atmospheric texture haze on left content area */
@@ -7119,37 +7276,32 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(
-          ellipse 90% 70% at 40% 50%,
+        radial-gradient(ellipse 90% 70% at 40% 50%,
           rgba(22, 12, 4, 0.28) 0%,
           rgba(18, 10, 4, 0.12) 45%,
-          transparent 75%
-        ),
-        radial-gradient(
-          ellipse 55% 45% at 15% 65%,
+          transparent 75%),
+        radial-gradient(ellipse 55% 45% at 15% 65%,
           rgba(28, 14, 5, 0.20) 0%,
-          transparent 65%
-        ),
-        repeating-linear-gradient(
-          47deg,
+          transparent 65%),
+        repeating-linear-gradient(47deg,
           transparent,
           transparent 2px,
           rgba(255, 200, 100, 0.012) 2px,
-          rgba(255, 200, 100, 0.012) 3px
-        ),
-        repeating-linear-gradient(
-          -31deg,
+          rgba(255, 200, 100, 0.012) 3px),
+        repeating-linear-gradient(-31deg,
           transparent,
           transparent 3px,
           rgba(180, 120, 40, 0.008) 3px,
-          rgba(180, 120, 40, 0.008) 4px
-        );
+          rgba(180, 120, 40, 0.008) 4px);
     }
 
     /* CHANGE 4: Jewelry focal point — active when img.hero-img gains a wrapper class */
     #hero .hero-right,
     #hero .hero-image-wrap,
-    #hero .jewelry-wrap { position: relative; }
+    #hero .jewelry-wrap {
+      position: relative;
+    }
+
     #hero .hero-right::after,
     #hero .hero-image-wrap::after,
     #hero .jewelry-wrap::after {
@@ -7159,23 +7311,24 @@
       z-index: 2;
       pointer-events: none;
       background:
-        radial-gradient(
-          ellipse 40% 35% at 82% 18%,
+        radial-gradient(ellipse 40% 35% at 82% 18%,
           rgba(255, 220, 140, 0.10) 0%,
           rgba(220, 170, 80, 0.04) 50%,
-          transparent 75%
-        ),
-        radial-gradient(
-          ellipse 55% 35% at 70% 88%,
+          transparent 75%),
+        radial-gradient(ellipse 55% 35% at 70% 88%,
           rgba(196, 136, 44, 0.10) 0%,
-          transparent 65%
-        );
+          transparent 65%);
     }
 
-    #hero img, #hero .hero-bg, #hero video {
-      position: absolute !important; inset: 0 !important;
-      width: 100% !important; height: 100% !important;
-      object-fit: cover !important; z-index: 0 !important;
+    #hero img,
+    #hero .hero-bg,
+    #hero video {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      z-index: 0 !important;
     }
 
     #hero .hero-content {
@@ -7184,32 +7337,45 @@
     }
 
     /* ── CHANGE 3C: Typography atmosphere ── */
-    #hero h1, #hero .hero-title {
+    #hero h1,
+    #hero .hero-title {
       text-shadow:
-        0 0 80px rgba(196,136,44,0.35),
-        0 0 30px rgba(196,136,44,0.15),
-        0 2px 12px rgba(0,0,0,0.8),
-        0 4px 40px rgba(0,0,0,0.5);
+        0 0 80px rgba(196, 136, 44, 0.35),
+        0 0 30px rgba(196, 136, 44, 0.15),
+        0 2px 12px rgba(0, 0, 0, 0.8),
+        0 4px 40px rgba(0, 0, 0, 0.5);
     }
 
-    #hero p, #hero .hero-sub {
-      text-shadow: 0 1px 8px rgba(0,0,0,0.9), 0 0 24px rgba(18,10,5,0.6);
+    #hero p,
+    #hero .hero-sub {
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 0 24px rgba(18, 10, 5, 0.6);
       opacity: 0.82;
     }
 
-    #hero .hero-eyebrow, #hero .hero-label {
-      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    #hero .hero-eyebrow,
+    #hero .hero-label {
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
       opacity: 0.7;
     }
 
     /* ── CHANGE 3D: Hero title entrance animation ── */
     @keyframes titleReveal {
-      from { opacity: 0; letter-spacing: 0.25em; transform: translateY(16px); }
-      to   { opacity: 1; letter-spacing: 0.1em;  transform: translateY(0); }
+      from {
+        opacity: 0;
+        letter-spacing: 0.25em;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        letter-spacing: 0.1em;
+        transform: translateY(0);
+      }
     }
 
-    .hero-title, #hero h1 {
-      animation: titleReveal 1.4s cubic-bezier(0.16,1,0.3,1) forwards;
+    .hero-title,
+    #hero h1 {
+      animation: titleReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       animation-delay: 0.3s;
       opacity: 0;
       font-size: clamp(2.6rem, 8vw, 6.5rem) !important;
@@ -7218,7 +7384,8 @@
       margin-bottom: clamp(12px, 2vw, 20px) !important;
     }
 
-    .hero-sub, #hero p {
+    .hero-sub,
+    #hero p {
       font-size: clamp(0.75rem, 1.8vw, 1rem) !important;
       letter-spacing: 0.28em !important;
       margin-bottom: clamp(24px, 4vw, 36px) !important;
@@ -7226,7 +7393,11 @@
     }
 
     @media (max-width: 768px) {
-      .hero-sub, #hero p { max-width: 100% !important; }
+
+      .hero-sub,
+      #hero p {
+        max-width: 100% !important;
+      }
     }
 
     /* ── CHANGE 3E: Hero content positioning ── */
@@ -7244,7 +7415,8 @@
       #hero .hero-content {
         position: absolute !important;
         bottom: clamp(48px, 10vw, 80px) !important;
-        left: 0 !important; right: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
         padding: 0 clamp(20px, 6vw, 40px) !important;
         text-align: center !important;
       }
@@ -7253,115 +7425,199 @@
     /* ── CHANGE 3F: Hero buttons — premium borderless ── */
     #hero .hero-btn.hero-btn-primary {
       background: transparent !important;
-      border: 1px solid rgba(196,136,44,0.55) !important;
-      color: rgba(240,220,170,0.92) !important;
+      border: 1px solid rgba(196, 136, 44, 0.55) !important;
+      color: rgba(240, 220, 170, 0.92) !important;
       font-family: 'Cormorant Garamond', serif !important;
-      font-size: 11px !important; font-weight: 500 !important;
-      letter-spacing: 0.28em !important; text-transform: uppercase !important;
-      padding: 14px 32px !important; border-radius: 2px !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.28em !important;
+      text-transform: uppercase !important;
+      padding: 14px 32px !important;
+      border-radius: 2px !important;
       box-shadow: none !important;
-      position: relative !important; overflow: hidden !important;
+      position: relative !important;
+      overflow: hidden !important;
       transition: border-color 0.5s ease, color 0.5s ease, background 0.5s ease !important;
     }
 
     #hero .hero-btn.hero-btn-primary::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
-      background: linear-gradient(105deg, transparent 30%, rgba(196,136,44,0.15) 50%, transparent 70%);
-      transition: left 0.7s cubic-bezier(0.4,0,0.2,1); pointer-events: none;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(196, 136, 44, 0.15) 50%, transparent 70%);
+      transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
     }
 
-    #hero .hero-btn.hero-btn-primary:hover::before { left: 150%; }
+    #hero .hero-btn.hero-btn-primary:hover::before {
+      left: 150%;
+    }
 
     #hero .hero-btn.hero-btn-primary:hover {
-      border-color: rgba(196,136,44,0.85) !important;
+      border-color: rgba(196, 136, 44, 0.85) !important;
       color: #fff !important;
-      background: rgba(196,136,44,0.08) !important;
+      background: rgba(196, 136, 44, 0.08) !important;
     }
 
     #hero .hero-btn.hero-btn-secondary {
       background: transparent !important;
-      border: 1px solid rgba(240,220,170,0.20) !important;
-      color: rgba(240,220,170,0.65) !important;
+      border: 1px solid rgba(240, 220, 170, 0.20) !important;
+      color: rgba(240, 220, 170, 0.65) !important;
       font-family: 'Cormorant Garamond', serif !important;
-      font-size: 11px !important; font-weight: 400 !important;
-      letter-spacing: 0.28em !important; text-transform: uppercase !important;
-      padding: 14px 32px !important; border-radius: 2px !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.28em !important;
+      text-transform: uppercase !important;
+      padding: 14px 32px !important;
+      border-radius: 2px !important;
       box-shadow: none !important;
       transition: border-color 0.5s ease, color 0.5s ease !important;
     }
 
     #hero .hero-btn.hero-btn-secondary:hover {
-      border-color: rgba(240,220,170,0.50) !important;
-      color: rgba(240,220,170,0.95) !important;
+      border-color: rgba(240, 220, 170, 0.50) !important;
+      color: rgba(240, 220, 170, 0.95) !important;
     }
 
     /* ── CHANGE 3H + CHANGE 8: Mobile hero overlay ── */
     @media (max-width: 768px) {
       #hero::before {
         background:
-          linear-gradient(
-            to bottom,
+          linear-gradient(to bottom,
             rgba(10, 6, 2, 0.60) 0%,
             rgba(12, 7, 3, 0.28) 25%,
             rgba(14, 8, 4, 0.18) 50%,
             rgba(12, 7, 3, 0.65) 72%,
-            rgba(10, 6, 2, 0.94) 100%
-          ) !important;
+            rgba(10, 6, 2, 0.94) 100%) !important;
       }
+
       #hero::after {
         background:
-          radial-gradient(
-            ellipse 80% 50% at 50% 40%,
+          radial-gradient(ellipse 80% 50% at 50% 40%,
             rgba(155, 85, 18, 0.12) 0%,
-            transparent 70%
-          ) !important;
+            transparent 70%) !important;
       }
+
       #hero .hero-content::before {
         display: none !important;
       }
     }
 
     /* ── CHANGE 4 CSS: Luxury Motion System ── */
-    .carousel-item.reveal.in:nth-child(1) { transition-delay: 0.04s; }
-    .carousel-item.reveal.in:nth-child(2) { transition-delay: 0.10s; }
-    .carousel-item.reveal.in:nth-child(3) { transition-delay: 0.17s; }
-    .carousel-item.reveal.in:nth-child(4) { transition-delay: 0.24s; }
+    .carousel-item.reveal.in:nth-child(1) {
+      transition-delay: 0.04s;
+    }
 
-    .stagger-text > * {
+    .carousel-item.reveal.in:nth-child(2) {
+      transition-delay: 0.10s;
+    }
+
+    .carousel-item.reveal.in:nth-child(3) {
+      transition-delay: 0.17s;
+    }
+
+    .carousel-item.reveal.in:nth-child(4) {
+      transition-delay: 0.24s;
+    }
+
+    .stagger-text>* {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .stagger-text.in > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-    .stagger-text.in > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.12s; }
-    .stagger-text.in > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.22s; }
-    .stagger-text.in > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.32s; }
+    .stagger-text.in>*:nth-child(1) {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0s;
+    }
+
+    .stagger-text.in>*:nth-child(2) {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.12s;
+    }
+
+    .stagger-text.in>*:nth-child(3) {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.22s;
+    }
+
+    .stagger-text.in>*:nth-child(4) {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.32s;
+    }
 
     .reveal-img {
-      opacity: 0; transform: scale(0.97);
-      transition: opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-img.in { opacity: 1; transform: scale(1); }
-
-    .heritage-headline, .heritage-pillars, .heritage-body, .heritage-ornament {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .cinematic-heritage.in .heritage-eyebrow    { opacity: 0.7;  transform: none; transition-delay: 0s; }
-    .cinematic-heritage.in .heritage-headline   { opacity: 1;    transform: none; transition-delay: 0.15s; }
-    .cinematic-heritage.in .heritage-image-wrap { opacity: 1;    transform: none; transition-delay: 0.28s; }
-    .cinematic-heritage.in .heritage-pillars    { opacity: 1;    transform: none; transition-delay: 0.40s; }
-    .cinematic-heritage.in .heritage-body       { opacity: 0.82; transform: none; transition-delay: 0.52s; }
-    .cinematic-heritage.in .heritage-ornament   { opacity: 0.3;  transform: none; transition-delay: 0.64s; }
+    .reveal-img.in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .heritage-headline,
+    .heritage-pillars,
+    .heritage-body,
+    .heritage-ornament {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cinematic-heritage.in .heritage-eyebrow {
+      opacity: 0.7;
+      transform: none;
+      transition-delay: 0s;
+    }
+
+    .cinematic-heritage.in .heritage-headline {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.15s;
+    }
+
+    .cinematic-heritage.in .heritage-image-wrap {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.28s;
+    }
+
+    .cinematic-heritage.in .heritage-pillars {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.40s;
+    }
+
+    .cinematic-heritage.in .heritage-body {
+      opacity: 0.82;
+      transform: none;
+      transition-delay: 0.52s;
+    }
+
+    .cinematic-heritage.in .heritage-ornament {
+      opacity: 0.3;
+      transform: none;
+      transition-delay: 0.64s;
+    }
 
     .heritage-image-wrap {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    * { scroll-behavior: smooth; }
+    * {
+      scroll-behavior: smooth;
+    }
 
     /* ── CHANGE 5: Negative space & text width ── */
     section p:not(.heritage-body):not(.heritage-eyebrow) {
@@ -7372,11 +7628,13 @@
 
     .section-centered p,
     section[style*="text-align: center"] p,
-    section.text-center p { max-width: 480px; }
+    section.text-center p {
+      max-width: 480px;
+    }
 
-    section h2 + p,
-    section .section-title + p,
-    section h2 + .section-sub {
+    section h2+p,
+    section .section-title+p,
+    section h2+.section-sub {
       margin-top: clamp(16px, 2.5vw, 28px);
     }
 
@@ -7400,6 +7658,7 @@
       letter-spacing: 0.09em !important;
       margin-top: clamp(8px, 2vw, 16px) !important;
     }
+
     #hero .hero-title span:first-child {
       background: none !important;
       -webkit-text-fill-color: #F0C96A !important;
@@ -7411,6 +7670,7 @@
         0 2px 10px rgba(0, 0, 0, 0.97),
         0 6px 48px rgba(0, 0, 0, 0.65) !important;
     }
+
     #hero .hero-sub-title,
     #hero h2.collection-word,
     #hero .collection-text,
@@ -7432,13 +7692,14 @@
     #hero .hero-sub-line,
     #hero small,
     #hero .lc-eyebrow {
-      color: rgba(240,210,140,0.90) !important;
+      color: rgba(240, 210, 140, 0.90) !important;
       text-shadow:
         0 1px 10px rgba(0, 0, 0, 0.97),
         0 0 30px rgba(0, 0, 0, 0.60) !important;
       letter-spacing: 0.22em !important;
       opacity: 1 !important;
     }
+
     #hero .hero-features,
     #hero .hero-pills,
     #hero .hero-descriptor-line,
@@ -7446,8 +7707,8 @@
     #hero .lc-micro-copy,
     #hero .hero-cap-part,
     #hero .hero-cap-sep {
-      color: rgba(230,200,130,0.88) !important;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.95) !important;
+      color: rgba(230, 200, 130, 0.88) !important;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95) !important;
       opacity: 1 !important;
     }
 
@@ -7475,6 +7736,7 @@
         box-shadow 0.7s ease,
         background 0.7s ease !important;
     }
+
     #hero a[href*="wa.me"]:hover,
     #hero .hero-btn-primary:hover,
     #hero .btn-primary:hover {
@@ -7486,18 +7748,24 @@
         inset 0 1px 0 rgba(255, 215, 100, 0.15) !important;
       background: rgba(196, 136, 44, 0.06) !important;
     }
+
     #hero a[href*="wa.me"]::before,
     #hero .hero-btn-primary::before {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 60%; height: 100%;
-      background: linear-gradient(105deg, transparent 30%, rgba(255,210,80,0.18) 50%, transparent 70%);
-      transition: left 0.65s cubic-bezier(0.4,0,0.2,1);
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 210, 80, 0.18) 50%, transparent 70%);
+      transition: left 0.65s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
     }
+
     #hero a[href*="wa.me"]:hover::before,
-    #hero .hero-btn-primary:hover::before { left: 150%; }
+    #hero .hero-btn-primary:hover::before {
+      left: 150%;
+    }
 
     /* FIX 4 + CHANGE 6: Secondary button */
     #hero .hero-btn-secondary,
@@ -7517,6 +7785,7 @@
         border-color 0.7s ease,
         color 0.7s ease !important;
     }
+
     #hero .hero-btn-secondary:hover,
     #hero .btn-secondary:hover {
       border-color: rgba(230, 200, 130, 0.55) !important;
@@ -7525,6 +7794,7 @@
 
     /* FIX 5: Mobile — button spacing / scroll indicator stacking */
     @media (max-width: 768px) {
+
       #hero .hero-btns,
       #hero .hero-buttons,
       #hero .btn-group,
@@ -7535,6 +7805,7 @@
         align-items: center !important;
         width: 100% !important;
       }
+
       #hero a[href*="wa.me"],
       #hero .hero-btn-primary,
       #hero .btn-primary,
@@ -7545,6 +7816,7 @@
         max-width: 320px !important;
         text-align: center !important;
       }
+
       #hero .scroll-indicator,
       #hero .discover-collection,
       #hero .hero-scroll,
@@ -7562,6 +7834,7 @@
 
     /* FIX 6: Desktop — discover indicator visibility + animated chevron */
     @media (min-width: 769px) {
+
       #hero .scroll-indicator,
       #hero .discover-collection,
       #hero .hero-scroll,
@@ -7572,12 +7845,12 @@
         bottom: 32px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        color: rgba(230,195,110,0.85) !important;
+        color: rgba(230, 195, 110, 0.85) !important;
         font-size: 10px !important;
         font-weight: 500 !important;
         letter-spacing: 0.30em !important;
         text-transform: uppercase !important;
-        text-shadow: 0 1px 6px rgba(0,0,0,0.9) !important;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
         opacity: 1 !important;
         display: flex !important;
         flex-direction: column !important;
@@ -7586,11 +7859,13 @@
         cursor: pointer !important;
         z-index: 10 !important;
       }
+
       #hero .hero-discover span {
-        color: rgba(230,195,110,0.85) !important;
-        text-shadow: 0 1px 6px rgba(0,0,0,0.9) !important;
+        color: rgba(230, 195, 110, 0.85) !important;
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
         opacity: 1 !important;
       }
+
       #hero .scroll-indicator::after,
       #hero .discover-collection::after,
       #hero .hero-scroll::after,
@@ -7600,40 +7875,51 @@
         display: block;
         width: 14px;
         height: 14px;
-        border-right: 1.5px solid rgba(220,175,80,0.85);
-        border-bottom: 1.5px solid rgba(220,175,80,0.85);
+        border-right: 1.5px solid rgba(220, 175, 80, 0.85);
+        border-bottom: 1.5px solid rgba(220, 175, 80, 0.85);
         transform: rotate(45deg);
         animation: scrollBounce 1.6s ease-in-out infinite;
         margin-top: 2px;
       }
+
       @keyframes scrollBounce {
-        0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.85; }
-        50%       { transform: rotate(45deg) translateY(5px); opacity: 0.45; }
+
+        0%,
+        100% {
+          transform: rotate(45deg) translateY(0);
+          opacity: 0.85;
+        }
+
+        50% {
+          transform: rotate(45deg) translateY(5px);
+          opacity: 0.45;
+        }
       }
     }
 
     /* CHANGE 7: Navbar blends into hero on initial load */
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) {
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 6, 2, 0.55) 0%,
-        rgba(10, 6, 2, 0.20) 70%,
-        transparent 100%
-      ) !important;
+      background: linear-gradient(to bottom,
+          rgba(10, 6, 2, 0.55) 0%,
+          rgba(10, 6, 2, 0.20) 70%,
+          transparent 100%) !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
       border-bottom: none !important;
       box-shadow: none !important;
     }
+
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-link,
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) a {
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85) !important;
       opacity: 0.88;
     }
+
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-link:hover,
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) a:hover {
       opacity: 1;
     }
+
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) .nav-separator,
     #nav:not(.stuck):not(.scrolled):not(.is-scrolled) hr {
       opacity: 0.15 !important;
@@ -7644,6 +7930,7 @@
       margin-bottom: 0 !important;
       padding-bottom: 0 !important;
     }
+
     .trust-bar,
     .rating-strip,
     .hero-trust,
@@ -7653,11 +7940,12 @@
       margin-top: 0 !important;
       margin-bottom: 0 !important;
     }
-    #hero + section,
-    #hero + div,
-    #hero ~ .trust-bar,
-    #hero ~ .rating-strip,
-    #hero ~ .proof-bar {
+
+    #hero+section,
+    #hero+div,
+    #hero~.trust-bar,
+    #hero~.rating-strip,
+    #hero~.proof-bar {
       margin-top: 0 !important;
       padding-top: 0 !important;
     }
@@ -7665,7 +7953,9 @@
     /* ── Polish Pass ── */
 
     /* Change 1: Disable GPU-heavy prism/bloom/sweep on touch devices */
-    @media (hover: none), (pointer: coarse) {
+    @media (hover: none),
+    (pointer: coarse) {
+
       .pcard::after,
       .pcard-bloom,
       .pcard-sweep {
@@ -7674,7 +7964,8 @@
     }
 
     /* Change 2: Prevent card hover lift on tap (Android Chrome) */
-    @media (hover: none), (pointer: coarse) {
+    @media (hover: none),
+    (pointer: coarse) {
       .pcard:hover {
         transform: none;
       }
@@ -7686,20 +7977,25 @@
         animation: none !important;
         opacity: 0.45;
       }
+
       .lc-ambient-glow {
         animation: none !important;
       }
+
       .gold-text {
         animation: none !important;
       }
+
       .hero-chev {
         animation: none !important;
         opacity: 0.55;
       }
+
       .reveal {
         transition: opacity 0.3s ease !important;
         transform: none !important;
       }
+
       .reveal.in {
         transform: none !important;
       }
@@ -7714,18 +8010,16 @@
     }
 
     /* Change 5: Atmospheric gold hairline between adjacent sections */
-    .sec + .sec,
-    .sec + .sec-alt,
-    .sec-alt + .sec {
+    .sec+.sec,
+    .sec+.sec-alt,
+    .sec-alt+.sec {
       border-top: 1px solid;
-      border-image: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(212, 175, 55, 0.07) 25%,
-        rgba(212, 175, 55, 0.13) 50%,
-        rgba(212, 175, 55, 0.07) 75%,
-        transparent 100%
-      ) 1;
+      border-image: linear-gradient(90deg,
+          transparent 0%,
+          rgba(212, 175, 55, 0.07) 25%,
+          rgba(212, 175, 55, 0.13) 50%,
+          rgba(212, 175, 55, 0.07) 75%,
+          transparent 100%) 1;
     }
 
     /* Change 7: Reduce ambient glow intensity on mobile */
@@ -7734,6 +8028,7 @@
         animation: none;
         opacity: 0.16;
       }
+
       .hero-gem-light {
         opacity: 0.5;
       }
@@ -7746,16 +8041,18 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 64px;
-      border-bottom: 1px solid rgba(180,130,40,0.18);
+      border-bottom: 1px solid rgba(180, 130, 40, 0.18);
       position: relative;
     }
 
     #nav::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(196,136,44,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(196, 136, 44, 0.5), transparent);
       pointer-events: none;
     }
 
@@ -7772,7 +8069,7 @@
       font-family: 'Cinzel', serif;
       font-size: 9.5px;
       letter-spacing: 0.28em;
-      color: rgba(200,160,70,0.55);
+      color: rgba(200, 160, 70, 0.55);
       text-decoration: none;
       text-transform: uppercase;
       transition: color 0.3s;
@@ -7793,7 +8090,7 @@
     .nav-icon-btn {
       width: 34px;
       height: 34px;
-      border: 1px solid rgba(180,130,40,0.25);
+      border: 1px solid rgba(180, 130, 40, 0.25);
       background: transparent;
       display: flex;
       align-items: center;
@@ -7810,7 +8107,7 @@
       font-size: 9.5px;
       letter-spacing: 0.28em;
       color: var(--gold);
-      border: 1px solid rgba(180,130,40,0.45);
+      border: 1px solid rgba(180, 130, 40, 0.45);
       padding: 0 18px;
       height: 34px;
       text-decoration: none;
@@ -7824,6 +8121,7 @@
       .nav-links {
         display: none;
       }
+
       #nav {
         padding: 0 20px;
       }
@@ -7848,7 +8146,7 @@
       font-family: 'Cinzel', serif;
       font-size: 44px;
       font-weight: 400;
-      color: rgba(180,130,40,0.14);
+      color: rgba(180, 130, 40, 0.14);
       line-height: 1;
       margin-bottom: 18px;
       letter-spacing: 0.04em;
@@ -7874,7 +8172,7 @@
     .how-step-desc {
       font-size: 14px;
       font-style: italic;
-      color: rgba(180,150,90,0.5);
+      color: rgba(180, 150, 90, 0.5);
       line-height: 1.7;
       letter-spacing: 0.02em;
     }
@@ -7888,15 +8186,15 @@
     .how-line {
       width: 48px;
       height: 1px;
-      background: linear-gradient(90deg, rgba(180,130,40,0.3), rgba(180,130,40,0.08));
+      background: linear-gradient(90deg, rgba(180, 130, 40, 0.3), rgba(180, 130, 40, 0.08));
     }
 
     .how-arrow {
       width: 5px;
       height: 5px;
       transform: rotate(45deg);
-      border-top: 1px solid rgba(180,130,40,0.35);
-      border-right: 1px solid rgba(180,130,40,0.35);
+      border-top: 1px solid rgba(180, 130, 40, 0.35);
+      border-right: 1px solid rgba(180, 130, 40, 0.35);
       margin-left: -2px;
       flex-shrink: 0;
     }
@@ -7906,7 +8204,7 @@
       font-size: 10px;
       letter-spacing: 0.3em;
       color: var(--gold);
-      border: 1px solid rgba(180,130,40,0.45);
+      border: 1px solid rgba(180, 130, 40, 0.45);
       padding: 14px 36px;
       text-transform: uppercase;
       background: transparent;
@@ -7927,11 +8225,13 @@
         grid-template-columns: 1fr;
         max-width: 320px;
       }
+
       .how-connector {
         justify-content: center;
         padding: 8px 0;
         transform: rotate(90deg);
       }
+
       .how-step {
         padding: 16px 0;
       }
@@ -7944,20 +8244,20 @@
       grid-template-columns: 1fr 1fr;
       align-items: center;
       gap: 0;
-      border-top: 1px solid rgba(180,130,40,0.1);
-      border-bottom: 1px solid rgba(180,130,40,0.1);
+      border-top: 1px solid rgba(180, 130, 40, 0.1);
+      border-bottom: 1px solid rgba(180, 130, 40, 0.1);
     }
 
     .ig-cta-left {
       padding-right: 48px;
-      border-right: 1px solid rgba(180,130,40,0.12);
+      border-right: 1px solid rgba(180, 130, 40, 0.12);
     }
 
     .sec-label {
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 0.32em;
-      color: rgba(180,130,40,0.4);
+      color: rgba(180, 130, 40, 0.4);
       text-transform: uppercase;
       display: block;
       margin-bottom: 16px;
@@ -7967,7 +8267,7 @@
       font-size: 24px;
       font-style: italic;
       font-weight: 300;
-      color: rgba(232,213,176,0.6);
+      color: rgba(232, 213, 176, 0.6);
       line-height: 1.55;
       letter-spacing: 0.02em;
     }
@@ -7990,7 +8290,7 @@
     .ig-cta-sub {
       font-size: 13px;
       font-style: italic;
-      color: rgba(180,150,90,0.4);
+      color: rgba(180, 150, 90, 0.4);
       letter-spacing: 0.04em;
     }
 
@@ -8000,7 +8300,7 @@
       font-size: 9.5px;
       letter-spacing: 0.3em;
       color: var(--gold);
-      border: 1px solid rgba(180,130,40,0.35);
+      border: 1px solid rgba(180, 130, 40, 0.35);
       padding: 13px 24px;
       text-decoration: none;
       text-transform: uppercase;
@@ -8020,16 +8320,19 @@
         grid-template-columns: 1fr;
         padding: 40px 24px;
       }
+
       .ig-cta-left {
         border-right: none;
-        border-bottom: 1px solid rgba(180,130,40,0.12);
+        border-bottom: 1px solid rgba(180, 130, 40, 0.12);
         padding-right: 0;
         padding-bottom: 28px;
         margin-bottom: 28px;
       }
+
       .ig-cta-right {
         padding-left: 0;
       }
+
       .ig-cta-quote {
         font-size: 20px;
       }
@@ -8039,7 +8342,7 @@
     .policy-body {
       max-width: 700px;
       margin: 0 auto;
-      border-top: 1px solid rgba(180,130,40,0.2);
+      border-top: 1px solid rgba(180, 130, 40, 0.2);
       padding-top: 32px;
     }
 
@@ -8047,7 +8350,7 @@
       font-size: 17px;
       font-style: italic;
       font-weight: 300;
-      color: rgba(200,170,100,0.6);
+      color: rgba(200, 170, 100, 0.6);
       line-height: 2;
       text-align: center;
       letter-spacing: 0.03em;
@@ -8078,7 +8381,7 @@
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 0.22em;
-      color: rgba(180,130,40,0.45);
+      color: rgba(180, 130, 40, 0.45);
       text-transform: uppercase;
     }
 
@@ -8086,6 +8389,7 @@
       .policy-para {
         font-size: 15px;
       }
+
       .policy-tags {
         flex-direction: column;
         align-items: center;
@@ -8096,7 +8400,7 @@
     /* ═══════════════════ NEW: FOOTER REDESIGN ═══════════════════ */
     footer {
       background: var(--bg);
-      border-top: 1px solid rgba(180,130,40,0.15);
+      border-top: 1px solid rgba(180, 130, 40, 0.15);
     }
 
     .footer-grid {
@@ -8109,7 +8413,7 @@
 
     .footer-brand {
       padding-right: 48px;
-      border-right: 1px solid rgba(180,130,40,0.1);
+      border-right: 1px solid rgba(180, 130, 40, 0.1);
     }
 
     .footer-brand-name {
@@ -8126,7 +8430,7 @@
       font-family: 'Cinzel', serif;
       font-size: 8px;
       letter-spacing: 0.32em;
-      color: rgba(180,130,40,0.4);
+      color: rgba(180, 130, 40, 0.4);
       text-transform: uppercase;
       margin-bottom: 16px;
     }
@@ -8135,7 +8439,7 @@
       font-size: 13.5px;
       font-style: italic;
       font-weight: 300;
-      color: rgba(200,170,100,0.4);
+      color: rgba(200, 170, 100, 0.4);
       line-height: 1.85;
       max-width: 220px;
       margin-bottom: 24px;
@@ -8149,7 +8453,7 @@
     .footer-social-btn {
       width: 32px;
       height: 32px;
-      border: 1px solid rgba(180,130,40,0.25);
+      border: 1px solid rgba(180, 130, 40, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -8166,7 +8470,7 @@
 
     .footer-nav {
       padding: 0 40px;
-      border-right: 1px solid rgba(180,130,40,0.1);
+      border-right: 1px solid rgba(180, 130, 40, 0.1);
       display: flex;
       flex-direction: column;
       gap: 13px;
@@ -8176,7 +8480,7 @@
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 0.32em;
-      color: rgba(180,130,40,0.4);
+      color: rgba(180, 130, 40, 0.4);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -8184,7 +8488,7 @@
     .footer-link {
       font-size: 13.5px;
       font-style: italic;
-      color: rgba(200,170,100,0.45);
+      color: rgba(200, 170, 100, 0.45);
       text-decoration: none;
       letter-spacing: 0.04em;
       transition: color 0.3s;
@@ -8201,7 +8505,7 @@
       gap: 0;
     }
 
-    .footer-contact > .footer-col-label {
+    .footer-contact>.footer-col-label {
       margin-bottom: 20px;
     }
 
@@ -8220,19 +8524,19 @@
     .footer-contact-detail {
       font-size: 13px;
       font-style: italic;
-      color: rgba(200,170,100,0.4);
+      color: rgba(200, 170, 100, 0.4);
       letter-spacing: 0.04em;
     }
 
     .footer-contact-sep {
       height: 1px;
-      background: rgba(180,130,40,0.08);
+      background: rgba(180, 130, 40, 0.08);
     }
 
     .footer-policy-strip {
       margin: 44px 56px 0;
-      border-top: 1px solid rgba(180,130,40,0.12);
-      border-bottom: 1px solid rgba(180,130,40,0.08);
+      border-top: 1px solid rgba(180, 130, 40, 0.12);
+      border-bottom: 1px solid rgba(180, 130, 40, 0.08);
       padding: 18px 0;
     }
 
@@ -8240,7 +8544,7 @@
       font-size: 13px;
       font-style: italic;
       font-weight: 300;
-      color: rgba(180,150,90,0.35);
+      color: rgba(180, 150, 90, 0.35);
       text-align: center;
       letter-spacing: 0.05em;
       line-height: 1.8;
@@ -8258,7 +8562,7 @@
       font-family: 'Cinzel', serif;
       font-size: 9px;
       letter-spacing: 0.22em;
-      color: rgba(180,130,40,0.28);
+      color: rgba(180, 130, 40, 0.28);
       text-transform: uppercase;
     }
 
@@ -8268,23 +8572,28 @@
         padding: 40px 24px 0;
         gap: 40px;
       }
+
       .footer-brand {
         border-right: none;
-        border-bottom: 1px solid rgba(180,130,40,0.1);
+        border-bottom: 1px solid rgba(180, 130, 40, 0.1);
         padding-right: 0;
         padding-bottom: 32px;
       }
+
       .footer-nav {
         border-right: none;
-        border-bottom: 1px solid rgba(180,130,40,0.1);
+        border-bottom: 1px solid rgba(180, 130, 40, 0.1);
         padding: 0 0 32px 0;
       }
+
       .footer-contact {
         padding-left: 0;
       }
+
       .footer-policy-strip {
         margin: 32px 24px 0;
       }
+
       .footer-copyright {
         padding: 16px 24px 32px;
         flex-direction: column;
@@ -8327,9 +8636,9 @@
   <a id="fwa"
     href="https://wa.me/918919359961?text=Hi!%20I%27m%20browsing%20LUVZ%20Collection%20and%20want%20to%20order%20%F0%9F%A4%A9"
     target="_blank" rel="noopener noreferrer" aria-label="Chat and Order on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
-      viewBox="0 0 32 32" fill="var(--wa-icon)">
-      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.486 2.031 7.788L0 32l8.418-2.006A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.79-1.863l-.486-.29-5.004 1.193 1.244-4.861-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.952c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.63-.199-.895.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.68-.619-3.2-1.975-1.182-1.055-1.98-2.357-2.213-2.755-.232-.398-.025-.613.175-.811.18-.178.398-.464.597-.696.2-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.895-2.158-1.227-2.954-.323-.775-.65-.67-.895-.682l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.361-1.393 3.319 0 1.958 1.426 3.85 1.625 4.116.199.265 2.807 4.287 6.802 6.013.951.41 1.693.655 2.272.839.954.303 1.823.26 2.509.158.765-.114 2.354-.963 2.686-1.893.332-.93.332-1.727.232-1.893-.099-.166-.364-.265-.762-.464z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="var(--wa-icon)">
+      <path
+        d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.486 2.031 7.788L0 32l8.418-2.006A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.79-1.863l-.486-.29-5.004 1.193 1.244-4.861-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.952c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.63-.199-.895.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.68-.619-3.2-1.975-1.182-1.055-1.98-2.357-2.213-2.755-.232-.398-.025-.613.175-.811.18-.178.398-.464.597-.696.2-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.895-2.158-1.227-2.954-.323-.775-.65-.67-.895-.682l-.762-.013c-.265 0-.696.1-1.061.497-.365.398-1.393 1.361-1.393 3.319 0 1.958 1.426 3.85 1.625 4.116.199.265 2.807 4.287 6.802 6.013.951.41 1.693.655 2.272.839.954.303 1.823.26 2.509.158.765-.114 2.354-.963 2.686-1.893.332-.93.332-1.727.232-1.893-.099-.166-.364-.265-.762-.464z" />
     </svg>
   </a>
 
@@ -8370,19 +8679,17 @@
     </div>
     <div class="nav-actions">
       <button class="nav-wish-btn nav-icon-btn" onclick="openWishlist()" aria-label="Wishlist">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.6)" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
         <span class="nav-wish-count" id="nav-wish-count">0</span>
       </button>
-      <button
-        id="nav-askai-icon"
-        class="nav-stylist-btn"
-        onclick="window.openLuvzChat(event);"
-        aria-label="Ask Jewellery Stylist"
-      >
+      <button id="nav-askai-icon" class="nav-stylist-btn" onclick="window.openLuvzChat(event);"
+        aria-label="Ask Jewellery Stylist">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8">
-          <path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z"/>
+          <path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z" />
         </svg>
         <span class="nav-askai-label">Stylist</span>
       </button>
@@ -8440,8 +8747,8 @@
         <span>COLLECTION</span>
       </h1>
       <div class="lc-micro-copy hero-caption-styled"><span class="hero-cap-part">Handcrafted</span><span
-          class="hero-cap-sep"> · </span><span class="hero-cap-part">92.5 Silver</span><span
-          class="hero-cap-sep"> · </span><span class="hero-cap-part">Heritage Design</span></div>
+          class="hero-cap-sep"> · </span><span class="hero-cap-part">92.5 Silver</span><span class="hero-cap-sep"> ·
+        </span><span class="hero-cap-part">Heritage Design</span></div>
       <div class="lc-rule-enhanced">
         <span class="lc-rule-line"></span>
         <span class="lc-rule-diamond"></span>
@@ -8487,8 +8794,12 @@
   <section id="categories" class="sec reveal">
     <div style="max-width:min(1560px,94vw);margin-inline:auto;padding-inline:0;padding-block:64px 72px">
       <div class="sec-head">
-        <div style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,201,106,0.48);font-family:'Jost',sans-serif;margin-bottom:6px">COLLECTIONS</div>
-        <h2 class="sec-title" style="font-family:'Cinzel',serif;font-size:clamp(22px,3.5vw,38px);font-weight:400;letter-spacing:0.08em;color:#f0ead8">Shop by Category</h2>
+        <div
+          style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,201,106,0.48);font-family:'Jost',sans-serif;margin-bottom:6px">
+          COLLECTIONS</div>
+        <h2 class="sec-title"
+          style="font-family:'Cinzel',serif;font-size:clamp(22px,3.5vw,38px);font-weight:400;letter-spacing:0.08em;color:#f0ead8">
+          Shop by Category</h2>
         <div style="width:36px;height:1px;background:rgba(240,201,106,0.28);margin:10px auto 22px"></div>
       </div>
 
@@ -8496,7 +8807,8 @@
 
         <!-- Necklaces — hero, spans rows 1–2 -->
         <div class="cat-tile" data-anchor="category-necklace">
-          <img class="cat-tile-img" loading="lazy" alt="Necklaces" style="object-position:center 30%;filter:brightness(1.00)">
+          <img class="cat-tile-img" loading="lazy" alt="Necklaces"
+            style="object-position:center 30%;filter:brightness(1.00)">
           <div class="cat-fade-bottom"></div>
           <div class="cat-fade-top"></div>
           <div class="cat-shine"></div>
@@ -8506,77 +8818,135 @@
               <div class="cat-glass-eyebrow">Signature</div>
               <div class="cat-glass-name">Necklaces</div>
             </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- Pendants -->
         <div class="cat-tile" data-anchor="category-pendant">
-          <img class="cat-tile-img" loading="lazy" alt="Pendants" style="object-position:center top;filter:brightness(0.92)">
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <img class="cat-tile-img" loading="lazy" alt="Pendants"
+            style="object-position:center top;filter:brightness(0.92)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge" data-badge></div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Everyday</div><div class="cat-glass-name">Pendants</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Everyday</div>
+              <div class="cat-glass-name">Pendants</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- Earrings -->
         <div class="cat-tile" data-anchor="category-earrings">
-          <img class="cat-tile-img" loading="lazy" alt="Earrings" style="object-position:center top;filter:brightness(0.96)">
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <img class="cat-tile-img" loading="lazy" alt="Earrings"
+            style="object-position:center top;filter:brightness(0.96)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge" data-badge></div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Statement</div><div class="cat-glass-name">Earrings</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Statement</div>
+              <div class="cat-glass-name">Earrings</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- Sets -->
         <div class="cat-tile" data-anchor="category-sets">
-          <img class="cat-tile-img" loading="lazy" alt="Sets" style="object-position:center center;filter:brightness(0.88)">
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <img class="cat-tile-img" loading="lazy" alt="Sets"
+            style="object-position:center center;filter:brightness(0.88)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge" data-badge></div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Bridal</div><div class="cat-glass-name">Sets</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Bridal</div>
+              <div class="cat-glass-name">Sets</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- New Collection — hero, spans rows 2–3 -->
         <div class="cat-tile" data-anchor="new_collection">
-          <img class="cat-tile-img" loading="lazy" alt="New Collection" style="object-position:center top;filter:brightness(1.04)">
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <img class="cat-tile-img" loading="lazy" alt="New Collection"
+            style="object-position:center top;filter:brightness(1.04)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge cat-badge-new">New</div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Latest</div><div class="cat-glass-name">New Collection</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Latest</div>
+              <div class="cat-glass-name">New Collection</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- Bangles — two-image split -->
         <div class="cat-tile" data-anchor="category-bangles">
           <div class="cat-bangles-split">
-            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles" style="object-position:center center;filter:brightness(0.94)"></div>
-            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles" style="object-position:center center;filter:brightness(0.90)"></div>
+            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles"
+                style="object-position:center center;filter:brightness(0.94)"></div>
+            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles"
+                style="object-position:center center;filter:brightness(0.90)"></div>
           </div>
           <div class="cat-bangles-divider"></div>
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge" data-badge></div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Stacking</div><div class="cat-glass-name">Bangles</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Stacking</div>
+              <div class="cat-glass-name">Bangles</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
         <!-- Jhumkas -->
         <div class="cat-tile" data-anchor="category-jhumkas">
-          <img class="cat-tile-img" loading="lazy" alt="Jhumkas" style="object-position:center 20%;filter:brightness(0.96)">
-          <div class="cat-fade-bottom"></div><div class="cat-fade-top"></div><div class="cat-shine"></div>
+          <img class="cat-tile-img" loading="lazy" alt="Jhumkas"
+            style="object-position:center 20%;filter:brightness(0.96)">
+          <div class="cat-fade-bottom"></div>
+          <div class="cat-fade-top"></div>
+          <div class="cat-shine"></div>
           <div class="cat-badge" data-badge></div>
           <div class="cat-glass">
-            <div><div class="cat-glass-eyebrow">Heritage</div><div class="cat-glass-name">Jhumkas</div></div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="cat-glass-eyebrow">Heritage</div>
+              <div class="cat-glass-name">Jhumkas</div>
+            </div>
+            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
           </div>
         </div>
 
@@ -8650,7 +9020,8 @@
       <div class="why-editorial-split">
         <div class="why-left">
           <p class="why-statement">Crafted to feel <strong>heirloom-worthy</strong> — from the first touch.</p>
-          <p class="why-atmo">Each piece passes through the hands of artisans who treat silver and gold as language. No shortcuts. No compromises.</p>
+          <p class="why-atmo">Each piece passes through the hands of artisans who treat silver and gold as language. No
+            shortcuts. No compromises.</p>
           <span class="why-material-tag">92.5 STERLING · 22K POLISH</span>
         </div>
         <div class="why-right">
@@ -8966,7 +9337,8 @@
           <div class="ig-cta-handle">@luvz_collection</div>
           <div class="ig-cta-sub">Instagram · See real customer styles</div>
         </div>
-        <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer" class="ig-cta-btn">Open Instagram →</a>
+        <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer"
+          class="ig-cta-btn">Open Instagram →</a>
       </div>
     </div>
   </section>
@@ -8982,8 +9354,10 @@
         <div class="contact-wa">
           <p class="contact-label">— Private Jewellery Concierge</p>
           <h3 class="contact-wa-title">WhatsApp Us</h3>
-          <p class="contact-wa-body">Speak directly with our jewellery stylist — for custom orders, size guidance, or simply to find your perfect piece.</p>
-          <a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9" target="_blank" rel="noopener" class="contact-ghost-btn">Chat on WhatsApp →</a>
+          <p class="contact-wa-body">Speak directly with our jewellery stylist — for custom orders, size guidance, or
+            simply to find your perfect piece.</p>
+          <a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9"
+            target="_blank" rel="noopener" class="contact-ghost-btn">Chat on WhatsApp →</a>
           <p class="contact-meta">+91 89193 59961 · Online across India</p>
         </div>
         <div class="contact-ig">
@@ -8992,7 +9366,8 @@
             <p class="contact-ig-handle">@luvz_collection</p>
             <p class="contact-ig-sub">Instagram DM · Usually replies within 1 hour</p>
           </div>
-          <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener" class="contact-ghost-btn contact-ghost-btn-quiet">Open Instagram →</a>
+          <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener"
+            class="contact-ghost-btn contact-ghost-btn-quiet">Open Instagram →</a>
         </div>
       </div>
     </div>
@@ -9055,7 +9430,8 @@
       </div>
       <div class="policy-body">
         <p class="policy-para">
-          Each piece is made to order with care — we don't accept returns, but if your jewellery arrives damaged, we replace it within 48 hours, no questions asked. Free tracked shipping across India on all orders above ₹999.
+          Each piece is made to order with care — we don't accept returns, but if your jewellery arrives damaged, we
+          replace it within 48 hours, no questions asked. Free tracked shipping across India on all orders above ₹999.
         </p>
         <div class="policy-tags">
           <div class="policy-tag">
@@ -9086,19 +9462,25 @@
           loading="lazy" decoding="async" />
         <div class="footer-brand-name">LUVZ Collection</div>
         <div class="footer-brand-sub">Designer Boutique</div>
-        <p class="footer-tagline">Handcrafted 92.5 silver jewellery with 22 carat gold polish. Made for women who wear tradition beautifully.</p>
+        <p class="footer-tagline">Handcrafted 92.5 silver jewellery with 22 carat gold polish. Made for women who wear
+          tradition beautifully.</p>
         <div class="footer-socials">
-          <a href="https://www.instagram.com/luvz_collection" class="footer-social-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          <a href="https://www.instagram.com/luvz_collection" class="footer-social-btn" target="_blank"
+            rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(180,130,40,0.7)" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
             </svg>
           </a>
-          <a href="https://wa.me/918919359961" class="footer-social-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <a href="https://wa.me/918919359961" class="footer-social-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="WhatsApp">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="rgba(180,130,40,0.7)">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.882l6.198-1.625A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.002-1.368l-.358-.214-3.718.975.992-3.624-.233-.372A9.78 9.78 0 0 1 2.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z"/>
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.855L.057 23.882l6.198-1.625A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 0 1-5.002-1.368l-.358-.214-3.718.975.992-3.624-.233-.372A9.78 9.78 0 0 1 2.182 12C2.182 6.579 6.579 2.182 12 2.182S21.818 6.579 21.818 12 17.421 21.818 12 21.818z" />
             </svg>
           </a>
         </div>
@@ -9143,7 +9525,8 @@
 
     <!-- Policy strip -->
     <div class="footer-policy-strip">
-      <p class="footer-policy-text">Custom-made with care. Each piece is crafted to order — returns aren't possible. We gladly replace items damaged during shipping.</p>
+      <p class="footer-policy-text">Custom-made with care. Each piece is crafted to order — returns aren't possible. We
+        gladly replace items damaged during shipping.</p>
     </div>
 
     <!-- Copyright bar -->
@@ -9273,10 +9656,9 @@
     <a href="#customer-love" onclick="toggleMenu()" class="mob-link">Customer Love</a>
     <a href="#heritage" onclick="toggleMenu()" class="mob-link">Our Story</a>
     <a href="#contact" onclick="toggleMenu()" class="mob-link">Contact</a>
-    <div style="display:flex;align-items:center;gap:18px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border-h)">
-      <button
-        onclick="openWishlist(); toggleMenu();"
-        style="
+    <div
+      style="display:flex;align-items:center;gap:18px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border-h)">
+      <button onclick="openWishlist(); toggleMenu();" style="
           background: none;
           border: none;
           cursor: pointer;
@@ -9290,19 +9672,16 @@
           letter-spacing: 1px;
           text-transform: uppercase;
           padding: 0;
-        "
-        aria-label="Open wishlist"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        " aria-label="Open wishlist">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
         </svg>
         Wishlist
       </button>
       <!-- Ask AI nav link - mobile only, triggers same chat drawer -->
-      <button
-        id="mob-askai-btn"
-        onclick="window.openLuvzChat(event); toggleMenu();"
-        style="
+      <button id="mob-askai-btn" onclick="window.openLuvzChat(event); toggleMenu();" style="
           background: none;
           border: none;
           cursor: pointer;
@@ -9317,12 +9696,12 @@
           letter-spacing: 1px;
           text-transform: uppercase;
           padding: 0;
-        "
-        aria-label="Ask AI Style Assistant"
-      >
+        " aria-label="Ask AI Style Assistant">
         <!-- Star icon matching luvz-chat.css trigger aesthetic -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
         Ask AI
       </button>
@@ -9332,7 +9711,6 @@
 
   <script defer src="app.js"></script>
   <footer class="mini-footer" style="padding-bottom:max(40px,calc(70px + env(safe-area-inset-bottom)))">
-    <p>© 2026 LUVZ Collection</p>
     <a id="admin-link" href="/admin/" class="admin-hidden">Admin Login</a>
   </footer>
 
