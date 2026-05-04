@@ -6,3 +6,5 @@
 !.env.example
 job_context.json
 HERO_ENHANCEMENT.md
+.claude
+
