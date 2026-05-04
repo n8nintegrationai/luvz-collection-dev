@@ -194,7 +194,7 @@ Loaded from Google Fonts with `preconnect` for performance. Font-size `16px` on 
 - **Objective:** Execute the Full Cinematic Redesign (v1.2).
 - **Scope:** Includes Hero section cleanup, "Jewellery Stylist" rebranding, and Luxury Motion System implementation.
 - **Priority:** Ensure 100% adherence to the "PROTECTED" list in the main prompt.
-- **Status:** ✅ nav-howit-works-footer-redesign
+- **Status:** ✅ nav-howit-works-footer-redesign · ✅ luxury-art-direction-refinement
 
 ---
 
@@ -205,3 +205,4 @@ Loaded from Google Fonts with `preconnect` for performance. Font-size `16px` on 
 * **2026-05-02:** Optimized mobile performance and stability by removing heavy animations and jitter, while ensuring full accessibility for reduced-motion settings. Refined the luxury brand aesthetic by restoring Cinzel typography and adding subtle gold hairline separators for a cleaner, editorial feel.
 * **2026-05-03:** Replaced "Shop by Category" auto-scroll carousel with a static asymmetric CSS Grid bento mosaic — 6 tiles, glass-bar labels with `backdrop-filter`, GPU-composited hover, click-to-scroll anchors; removed `initCategoryAutoScroll`, `buildCatTile`, and all `.cat-carousel-*` / `.cat-tile*` CSS.
 * **2026-05-03:** Redesigned Nav + How It Works + Instagram CTA + Our Policy + Footer. Removed emoji, replaced card grids with editorial layouts, unwrapped nav-inner, replaced SVG icons, updated button styles to ghost theme, added 3-column footer grid with policy strip.
+* **2026-05-04:** Applied luxury art direction refinement: locked theme to earth (removed dark/light switcher), elevated WHY LUVZ section with Cinzel gold statement + transparent proof cards + inline logistics whisper, reframed GET IN TOUCH with "Jewellery Stylist" persona + asymmetric layout + Jost buttons, added tonal pacing glows (Contact richest gold, Heritage warmer, Footer subtle whisper).
