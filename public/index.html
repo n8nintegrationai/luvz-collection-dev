@@ -2200,143 +2200,324 @@
     }
 
     /* ═══════════════════ WHY LUVZ ═══════════════════ */
-    .why-grid {
+    #why-luvz {
+      position: relative;
+      overflow: hidden;
+    }
+
+    #why-luvz::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse at center, rgba(196,136,44,0.07), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #why-luvz > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-editorial-split {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 900px;
-      margin: 0 auto
+      grid-template-columns: 38% 62%;
+      gap: 0;
+      align-items: start;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    @media(max-width:700px) {
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px
-      }
+    .why-left {
+      padding: 0 40px 0 0;
+      border-right: 1px solid rgba(180,130,40,0.18);
     }
 
-    @media(max-width:420px) {
-      .why-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px
-      }
-    }
-
-    .why-card {
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 16px;
-      padding: 24px 20px;
-      text-align: center;
-      transition: border-color .3s, box-shadow .3s, transform .35s;
-      box-shadow: var(--sh);
-    }
-
-    .why-card:hover {
-      border-color: var(--border-h);
-      box-shadow: var(--sh-h);
-      transform: translateY(-4px)
-    }
-
-    .why-icon {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      display: block
-    }
-
-    .why-title {
-      font-family: 'Cinzel', serif;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px
-    }
-
-    .why-body {
+    .why-statement {
       font-family: 'Cormorant Garamond', serif;
-      font-size: .88rem;
+      font-size: 28px;
+      font-weight: 300;
       font-style: italic;
-      color: var(--txt2);
-      opacity: .62;
-      line-height: 1.5
+      line-height: 1.45;
+      color: var(--txt);
+      margin-bottom: 20px;
+    }
+
+    .why-statement strong {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .why-atmo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      opacity: 0.45;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .why-material-tag {
+      display: inline-block;
+      border: 1px solid rgba(180,130,40,0.3);
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      padding: 7px 14px;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .why-right {
+      padding-left: 32px;
+    }
+
+    .why-proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+
+    .why-proof-card {
+      background: linear-gradient(145deg, rgba(40,20,8,0.92), rgba(18,9,3,0.98));
+      padding: 24px 22px;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .why-proof-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(180,130,40,0.25), transparent);
+    }
+
+    .why-proof-title {
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .why-proof-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      opacity: 0.45;
+      line-height: 1.7;
+    }
+
+    .why-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .why-strip-item {
+      padding: 16px 18px;
+      background: rgba(30,15,5,0.6);
+      border-top: 1px solid rgba(180,130,40,0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .why-strip-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .why-strip-text {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      opacity: 0.4;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .why-editorial-split {
+        grid-template-columns: 1fr;
+      }
+
+      .why-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(180,130,40,0.18);
+        padding-right: 0;
+        padding-bottom: 32px;
+        margin-bottom: 32px;
+      }
+
+      .why-right {
+        padding-left: 0;
+      }
+
+      .why-proof-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-proof-grid,
+      .why-strip {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ═══════════════════ CONTACT ═══════════════════ */
-    .contact-grid {
+    .contact-asymmetric {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto
+      grid-template-columns: 58% 42%;
+      gap: 16px;
+      align-items: stretch;
+      max-width: 1060px;
+      margin: 0 auto;
     }
 
-    @media(max-width:640px) {
-      .contact-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      /* Tighten card padding on small screens so content fits side by side */
-      .contact-card {
-        padding: 20px 14px;
-      }
-
-      .contact-title {
-        font-size: .9rem;
-      }
-
-      .contact-body {
-        font-size: .82rem;
-      }
+    .contact-wa {
+      background: linear-gradient(145deg, rgba(44,22,6,0.95), rgba(22,11,3,0.99));
+      border: 1px solid rgba(180,130,40,0.2);
+      padding: 44px 40px;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .contact-card {
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 20px;
+    .contact-wa::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(196,136,44,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-ig {
+      background: rgba(20,10,3,0.5);
+      border: 1px solid rgba(180,130,40,0.12);
       padding: 36px 30px;
-      text-align: center;
-      transition: border-color .3s, box-shadow .3s;
-      box-shadow: var(--sh)
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .contact-card:hover {
-      border-color: var(--border-h);
-      box-shadow: var(--sh-h)
-    }
-
-    .contact-icon {
-      font-size: 2rem;
-      margin-bottom: 12px
-    }
-
-    .contact-title {
+    .contact-label {
       font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      margin-bottom: 10px
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      opacity: 0.4;
+      text-transform: uppercase;
+      margin-bottom: 16px;
     }
 
-    .contact-body {
+    .contact-wa-title {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .contact-wa-body {
       font-family: 'Cormorant Garamond', serif;
-      font-size: .93rem;
+      font-size: 16px;
       font-style: italic;
+      opacity: 0.6;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .contact-ghost-btn {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid rgba(180,130,40,0.5);
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 0;
+      text-decoration: none;
+      transition: background 0.4s, border-color 0.4s;
+      cursor: pointer;
+    }
+
+    .contact-ghost-btn:hover {
+      background: rgba(180,130,40,0.08);
+      border-color: rgba(180,130,40,0.8);
+    }
+
+    .contact-ghost-btn-quiet {
+      border-color: rgba(180,130,40,0.2);
       color: var(--txt2);
-      opacity: .62;
+      opacity: 0.6;
+      align-self: flex-start;
+    }
+
+    .contact-meta {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      opacity: 0.35;
+      margin-top: 20px;
+    }
+
+    .contact-ig-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 300;
+      opacity: 0.4;
+      line-height: 1.5;
       margin-bottom: 20px;
-      line-height: 1.65
     }
 
-    .contact-footer {
+    .contact-ig-handle {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .contact-ig-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: .76rem;
+      font-size: 12px;
       font-style: italic;
-      color: var(--txt2);
-      opacity: .28;
-      margin-top: 14px
+      opacity: 0.35;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .contact-asymmetric {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-wa {
+        padding: 36px 24px;
+      }
+
+      .contact-ig {
+        padding: 28px 24px;
+      }
     }
 
     /* ═══════════════════ BUTTONS ═══════════════════ */
@@ -7921,38 +8102,42 @@
       <div class="sec-head">
         <div class="eyebrow">Our Promise</div>
         <h2 class="sec-title gold-text">Why LUVZ?</h2>
-        <p>Every piece we make is a promise — of quality, care, and craftsmanship that lasts.</p>
       </div>
-      <div class="why-grid">
-        <div class="why-card">
-          <span class="why-icon">🥈</span>
-          <div class="why-title">92.5 Sterling Silver</div>
-          <div class="why-body">Hallmark certified. The finest grade.</div>
+      <div class="why-editorial-split">
+        <div class="why-left">
+          <p class="why-statement">Crafted to feel <strong>heirloom-worthy</strong> — from the first touch.</p>
+          <p class="why-atmo">Each piece passes through the hands of artisans who treat silver and gold as language. No shortcuts. No compromises.</p>
+          <span class="why-material-tag">92.5 STERLING · 22K POLISH</span>
         </div>
-        <div class="why-card">
-          <span class="why-icon">✨</span>
-          <div class="why-title">22K Gold Polish</div>
-          <div class="why-body">Temple-warm glow that doesn't fade.</div>
-        </div>
-        <div class="why-card">
-          <span class="why-icon">🤲</span>
-          <div class="why-title">Handcrafted Designs</div>
-          <div class="why-body">Real hands. No two pieces alike.</div>
-        </div>
-        <div class="why-card">
-          <span class="why-icon">🌿</span>
-          <div class="why-title">Lightweight & Skin Safe</div>
-          <div class="why-body">Nickel-free. Wear it all day, every day.</div>
-        </div>
-        <div class="why-card">
-          <span class="why-icon">🚚</span>
-          <div class="why-title">Free Shipping</div>
-          <div class="why-body">Tracked, secure, pan-India. Free above ₹999.</div>
-        </div>
-        <div class="why-card">
-          <span class="why-icon">💬</span>
-          <div class="why-title">WhatsApp Support</div>
-          <div class="why-body">Custom orders. Fast replies. Direct line to us.</div>
+        <div class="why-right">
+          <div class="why-proof-grid">
+            <div class="why-proof-card">
+              <p class="why-proof-title">Sterling Silver</p>
+              <p class="why-proof-desc">Hallmark certified. The finest grade.</p>
+            </div>
+            <div class="why-proof-card">
+              <p class="why-proof-title">Gold Polish</p>
+              <p class="why-proof-desc">Temple-warm glow that doesn't fade.</p>
+            </div>
+            <div class="why-proof-card">
+              <p class="why-proof-title">Handcrafted</p>
+              <p class="why-proof-desc">Real hands. No two pieces alike.</p>
+            </div>
+            <div class="why-proof-card">
+              <p class="why-proof-title">Skin Safe</p>
+              <p class="why-proof-desc">Nickel-free. Wear it all day, every day.</p>
+            </div>
+          </div>
+          <div class="why-strip">
+            <div class="why-strip-item">
+              <span class="why-strip-dot"></span>
+              <span class="why-strip-text">Free Shipping Pan-India</span>
+            </div>
+            <div class="why-strip-item">
+              <span class="why-strip-dot"></span>
+              <span class="why-strip-text">WhatsApp Support</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -8251,37 +8436,21 @@
         <div class="eyebrow">Get in Touch</div>
         <h2 class="sec-title gold-text">We're Here for You</h2>
       </div>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-icon">💬</div>
-          <div class="eyebrow" style="margin-bottom:8px">Direct Message</div>
-          <h3 class="contact-title gold-text">WhatsApp Us</h3>
-          <p class="contact-body">Questions, custom orders, or just want to know more? We reply within minutes.</p>
-          <a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9"
-            target="_blank" rel="noopener noreferrer" class="btn-gold">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-            </svg>
-            Chat on WhatsApp
-          </a>
-          <p class="contact-footer">📞 +91 89193 59961 · 📍 Online Across India</p>
+      <div class="contact-asymmetric">
+        <div class="contact-wa">
+          <p class="contact-label">— Private Jewellery Concierge</p>
+          <h3 class="contact-wa-title">WhatsApp Us</h3>
+          <p class="contact-wa-body">Speak directly with our jewellery stylist — for custom orders, size guidance, or simply to find your perfect piece.</p>
+          <a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9" target="_blank" rel="noopener" class="contact-ghost-btn">Chat on WhatsApp →</a>
+          <p class="contact-meta">+91 89193 59961 · Online across India</p>
         </div>
-        <div class="contact-card">
-          <div class="contact-icon">📸</div>
-          <div class="eyebrow" style="margin-bottom:8px">Instagram DM</div>
-          <h3 class="contact-title gold-text">@luvz_collection</h3>
-          <p class="contact-body">Follow us for daily updates, new arrivals, reels and behind-the-scenes of our craft.
-          </p>
-          <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener noreferrer"
-            class="btn-gold">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-            </svg>
-            Open Instagram
-          </a>
-          <p class="contact-footer">DMs open · Usually replies within 1 hour</p>
+        <div class="contact-ig">
+          <div>
+            <p class="contact-ig-quote">Daily arrivals, craft stories, and the world behind the jewel.</p>
+            <p class="contact-ig-handle">@luvz_collection</p>
+            <p class="contact-ig-sub">Instagram DM · Usually replies within 1 hour</p>
+          </div>
+          <a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener" class="contact-ghost-btn contact-ghost-btn-quiet">Open Instagram →</a>
         </div>
       </div>
     </div>
