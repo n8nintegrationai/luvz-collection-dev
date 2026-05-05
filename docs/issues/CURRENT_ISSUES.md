@@ -2,9 +2,14 @@
 
 ---
 
-## Visual Inconsistencies
+## Visual Inconsistencies (Post CSS Consistency Pass)
 
-### Typography
+### Resolved ✓
+**5/8/2026:** Typography weight/case/tracking, opacity register, gold shimmer overuse, contact button timing, category hover clarity, New Collection eyebrow color, spacing rhythm. See `docs/logs/log.md` v2.2 for details.
+
+### Remaining Issues
+
+#### Typography
 
 | Issue | Fix |
 |-------|-----|
@@ -12,23 +17,32 @@
 | Duplicate `@keyframes` names (`lcFadeUp`, `lcImageFloat`, `lcImageFloatMobile` defined 2×) | Audit and consolidate all duplicate keyframe definitions |
 | `hero-title` text-shadow defined in 3+ rule blocks; compounding effect | Consolidate to single `.hero-title` rule block |
 | `.gold-text` nth-child stagger delays break if elements are reordered | Use CSS counter-based delays instead of nth-child |
+| Eyebrow opacity at 0.5 may be imperceptible on 8px eyebrows at extreme scales | Visual QA at all breakpoints; adjust if needed |
 
-### Layout & Spacing
+#### Layout & Spacing
 
-| Issue | Fix |
-|-------|-----|
-| Mobile hero button spacing inconsistent across viewports | Lock `hero-btns` margin-bottom to 56px; test 320px–480px |
-| Chat widget z-index: 9998 desktop, 99999 mobile | Use consistent z-index; document stacking context |
-| Category bento grid gaps: 16px vs 12px in different cells | Standardize all gaps to 16px |
-| Footer column widths (1.4fr 1fr 1.1fr) cause alignment issues on narrow screens | Test footer at all breakpoints; consider equal columns on tablet |
+| Issue | Fix | Priority |
+|-------|-----|----------|
+| Mobile hero button spacing inconsistent across viewports | Lock `hero-btns` margin-bottom to 56px; test 320px–480px | Low |
+| Chat widget z-index: 9998 desktop, 99999 mobile | Use consistent z-index; document stacking context | Low |
+| Footer column widths (1.4fr 1fr 1.1fr) cause alignment issues on narrow screens | Test footer at all breakpoints; consider equal columns on tablet | Low |
+| Section max-widths uncoordinated (960px/1060px/1360px) | Standardize editorial (960px) vs. showcase (1200+px) via CSS variable | **Medium** |
 
-### Hover & Interactive States
+#### Content & Narrative
+
+| Issue | Fix | Priority |
+|-------|-----|----------|
+| Heritage section image is same as hero image | Commission/source separate image (craft process, artisan hands, workshop) | **High** |
+| New Collection layout identical to Top Sellers | Differentiate via editorial grid/strip/masonry instead of carousel | **Medium** |
+
+#### Hover & Interactive States
 
 | Issue | Fix |
 |-------|-----|
 | Product card hover shadow transition stutters on mobile | Add `will-change: box-shadow`; optimize for GPU |
 | Ghost button hover shows 2px border shift (layout shift) | Transition `border-color` only; use `outline` instead of `border-width` change |
 | Wishlist heart fill inconsistent between card and drawer | Sync `.pcard-wish` fill logic with drawer heart rendering |
+| Contact section card visual hierarchy flat | Make WhatsApp dominant (gold accent), Instagram secondary (gray accent) |
 
 ---
 

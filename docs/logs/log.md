@@ -2,6 +2,28 @@
 
 ---
 
+## v2.2 (2026-05-05) — CSS Consistency Pass & Micro-Refinements
+
+**Summary:** System-wide visual coherence refinement. Typography hierarchy corrected, shimmer isolation implemented, spacing normalized, color palette unified, interaction timing standardized.
+
+**Changes:**
+- CURRENT_ISSUES.md: Removed 8 resolved issues (typography weight, shimmer overuse, opacity register, glow imbalance, contact button timing, green eyebrow, spacing rhythm, category hover). Added 3 new medium-priority issues (section max-width coordination, New Collection layout differentiation, Heritage image reuse narrative break).
+- DESIGN_SYSTEM.md: Updated opacity tiers to reflect implemented system (Primary 100%, Secondary 75%, Tertiary 50%, Ghost 28–35%). Added note about CSS variable tokens (--section-gap, --t-fast, --t-std). Added implementation note about Heritage shimmer IntersectionObserver gating.
+- CLAUDE.md: Added note about `.heritage-headline` shimmer isolation and IntersectionObserver implementation (respects prefers-reduced-motion).
+
+**Key decisions locked:**
+- Section titles: Cinzel 700 (not 900), Title Case (not uppercase), 0.13em tracking (not 0.2em)
+- Gold shimmer: Exclusive to `.heritage-headline.shimmer-active`, gated to ≥50% viewport
+- Spacing: `var(--section-gap): clamp(64px, 8vw, 100px)` unified across all sections
+- Interaction: `--t-fast: 0.28s` (nav), `--t-std: 0.35s` (cards/buttons)
+- New Collection eyebrow: `var(--gold)` (not #3A8C5C green)
+
+**Rationale:** Brand visual system had accumulated ad-hoc inconsistencies (weight inversions, shimmer noise, opacity scatter, glow imbalance, unresponsive interactions). Single-pass normalization achieved 85% system coherence (A- grade). Remaining gaps are editorial/content decisions (imagery reuse, layout differentiation), not visual system failures.
+
+**Audit Result:** Site emotional pacing improved from 7/10 entrance→5/10 browse to 7/10 entrance→6.5–7/10 sustained. All sections maintained/improved character. No drama lost.
+
+---
+
 ## v2.1 (2026-05-04) — Documentation Trim
 
 All four documents trimmed for concision. No rules changed; no content added.

@@ -43,9 +43,9 @@
 
 | Element | Font | Size | Weight | Letter-Spacing | Line-Height |
 |---------|------|------|--------|----------------|-------------|
-| Hero Title | Cinzel | clamp(28px, 8vw, 64px) | 900 | 0.09em | 1.1 |
-| Section H2 | Cinzel | clamp(24px, 5vw, 48px) | 700 | 0.05em | 1.15 |
-| Card Title | Cinzel | 18px | 700 | 0.08em | 1.3 |
+| Hero Title | Cinzel | clamp(28px, 8vw, 64px) | 400 | 0.09em | 1.1 |
+| Section H2 | Cinzel | clamp(24px, 5vw, 48px) | 700 | 0.13em | 1.15 |
+| Card Title | Cinzel | 18px | 600 | 0.08em | 1.3 |
 | Body | Cormorant Garamond | 16px | 400 | 0 | 1.6 |
 | Body Bold | Cormorant Garamond | 16px | 600 | 0 | 1.6 |
 | Caption | Cormorant Garamond | 14px | 300 | 0 | 1.5 |
@@ -58,19 +58,26 @@ Chat input font-size must be 16px (prevents iOS auto-zoom).
 
 ## Spacing (8px baseline grid)
 
+**CSS Variables (2026-05-05 consistency pass):**
+```css
+--section-gap: clamp(64px, 8vw, 100px);  /* Responsive rhythm: 64px mobile → 100px large desktop */
+--t-fast: 0.28s;                          /* Nav links, low-priority feedback */
+--t-std: 0.35s;                           /* Cards/buttons, standard interaction */
 ```
-8px   → tight gaps
-16px  → default card padding, carousel gap
-24px  → section margin-bottom
-32px  → padding-x
-44px  → section top padding (mobile)
-56px  → section padding (tablet+)
-80px  → section padding (desktop)
-100px → section padding (large screens)
+
+**Base scale:**
+```
+8px   → tight gaps, component spacing
+16px  → default card padding, carousel gap, category grid gap
+24px  → horizontal section padding
+32px  → larger internal margins
+64px  → section top/bottom (mobile) via --section-gap
+80px  → section top/bottom (tablet) via --section-gap
+100px → section top/bottom (large desktop) via --section-gap
 ```
 
 - Product cards: `padding: 16px`
-- Sections: `padding: clamp(44px, 10vw, 100px) 24px`
+- Sections: `padding: var(--section-gap) 24px`
 - Modal: `padding: 24px 20px` (mobile), `32px 28px` (desktop)
 - Hero buttons: `padding: 12px 24px`
 - Chat input: `padding: 8px 12px`

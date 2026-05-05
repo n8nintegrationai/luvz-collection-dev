@@ -96,8 +96,9 @@ Prod New Code/
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v2.2 | 2026-05-05 | CSS consistency pass: typography weight 900→700, shimmer isolation, opacity normalization, glow rebalancing, spacing rhythm unification, hover timing standardization |
 | v2.1 | 2026-05-04 | All four docs trimmed; cross-doc duplication removed; functions/ flagged for deletion |
 | v2.0 | 2026-05-04 | AI-optimized documentation suite; full rewrite from redesign-heavy v1.0 |
 | v1.0 | 2026-05-02 | Original CLAUDE.md |
 
-Last updated: 2026-05-04
+Last updated: 2026-05-05

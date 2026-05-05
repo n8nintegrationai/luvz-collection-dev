@@ -168,6 +168,6 @@ Cloudflare dashboard only (never in repo):
 ---
 
 ## Quick Links
-- **Design System:** `DESIGN_SYSTEM.md`
-- **Known Issues:** `CURRENT_ISSUES.md`
-- **Architecture:** `ARCHITECTURE.md`
+- **Design System:** `docs/design/DESIGN_SYSTEM.md`
+- **Known Issues:** `docs/issues/CURRENT_ISSUES.md`
+- **Architecture:** `docs/architecture/ARCHITECTURE.md`
