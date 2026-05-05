@@ -24,6 +24,29 @@
 
 ---
 
+## v2.3 (2026-05-05) — New Collection Editorial Composition Pass
+
+**Summary:** Redesigned New Collection section from ecommerce-style split layout to luxury editorial feature + supporting carousel system. Eliminated product duplication, introduced stacked composition philosophy, and added subtle navigation affordances.
+
+**Changes:**
+- New Collection section: Converted from side-by-side grid/split layout to stacked editorial composition (featured product + curated text + supporting carousel)
+- Feature spotlight: Left-weighted asymmetric positioning (6% left margin, 85% image width), removed mat frame and centered composition
+- Supporting carousel: Introduced native CSS scroll-snap (no pagination UI), removed featured product from carousel via `.slice(1)`, shows ~2.3 cards with partial next-card peek
+- Navigation: Added subtle left/right arrows (0.5 opacity, fade on hover, no visible background), desktop-only, smooth scroll by 1 card width + gap
+- Product duplication: Removed—featured product no longer appears in carousel
+
+**Key decisions locked:**
+- Composition: Stacked vertical layout, not split/grid (breaks ecommerce affordance)
+- Navigation: Ambient directional hints (not pagination controls), minimal visual footprint
+- Carousel: Native scroll-snap with scroll interaction, no JavaScript transform pagination
+- Mobile: Arrows visible and larger (40px font, bigger touch target), same functionality as desktop
+
+**Rationale:** Split layouts inherently read as ecommerce UI (product rows, card grids, compartmentalization). Stacked editorial layout breaks that affordance and creates narrative flow—a single curated moment (featured) followed by supporting context (carousel). Scrollable carousel (no dots/arrows/count) feels like a natural extension of editorial moment, not a separate component. Subtle arrows signal affordance without dominating composition.
+
+**Audit Result:** New Collection shifted from D+ (cold, generic) to B (warm, editorial). Feature clarity improved, carousel no longer duplicates featured product. Visual hierarchy now reads as curated editorial spread, not product listing.
+
+---
+
 ## v2.1 (2026-05-04) — Documentation Trim
 
 All four documents trimmed for concision. No rules changed; no content added.

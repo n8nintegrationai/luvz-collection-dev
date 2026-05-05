@@ -774,6 +774,73 @@ function goPage(sec, p) { const s = CS[sec]; if (!s) return; s.page = Math.max(0
 function nextPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page + 1) }
 function prevPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page - 1) }
 
+function buildEditorialCarousel(sec, items) {
+  const track = document.getElementById('ct-' + sec);
+  const nav = document.getElementById('cn-' + sec);
+  if (!track) return;
+  track.innerHTML = items.map(p => buildCard(p, sec)).join('');
+  track.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  track.classList.add('editorial-track');
+  if (nav) nav.innerHTML = '';
+  setupCarouselArrows(sec);
+}
+
+function setupCarouselArrows(sec) {
+  const container = document.getElementById('cc-' + sec);
+  if (!container) return;
+  const leftArrow = container.querySelector('.carousel-arrow-left');
+  const rightArrow = container.querySelector('.carousel-arrow-right');
+  const wrap = document.getElementById('cw-' + sec);
+  const track = document.getElementById('ct-' + sec);
+  if (!track || !wrap || !leftArrow || !rightArrow) return;
+
+  const scroll = (direction) => {
+    const firstCard = track.querySelector('.carousel-item');
+    if (!firstCard) return;
+    const cardWidth = firstCard.offsetWidth;
+    const gap = 24;
+    const distance = cardWidth + gap;
+    wrap.scrollBy({ left: direction * distance, behavior: 'smooth' });
+  };
+
+  leftArrow.addEventListener('click', e => {
+    e.stopPropagation();
+    scroll(-1);
+  });
+
+  rightArrow.addEventListener('click', e => {
+    e.stopPropagation();
+    scroll(1);
+  });
+}
+
+function buildNcFeature(p) {
+  const el = document.getElementById('nc-feature');
+  if (!el || !p) return;
+  const price = p.price ? '₹' + Number(p.price).toLocaleString('en-IN') : '';
+  const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
+  const wished = (JSON.parse(localStorage.getItem('luvz-wish') || '[]')).some(w => w.id === pid);
+  const pJson = JSON.stringify(p).replace(/"/g, '&quot;');
+  productRegistry[pid] = { ...p, category: p.category || 'New' };
+  el.innerHTML = `
+    <div class="nc-feature-img-wrap" onclick="openModal(${pJson})">
+      <img src="${p.image || ''}" alt="${p.name || ''}" loading="lazy">
+      <button class="pcard-wish nc-feature-wish${wished ? ' wished' : ''}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="${wished ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="1.8">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="nc-feature-text">
+      ${p.category ? `<div class="nc-feature-category">${p.category}</div>` : ''}
+      <div class="nc-feature-name">${p.name || ''}</div>
+      ${p.description ? `<div class="nc-feature-desc">${p.description}</div>` : ''}
+      ${price ? `<div class="nc-feature-price">${price}</div>` : ''}
+      <a href="${waURL(p.name)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="pcard-btn">Enquire Now</a>
+    </div>
+  `;
+}
+
 /* ── Build carousel into any track/nav pair ── */
 function buildCarouselInSection(trackId, navId, items, categoryKey) {
   // Re-use buildCarousel logic but target arbitrary IDs
@@ -920,8 +987,13 @@ async function load() {
     buildCategoryBento(d);
     ['top_sellers', 'new_collection'].forEach(sec => {
       if (d[sec] && d[sec].length) {
-        buildCarousel(sec, d[sec]);
-        if (sec === 'top_sellers') requestAnimationFrame(() => window._buildVaultFromTrack && window._buildVaultFromTrack());
+        if (sec === 'new_collection') {
+          buildNcFeature(d[sec][0]);
+          buildEditorialCarousel(sec, d[sec].slice(1));
+        } else {
+          buildCarousel(sec, d[sec]);
+          if (sec === 'top_sellers') requestAnimationFrame(() => window._buildVaultFromTrack && window._buildVaultFromTrack());
+        }
       }
       else {
         const t = document.getElementById('ct-' + sec);

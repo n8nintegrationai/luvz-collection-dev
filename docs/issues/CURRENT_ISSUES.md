@@ -7,6 +7,8 @@
 ### Resolved ✓
 **5/8/2026:** Typography weight/case/tracking, opacity register, gold shimmer overuse, contact button timing, category hover clarity, New Collection eyebrow color, spacing rhythm. See `docs/logs/log.md` v2.2 for details.
 
+**5/8/2026 (continued):** New Collection composition redesigned from grid-based ecommerce layout to editorial feature + carousel system. Removed duplication, introduced stacked layout with supporting product carousel. See `docs/logs/log.md` v2.3 for details.
+
 ### Remaining Issues
 
 #### Typography
@@ -33,7 +35,6 @@
 | Issue | Fix | Priority |
 |-------|-----|----------|
 | Heritage section image is same as hero image | Commission/source separate image (craft process, artisan hands, workshop) | **High** |
-| New Collection layout identical to Top Sellers | Differentiate via editorial grid/strip/masonry instead of carousel | **Medium** |
 
 #### Hover & Interactive States
 
@@ -166,7 +167,6 @@
 
 ## Next Steps
 
-1. **Immediate:** Delete `functions/` directory.
-2. **Short-term:** Fix wishlist ID generation; test mobile chat visibility; verify Oracle FastAPI stability.
-3. **Medium-term:** Consolidate CSS animations; import Jost; debounce resize handlers.
-4. **Long-term:** Remove dead code; implement lazy loading; add test suite.
+1. **Short-term:** Fix wishlist ID generation; test mobile chat visibility; verify Oracle FastAPI stability.
+2. **Medium-term:** Consolidate CSS animations; import Jost; debounce resize handlers.
+3. **Long-term:** Remove dead code; implement lazy loading; add test suite.

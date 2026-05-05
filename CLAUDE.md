@@ -169,5 +169,6 @@ Cloudflare dashboard only (never in repo):
 
 ## Quick Links
 - **Design System:** `docs/design/DESIGN_SYSTEM.md`
+- **Design System:** `docs/design/LUXURY_DIRECTION.md`
 - **Known Issues:** `docs/issues/CURRENT_ISSUES.md`
 - **Architecture:** `docs/architecture/ARCHITECTURE.md`

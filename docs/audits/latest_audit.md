@@ -82,13 +82,14 @@ Heritage is still visually part of the gold text system (same warm gradient) but
 
 **Resolved in this pass:** shimmer overuse, green eyebrow, muted Contact title, slow Contact button, imperceptible category hover, inverted type weights, excessive tracking, unreadable footer links, missing New Collection glow.
 
+**Resolved (5/5/2026):** New Collection layout redesigned to editorial feature + carousel system. Product duplication eliminated. Composition shifted from generic ecommerce grid to curated editorial moment with supporting carousel.
+
 **Still outstanding:**
 
 | Issue | Severity | Notes |
 |---|---|---|
 | Heritage image = hero image | High | Content/photography change needed |
 | Section max-widths uncoordinated (960, 1060, 1360px) | Medium | Needs CSS variable standardization |
-| New Collection layout identical to Top Sellers | Medium | Editorial/layout decision needed |
 | Contact card: WhatsApp and Instagram equal visual weight | Medium | WhatsApp should be dominant |
 | Footer exits quietly | Low | Works; just minimal |
 

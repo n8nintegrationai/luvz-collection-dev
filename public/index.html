@@ -2538,6 +2538,218 @@
       background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(196, 136, 44, 0.06), transparent 70%), var(--bg2);
     }
 
+    /* New Collection — Feature Spotlight */
+    .nc-feature-wrap {
+      display: grid;
+      grid-template-columns: 60fr 40fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .nc-feature-wrap.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nc-feature-img-wrap {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .nc-feature-img-wrap img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      transition: transform var(--t-std) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .nc-feature-img-wrap:hover img {
+      transform: scale(1.03);
+    }
+    .nc-feature-wish {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+    }
+    .nc-feature-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 8px 0;
+    }
+    .nc-feature-category {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--txt2);
+      text-transform: uppercase;
+    }
+    .nc-feature-name {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(20px, 2.5vw, 32px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1.25;
+      color: var(--txt);
+    }
+    .nc-feature-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--txt2);
+      max-width: 400px;
+    }
+    .nc-feature-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold-l);
+    }
+    .nc-feature-text .pcard-btn {
+      margin-top: 8px;
+    }
+    .nc-feature-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 40px;
+    }
+
+    @media (max-width: 768px) {
+      .nc-feature-wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .nc-feature-img-wrap img {
+        aspect-ratio: 3 / 4;
+      }
+      .nc-feature-desc {
+        max-width: none;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nc-feature-wrap {
+        display: block;
+        position: static;
+        max-width: 1000px;
+        margin: 0 auto 0 6%;
+      }
+      .nc-feature-img-wrap {
+        display: block;
+        width: 85%;
+        margin-right: auto;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+        margin-bottom: 56px;
+      }
+      .nc-feature-img-wrap img {
+        width: 100%;
+        aspect-ratio: auto;
+        max-height: 680px;
+        object-fit: contain;
+        display: block;
+      }
+      .nc-feature-img-wrap:hover img {
+        transform: scale(1.02);
+      }
+      .nc-feature-wish {
+        top: 16px;
+        right: 16px;
+      }
+      .nc-feature-text {
+        position: static;
+        max-width: 480px;
+        margin: 0 auto 0 20%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0;
+      }
+      .nc-feature-text .pcard-btn {
+        width: fit-content;
+        padding: 7px 20px;
+        letter-spacing: 0.32em;
+        margin-top: 12px;
+      }
+    }
+
+    /* ── New Collection Editorial Carousel ─────────────── */
+    #new-collection .nc-feature-divider {
+      margin-bottom: 56px;
+    }
+
+    #new-collection .carousel-container {
+      position: relative;
+    }
+
+    #new-collection .carousel-wrap {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-left: 6%;
+      padding-right: 4%;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    #new-collection .carousel-wrap:active {
+      cursor: grabbing;
+    }
+    #new-collection .carousel-wrap::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      font-size: 40px;
+      font-family: 'Cinzel', serif;
+      opacity: 0.5;
+      cursor: pointer;
+      padding: 8px 12px;
+      transition: opacity var(--t-fast) ease;
+      font-weight: 400;
+      z-index: 10;
+      line-height: 1;
+    }
+
+    .carousel-arrow:hover {
+      opacity: 0.75;
+    }
+
+    .carousel-arrow:active {
+      opacity: 0.95;
+    }
+
+    .carousel-arrow-left {
+      left: 8px;
+    }
+
+    .carousel-arrow-right {
+      right: 8px;
+    }
+
+    .editorial-track {
+      transform: none !important;
+      transition: none !important;
+      gap: 24px;
+      overflow: visible;
+    }
+
+    .editorial-track .carousel-item {
+      flex: 0 0 clamp(220px, 43%, 540px);
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
     /* ═══════════════════ BUTTONS ═══════════════════ */
     .btn-gold {
       display: inline-flex;
@@ -8749,13 +8961,20 @@
         <div class="eyebrow" style="color:var(--gold)">Just Arrived</div>
         <h2 class="sec-title gold-text">New Collection</h2>
       </div>
-      <div class="carousel-wrap">
-        <div class="carousel-track" id="ct-new_collection">
-          <div class="loading-message">
-            <div class="loading-spinner"></div>
-            <span>Loading new arrivals...</span>
+      <!-- Feature spotlight: JS-populated from new_collection[0] -->
+      <div id="nc-feature" class="nc-feature-wrap reveal"></div>
+      <div class="nc-feature-divider"></div>
+      <div class="carousel-container" id="cc-new_collection">
+        <div class="carousel-wrap" id="cw-new_collection">
+          <div class="carousel-track" id="ct-new_collection">
+            <div class="loading-message">
+              <div class="loading-spinner"></div>
+              <span>Loading new arrivals...</span>
+            </div>
           </div>
         </div>
+        <button class="carousel-arrow carousel-arrow-left" aria-label="Scroll left" data-section="new_collection">‹</button>
+        <button class="carousel-arrow carousel-arrow-right" aria-label="Scroll right" data-section="new_collection">›</button>
       </div>
       <div class="carousel-nav" id="cn-new_collection"></div>
     </div>
