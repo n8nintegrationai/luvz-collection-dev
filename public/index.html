@@ -45,7 +45,7 @@
 </script>
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Google Fonts: non-blocking -->
   <link
@@ -57,6 +57,7 @@
       rel="stylesheet" />
   </noscript>
   <link rel="preload" href="images/logo_gif.webp" as="image" type="image/webp" fetchpriority="high" />
+  <link rel="preload" href="images/hero_image.png" as="image" fetchpriority="high" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <!-- Tailwind CDN removed: only 5 utility classes were used, replaced with inline CSS -->
 
@@ -8658,7 +8659,7 @@
   <nav id="nav" aria-label="Primary navigation">
     <a href="#" class="nav-logo-wrap" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
       <img src="images/logo_gif.webp" alt="LUVZ Collection logo" class="nav-logo-img" loading="eager"
-        fetchpriority="low" decoding="async" width="36" height="36" />
+        decoding="async" width="36" height="36" />
       <div>
         <div class="nav-brand gold-text">LUVZ Collection</div>
         <div class="nav-brand-sub">Designer Boutique</div>
@@ -9060,7 +9061,7 @@
     <h2 class="heritage-headline heritage-title gold-text">Crafted for Eternity</h2>
     <div class="heritage-image-wrap">
       <img id="heritage-img" src="images/heritage.webp" alt="LUVZ Heritage — Handcrafted Sterling Silver Jewellery"
-        loading="lazy" decoding="async" />
+        loading="lazy" decoding="async" width="800" height="600" />
       <div id="about-img-sk" aria-hidden="true"></div>
       <div class="heritage-image-overlay"></div>
     </div>
@@ -9260,7 +9261,7 @@
       <div class="about-img-wrap">
         <div class="sk" style="width:100%;height:100%;position:absolute;inset:0;border-radius:4px">
         </div>
-        <img src="" alt="LUVZ Collection artisan crafting handmade silver jewellery" loading="lazy"
+        <img alt="LUVZ Collection artisan crafting handmade silver jewellery" loading="lazy"
           style="opacity:0;transition:opacity .5s" decoding="async" />
         <div class="about-img-bar"></div>
       </div>
@@ -9528,7 +9529,7 @@
   <!-- REVIEW LIGHTBOX — Task 6 -->
   <div id="review-lightbox" role="dialog" aria-modal="true" aria-label="Customer review image"
     onclick="closeLightbox(event)">
-    <img id="review-lightbox-img" src="" alt="Customer review" loading="lazy" decoding="async" />
+    <img id="review-lightbox-img" alt="Customer review" loading="lazy" decoding="async" />
     <button id="review-lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
   </div>
 
@@ -9562,7 +9563,7 @@
     <div class="mbox modal-inner">
       <button class="mclose close-btn" onclick="closeModal()" aria-label="Close">✕</button>
       <div id="mimg-wrap" class="mimg-wrap">
-        <img loading="lazy" id="mimg" src="" alt="Selected LUVZ Collection product image" loading="lazy"
+        <img id="mimg" alt="Selected LUVZ Collection product image" loading="lazy"
           onclick="this.classList.toggle('z')" decoding="async" />
         <button type="button" class="gallery-nav gallery-prev" id="gallery-prev" aria-label="Previous image"
           onclick="event.stopPropagation();galleryPrev()" style="display:none">
@@ -9621,7 +9622,7 @@
 
   <!-- POSTER MODAL -->
   <div id="poster-overlay" onclick="closePosterModal()">
-    <img loading="lazy" id="poster-modal-img" src="" alt="LUVZ Collection promotional poster" loading="lazy"
+    <img loading="lazy" id="poster-modal-img" alt="LUVZ Collection promotional poster"
       decoding="async" />
     <button onclick="event.stopPropagation();closePosterModal()"
       style="position:absolute;top:16px;right:16px;background:rgba(0,0,0,.6);border:1px solid var(--border-h);color:var(--gold);width:33px;height:33px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center">✕</button>
@@ -9787,8 +9788,7 @@
           ([entry]) => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
               entry.target.classList.add('shimmer-active');
-            } else {
-              entry.target.classList.remove('shimmer-active');
+              observer.disconnect();
             }
           },
           { threshold: 0.5 }
@@ -9798,7 +9798,7 @@
     }
   </script>
 
-  <script src="/luvz-chat.js"></script>
+  <script src="/luvz-chat.js" defer></script>
 </body>
 
 </html>
