@@ -2383,7 +2383,8 @@
 
     .contact-wa {
       background: linear-gradient(135deg, rgba(45, 22, 5, 0.97), rgba(28, 14, 3, 0.99));
-      border: 1px solid rgba(180, 130, 40, 0.2);
+      border: 1px solid rgba(180, 130, 40, 0.32);
+      box-shadow: 0 0 0 1px rgba(196, 136, 44, 0.06), 0 12px 40px rgba(0, 0, 0, 0.4);
       padding: 44px 40px;
       border-radius: 2px;
       overflow: hidden;
@@ -2785,7 +2786,7 @@
       border: 1.5px solid var(--gold);
       color: var(--gold);
       border-radius: 28px;
-      transition: all var(--t-std)
+      transition: background-color var(--t-std), border-color var(--t-std), color var(--t-std), transform var(--t-std);
     }
 
     .btn-outline:hover {
@@ -6658,6 +6659,7 @@
       border: 1px solid var(--border);
       box-shadow: 0 12px 42px rgba(0, 0, 0, 0.32);
       transition: transform 0.45s ease, border-color 0.35s ease, box-shadow 0.45s ease;
+      will-change: transform, box-shadow;
     }
 
     .pcard:hover {

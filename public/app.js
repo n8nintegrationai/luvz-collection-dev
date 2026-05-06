@@ -426,16 +426,23 @@ function isWished(id) { return getWishlist().includes(id) }
 function toggleWish(btn, id) {
   let w = getWishlist();
   const idx = w.indexOf(id);
-  if (idx === -1) {
+  const adding = idx === -1;
+  if (adding) {
     w.push(id);
-    btn.classList.add('wished');
-    btn.querySelector('svg').setAttribute('fill', 'var(--gold)');
   } else {
     w.splice(idx, 1);
-    btn.classList.remove('wished');
-    btn.querySelector('svg').setAttribute('fill', 'none');
   }
   saveWishlist(w);
+  // Sync all visible hearts for this product (including the clicked one)
+  document.querySelectorAll('.pcard-wish[data-pid="' + id + '"]').forEach(function(b) {
+    if (adding) {
+      b.classList.add('wished');
+      b.querySelector('svg')?.setAttribute('fill', 'var(--gold)');
+    } else {
+      b.classList.remove('wished');
+      b.querySelector('svg')?.setAttribute('fill', 'none');
+    }
+  });
   updateWishCount();
 }
 
