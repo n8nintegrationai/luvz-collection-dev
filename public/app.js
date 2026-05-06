@@ -498,7 +498,7 @@ function buildCard(p, sec) {
   // Scarcity line
   const scarcity = p.scarcity ? `<div class="pcard-scarcity">🔴 ${p.scarcity}</div>` : '';
 
-  return `<div class="carousel-item"><div class="pcard reveal" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" data-p='${ps}'>
+  return `<div class="carousel-item"><div class="pcard reveal" role="button" tabindex="0" aria-label="${(p.name || 'View product').replace(/"/g, '&quot;')}" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(JSON.parse(this.dataset.p),'${m.bt}')}" data-p='${ps}'>
     <div class="pcard-img">
       <img loading="lazy" src="${optimizeCloudinaryUrl(p.image || fb, 600)}" srcset="${generateSrcset(p.image, [400, 600, 800])}" sizes="(max-width: 480px) 90vw, (max-width: 768px) 50vw, (max-width: 1100px) 33vw, 25vw" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${optimizeCloudinaryUrl(fb, 600)}'" decoding="async"/>
       <div class="pcard-img-ov"></div>
@@ -695,7 +695,7 @@ function buildNcFeature(p) {
   const pJson = JSON.stringify(p).replace(/"/g, '&quot;');
   productRegistry[pid] = { ...p, category: p.category || 'New' };
   el.innerHTML = `
-    <div class="nc-feature-img-wrap" onclick="openModal(${pJson})">
+    <div class="nc-feature-img-wrap" role="button" tabindex="0" aria-label="${(p.name || 'View product details').replace(/"/g, '&quot;')}" onclick="openModal(${pJson})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(${pJson})}">
       <img src="${p.image || ''}" alt="${p.name || ''}" loading="lazy">
       <button class="pcard-wish nc-feature-wish${wished ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="${wished ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="1.8">
@@ -740,7 +740,7 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
 
     const scarcity = p.scarcity ? `<div class="pcard-scarcity">🔴 ${p.scarcity}</div>` : '';
 
-    return `<div class="carousel-item"><div class="pcard reveal" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" data-p='${ps}'>
+    return `<div class="carousel-item"><div class="pcard reveal" role="button" tabindex="0" aria-label="${(p.name || 'View product').replace(/"/g, '&quot;')}" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(JSON.parse(this.dataset.p),'${m.bt}')}" data-p='${ps}'>
       <div class="pcard-img">
         <img loading="lazy" src="${p.image || fb}" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${fb}'" decoding="async"/>
         <div class="pcard-img-ov"></div>
@@ -849,6 +849,13 @@ async function load() {
         // Network failure � use mock data so page renders without errors
         console.warn('Data fetch failed, using mock data:', fetchErr.message);
         d = MOCK_DATA;
+        const _eb = document.createElement('div');
+        _eb.setAttribute('role', 'alert');
+        _eb.className = 'ebanner';
+        _eb.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9998;text-align:center;max-width:90vw;pointer-events:auto';
+        _eb.innerHTML = 'Products could not be loaded. Check your connection and refresh. <span style="cursor:pointer;margin-left:8px;opacity:.5" onclick="this.parentElement.remove()" aria-label="Dismiss">✕</span>';
+        document.body.appendChild(_eb);
+        setTimeout(() => _eb.remove(), 8000);
       }
     }
     // Store valid referral codes (case-insensitive — normalise to uppercase)
@@ -919,10 +926,29 @@ load().then(() => handleInitialHash()).catch(() => { });
 updateWishCount();
 
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closePosterModal(); closeWishlist() } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closePosterModal(); closeWishlist(); }
+  // Focus trap for product modal
+  if (e.key === 'Tab') {
+    const overlay = document.getElementById('moverlay');
+    if (!overlay.classList.contains('open')) return;
+    const focusable = Array.from(overlay.querySelectorAll(
+      'button:not([disabled]),input:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])'
+    ));
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+});
 
 
 let _gallery = { imgs: [], index: 0 };
+let _modalTrigger = null;
+
 function getGalleryImages(p) {
   const fb = `https://placehold.co/400x533/141210/D4AF37?text=${encodeURIComponent(p.name || '')}`;
   if (Array.isArray(p.images) && p.images.length) {
@@ -962,6 +988,7 @@ function galleryNext() {
 }
 
 function openModal(p, badge) {
+  _modalTrigger = document.activeElement;
   const fb = `https://placehold.co/400x533/141210/D4AF37?text=${encodeURIComponent(p.name || '')}`;
   _gallery.imgs = getGalleryImages(p);
   _gallery.index = 0;
@@ -1002,6 +1029,10 @@ function openModal(p, badge) {
   document.body.classList.add('modal-open');
   renderGalleryFrame();
 
+  // Move focus to close button for keyboard/screen reader users
+  const _mclose = document.querySelector('#moverlay .mclose');
+  requestAnimationFrame(() => { if (_mclose) _mclose.focus(); });
+
   // Task 3B + 4A: update URL hash and meta tags for sharing
   const slug = toSlug(p.name);
   pushProductHash(slug);
@@ -1033,6 +1064,8 @@ function closeModal() {
   _gallery._keyHandler = null;
   // Task 3B + 4A: restore original meta + clear hash
   clearHash();
+  // Restore focus to the element that triggered the modal
+  if (_modalTrigger) { _modalTrigger.focus(); _modalTrigger = null; }
 }
 const closeBtn = document.querySelector('.close-btn');
 if (closeBtn) closeBtn.onclick = closeModal;
@@ -1817,6 +1850,7 @@ async function askLuvzAI() {
   function lcEnhanceParallax() {
     const hero = document.querySelector('.hero-redesign');
     if (!hero || window.innerWidth < 768) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const imgLayer = hero.querySelector('.hero-img-parallax');
     const txtLayer = hero.querySelector('.hero-text-parallax');
     const gemLight = hero.querySelector('.hero-gem-light');

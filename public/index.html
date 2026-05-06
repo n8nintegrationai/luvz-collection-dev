@@ -566,7 +566,7 @@
     }
 
     .mob-link:hover,
-    .mob-link:focus {
+    .mob-link:focus-visible {
       color: var(--gold) !important;
       padding-left: 10px;
       border-bottom-color: rgba(212, 175, 55, .35);
@@ -7999,6 +7999,11 @@
       .reveal.in {
         transform: none !important;
       }
+
+      .loading-spinner {
+        animation: none !important;
+        opacity: 0.4;
+      }
     }
 
     /* Change 4: Restore Cinzel editorial authority to section eyebrow labels */
@@ -8610,6 +8615,13 @@
         text-align: center;
       }
     }
+
+    /* A11y: keyboard focus ring — overrides all component-level outline:none */
+    *:focus-visible {
+      outline: 2px solid var(--gold-l) !important;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
   </style>
 
 <body>
@@ -8707,7 +8719,7 @@
     <div class="lc-corner lc-corner-br"></div>
 
     <!-- Hero Image Layer: full bleed cinematic backdrop -->
-    <img src="images/hero_image.webp" alt="" class="hero-img" loading="eager" fetchpriority="high" decoding="async" />
+    <img src="images/hero_image.webp" alt="LUVZ Collection — handcrafted silver jewellery" class="hero-img" loading="eager" fetchpriority="high" decoding="async" />
 
     <!-- Gradient Veil Layer: diagonal darkening from left to center -->
     <div class="hero-veil" aria-hidden="true"></div>
@@ -9559,9 +9571,9 @@
   </div>
 
   <!-- PRODUCT MODAL -->
-  <div id="moverlay" class="modal" role="dialog" aria-modal="true">
+  <div id="moverlay" class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
     <div class="mbox modal-inner">
-      <button class="mclose close-btn" onclick="closeModal()" aria-label="Close">✕</button>
+      <button class="mclose close-btn" onclick="closeModal()" aria-label="Close product details">✕</button>
       <div id="mimg-wrap" class="mimg-wrap">
         <img id="mimg" alt="Selected LUVZ Collection product image" loading="lazy"
           onclick="this.classList.toggle('z')" decoding="async" />
