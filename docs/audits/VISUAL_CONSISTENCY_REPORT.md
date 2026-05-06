@@ -298,7 +298,7 @@ The hero image at full-bleed with `scale(1.04)` + CSS `lcImageFloat` animation (
 **Grade:** A
 
 ### Heritage Image
-The heritage section uses `src="images/hero_image.png"` — **the same image as the hero**.
+The heritage section uses `src="images/hero_image.webp"` — **the same image as the hero**.
 
 This is the most significant missed editorial opportunity on the site. The Heritage section explicitly invokes craft, tradition, and atelier provenance. It should carry a *different* visual register — an artisan's hands, silver in process, a workshop detail, or a completely different atmospheric angle of the hero piece.
 
