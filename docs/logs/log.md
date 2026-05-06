@@ -2,6 +2,44 @@
 
 ---
 
+## v2.9 (2026-05-06) — Accessibility & Production-Readiness Pass
+
+**Summary:** Keyboard navigation, screen reader support, focus management, reduced-motion compliance, and resilient error states. No visual changes. Site is now fully navigable via keyboard, supports assistive technologies, and handles network failures gracefully.
+
+**Changes:**
+
+**CSS (index.html):**
+- Global `*:focus-visible` rule with 2px gold outline at end of style block (overrides all `outline: none`)
+- `.mob-link:focus` → `:focus-visible` (prevent outline flash on mouse click)
+- `.loading-spinner` animation disabled in `prefers-reduced-motion: reduce` block
+- Hero image alt text: `""` → `"LUVZ Collection — handcrafted silver jewellery"`
+
+**HTML (index.html):**
+- `#moverlay` modal: add `aria-labelledby="m-name"` (product name as accessible name)
+- Modal close button: `aria-label="Close"` → `"Close product details"` (less ambiguous)
+
+**JavaScript (app.js):**
+- Focus management: save `document.activeElement` in `openModal()`, restore in `closeModal()` via `_modalTrigger`
+- Focus trap: Tab/Shift+Tab now cycles through focusable elements within modal, prevents escape
+- Focus moved to close button after modal opens (via `requestAnimationFrame`)
+- Keyboard accessibility: product cards now support `role="button"` `tabindex="0"` `onkeydown` Enter/Space activation
+  - Applied to: `buildCard()`, `buildCarouselInSection()`, `buildNcFeature()`
+- Reduced motion: `lcEnhanceParallax()` checks `prefers-reduced-motion: reduce` and skips parallax
+- Resilience: products.json fetch failure now shows `role="alert"` error banner (auto-dismiss 8s)
+
+**Key decisions locked:**
+- Focus ring: gold 2px outline, 3px offset, 2px border-radius (matches design)
+- Focus trap: Tab only within modal, ESC closes, focus restores to trigger
+- Keyboard: Enter/Space activates buttons, Tab navigates, Escape closes modals
+- Error banner: appears at bottom center, auto-dismisses after 8 seconds, role="alert" for screen readers
+- Reduced motion: honored in both CSS (5 blocks) and JS (parallax function)
+
+**Rationale:** Accessibility was a significant gap — no focus ring, non-keyboard-navigable cards, silent fetch failures, motion not respecting user preferences. WCAG 2.1 Level AA compliance requires keyboard navigation, focus indicators, screen reader support, and error recovery. Systematic pass addressed all critical gaps without visual redesign.
+
+**Outcome:** Site is now fully accessible to keyboard-only and screen reader users. All interactive elements reachable via Tab. Modal focus trapped and restored. Cards activatable via Enter/Space. Motion respects user preferences. Network failures show actionable messages. Production-ready for inclusive deployment.
+
+---
+
 ## v2.8 (2026-05-06) — Performance Optimization Pass (Phase 1 & 2)
 
 **Summary:** Load speed and runtime efficiency improvements targeting LCP, scroll smoothness, RAF loops, and dead code. No visual changes. All optimizations reduce paint/layout thrashing, eliminate repeated DOM queries and parsing, and stop off-screen animations from consuming CPU.
