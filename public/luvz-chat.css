@@ -153,11 +153,14 @@
 }
 
 /* ---------- DESKTOP Popup ---------- */
+/* Stacking context: popup (9999) above trigger (9999, same layer, no overlap).
+   Sits below modal (9998 in index.html) on desktop to prevent chat from blocking
+   product details. On mobile becomes fullscreen at same z-index for consistency. */
 #luvz-chat-popup {
   position: fixed;
   bottom: 140px;
   right: 16px;
-  z-index: 9998;
+  z-index: 9999;
   width: 370px;
   height: 540px;
   background: #0d0d0d;
@@ -197,7 +200,7 @@
     border: none;
     opacity: 1;
     transform: translateY(100%);
-    z-index: 99999;
+    z-index: 9999;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
 

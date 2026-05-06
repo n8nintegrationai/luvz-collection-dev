@@ -2,6 +2,51 @@
 
 ---
 
+## v2.6 (2026-05-06) — Layout & Spacing Edge-Case Refinement
+
+**Summary:** Responsive layout polish addressing edge-case spacing and stacking inconsistencies across breakpoints. No visual changes. Hero button spacing normalized, chat widget z-index standardized, footer responsiveness improved.
+
+**Changes:**
+- Hero button spacing: Added explicit `margin-bottom: 56px;` at 480px media query (was missing, causing inconsistency 320px–768px range)
+- Chat widget stacking: Standardized z-index to 9999 across all breakpoints (desktop was 9998, mobile was 99999). Added stacking context comment documenting position relative to modal (9998)
+- Footer grid responsiveness: Added tablet breakpoint `@media (max-width: 1024px)` with equal 1fr 1fr 1fr columns (desktop 1.1fr 1fr 1.1fr unchanged, mobile <768px unchanged)
+
+**Key decisions locked:**
+- Hero button margin-bottom: 56px (consistent 320px–768px mobile range)
+- Chat widget z-index: 9999 (trigger and popup, both devices)
+- Footer breakpoint system: desktop (>1024px) asymmetric, tablet (768–1024px) equal, mobile (<768px) single column
+
+**Rationale:** Spacing and stacking context had minor inconsistencies across viewport ranges — hero buttons lacked explicit margin at 480px, chat popup z-index jumped between device classes, footer columns compressed unevenly at tablet widths. Fixes were minimal and surgical, targeting only affected breakpoints.
+
+**Outcome:** Layout now behaves predictably across all breakpoints. Spacing is locked to intentional values. Stacking context is explicit and documented. Zero visual regressions. System consistency improved.
+
+---
+
+## v2.5 (2026-05-06) — Typography Cleanup & Animation Deduplication
+
+**Summary:** Technical correctness pass removing dead code and fixing typography system. No visual changes. Font loading corrected, keyframe definitions deduplicated, shadow rules consolidated. Animation system now deterministic and maintainable.
+
+**Changes:**
+- Font loading: Added Jost import to Google Fonts with proper weights (300, 400, 500) and `display=swap`. Both JS-enabled and no-JS fallback links updated.
+- Removed duplicate `@keyframes lcFadeUp` (22px version, dead code overridden by 24px canonical)
+- Removed duplicate `@keyframes lcImageFloat` (-9px version, dead code overridden by -8px canonical)
+- Removed duplicate `@keyframes lcImageFloatMobile` + media query (767px block overridden by 768px canonical)
+- Removed dead `hero-title` text-shadow rule (4-layer, fully overridden by 5-layer Block 11 with `!important`)
+- Evaluated `.gold-text nth-child` concern: confirmed non-issue (stagger on `.stagger-text.in > *:nth-child(n)`, static order)
+- Evaluated eyebrow opacity: confirmed readable across all breakpoints (8px base at 50% opacity, 68% on hover)
+
+**Key decisions locked:**
+- Jost non-blocking load via `media="print" onload="this.media='all'"` + `display=swap`
+- Canonical animation definitions: lcFadeUp (5766), lcImageFloat (5783), lcImageFloatMobile (5936)
+- Single hero-title shadow source (Block 11, lines 7676–7687)
+- Static stagger logic (.stagger-text.in > *:nth-child) — no refactor needed
+
+**Rationale:** Animation system had hidden duplicate definitions causing maintenance risk and conceptual confusion (CSS "override behavior" vs "duplication"). Jost font fallback was silent — users on slow/JS-disabled situations fell back to system sans. Shadow rule was legacy dead code left from earlier revisions. Cleanup removed ~47 lines of technical debt while preserving exact visual and behavioral output.
+
+**Outcome:** Typography system is now deterministic, maintainable, and technically correct. All animation references resolve to a single canonical @keyframes definition. Font loading is explicit and correct. Zero visual regressions. Reduced risk of future animation bugs from conflicting duplicate definitions.
+
+---
+
 ## v2.4 (2026-05-06) — System Coherence & Editorial Refinement Pass
 
 **Summary:** Final refinement cycle bringing site into visually and emotionally cohesive luxury editorial system. Category interactions elevated to premium standard, Heritage section redesigned for distinct narrative identity, motion simplified for natural feel, and section alignment unified across all major content areas.

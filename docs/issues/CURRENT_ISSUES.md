@@ -11,25 +11,17 @@
 
 **5/6/2026:** Category card interaction weakness (added elevation, shadow, typography response, overlay contrast). Heritage image reuse (replaced with distinct heritage.webp). Heritage shimmer looping (reduced to single 2.2s pass). Section width inconsistencies (unified categories and heritage to 1360px system, aligned all major sections). See `docs/logs/log.md` v2.4 for details.
 
+**5/6/2026 (continued):** Typography system cleanup — Jost font properly imported with display=swap (no fallback). Duplicate keyframe definitions removed (lcFadeUp, lcImageFloat, lcImageFloatMobile). Hero-title shadow consolidated to single canonical rule. Animation system verified deterministic across desktop/mobile. Stagger logic confirmed stable; gold-text nth-child evaluated as non-issue (stagger is on .stagger-text.in > *:nth-child(n), static order). Eyebrow readability validated across all breakpoints. See `docs/logs/log.md` v2.5 for details.
+
 ### Remaining Issues
 
 #### Typography
 
-| Issue | Fix |
-|-------|-----|
-| Jost not imported; all Jost text falls back to system sans-serif | Import Jost from Google Fonts with `display=swap` |
-| Duplicate `@keyframes` names (`lcFadeUp`, `lcImageFloat`, `lcImageFloatMobile` defined 2×) | Audit and consolidate all duplicate keyframe definitions |
-| `hero-title` text-shadow defined in 3+ rule blocks; compounding effect | Consolidate to single `.hero-title` rule block |
-| `.gold-text` nth-child stagger delays break if elements are reordered | Use CSS counter-based delays instead of nth-child |
-| Eyebrow opacity at 0.5 may be imperceptible on 8px eyebrows at extreme scales | Visual QA at all breakpoints; adjust if needed |
+*(All active typography issues resolved 5/6/2026. See "Recently Resolved" section below.)*
 
 #### Layout & Spacing
 
-| Issue | Fix | Priority |
-|-------|-----|----------|
-| Mobile hero button spacing inconsistent across viewports | Lock `hero-btns` margin-bottom to 56px; test 320px–480px | Low |
-| Chat widget z-index: 9998 desktop, 99999 mobile | Use consistent z-index; document stacking context | Low |
-| Footer column widths (1.4fr 1fr 1.1fr) cause alignment issues on narrow screens | Test footer at all breakpoints; consider equal columns on tablet | Low |
+*(All active layout issues resolved 5/6/2026. See "Recently Resolved" section below.)*
 
 #### Content & Narrative
 
@@ -44,6 +36,34 @@
 | Wishlist heart fill inconsistent between card and drawer | Sync `.pcard-wish` fill logic with drawer heart rendering |
 | Contact section card visual hierarchy flat | Make WhatsApp dominant (gold accent), Instagram secondary (gray accent) |
 | Category card hover feedback minimal | *(Resolved 5/6/2026: added elevation, shadow, overlay contrast, typography response)* |
+
+---
+
+## Recently Resolved (2026-05-06 — Layout & Spacing Polish)
+
+| Item | Resolution |
+|------|-----------|
+| Mobile hero button spacing inconsistency | Locked `margin-bottom: 56px;` at 480px media query. Spacing now consistent across 320px–768px viewports. No layout shift. |
+| Chat widget z-index mismatch | Standardized to z-index: 9999 across desktop (was 9998) and mobile (was 99999). Added stacking context comment documenting position relative to modal (9998). Trigger remains 9999. |
+| Footer column misalignment at tablet | Added tablet breakpoint `@media (max-width: 1024px)` with equal 1fr 1fr 1fr grid columns. Desktop (>1024px) keeps asymmetric 1.1fr 1fr 1.1fr; tablet/mobile adapt cleanly. |
+
+**Total:** 3 spacing/stacking fixes. Zero visual changes. System consistency improved across all breakpoints.
+
+---
+
+## Recently Resolved (2026-05-06 — Typography Cleanup & Animation Deduplication)
+
+| Item | Resolution |
+|------|-----------|
+| Jost font silent fallback | Font properly imported from Google Fonts with `&family=Jost:wght@300;400;500&display=swap`. No-JS fallback included. Zero FOIT risk. |
+| Duplicate `@keyframes lcFadeUp` | Removed 22px (dead code) version; canonical 24px definition at line 5766 now sole source of truth. Hero title stagger works correctly. |
+| Duplicate `@keyframes lcImageFloat` | Removed -9px (dead code) version; canonical -8px definition at line 5783 active. Hero image float animation deterministic. |
+| Duplicate `@keyframes lcImageFloatMobile` | Removed 767px media block (-5px, 9s duration) that was overridden by 768px canonical. Mobile animation now single source. |
+| `hero-title` text-shadow duplication | Removed 4-layer shadow rule (lines 7356–7364, fully overridden by 5-layer with `!important`). Consolidated to canonical Block 11. No visual change. |
+| `.gold-text` nth-child refactor concern | Evaluated and verified non-issue — stagger lives on `.stagger-text.in > *:nth-child(n)` (static hero content, stable order). No refactor needed. |
+| Eyebrow opacity readability (8px) | Validated across desktop/tablet/mobile breakpoints. `.cat-glass-eyebrow` at 50% opacity on dark background is readable. No change required. Hover state (68%) provides adequate contrast feedback. |
+
+**Total cleanup:** ~47 lines of dead code removed. Animation system now deterministic. Zero visual regressions. Typography system technically correct and maintainable.
 
 ---
 

@@ -49,11 +49,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Google Fonts: non-blocking -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,200;0,300;1,200;1,300&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,200;0,300;1,200;1,300&family=Jost:wght@300;400;500&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,200;0,300;1,200;1,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,200;0,300;1,200;1,300&family=Jost:wght@300;400;500&display=swap"
       rel="stylesheet" />
   </noscript>
   <link rel="preload" href="images/logo_gif.webp" as="image" type="image/webp" fetchpriority="high" />
@@ -1055,18 +1055,6 @@
     }
 
     /* Feature 1: Text Entrance Animations */
-    @keyframes lcFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .hero-title span:nth-child(1) {
       animation: lcFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
       animation-delay: 0.1s;
@@ -1092,40 +1080,9 @@
       animation-delay: 0.82s;
     }
 
-    /* Feature 2: Hero Image Float Animation */
-    @keyframes lcImageFloat {
-
-      0%,
-      100% {
-        transform: translateY(0px) scale(1.04);
-      }
-
-      50% {
-        transform: translateY(-9px) scale(1.04);
-      }
-    }
-
     .hero-img {
       animation: lcImageFloat 7s ease-in-out infinite;
       will-change: transform;
-    }
-
-    @media (max-width: 767px) {
-      @keyframes lcImageFloatMobile {
-
-        0%,
-        100% {
-          transform: translateY(0px) scale(1.04);
-        }
-
-        50% {
-          transform: translateY(-5px) scale(1.04);
-        }
-      }
-
-      .hero-img {
-        animation: lcImageFloatMobile 9s ease-in-out infinite;
-      }
     }
 
     /* Feature 3: Mobile Ambient Scale */
@@ -5279,6 +5236,7 @@
         flex-wrap: nowrap;
         gap: 8px;
         width: 100%;
+        margin-bottom: 56px;
       }
 
       .hero-btns .btn-gold,
@@ -7353,16 +7311,6 @@
       z-index: 3 !important;
     }
 
-    /* ── CHANGE 3C: Typography atmosphere ── */
-    #hero h1,
-    #hero .hero-title {
-      text-shadow:
-        0 0 80px rgba(196, 136, 44, 0.35),
-        0 0 30px rgba(196, 136, 44, 0.15),
-        0 2px 12px rgba(0, 0, 0, 0.8),
-        0 4px 40px rgba(0, 0, 0, 0.5);
-    }
-
     #hero p,
     #hero .hero-sub {
       text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 0 24px rgba(18, 10, 5, 0.6);
@@ -8591,6 +8539,15 @@
       letter-spacing: 0.22em;
       color: rgba(180, 130, 40, 0.28);
       text-transform: uppercase;
+    }
+
+    /* Tablet: balanced 3-column layout */
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 50px 40px 0;
+        gap: 30px;
+      }
     }
 
     @media (max-width: 768px) {
