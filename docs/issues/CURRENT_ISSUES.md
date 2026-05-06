@@ -9,6 +9,8 @@
 
 **5/8/2026 (continued):** New Collection composition redesigned from grid-based ecommerce layout to editorial feature + carousel system. Removed duplication, introduced stacked layout with supporting product carousel. See `docs/logs/log.md` v2.3 for details.
 
+**5/6/2026:** Category card interaction weakness (added elevation, shadow, typography response, overlay contrast). Heritage image reuse (replaced with distinct heritage.webp). Heritage shimmer looping (reduced to single 2.2s pass). Section width inconsistencies (unified categories and heritage to 1360px system, aligned all major sections). See `docs/logs/log.md` v2.4 for details.
+
 ### Remaining Issues
 
 #### Typography
@@ -28,13 +30,10 @@
 | Mobile hero button spacing inconsistent across viewports | Lock `hero-btns` margin-bottom to 56px; test 320px–480px | Low |
 | Chat widget z-index: 9998 desktop, 99999 mobile | Use consistent z-index; document stacking context | Low |
 | Footer column widths (1.4fr 1fr 1.1fr) cause alignment issues on narrow screens | Test footer at all breakpoints; consider equal columns on tablet | Low |
-| Section max-widths uncoordinated (960px/1060px/1360px) | Standardize editorial (960px) vs. showcase (1200+px) via CSS variable | **Medium** |
 
 #### Content & Narrative
 
-| Issue | Fix | Priority |
-|-------|-----|----------|
-| Heritage section image is same as hero image | Commission/source separate image (craft process, artisan hands, workshop) | **High** |
+*(None currently)*
 
 #### Hover & Interactive States
 
@@ -44,6 +43,7 @@
 | Ghost button hover shows 2px border shift (layout shift) | Transition `border-color` only; use `outline` instead of `border-width` change |
 | Wishlist heart fill inconsistent between card and drawer | Sync `.pcard-wish` fill logic with drawer heart rendering |
 | Contact section card visual hierarchy flat | Make WhatsApp dominant (gold accent), Instagram secondary (gray accent) |
+| Category card hover feedback minimal | *(Resolved 5/6/2026: added elevation, shadow, overlay contrast, typography response)* |
 
 ---
 

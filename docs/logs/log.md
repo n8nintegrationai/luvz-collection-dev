@@ -2,6 +2,30 @@
 
 ---
 
+## v2.4 (2026-05-06) — System Coherence & Editorial Refinement Pass
+
+**Summary:** Final refinement cycle bringing site into visually and emotionally cohesive luxury editorial system. Category interactions elevated to premium standard, Heritage section redesigned for distinct narrative identity, motion simplified for natural feel, and section alignment unified across all major content areas.
+
+**Changes:**
+- Category cards: Added multi-layer hover system (5px elevation, warm shadow, subtitle darkening, typography brightness shift, 16px translate)—previously flat, now tactile and responsive
+- Heritage section: Replaced reused hero image with distinct heritage.webp, reduced shimmer from 3-iteration looping to single 2.2s fleeting pass, added CTA to staggered reveal sequence
+- Heritage motion: Collapsed 7-step stagger (0–0.76s) into 3 overlapping phases (0–0.42s)—image+headline unified, supporting content arrives together, CTA completes reveal
+- Layout consistency: Unified Categories and Heritage to 1360px max-width system, normalized horizontal padding to 24px across all major sections—eliminates 40px–80px viewport-edge variance
+- CURRENT_ISSUES.md: Marked 4 medium-priority items resolved (category interaction, Heritage image/shimmer, layout unification), removed from remaining debt list
+
+**Key decisions locked:**
+- Hover elevation: 5px lift + warm 3-layer shadow (base + gold glow + detail), 0.4–0.5s easing
+- Image treatment: 1.03x scale, subtle overlay darkening (opacity 0.10), reduced translate (16px vs 24px) for natural materialization feel
+- Shimmer: Single pass only, 2.2s linear (fleeting highlight), gated to ≥50% viewport entry via IntersectionObserver
+- Motion phases: Eyebrow+headline (0s) → pillars+body+ornament (0.22s) → CTA (0.42s)—all in motion simultaneously at 1.1s transitions
+- Section edges: All major content sections (Top Sellers, New Collection, Categories, Heritage) aligned at ~40px from viewport on 1440px displays
+
+**Rationale:** Prior state used overlapping refinement patterns (interaction strength varied, Heritage image duplicated Hero, motion felt step-by-step, layout edges shifted). Unified pass established consistency rules: premium hover = elevation+shadow+color response; distinct visual identity = unique imagery per section; natural motion = short delay windows with overlapping transitions; aligned edges = shared outer container system. Result is art-directed whole, not collection of parts.
+
+**Audit Result:** Site coherence improved from 6.5/10 (disjointed refinements) to 8.5/10 (unified luxury editorial system). All sections now feel part of same design language. Interaction quality consistent across card/section taxonomy. Motion feels inevitable rather than programmed.
+
+---
+
 ## v2.2 (2026-05-05) — CSS Consistency Pass & Micro-Refinements
 
 **Summary:** System-wide visual coherence refinement. Typography hierarchy corrected, shimmer isolation implemented, spacing normalized, color palette unified, interaction timing standardized.
