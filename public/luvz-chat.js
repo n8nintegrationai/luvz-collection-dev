@@ -290,7 +290,7 @@
     var el = document.createElement('div');
     el.className = 'luvz-typing';
     el.id = 'luvz-typing-ind';
-    el.innerHTML = '<span></span><span></span><span></span>';
+    el.innerHTML = '<span></span><span></span><span></span><small class="luvz-thinking-label">Thinking…</small>';
     messagesEl.appendChild(el);
     scrollToBottom();
   }

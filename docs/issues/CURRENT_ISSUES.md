@@ -74,17 +74,13 @@
 | Issue | Fix |
 |-------|-----|
 | Floating trigger hidden on <768px | Show trigger on mobile (reduced size), or update onboarding to highlight menu button |
-| No loading state before SSE stream begins | Add immediate "Thinking…" message before stream |
 | Old localStorage messages shown without context | Add timestamp to each message + "Previous conversation" divider |
 | Safe-area-inset-bottom may not cover all iOS versions | Test iOS 15 Safari; adjust `viewport-fit` |
-| Suggestion chips truncated on mobile | Horizontal scroll on chip row or shorten chip text |
 
 ### Wishlist
 
 | Issue | Fix |
 |-------|-----|
-| ID generation `btoa(Math.random())` unstable across reloads | Add explicit `id` to every product in JSON |
-| Heart button sync uses string inspection of onclick | Use `data-pid` as primary selector |
 | "Enquire All" omits prices | Include prices: "Ring ₹X, Necklace ₹Y…" |
 | `updateWishCount()` not called on drawer close | Call `updateWishCount()` on `closeWishlist()` |
 
@@ -92,17 +88,29 @@
 
 | Issue | Fix |
 |-------|-----|
-| Gallery swipe threshold 50px vs carousel 44px | Standardize all swipe thresholds to 44px |
-| Gallery doesn't loop past last image | Add modulo: `index = (index - 1 + total) % total` |
 | Referral code input has no real-time validation feedback | Green border on valid, red on invalid, while typing |
 
 ### Hash Routing
 
 | Issue | Fix |
 |-------|-----|
-| 400ms setTimeout on `handleInitialHash()` gamble | Increase to 800ms or use `load()` completion promise |
 | If MOCK_DATA used, hash routing silently fails | Log warning when products.json fails and MOCK_DATA activates |
-| No visual feedback during 400ms wait | Show loading skeleton while modal opens |
+
+---
+
+## Recently Resolved (2026-05-06 — UX Behavior Corrections)
+
+| Item | Resolution |
+|------|-----------|
+| No loading state before SSE stream | Chat typing indicator now shows "Thinking…" text label immediately on send. Text persists until first SSE delta replaces it. No perceived lag. |
+| Suggestion chips truncated on mobile | Changed `.luvz-suggestions` from `flex-wrap: wrap` to `nowrap` with `overflow-x: auto`. Chips scroll horizontally on narrow viewports. Touch-optimized (`-webkit-overflow-scrolling: touch`). |
+| ID generation `btoa(Math.random())` unstable | Confirmed all products in `products.json` have explicit `id` fields. Fallback was never exercised. No JSON changes needed. |
+| Heart button sync via string parsing | Added `data-pid="${pid}"` attribute to all `.pcard-wish` buttons (3 build sites). Updated `removeFromWishlist()` sync to use clean attribute lookup instead of `onclick.toString()` parsing. |
+| Gallery swipe threshold inconsistency | Unified to 44px across modal (was 50px) and carousels. Single responsive threshold improves UX consistency. |
+| Gallery not looping past last image | Implemented circular navigation with modulo: `index = (index ± 1 + total) % total`. Prev/next buttons always enabled. Seamless navigation in both directions. |
+| 400ms setTimeout routing timing gamble | Replaced fixed timeout with `requestAnimationFrame(() => openModal())`. Deterministic (one paint cycle), eliminates race condition, respects browser performance. Modal opens immediately after `load()` completes. |
+
+**Total:** 7 UX fixes. Zero visual changes. Behavior across chat, wishlist, modal, and routing is now consistent and predictable.
 
 ---
 

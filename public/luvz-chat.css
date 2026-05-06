@@ -558,14 +558,27 @@
   }
 }
 
+.luvz-thinking-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(201, 168, 76, 0.45);
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+}
+
 /* ---------- Suggestion Chips ---------- */
 .luvz-suggestions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 6px;
   padding: 8px 13px 4px;
   flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.luvz-suggestions::-webkit-scrollbar { display: none; }
 
 .luvz-chip {
   font-family: 'Jost', sans-serif;
@@ -580,6 +593,8 @@
   transition: background 0.18s, color 0.18s;
   letter-spacing: 0.02em;
   -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .luvz-chip:hover {

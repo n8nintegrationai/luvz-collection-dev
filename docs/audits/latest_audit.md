@@ -3,7 +3,7 @@
 **Date:** 2026-05-04  
 **Scope:** CSS consistency pass + micro-refinements against brand spec
 
-> **Note (2026-05-06):** This audit is from the initial CSS consistency pass. Subsequent refinement cycles: v2.4 (Category hover, Heritage redesign, motion simplification, layout unification), v2.5 (typography cleanup), v2.6 (layout & spacing polish). All major inconsistencies resolved; system is visually cohesive and technically stable. Remaining issues are low-priority interactive enhancements and content decisions.
+> **Note (2026-05-06):** This audit is from the initial CSS consistency pass. Subsequent refinement cycles: v2.4 (Category hover, Heritage redesign, motion simplification, layout unification), v2.5 (typography cleanup), v2.6 (layout & spacing polish), v2.7 (UX behavior corrections). All major inconsistencies resolved; interaction behavior is now consistent and reliable; system is visually cohesive and technically stable. Remaining issues are low-priority interactive enhancements and content decisions.
 
 ---
 

@@ -472,7 +472,7 @@ function removeFromWishlist(id) {
   updateWishCount();
   // Update any visible heart buttons on the page
   document.querySelectorAll('.pcard-wish').forEach(btn => {
-    if (btn.getAttribute('data-pid') === id || btn.onclick?.toString().includes(`'${id}'`)) {
+    if (btn.getAttribute('data-pid') === id) {
       btn.classList.remove('wished');
       btn.querySelector('svg')?.setAttribute('fill', 'none');
     }
@@ -530,7 +530,7 @@ function handleInitialHash() {
   if (found) {
     // Determine badge from context
     const badge = found.badge === 'new' ? 'New Arrival' : 'LUVZ Collection';
-    setTimeout(() => openModal(found, badge), 400); // slight delay for DOM ready
+    requestAnimationFrame(() => openModal(found, badge));
   }
 }
 
@@ -633,7 +633,7 @@ function buildCard(p, sec) {
       <div class="pcard-bloom" aria-hidden="true"></div>
       <div class="pcard-sweep" aria-hidden="true"></div>
       <div class="pcard-quick-view">Quick View</div>
-      <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+      <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="${isWished(pid) ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
       ${badgeHtml}
@@ -825,7 +825,7 @@ function buildNcFeature(p) {
   el.innerHTML = `
     <div class="nc-feature-img-wrap" onclick="openModal(${pJson})">
       <img src="${p.image || ''}" alt="${p.name || ''}" loading="lazy">
-      <button class="pcard-wish nc-feature-wish${wished ? ' wished' : ''}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+      <button class="pcard-wish nc-feature-wish${wished ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="${wished ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="1.8">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
@@ -873,7 +873,7 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
         <img loading="lazy" src="${p.image || fb}" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${fb}'" decoding="async"/>
         <div class="pcard-img-ov"></div>
         <div class="pcard-quick-view">Quick View</div>
-        <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+        <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="${isWished(pid) ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         ${badgeHtml}
@@ -1072,12 +1072,19 @@ function renderGalleryFrame() {
   img.classList.remove('z');
   const multi = n > 1;
   wrap.classList.toggle('has-gallery', multi);
-  if (prev) { prev.style.display = multi ? 'flex' : 'none'; prev.disabled = _gallery.index <= 0; }
-  if (next) { next.style.display = multi ? 'flex' : 'none'; next.disabled = _gallery.index >= n - 1; }
+  if (prev) { prev.style.display = multi ? 'flex' : 'none'; prev.disabled = false; }
+  if (next) { next.style.display = multi ? 'flex' : 'none'; next.disabled = false; }
   if (counter) { counter.style.display = multi ? 'block' : 'none'; counter.textContent = `${_gallery.index + 1} / ${n}`; }
 }
-function galleryPrev() { if (_gallery.index > 0) { _gallery.index--; renderGalleryFrame(); } }
-function galleryNext() { if (_gallery.index < _gallery.imgs.length - 1) { _gallery.index++; renderGalleryFrame(); } }
+function galleryPrev() {
+  var t = _gallery.imgs.length;
+  _gallery.index = ((_gallery.index - 1) + t) % t;
+  renderGalleryFrame();
+}
+function galleryNext() {
+  _gallery.index = (_gallery.index + 1) % _gallery.imgs.length;
+  renderGalleryFrame();
+}
 
 function openModal(p, badge) {
   const fb = `https://placehold.co/400x533/141210/D4AF37?text=${encodeURIComponent(p.name || '')}`;
@@ -1165,7 +1172,7 @@ document.getElementById('moverlay').addEventListener('click', e => { if (e.targe
   wrap.addEventListener('touchend', e => {
     if (_gallery.imgs.length <= 1) return;
     const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 50) dx < 0 ? galleryNext() : galleryPrev();
+    if (Math.abs(dx) > 44) dx < 0 ? galleryNext() : galleryPrev();
   }, { passive: true });
 })();
 

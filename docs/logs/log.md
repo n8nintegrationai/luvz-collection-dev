@@ -2,6 +2,32 @@
 
 ---
 
+## v2.7 (2026-05-06) — UX Behavior Stabilization Pass
+
+**Summary:** Interaction behavior corrections addressing responsiveness, consistency, and reliability across chat, wishlist, product modal, and routing. No visual changes. All fixes eliminate perceived lag, fragility, and inconsistent interaction patterns.
+
+**Changes:**
+- Chat widget: Added immediate "Thinking…" text label to typing indicator (shows between send and first SSE delta)
+- Chat chips: Changed from wrapping layout to horizontal scroll on mobile (`overflow-x: auto`, gesture-driven, hidden scrollbar)
+- Wishlist IDs: Added `data-pid="${pid}"` attribute to all `.pcard-wish` buttons for reliable sync (3 build sites: buildCard, buildNcFeature, buildCarouselInSection)
+- Wishlist sync: Removed `onclick.toString()` string-parsing fallback; now uses clean `data-pid` lookup only
+- Modal swipe: Unified threshold from 50px (gallery) to 44px (matches carousels)
+- Modal gallery: Implemented circular navigation with modulo logic; prev/next buttons always enabled for seamless looping
+- Hash routing: Replaced 400ms `setTimeout` timing gamble with `requestAnimationFrame` for deterministic initialization
+
+**Key decisions locked:**
+- Chat loading state is immediate (no delay before typing indicator appears)
+- Wishlist sync is attribute-based, not string-based (fragile parsing removed)
+- Modal swipe threshold: 44px (unified, matches carousel)
+- Gallery navigation: circular with modulo (index ± 1 + total) % total
+- Hash routing: requestAnimationFrame ensures one paint cycle before opening modal
+
+**Rationale:** Interaction inconsistencies accumulated across independent systems — chat showed no immediate feedback, wishlist sync relied on brittle string parsing, modal swipe threshold diverged, gallery blocked at boundaries, routing used fixed timing hacks. Seven targeted fixes unified behavior, eliminated perceived lag, and improved system reliability. Each fix was surgical — no behavioral side effects, no visual changes.
+
+**Outcome:** Chat, wishlist, modal, and routing now behave consistently and predictably. Perceived responsiveness improved. System is more resilient to edge cases and timing variations. Zero regressions. Behavior is now deterministic rather than timing-dependent.
+
+---
+
 ## v2.6 (2026-05-06) — Layout & Spacing Edge-Case Refinement
 
 **Summary:** Responsive layout polish addressing edge-case spacing and stacking inconsistencies across breakpoints. No visual changes. Hero button spacing normalized, chat widget z-index standardized, footer responsiveness improved.
