@@ -6,6 +6,15 @@ const WA_NUM = '918919359961';
 const VIS = 4; // cards per page on desktop
 // ╚══════════════════════════════════════╝
 
+/* ── Utilities ─────────────────────────── */
+function _debounce(fn, ms) {
+  let t;
+  return function() {
+    clearTimeout(t);
+    t = setTimeout(fn, ms);
+  };
+}
+
 /* ── Theme ─────────────────────────── */
 document.documentElement.setAttribute('data-theme', 'earth');
 
@@ -17,23 +26,26 @@ window.addEventListener('resize', () => {
   }
 }, { passive: true });
 
+// Cache DOM elements and hero height to avoid repeated queries
+const _nav = document.getElementById('nav');
+const _discover = document.querySelector('.hero-discover');
+const _gemBar = document.querySelector('.gem-bar');
+const _fwa = document.getElementById('fwa');
+const _hero = document.querySelector('.hero');
+let _heroH = _hero ? _hero.offsetHeight : window.innerHeight;
+
+window.addEventListener('resize', () => {
+  _heroH = _hero ? _hero.offsetHeight : window.innerHeight;
+}, { passive: true });
+
 window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('stuck', window.scrollY > 50);
-  const discover = document.querySelector('.hero-discover');
-  if (discover) discover.style.opacity = window.scrollY > 100 ? '0' : '1';
-
-  // Gem bar: visible only on first screen (= 100svh = window.innerHeight)
-  const gb = document.querySelector('.gem-bar');
-  if (gb) {
-    gb.classList.toggle('gem-hidden', window.scrollY > window.innerHeight * 0.8);
+  _nav.classList.toggle('stuck', window.scrollY > 50);
+  if (_discover) _discover.style.opacity = window.scrollY > 100 ? '0' : '1';
+  if (_gemBar) {
+    _gemBar.classList.toggle('gem-hidden', window.scrollY > window.innerHeight * 0.8);
   }
-
-  // Task 4B: show floating WA only after scrolling past hero
-  const fwa = document.getElementById('fwa');
-  if (fwa) {
-    const hero = document.querySelector('.hero');
-    const heroH = hero ? hero.offsetHeight : window.innerHeight;
-    fwa.classList.toggle('fwa-visible', window.scrollY > heroH * 0.6);
+  if (_fwa) {
+    _fwa.classList.toggle('fwa-visible', window.scrollY > _heroH * 0.6);
   }
 }, { passive: true });
 
@@ -80,154 +92,6 @@ window.addEventListener('scroll', () => {
   }
 })();
 
-function initHeroRedesignParallax() {
-  // Parallax removed — Phase 3. Image float handled by CSS lcImageFloat.
-}
-
-initHeroRedesignParallax();
-
-function initHeroParticles() {
-  return; // Replaced by lcInitParticles() in Phase 3
-  const hero = document.querySelector('.hero.hero-redesign');
-  const canvas = document.getElementById('hero-particles-canvas');
-  if (!hero || !canvas) return;
-
-  const media = canvas.parentElement;
-  const mobileQuery = window.matchMedia('(max-width: 768px)');
-  const ctx = canvas.getContext('2d');
-  if (!media || !ctx) return;
-
-  const PARTICLE_COUNT = 55;
-  const particles = [];
-  let heroParticlesRAF = 0;
-  let canvasWidth = 0;
-  let canvasHeight = 0;
-  let animationActive = false;
-  let visibilityPaused = false;
-
-  function resizeHeroParticlesCanvas() {
-    canvasWidth = media.clientWidth;
-    canvasHeight = media.clientHeight;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
-  }
-
-  function createParticle(index) {
-    const size = 0.8 + Math.random() * 2.2;
-    const alpha = 0.06 + Math.random() * 0.28;
-    particles[index] = {
-      baseX: Math.random() * canvasWidth,
-      y: Math.random() * canvasHeight,
-      size,
-      alpha,
-      color: `rgba(212, 175, 55, ${alpha})`,
-      speedY: 0.12 + Math.random() * 0.22,
-      amplitude: 3 + Math.random() * 8,
-      phase: Math.random() * Math.PI * 2,
-      phaseSpeed: 0.0048 + Math.random() * 0.0096,
-      rotation: Math.random() * Math.PI * 2,
-      rotationSpeed: (Math.random() - 0.5) * 0.008,
-      sizeVariation: 1 + (Math.random() - 0.5) * 0.3
-    };
-  }
-
-  function resetParticleToBottom(particle) {
-    particle.baseX = Math.random() * canvasWidth;
-    particle.y = canvasHeight + particle.size + Math.random() * 18;
-    particle.phase = Math.random() * Math.PI * 2;
-  }
-
-  function animateHeroParticles() {
-    heroParticlesRAF = requestAnimationFrame(animateHeroParticles);
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    for (let i = 0; i < particles.length; i += 1) {
-      const particle = particles[i];
-      particle.y -= particle.speedY;
-      particle.phase += particle.phaseSpeed;
-      particle.rotation += particle.rotationSpeed;
-
-      if (particle.y + particle.size < 0) {
-        resetParticleToBottom(particle);
-      }
-
-      const currentSize = particle.size * particle.sizeVariation * (0.9 + Math.sin(particle.phase) * 0.1);
-      ctx.fillStyle = particle.color;
-      ctx.save();
-      ctx.translate(
-        particle.baseX + Math.sin(particle.phase) * particle.amplitude,
-        particle.y
-      );
-      ctx.rotate(particle.rotation);
-      ctx.beginPath();
-      ctx.arc(0, 0, currentSize, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  function startHeroParticles() {
-    if (animationActive || mobileQuery.matches || document.hidden) return;
-    resizeHeroParticlesCanvas();
-    heroParticlesRAF = requestAnimationFrame(animateHeroParticles);
-    animationActive = true;
-  }
-
-  function stopHeroParticles() {
-    if (heroParticlesRAF) {
-      cancelAnimationFrame(heroParticlesRAF);
-      heroParticlesRAF = 0;
-    }
-    animationActive = false;
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  }
-
-  function handleHeroParticlesViewportChange(event) {
-    if (event.matches) stopHeroParticles();
-    else if (!visibilityPaused) startHeroParticles();
-  }
-
-  function handleHeroParticlesVisibilityChange() {
-    if (document.hidden) {
-      visibilityPaused = true;
-      cancelAnimationFrame(heroParticlesRAF);
-      heroParticlesRAF = 0;
-      animationActive = false;
-      return;
-    }
-
-    visibilityPaused = false;
-    if (!mobileQuery.matches) {
-      heroParticlesRAF = requestAnimationFrame(animateHeroParticles);
-      animationActive = true;
-    }
-  }
-
-  function cleanupHeroParticles() {
-    stopHeroParticles();
-    mobileQuery.removeEventListener('change', handleHeroParticlesViewportChange);
-    document.removeEventListener('visibilitychange', handleHeroParticlesVisibilityChange);
-    window.removeEventListener('pagehide', cleanupHeroParticles);
-    resizeObserver.disconnect();
-  }
-
-  resizeHeroParticlesCanvas();
-  for (let i = 0; i < PARTICLE_COUNT; i += 1) {
-    createParticle(i);
-  }
-
-  const resizeObserver = new ResizeObserver(() => {
-    resizeHeroParticlesCanvas();
-  });
-
-  resizeObserver.observe(media);
-  if (!mobileQuery.matches) startHeroParticles();
-  mobileQuery.addEventListener('change', handleHeroParticlesViewportChange);
-  document.addEventListener('visibilitychange', handleHeroParticlesVisibilityChange);
-  window.addEventListener('pagehide', cleanupHeroParticles);
-}
-
-initHeroParticles();
 
 /* ── PHASE 3: HERO TEXT ENTRANCE ANIMATIONS ── */
 (function lcInitHeroEntranceAnimations() {
@@ -418,10 +282,11 @@ function renderAboutSection(cfg) {
 /* ── Build product card ─────────────── */
 /* ── Wishlist (localStorage) ─────────── */
 const productRegistry = {}; // id → product object, populated as cards are built
+let _wishedSetCache = null;
 
 function getWishlist() { try { return JSON.parse(localStorage.getItem('luvz-wish') || '[]') } catch { return [] } }
 function saveWishlist(w) { try { localStorage.setItem('luvz-wish', JSON.stringify(w)) } catch { } }
-function isWished(id) { return getWishlist().includes(id) }
+function isWished(id) { return _wishedSetCache ? _wishedSetCache.has(id) : getWishlist().includes(id) }
 
 function toggleWish(btn, id) {
   let w = getWishlist();
@@ -927,13 +792,13 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
   track.addEventListener('touchstart', e => { tx = e.touches[0].clientX }, { passive: true });
   track.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) dx < 0 ? goPage(trackId, CS[trackId].page + 1) : goPage(trackId, CS[trackId].page - 1) }, { passive: true });
 }
-window.addEventListener('resize', () => {
+window.addEventListener('resize', _debounce(() => {
   Object.keys(CS).forEach(key => {
     const s = CS[key]; if (!s || !s._r) return;
     s.vis = getVis(); s.pages = Math.max(1, Math.ceil(s.total / s.vis));
     s.page = Math.min(s.page, s.pages - 1); s._r();
   });
-}, { passive: true });
+}, 100), { passive: true });
 
 /* ── Poster (kept for compatibility, no-op if no poster element) ── */
 let posterData = null;
@@ -955,6 +820,9 @@ const MOCK_DATA = {
 
 async function load() {
   try {
+    // Cache wishedSet once for all render functions to avoid repeated localStorage parses
+    _wishedSetCache = new Set(getWishlist());
+
     const isFileProtocol = location.protocol === 'file:';
 
     let d;
@@ -1668,7 +1536,7 @@ document.addEventListener('touchstart', e => {
 /* ══════════════════════════════════════════════
    TASK 10: Resize — update vault translateZ on orientation change
 ══════════════════════════════════════════════ */
-window.addEventListener('resize', () => {
+window.addEventListener('resize', _debounce(() => {
   const ring = document.getElementById('vault-ring');
   if (!ring) return;
   // Recalculate translateZ inline — matches tz() inside initVault IIFE
@@ -1679,7 +1547,7 @@ window.addEventListener('resize', () => {
       `translateZ(${tzVal}px)`
     );
   });
-}, { passive: true });
+}, 100), { passive: true });
 
 
 /* ── Referral Code System ─────────────────── */
@@ -1928,6 +1796,17 @@ async function askLuvzAI() {
       else raf = requestAnimationFrame(draw);
     });
 
+    // Stop RAF when canvas leaves viewport
+    const _canvasIO = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+      } else if (!raf) {
+        raf = requestAnimationFrame(draw);
+      }
+    }, { threshold: 0 });
+    _canvasIO.observe(canvas);
+
     window.addEventListener('resize', () => { resize(); }, { passive: true });
 
     init();
@@ -1944,22 +1823,42 @@ async function askLuvzAI() {
     if (!imgLayer || !txtLayer) return;
 
     let tx = 0, ty = 0, cx = 0, cy = 0;
+    let _heroRect = hero.getBoundingClientRect();
 
-    hero.addEventListener('mousemove', e => {
-      const r = hero.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-      ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    window.addEventListener('resize', () => {
+      _heroRect = hero.getBoundingClientRect();
     }, { passive: true });
 
-    (function tick() {
-      // Smooth lerp
-      cx += (tx - cx) * 0.06;
-      cy += (ty - cy) * 0.06;
-      imgLayer.style.transform = `translate(${cx * 14}px, ${cy * 8}px) scale(1.04)`;
-      txtLayer.style.transform = `translate(${cx * -5}px, ${cy * -3}px)`;
-      if (gemLight) gemLight.style.transform = `translate(${cx * 22}px, ${cy * 14}px)`;
-      requestAnimationFrame(tick);
-    })();
+    hero.addEventListener('mousemove', e => {
+      tx = ((e.clientX - _heroRect.left) / _heroRect.width - 0.5) * 2;
+      ty = ((e.clientY - _heroRect.top) / _heroRect.height - 0.5) * 2;
+    }, { passive: true });
+
+    let _tickRaf = null;
+
+    function _startTick() {
+      if (_tickRaf) return;
+      (function tick() {
+        cx += (tx - cx) * 0.06;
+        cy += (ty - cy) * 0.06;
+        imgLayer.style.transform = `translate(${cx * 14}px, ${cy * 8}px) scale(1.04)`;
+        txtLayer.style.transform = `translate(${cx * -5}px, ${cy * -3}px)`;
+        if (gemLight) gemLight.style.transform = `translate(${cx * 22}px, ${cy * 14}px)`;
+        _tickRaf = requestAnimationFrame(tick);
+      })();
+    }
+
+    function _stopTick() {
+      if (_tickRaf) {
+        cancelAnimationFrame(_tickRaf);
+        _tickRaf = null;
+      }
+    }
+
+    const _tickIO = new IntersectionObserver(([e]) => e.isIntersecting ? _startTick() : _stopTick());
+    _tickIO.observe(hero);
+
+    document.addEventListener('visibilitychange', () => document.hidden ? _stopTick() : _startTick());
   }
 
   /* ── INIT ── */
@@ -1976,13 +1875,18 @@ async function askLuvzAI() {
 
 })();
 
-// Hero parallax — desktop only, passive scroll
+// Hero parallax — desktop only, passive scroll, RAF-gated
 (function initLuxuryHeroParallax() {
   function bindHeroParallax() {
     const heroImg = document.querySelector('#hero img, .hero-bg, .hero-image, .hero-img');
     if (!heroImg || window.innerWidth <= 768) return;
+    let _rafScroll = null;
     window.addEventListener('scroll', function () {
-      heroImg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.28) + 'px)';
+      if (_rafScroll) return;
+      _rafScroll = requestAnimationFrame(function () {
+        heroImg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.28) + 'px)';
+        _rafScroll = null;
+      });
     }, { passive: true });
   }
 
