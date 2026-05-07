@@ -798,11 +798,22 @@ function ncUpdateDots(images, activeAngle) {
   if (!svg) return;
   svg.innerHTML = '';
   const n = images.length, spacing = 14;
+  if (n === 0) return;
   const totalW = (n - 1) * spacing;
   let x = (60 - totalW) / 2;
   images.forEach((_, i) => {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    hitArea.setAttribute('r', '16');
+    hitArea.setAttribute('cx', x);
+    hitArea.setAttribute('cy', '5');
+    hitArea.setAttribute('fill', 'transparent');
+    hitArea.style.cursor = 'pointer';
+    hitArea.addEventListener('click', () => ncSwitchAngle(i));
+    g.appendChild(hitArea);
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    if (i === activeAngle) {
+    const isActive = i === activeAngle && activeAngle >= 0;
+    if (isActive) {
       circle.setAttribute('r', '3.5');
       circle.setAttribute('fill', '#c8923a');
       circle.setAttribute('opacity', '1');
@@ -815,9 +826,8 @@ function ncUpdateDots(images, activeAngle) {
     }
     circle.setAttribute('cx', x);
     circle.setAttribute('cy', '5');
-    circle.style.cursor = 'pointer';
-    circle.addEventListener('click', () => ncSwitchAngle(i));
-    svg.appendChild(circle);
+    g.appendChild(circle);
+    svg.appendChild(g);
     x += spacing;
   });
 }
@@ -848,12 +858,12 @@ function ncSwitchProduct(idx) {
   if (_nc.fading || idx === _nc.active) return;
   _nc.fading = true;
   _nc.active = idx;
-  _nc.angle  = 0;
+  _nc.angle  = -1;
   const p      = _nc.products[idx];
-  const images = getNcImages(p);
-  ncSetImage(images[0], 600);
+  ncSetImage(p.image, 600);
   ncUpdateText(p);
-  ncUpdateDots(images, 0);
+  const angleImages = (p.images || []).filter(Boolean);
+  ncUpdateDots(angleImages, -1);
   ncUpdateCounter();
   ncUpdateFilmstrip();
   setTimeout(() => { _nc.fading = false; }, 700);
@@ -863,7 +873,7 @@ function buildNcEditorial(products) {
   if (!products || !products.length) return;
   _nc.products = products;
   _nc.active   = 0;
-  _nc.angle    = 0;
+  _nc.angle    = -1;
 
   products.forEach(p => {
     const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
@@ -871,21 +881,21 @@ function buildNcEditorial(products) {
   });
 
   const p0     = products[0];
-  const images = getNcImages(p0);
 
   const back  = document.getElementById('nc-img-back');
   const front = document.getElementById('nc-img-front');
-  if (back)  back.style.backgroundImage  = `url('${images[0]}')`;
-  if (front) front.style.backgroundImage = `url('${images[0]}')`;
+  if (back)  back.style.backgroundImage  = `url('${p0.image}')`;
+  if (front) front.style.backgroundImage = `url('${p0.image}')`;
 
   ncUpdateText(p0);
-  ncUpdateDots(images, 0);
+  const angleImages = (p0.images || []).filter(Boolean);
+  ncUpdateDots(angleImages, -1);
   ncUpdateCounter();
 
   const strip = document.getElementById('nc-filmstrip');
   if (strip) {
     strip.innerHTML = products.map((p, i) => {
-      const img = getNcImages(p)[0];
+      const img = p.image;
       return `<div class="nc-thumb ${i===0?'nc-thumb-active':'nc-thumb-inactive'}"
                    style="background-image:url('${img}')"
                    data-nc-idx="${i}"
