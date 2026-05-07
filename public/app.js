@@ -805,7 +805,7 @@ function ncUpdateDots(images, activeAngle) {
   const n = images.length, spacing = 20;
   if (n === 0) return;
   const totalW = (n - 1) * spacing;
-  let x = (60 - totalW) / 2;
+  let x = 30 - totalW / 2;
   images.forEach((_, i) => {
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
