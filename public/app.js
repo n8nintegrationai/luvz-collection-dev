@@ -760,6 +760,11 @@ function getNcImages(p) {
   return imgs.length ? imgs : [p.image];
 }
 
+function getNcAllImages(p) {
+  const allImages = [p.image || null, ...((p.images || []).filter(Boolean))];
+  return allImages.filter(img => img !== null);
+}
+
 function ncSetImage(url, duration) {
   const back  = document.getElementById('nc-img-back');
   const front = document.getElementById('nc-img-front');
@@ -797,35 +802,44 @@ function ncUpdateDots(images, activeAngle) {
   const svg = document.getElementById('nc-angle-dots');
   if (!svg) return;
   svg.innerHTML = '';
-  const n = images.length, spacing = 14;
+  const n = images.length, spacing = 16;
   if (n === 0) return;
   const totalW = (n - 1) * spacing;
   let x = (60 - totalW) / 2;
   images.forEach((_, i) => {
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    hitArea.setAttribute('r', '16');
+    hitArea.setAttribute('r', '18');
     hitArea.setAttribute('cx', x);
     hitArea.setAttribute('cy', '5');
     hitArea.setAttribute('fill', 'transparent');
     hitArea.style.cursor = 'pointer';
-    hitArea.addEventListener('click', () => ncSwitchAngle(i));
+    hitArea.addEventListener('pointerdown', e => { e.preventDefault(); ncSwitchAngle(i); });
     g.appendChild(hitArea);
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    const isActive = i === activeAngle && activeAngle >= 0;
+    const isActive = i === activeAngle;
     if (isActive) {
-      circle.setAttribute('r', '3.5');
+      circle.setAttribute('r', '4');
       circle.setAttribute('fill', '#c8923a');
       circle.setAttribute('opacity', '1');
     } else {
-      circle.setAttribute('r', '2.5');
+      circle.setAttribute('r', '3');
       circle.setAttribute('fill', 'none');
       circle.setAttribute('stroke', '#c8923a');
-      circle.setAttribute('stroke-width', '0.8');
-      circle.setAttribute('opacity', '0.45');
+      circle.setAttribute('stroke-width', '1');
+      circle.setAttribute('opacity', '0.55');
     }
     circle.setAttribute('cx', x);
     circle.setAttribute('cy', '5');
+    circle.style.transition = 'opacity 150ms ease';
+    const onHover = () => {
+      if (!isActive) circle.setAttribute('opacity', '0.85');
+    };
+    const onOut = () => {
+      if (!isActive) circle.setAttribute('opacity', '0.55');
+    };
+    g.addEventListener('pointerenter', onHover);
+    g.addEventListener('pointerleave', onOut);
     g.appendChild(circle);
     svg.appendChild(g);
     x += spacing;
@@ -844,28 +858,53 @@ function ncUpdateFilmstrip() {
   });
 }
 
-function ncSwitchAngle(angleIdx) {
+function ncUpdateWishlist() {
+  const p = _nc.products[_nc.active];
+  if (!p) return;
+  const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
+  const btn = document.getElementById('nc-wish');
+  if (!btn) return;
+  const wished = isWished(pid);
+  if (wished) {
+    btn.classList.add('wished');
+    btn.querySelector('svg')?.setAttribute('fill', '#c8923a');
+  } else {
+    btn.classList.remove('wished');
+    btn.querySelector('svg')?.setAttribute('fill', 'none');
+  }
+}
+
+function ncSwitchAngle(dotIdx) {
   if (_nc.fading) return;
   const p      = _nc.products[_nc.active];
-  const images = getNcImages(p);
-  if (angleIdx >= images.length) return;
-  _nc.angle = angleIdx;
-  ncSetImage(images[angleIdx], 500);
-  ncUpdateDots(images, _nc.angle);
+  const allImages = getNcAllImages(p);
+  if (dotIdx >= allImages.length) return;
+  _nc.angle = dotIdx;
+  ncSetImage(allImages[dotIdx], 500);
+  ncUpdateDots(allImages, _nc.angle);
 }
 
 function ncSwitchProduct(idx) {
   if (_nc.fading || idx === _nc.active) return;
   _nc.fading = true;
   _nc.active = idx;
-  _nc.angle  = -1;
+  _nc.angle  = 0;
   const p      = _nc.products[idx];
-  ncSetImage(p.image, 600);
+  const allImages = getNcAllImages(p);
+  ncSetImage(allImages[0], 600);
   ncUpdateText(p);
-  const angleImages = (p.images || []).filter(Boolean);
-  ncUpdateDots(angleImages, -1);
+  ncUpdateDots(allImages, 0);
   ncUpdateCounter();
   ncUpdateFilmstrip();
+  ncUpdateWishlist();
+  const wishBtn = document.getElementById('nc-wish');
+  if (wishBtn) {
+    wishBtn.onclick = () => {
+      const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
+      toggleWish(wishBtn, pid);
+      ncUpdateWishlist();
+    };
+  }
   setTimeout(() => { _nc.fading = false; }, 700);
 }
 
@@ -873,7 +912,7 @@ function buildNcEditorial(products) {
   if (!products || !products.length) return;
   _nc.products = products;
   _nc.active   = 0;
-  _nc.angle    = -1;
+  _nc.angle    = 0;
 
   products.forEach(p => {
     const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
@@ -881,16 +920,26 @@ function buildNcEditorial(products) {
   });
 
   const p0     = products[0];
+  const allImages = getNcAllImages(p0);
 
   const back  = document.getElementById('nc-img-back');
   const front = document.getElementById('nc-img-front');
-  if (back)  back.style.backgroundImage  = `url('${p0.image}')`;
-  if (front) front.style.backgroundImage = `url('${p0.image}')`;
+  if (back)  back.style.backgroundImage  = `url('${allImages[0]}')`;
+  if (front) front.style.backgroundImage = `url('${allImages[0]}')`;
 
   ncUpdateText(p0);
-  const angleImages = (p0.images || []).filter(Boolean);
-  ncUpdateDots(angleImages, -1);
+  ncUpdateDots(allImages, 0);
   ncUpdateCounter();
+  ncUpdateWishlist();
+
+  const wishBtn = document.getElementById('nc-wish');
+  if (wishBtn) {
+    wishBtn.onclick = () => {
+      const pid = p0.id || btoa(p0.name || Math.random()).slice(0, 8);
+      toggleWish(wishBtn, pid);
+      ncUpdateWishlist();
+    };
+  }
 
   const strip = document.getElementById('nc-filmstrip');
   if (strip) {

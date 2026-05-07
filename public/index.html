@@ -2539,7 +2539,7 @@
     #nc-img-zone {
       position: relative;
       width: 100%;
-      min-height: 85vh;
+      min-height: calc(100vh - 320px);
       overflow: hidden;
       background: #0a0502;
     }
@@ -2709,16 +2709,41 @@
       color: #3a2510;
     }
 
+    /* WISHLIST ICON */
+    .nc-wish {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.6;
+      transition: opacity 150ms ease;
+    }
+    .nc-wish:hover {
+      opacity: 1;
+    }
+    .nc-wish.wished svg {
+      fill: #c8923a;
+    }
+
     /* FILMSTRIP */
     #nc-filmstrip {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100px;
+      height: 80px;
       background: #080401;
       border-top: 0.5px solid #1e1008;
       gap: 0;
-      padding: 0 14px;
+      padding: 8px 14px;
       max-width: 680px;
       margin: 0 auto;
     }
@@ -2731,7 +2756,7 @@
     }
     .nc-thumb.nc-thumb-inactive {
       width: 50px;
-      height: 64px;
+      height: 56px;
       border: 0.4px solid #2a1a08;
       background-color: #1a0e04;
     }
@@ -2740,7 +2765,7 @@
     }
     .nc-thumb.nc-thumb-active {
       width: 55px;
-      height: 72px;
+      height: 64px;
       border: 0.75px solid #c8923a;
       background-color: #2e1c0a;
     }
@@ -2767,26 +2792,76 @@
       }
       #nc-caption {
         position: static;
-        padding: 24px 24px 0;
+        padding: 24px;
+        background: #0a0502;
       }
-      #nc-cap-category,
-      #nc-cap-name,
-      #nc-cap-desc,
-      #nc-cap-hairline,
-      #nc-cap-price,
-      #nc-cap-enquire {
+      #nc-cap-category {
         position: static;
         display: block;
-        margin-bottom: 8px;
+        font-family: Georgia, serif;
+        font-size: 8px;
+        letter-spacing: 3.5px;
+        color: #8a6030;
+        text-transform: uppercase;
+        margin-bottom: 12px;
       }
       #nc-cap-name {
+        position: static;
+        display: block;
+        font-family: 'Cormorant Garamond', Georgia, serif;
         font-size: 24px;
-        margin-bottom: 6px;
+        font-style: italic;
+        letter-spacing: 1px;
+        color: #e8c46a;
+        margin-bottom: 8px;
+      }
+      #nc-cap-desc {
+        position: static;
+        display: block;
+        font-family: Georgia, serif;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        color: #9a7848;
+        margin-bottom: 14px;
+        line-height: 1.4;
+      }
+      #nc-cap-hairline {
+        position: static;
+        display: block;
+        border-top: 0.5px solid #3a2510;
+        width: 100%;
+        margin: 14px 0;
+      }
+      #nc-cap-price {
+        position: static;
+        display: block;
+        font-family: Georgia, serif;
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: #c8923a;
+        margin-bottom: 16px;
+      }
+      #nc-cap-enquire {
+        position: static;
+        display: inline-block;
+        font-family: Georgia, serif;
+        font-size: 9px;
+        letter-spacing: 4px;
+        color: #6a4820;
+        border-bottom: 0.5px solid #6a4820;
+        padding: 8px 0;
+        cursor: pointer;
+        text-decoration: none;
+        min-width: 44px;
+        text-align: center;
       }
       #nc-angle-dots {
         position: static;
         display: block;
-        margin: 16px auto 0;
+        margin: 24px auto 0;
+        width: 100%;
+        height: auto;
+        max-width: 100px;
       }
       #nc-counter {
         display: none;
@@ -9079,6 +9154,13 @@
 
         <!-- PRODUCT COUNTER -->
         <div id="nc-counter">01 / 06</div>
+
+        <!-- WISHLIST ICON -->
+        <button id="nc-wish" class="nc-wish" aria-label="Add to wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8923a" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </button>
       </div>
 
       <!-- FILMSTRIP -->
