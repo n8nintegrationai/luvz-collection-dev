@@ -2539,7 +2539,7 @@
     #nc-img-zone {
       position: relative;
       width: 100%;
-      min-height: calc(100vh - 320px);
+      min-height: 80vh;
       overflow: hidden;
       background: #0a0502;
     }
@@ -2551,6 +2551,7 @@
       background-size: cover;
       background-position: center 20%;
       transition: opacity 600ms ease-in-out;
+      pointer-events: none;
     }
     #nc-img-back {
       opacity: 1;
@@ -2695,6 +2696,7 @@
       z-index: 10;
       width: 60px;
       height: 10px;
+      touch-action: manipulation;
     }
 
     /* PRODUCT COUNTER */
@@ -2794,6 +2796,7 @@
         position: static;
         padding: 24px;
         background: #0a0502;
+        z-index: 10;
       }
       #nc-cap-category {
         position: static;

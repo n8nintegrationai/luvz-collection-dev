@@ -802,14 +802,14 @@ function ncUpdateDots(images, activeAngle) {
   const svg = document.getElementById('nc-angle-dots');
   if (!svg) return;
   svg.innerHTML = '';
-  const n = images.length, spacing = 16;
+  const n = images.length, spacing = 20;
   if (n === 0) return;
   const totalW = (n - 1) * spacing;
   let x = (60 - totalW) / 2;
   images.forEach((_, i) => {
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    hitArea.setAttribute('r', '18');
+    hitArea.setAttribute('r', '10');
     hitArea.setAttribute('cx', x);
     hitArea.setAttribute('cy', '5');
     hitArea.setAttribute('fill', 'transparent');
@@ -819,11 +819,11 @@ function ncUpdateDots(images, activeAngle) {
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     const isActive = i === activeAngle;
     if (isActive) {
-      circle.setAttribute('r', '4');
+      circle.setAttribute('r', '6');
       circle.setAttribute('fill', '#c8923a');
       circle.setAttribute('opacity', '1');
     } else {
-      circle.setAttribute('r', '3');
+      circle.setAttribute('r', '5');
       circle.setAttribute('fill', 'none');
       circle.setAttribute('stroke', '#c8923a');
       circle.setAttribute('stroke-width', '1');
@@ -865,13 +865,7 @@ function ncUpdateWishlist() {
   const btn = document.getElementById('nc-wish');
   if (!btn) return;
   const wished = isWished(pid);
-  if (wished) {
-    btn.classList.add('wished');
-    btn.querySelector('svg')?.setAttribute('fill', '#c8923a');
-  } else {
-    btn.classList.remove('wished');
-    btn.querySelector('svg')?.setAttribute('fill', 'none');
-  }
+  btn.classList.toggle('wished', wished);
 }
 
 function ncSwitchAngle(dotIdx) {
