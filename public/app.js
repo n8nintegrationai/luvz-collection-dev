@@ -298,6 +298,7 @@ function toggleWish(btn, id) {
     w.splice(idx, 1);
   }
   saveWishlist(w);
+  _wishedSetCache = null;  // Invalidate cache so isWished() re-reads localStorage
   // Sync all visible hearts for this product (including the clicked one)
   document.querySelectorAll('.pcard-wish[data-pid="' + id + '"]').forEach(function(b) {
     if (adding) {
@@ -341,6 +342,7 @@ function removeFromWishlist(id) {
   let w = getWishlist();
   w = w.filter(x => x !== id);
   saveWishlist(w);
+  _wishedSetCache = null;  // Invalidate cache so isWished() re-reads localStorage
   updateWishCount();
   // Update any visible heart buttons on the page
   document.querySelectorAll('.pcard-wish').forEach(btn => {

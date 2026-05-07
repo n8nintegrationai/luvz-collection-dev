@@ -2794,78 +2794,63 @@
         display: none;
       }
       #nc-caption {
-        position: static;
-        padding: 24px;
-        background: #0a0502;
+        position: relative;
         z-index: 10;
+        margin-top: 60vh;
+        padding: 0;
+        background: transparent;
       }
       #nc-cap-category {
-        position: static;
-        display: block;
-        font-family: Georgia, serif;
-        font-size: 8px;
-        letter-spacing: 3.5px;
-        color: #8a6030;
-        text-transform: uppercase;
-        margin-bottom: 12px;
+        display: none !important;
       }
       #nc-cap-name {
-        position: static;
-        display: block;
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        font-size: 24px;
-        font-style: italic;
-        letter-spacing: 1px;
-        color: #e8c46a;
-        margin-bottom: 8px;
+        display: none !important;
       }
       #nc-cap-desc {
-        position: static;
-        display: block;
-        font-family: Georgia, serif;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-        color: #9a7848;
-        margin-bottom: 14px;
-        line-height: 1.4;
+        display: none !important;
       }
       #nc-cap-hairline {
-        position: static;
-        display: block;
-        border-top: 0.5px solid #3a2510;
-        width: 100%;
-        margin: 14px 0;
+        display: none !important;
       }
       #nc-cap-price {
         position: static;
         display: block;
         font-family: Georgia, serif;
-        font-size: 15px;
+        font-size: 18px;
         letter-spacing: 1px;
         color: #c8923a;
-        margin-bottom: 16px;
+        padding: 8px 24px 0 24px;
+        margin: 0;
       }
       #nc-cap-enquire {
         position: static;
         display: inline-block;
         font-family: Georgia, serif;
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: 4px;
         color: #6a4820;
         border-bottom: 0.5px solid #6a4820;
-        padding: 8px 0;
+        padding: 12px 0 20px 0;
+        margin: 0 0 0 24px;
         cursor: pointer;
         text-decoration: none;
-        min-width: 44px;
-        text-align: center;
+        background: none;
+        border: none;
+        text-transform: uppercase;
+        min-height: 44px;
+        line-height: 44px;
       }
       #nc-angle-dots {
-        position: static;
-        display: block;
-        margin: 24px auto 0;
+        position: relative;
+        z-index: 10;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+        padding: 16px 0 8px 0;
+        margin-top: 60vh;
         width: 100%;
         height: auto;
-        max-width: 100px;
       }
       #nc-counter {
         display: none;
