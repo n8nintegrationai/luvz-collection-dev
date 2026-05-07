@@ -2778,8 +2778,34 @@
 
     /* ── MOBILE (≤ 768px) ──────────────────────────── */
     @media (max-width: 768px) {
+      #nc-editorial {
+        height: auto !important;
+        min-height: unset !important;
+        max-height: unset !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: visible !important;
+      }
       #nc-img-zone {
-        min-height: 60vh;
+        height: 55vh !important;
+        min-height: 300px !important;
+        max-height: 420px !important;
+        width: 100% !important;
+        position: relative !important;
+        flex-shrink: 0 !important;
+        overflow: visible !important;
+      }
+      .nc-img-layer {
+        position: absolute !important;
+        inset: 0 !important;
+        background-size: cover !important;
+        background-position: center 15% !important;
+        pointer-events: none !important;
+      }
+      #nc-img-back,
+      #nc-img-front {
+        position: absolute !important;
+        inset: 0 !important;
       }
       #nc-img-zone::before,
       #nc-img-zone::after {
@@ -2793,12 +2819,35 @@
       #nc-gold-rule {
         display: none;
       }
+      #nc-angle-dots {
+        position: absolute !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 14px !important;
+        padding: 12px 0 8px 0 !important;
+        height: 40px !important;
+        z-index: 10 !important;
+        width: 100% !important;
+        background: transparent !important;
+        margin: 0 !important;
+        top: 55vh !important;
+        left: 0 !important;
+        right: 0 !important;
+      }
       #nc-caption {
-        position: relative;
-        z-index: 10;
-        margin-top: 60vh;
-        padding: 0;
-        background: transparent;
+        position: absolute !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 10 !important;
+        gap: 0 !important;
+        top: calc(55vh + 40px + 12px) !important;
+        left: 0 !important;
+        right: 0 !important;
       }
       #nc-cap-category {
         display: none !important;
@@ -2813,49 +2862,51 @@
         display: none !important;
       }
       #nc-cap-price {
-        position: static;
-        display: block;
-        font-family: Georgia, serif;
-        font-size: 18px;
-        letter-spacing: 1px;
-        color: #c8923a;
-        padding: 8px 24px 0 24px;
-        margin: 0;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        font-family: Georgia, serif !important;
+        font-size: 17px !important;
+        color: #c8923a !important;
+        letter-spacing: 1px !important;
+        padding: 10px 24px 0 24px !important;
+        margin: 0 !important;
+        background: transparent !important;
+        height: auto !important;
+        overflow: visible !important;
+        flex-shrink: 0 !important;
       }
       #nc-cap-enquire {
-        position: static;
-        display: inline-block;
-        font-family: Georgia, serif;
-        font-size: 11px;
-        letter-spacing: 4px;
-        color: #6a4820;
-        border-bottom: 0.5px solid #6a4820;
-        padding: 12px 0 20px 0;
-        margin: 0 0 0 24px;
-        cursor: pointer;
-        text-decoration: none;
-        background: none;
-        border: none;
-        text-transform: uppercase;
-        min-height: 44px;
-        line-height: 44px;
-      }
-      #nc-angle-dots {
-        position: relative;
-        z-index: 10;
-        display: flex !important;
-        justify-content: center;
-        align-items: center;
-        gap: 18px;
-        padding: 16px 0 8px 0;
-        margin-top: 60vh;
-        width: 100%;
-        height: auto;
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: static !important;
+        font-family: Georgia, serif !important;
+        font-size: 10px !important;
+        color: #6a4820 !important;
+        letter-spacing: 4px !important;
+        text-transform: uppercase !important;
+        margin: 8px 0 14px 24px !important;
+        padding: 10px 0 !important;
+        background: none !important;
+        border: none !important;
+        border-bottom: 0.5px solid #6a4820 !important;
+        border-radius: 0 !important;
+        cursor: pointer !important;
+        min-height: 44px !important;
+        line-height: 24px !important;
+        height: auto !important;
+        flex-shrink: 0 !important;
       }
       #nc-counter {
         display: none;
       }
       #nc-filmstrip {
+        height: 80px !important;
+        max-height: 80px !important;
+        flex-shrink: 0 !important;
+        margin-top: 130px !important;
         overflow-x: auto;
         justify-content: flex-start;
         scrollbar-width: none;
@@ -2865,6 +2916,12 @@
       }
       #nc-filmstrip::-webkit-scrollbar {
         display: none;
+      }
+      .nc-thumb {
+        height: 56px !important;
+      }
+      .nc-thumb.nc-thumb-active {
+        height: 64px !important;
       }
     }
 
