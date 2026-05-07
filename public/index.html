@@ -2530,229 +2530,278 @@
       opacity: 1.0;
     }
 
-    #new-collection {
-      background: radial-gradient(ellipse 70% 50% at 50% 30%, rgba(196, 136, 44, 0.06), transparent 70%), var(--bg2);
-    }
-
-    /* New Collection — Feature Spotlight */
-    .nc-feature-wrap {
-      display: grid;
-      grid-template-columns: 60fr 40fr;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .nc-feature-wrap.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .nc-feature-img-wrap {
+    /* ── NC EDITORIAL ─────────────────────────── */
+    #nc-editorial {
       position: relative;
-      overflow: hidden;
-      cursor: pointer;
     }
 
-    .nc-feature-img-wrap img {
+    /* IMAGE ZONE */
+    #nc-img-zone {
+      position: relative;
       width: 100%;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      display: block;
-      transition: transform var(--t-std) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      min-height: 85vh;
+      overflow: hidden;
+      background: #0a0502;
     }
 
-    .nc-feature-img-wrap:hover img {
-      transform: scale(1.03);
+    /* Cross-fade image layers */
+    .nc-img-layer {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 20%;
+      transition: opacity 600ms ease-in-out;
+    }
+    #nc-img-back {
+      opacity: 1;
+      z-index: 1;
+    }
+    #nc-img-front {
+      opacity: 0;
+      z-index: 2;
     }
 
-    .nc-feature-wish {
+    /* Gradient 1 — vertical vignette (bottom rise) */
+    #nc-img-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,5,2,0) 0%,
+        rgba(10,5,2,0) 55%,
+        rgba(8,3,1,0.93) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Gradient 2 — horizontal left shadow */
+    #nc-img-zone::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: linear-gradient(
+        to right,
+        rgba(10,5,2,0.72) 0%,
+        rgba(10,5,2,0)    38%
+      );
+      pointer-events: none;
+    }
+
+    /* SECTION LABEL */
+    #nc-section-label {
       position: absolute;
       top: 16px;
-      right: 16px;
+      left: 82px;
+      z-index: 10;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 8px;
+      letter-spacing: 3px;
+      color: #8a6030;
+      opacity: 0.5;
+      pointer-events: none;
     }
 
-    .nc-feature-text {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      padding: 8px 0;
+    /* GOLD RULE */
+    #nc-gold-rule {
+      position: absolute;
+      left: 102px;
+      bottom: 30px;
+      width: 1px;
+      height: 220px;
+      background: rgba(200,146,58,0.5);
+      z-index: 10;
+      pointer-events: none;
     }
 
-    .nc-feature-category {
-      font-family: 'Jost', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: var(--txt2);
-      text-transform: uppercase;
+    /* CAPTION */
+    #nc-caption {
+      position: absolute;
+      left: 118px;
+      bottom: 0;
+      z-index: 10;
+      transition: opacity 400ms ease-in-out;
+    }
+    #nc-caption.nc-fading {
+      opacity: 0;
     }
 
-    .nc-feature-name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(20px, 2.5vw, 32px);
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      line-height: 1.25;
-      color: var(--txt);
+    #nc-cap-category {
+      position: absolute;
+      bottom: 188px;
+      font-family: Georgia, serif;
+      font-size: 8px;
+      letter-spacing: 3.5px;
+      color: #8a6030;
     }
-
-    .nc-feature-desc {
-      font-family: 'Cormorant Garamond', serif;
+    #nc-cap-name {
+      position: absolute;
+      bottom: 144px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 30px;
+      font-style: italic;
+      letter-spacing: 1px;
+      color: #e8c46a;
+    }
+    #nc-cap-desc {
+      position: absolute;
+      bottom: 108px;
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      color: #9a7848;
+      margin: 0;
+      max-width: 280px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    #nc-cap-hairline {
+      position: absolute;
+      bottom: 90px;
+      width: 182px;
+      height: 0;
+      border-top: 0.5px solid #3a2510;
+    }
+    #nc-cap-price {
+      position: absolute;
+      bottom: 66px;
+      font-family: Georgia, serif;
       font-size: 16px;
-      font-weight: 400;
-      line-height: 1.65;
-      color: var(--txt2);
-      max-width: 400px;
+      letter-spacing: 1px;
+      color: #c8923a;
+    }
+    #nc-cap-enquire {
+      position: absolute;
+      bottom: 30px;
+      font-family: Georgia, serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #6a4820;
+      border-bottom: 0.5px solid #6a4820;
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    .nc-feature-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--gold-l);
+    /* ANGLE DOTS */
+    #nc-angle-dots {
+      position: absolute;
+      top: 20px;
+      right: 90px;
+      z-index: 10;
+      width: 60px;
+      height: 10px;
     }
 
-    .nc-feature-text .pcard-btn {
-      margin-top: 8px;
+    /* PRODUCT COUNTER */
+    #nc-counter {
+      position: absolute;
+      top: 20px;
+      right: 36px;
+      z-index: 10;
+      font-family: Georgia, serif;
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: #3a2510;
     }
 
-    .nc-feature-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 0 40px;
+    /* FILMSTRIP */
+    #nc-filmstrip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      background: #080401;
+      border-top: 0.5px solid #1e1008;
+      gap: 0;
+      padding: 0 14px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .nc-thumb {
+      flex: 0 0 auto;
+      background-size: cover;
+      background-position: center top;
+      cursor: pointer;
+      transition: border-color 200ms ease;
+    }
+    .nc-thumb.nc-thumb-inactive {
+      width: 50px;
+      height: 64px;
+      border: 0.4px solid #2a1a08;
+      background-color: #1a0e04;
+    }
+    .nc-thumb.nc-thumb-inactive:hover {
+      border-color: #4a2c10;
+    }
+    .nc-thumb.nc-thumb-active {
+      width: 55px;
+      height: 72px;
+      border: 0.75px solid #c8923a;
+      background-color: #2e1c0a;
+    }
+    #nc-filmstrip {
+      gap: calc((100% - 28px - 305px) / 5);
     }
 
+    /* ── MOBILE (≤ 768px) ──────────────────────────── */
     @media (max-width: 768px) {
-      .nc-feature-wrap {
-        grid-template-columns: 1fr;
-        gap: 24px;
+      #nc-img-zone {
+        min-height: 60vh;
       }
-
-      .nc-feature-img-wrap img {
-        aspect-ratio: 3 / 4;
+      #nc-img-zone::before,
+      #nc-img-zone::after {
+        display: none;
       }
-
-      .nc-feature-desc {
+      #nc-section-label {
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+      }
+      #nc-gold-rule {
+        display: none;
+      }
+      #nc-caption {
+        position: static;
+        padding: 24px 24px 0;
+      }
+      #nc-cap-category,
+      #nc-cap-name,
+      #nc-cap-desc,
+      #nc-cap-hairline,
+      #nc-cap-price,
+      #nc-cap-enquire {
+        position: static;
+        display: block;
+        margin-bottom: 8px;
+      }
+      #nc-cap-name {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      #nc-angle-dots {
+        position: static;
+        display: block;
+        margin: 16px auto 0;
+      }
+      #nc-counter {
+        display: none;
+      }
+      #nc-filmstrip {
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        padding: 0 14px;
+        gap: 8px;
         max-width: none;
       }
-    }
-
-    @media (min-width: 769px) {
-      .nc-feature-wrap {
-        display: block;
-        position: static;
-        max-width: 1000px;
-        margin: 0 auto 0 6%;
+      #nc-filmstrip::-webkit-scrollbar {
+        display: none;
       }
-
-      .nc-feature-img-wrap {
-        display: block;
-        width: 85%;
-        margin-right: auto;
-        padding: 0;
-        background: transparent;
-        box-shadow: none;
-        margin-bottom: 56px;
-      }
-
-      .nc-feature-img-wrap img {
-        width: 100%;
-        aspect-ratio: auto;
-        max-height: 680px;
-        object-fit: contain;
-        display: block;
-      }
-
-      .nc-feature-img-wrap:hover img {
-        transform: scale(1.02);
-      }
-
-      .nc-feature-wish {
-        top: 16px;
-        right: 16px;
-      }
-
-      .nc-feature-text {
-        position: static;
-        max-width: 480px;
-        margin: 0 auto 0 20%;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding: 0;
-      }
-
-      .nc-feature-text .pcard-btn {
-        width: fit-content;
-        padding: 7px 20px;
-        letter-spacing: 0.32em;
-        margin-top: 12px;
-      }
-    }
-
-    /* ── New Collection Editorial Carousel ─────────────── */
-    #new-collection .nc-feature-divider {
-      margin-bottom: 56px;
-    }
-
-    #new-collection .carousel-container {
-      position: relative;
-    }
-
-    #new-collection .carousel-wrap {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding-left: 6%;
-      padding-right: 4%;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      cursor: grab;
-    }
-
-    #new-collection .carousel-wrap:active {
-      cursor: grabbing;
-    }
-
-    #new-collection .carousel-wrap::-webkit-scrollbar {
-      display: none;
-    }
-
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      color: var(--gold);
-      font-size: 40px;
-      font-family: 'Cinzel', serif;
-      opacity: 0.5;
-      cursor: pointer;
-      padding: 8px 12px;
-      transition: opacity var(--t-fast) ease;
-      font-weight: 400;
-      z-index: 10;
-      line-height: 1;
-    }
-
-    .carousel-arrow:hover {
-      opacity: 0.75;
-    }
-
-    .carousel-arrow:active {
-      opacity: 0.95;
-    }
-
-    .carousel-arrow-left {
-      left: 8px;
-    }
-
-    .carousel-arrow-right {
-      right: 8px;
     }
 
     .editorial-track {
@@ -9000,29 +9049,38 @@
   <!-- NEW COLLECTION -->
   <section id="new-collection" class="sec sec-alt reveal">
     <div id="new_collection" style="position:absolute;top:-80px;"></div>
-    <div style="max-width:1360px;margin:0 auto">
-      <div class="sec-head">
-        <div class="eyebrow" style="color:var(--gold)">Just Arrived</div>
-        <h2 class="sec-title gold-text">New Collection</h2>
-      </div>
-      <!-- Feature spotlight: JS-populated from new_collection[0] -->
-      <div id="nc-feature" class="nc-feature-wrap reveal"></div>
-      <div class="nc-feature-divider"></div>
-      <div class="carousel-container" id="cc-new_collection">
-        <div class="carousel-wrap" id="cw-new_collection">
-          <div class="carousel-track" id="ct-new_collection">
-            <div class="loading-message">
-              <div class="loading-spinner"></div>
-              <span>Loading new arrivals...</span>
-            </div>
-          </div>
+    <div id="nc-editorial">
+
+      <!-- IMAGE ZONE -->
+      <div id="nc-img-zone">
+        <!-- Cross-fade layers: back = outgoing, front = incoming -->
+        <div id="nc-img-back"  class="nc-img-layer"></div>
+        <div id="nc-img-front" class="nc-img-layer"></div>
+
+        <!-- SECTION LABEL -->
+        <div id="nc-section-label">JUST ARRIVED</div>
+
+        <!-- GOLD RULE + CAPTION -->
+        <div id="nc-gold-rule"></div>
+        <div id="nc-caption">
+          <div id="nc-cap-category"></div>
+          <div id="nc-cap-name"></div>
+          <p  id="nc-cap-desc"></p>
+          <div id="nc-cap-hairline"></div>
+          <div id="nc-cap-price"></div>
+          <a  id="nc-cap-enquire" tabindex="0">ENQUIRE</a>
         </div>
-        <button class="carousel-arrow carousel-arrow-left" aria-label="Scroll left"
-          data-section="new_collection">‹</button>
-        <button class="carousel-arrow carousel-arrow-right" aria-label="Scroll right"
-          data-section="new_collection">›</button>
+
+        <!-- ANGLE DOTS (SVG, built by JS) -->
+        <svg id="nc-angle-dots" viewBox="0 0 60 10" xmlns="http://www.w3.org/2000/svg"></svg>
+
+        <!-- PRODUCT COUNTER -->
+        <div id="nc-counter">01 / 06</div>
       </div>
-      <div class="carousel-nav" id="cn-new_collection"></div>
+
+      <!-- FILMSTRIP -->
+      <div id="nc-filmstrip"></div>
+
     </div>
   </section>
 

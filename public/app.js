@@ -646,72 +646,6 @@ function goPage(sec, p) { const s = CS[sec]; if (!s) return; s.page = Math.max(0
 function nextPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page + 1) }
 function prevPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page - 1) }
 
-function buildEditorialCarousel(sec, items) {
-  const track = document.getElementById('ct-' + sec);
-  const nav = document.getElementById('cn-' + sec);
-  if (!track) return;
-  track.innerHTML = items.map(p => buildCard(p, sec)).join('');
-  track.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-  track.classList.add('editorial-track');
-  if (nav) nav.innerHTML = '';
-  setupCarouselArrows(sec);
-}
-
-function setupCarouselArrows(sec) {
-  const container = document.getElementById('cc-' + sec);
-  if (!container) return;
-  const leftArrow = container.querySelector('.carousel-arrow-left');
-  const rightArrow = container.querySelector('.carousel-arrow-right');
-  const wrap = document.getElementById('cw-' + sec);
-  const track = document.getElementById('ct-' + sec);
-  if (!track || !wrap || !leftArrow || !rightArrow) return;
-
-  const scroll = (direction) => {
-    const firstCard = track.querySelector('.carousel-item');
-    if (!firstCard) return;
-    const cardWidth = firstCard.offsetWidth;
-    const gap = 24;
-    const distance = cardWidth + gap;
-    wrap.scrollBy({ left: direction * distance, behavior: 'smooth' });
-  };
-
-  leftArrow.addEventListener('click', e => {
-    e.stopPropagation();
-    scroll(-1);
-  });
-
-  rightArrow.addEventListener('click', e => {
-    e.stopPropagation();
-    scroll(1);
-  });
-}
-
-function buildNcFeature(p) {
-  const el = document.getElementById('nc-feature');
-  if (!el || !p) return;
-  const price = p.price ? '₹' + Number(p.price).toLocaleString('en-IN') : '';
-  const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
-  const wished = (JSON.parse(localStorage.getItem('luvz-wish') || '[]')).some(w => w.id === pid);
-  const pJson = JSON.stringify(p).replace(/"/g, '&quot;');
-  productRegistry[pid] = { ...p, category: p.category || 'New' };
-  el.innerHTML = `
-    <div class="nc-feature-img-wrap" role="button" tabindex="0" aria-label="${(p.name || 'View product details').replace(/"/g, '&quot;')}" onclick="openModal(${pJson})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(${pJson})}">
-      <img src="${p.image || ''}" alt="${p.name || ''}" loading="lazy">
-      <button class="pcard-wish nc-feature-wish${wished ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="${wished ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="1.8">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
-      </button>
-    </div>
-    <div class="nc-feature-text">
-      ${p.category ? `<div class="nc-feature-category">${p.category}</div>` : ''}
-      <div class="nc-feature-name">${p.name || ''}</div>
-      ${p.description ? `<div class="nc-feature-desc">${p.description}</div>` : ''}
-      ${price ? `<div class="nc-feature-price">${price}</div>` : ''}
-      <a href="${waURL(p.name)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="pcard-btn">Enquire Now</a>
-    </div>
-  `;
-}
 
 /* ── Build carousel into any track/nav pair ── */
 function buildCarouselInSection(trackId, navId, items, categoryKey) {
@@ -818,6 +752,154 @@ const MOCK_DATA = {
   reviews: []
 };
 
+// ── NC EDITORIAL STATE ────────────────────────────────
+const _nc = { active: 0, angle: 0, products: [], fading: false };
+
+function getNcImages(p) {
+  const imgs = (p.images || []).filter(Boolean);
+  return imgs.length ? imgs : [p.image];
+}
+
+function ncSetImage(url, duration) {
+  const back  = document.getElementById('nc-img-back');
+  const front = document.getElementById('nc-img-front');
+  if (!back || !front) return;
+  front.style.backgroundImage = `url('${url}')`;
+  front.style.transition = `opacity ${duration}ms ease-in-out`;
+  front.style.opacity = '1';
+  back.style.opacity  = '0';
+  setTimeout(() => {
+    back.style.backgroundImage  = `url('${url}')`;
+    back.style.opacity  = '1';
+    front.style.opacity = '0';
+  }, duration + 50);
+}
+
+function ncUpdateText(p) {
+  const cap = document.getElementById('nc-caption');
+  if (!cap) return;
+  cap.classList.add('nc-fading');
+  setTimeout(() => {
+    document.getElementById('nc-cap-category').textContent = (p.category || '').toUpperCase();
+    document.getElementById('nc-cap-name').textContent     = p.name || '';
+    document.getElementById('nc-cap-desc').textContent     = p.description || '';
+    document.getElementById('nc-cap-price').textContent    = p.price ? `₹${p.price.toLocaleString('en-IN')}` : '';
+    const enq = document.getElementById('nc-cap-enquire');
+    if (enq) {
+      enq.href = p.whatsapp || waURL(p.name);
+      enq.onclick = e => { e.preventDefault(); window.open(p.whatsapp || waURL(p.name), '_blank'); };
+    }
+    cap.classList.remove('nc-fading');
+  }, 400);
+}
+
+function ncUpdateDots(images, activeAngle) {
+  const svg = document.getElementById('nc-angle-dots');
+  if (!svg) return;
+  svg.innerHTML = '';
+  const n = images.length, spacing = 14;
+  const totalW = (n - 1) * spacing;
+  let x = (60 - totalW) / 2;
+  images.forEach((_, i) => {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    if (i === activeAngle) {
+      circle.setAttribute('r', '3.5');
+      circle.setAttribute('fill', '#c8923a');
+      circle.setAttribute('opacity', '1');
+    } else {
+      circle.setAttribute('r', '2.5');
+      circle.setAttribute('fill', 'none');
+      circle.setAttribute('stroke', '#c8923a');
+      circle.setAttribute('stroke-width', '0.8');
+      circle.setAttribute('opacity', '0.45');
+    }
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', '5');
+    circle.style.cursor = 'pointer';
+    circle.addEventListener('click', () => ncSwitchAngle(i));
+    svg.appendChild(circle);
+    x += spacing;
+  });
+}
+
+function ncUpdateCounter() {
+  const el = document.getElementById('nc-counter');
+  if (el) el.textContent = `${String(_nc.active + 1).padStart(2,'0')} / ${String(_nc.products.length).padStart(2,'0')}`;
+}
+
+function ncUpdateFilmstrip() {
+  document.querySelectorAll('.nc-thumb').forEach((el, i) => {
+    el.classList.toggle('nc-thumb-active',   i === _nc.active);
+    el.classList.toggle('nc-thumb-inactive', i !== _nc.active);
+  });
+}
+
+function ncSwitchAngle(angleIdx) {
+  if (_nc.fading) return;
+  const p      = _nc.products[_nc.active];
+  const images = getNcImages(p);
+  if (angleIdx >= images.length) return;
+  _nc.angle = angleIdx;
+  ncSetImage(images[angleIdx], 500);
+  ncUpdateDots(images, _nc.angle);
+}
+
+function ncSwitchProduct(idx) {
+  if (_nc.fading || idx === _nc.active) return;
+  _nc.fading = true;
+  _nc.active = idx;
+  _nc.angle  = 0;
+  const p      = _nc.products[idx];
+  const images = getNcImages(p);
+  ncSetImage(images[0], 600);
+  ncUpdateText(p);
+  ncUpdateDots(images, 0);
+  ncUpdateCounter();
+  ncUpdateFilmstrip();
+  setTimeout(() => { _nc.fading = false; }, 700);
+}
+
+function buildNcEditorial(products) {
+  if (!products || !products.length) return;
+  _nc.products = products;
+  _nc.active   = 0;
+  _nc.angle    = 0;
+
+  products.forEach(p => {
+    const pid = p.id || btoa(p.name || Math.random()).slice(0, 8);
+    productRegistry[pid] = { ...p, category: p.category || 'New Arrival' };
+  });
+
+  const p0     = products[0];
+  const images = getNcImages(p0);
+
+  const back  = document.getElementById('nc-img-back');
+  const front = document.getElementById('nc-img-front');
+  if (back)  back.style.backgroundImage  = `url('${images[0]}')`;
+  if (front) front.style.backgroundImage = `url('${images[0]}')`;
+
+  ncUpdateText(p0);
+  ncUpdateDots(images, 0);
+  ncUpdateCounter();
+
+  const strip = document.getElementById('nc-filmstrip');
+  if (strip) {
+    strip.innerHTML = products.map((p, i) => {
+      const img = getNcImages(p)[0];
+      return `<div class="nc-thumb ${i===0?'nc-thumb-active':'nc-thumb-inactive'}"
+                   style="background-image:url('${img}')"
+                   data-nc-idx="${i}"
+                   role="button" tabindex="0"
+                   aria-label="${p.name}"></div>`;
+    }).join('');
+    strip.querySelectorAll('.nc-thumb').forEach(el => {
+      const idx = parseInt(el.dataset.ncIdx, 10);
+      el.addEventListener('click', () => ncSwitchProduct(idx));
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ncSwitchProduct(idx); });
+    });
+  }
+}
+
 async function load() {
   try {
     // Cache wishedSet once for all render functions to avoid repeated localStorage parses
@@ -870,8 +952,7 @@ async function load() {
     ['top_sellers', 'new_collection'].forEach(sec => {
       if (d[sec] && d[sec].length) {
         if (sec === 'new_collection') {
-          buildNcFeature(d[sec][0]);
-          buildEditorialCarousel(sec, d[sec].slice(1));
+          buildNcEditorial(d[sec]);
         } else {
           buildCarousel(sec, d[sec]);
           if (sec === 'top_sellers') requestAnimationFrame(() => window._buildVaultFromTrack && window._buildVaultFromTrack());
