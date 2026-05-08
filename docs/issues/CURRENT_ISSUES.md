@@ -15,6 +15,8 @@
 
 **Modal Gallery Accessibility:** Arrow key support (ArrowLeft/Right) for keyboard navigation. Updated button labels to "Previous product image" / "Next product image". Container aria-label explains keyboard/swipe options.
 
+**Cloudinary Image Optimization:** All Cloudinary transforms refactored to use `q_auto:good` (vs. expensive `q_auto:best`). Fixed responsive srcset widths: product cards w_320 (down from w_600), category tiles w_480, carousels srcset [400, 600, 800]. Fixed sizes breakpoints to match CSS layout (700px / 1100px). Eliminates Lighthouse "image larger than displayed size" warnings. See [IMAGE_OPTIMIZATION.md](../architecture/IMAGE_OPTIMIZATION.md) for details.
+
 ---
 
 

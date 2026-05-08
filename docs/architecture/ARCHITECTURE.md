@@ -2,6 +2,12 @@
 
 ---
 
+## Related Documentation
+
+- **[IMAGE_OPTIMIZATION.md](IMAGE_OPTIMIZATION.md)** — Cloudinary image delivery, responsive srcset strategy, breakpoint alignment, Lighthouse optimization
+
+---
+
 ## Data Flow
 
 ### Page Load & Product Rendering
