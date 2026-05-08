@@ -9859,16 +9859,16 @@
   <div id="moverlay" class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
     <div class="mbox modal-inner">
       <button class="mclose close-btn" onclick="closeModal()" aria-label="Close product details">✕</button>
-      <div id="mimg-wrap" class="mimg-wrap">
+      <div id="mimg-wrap" class="mimg-wrap" aria-label="Product gallery. Use arrow keys or swipe to navigate between images">
         <img id="mimg" alt="Selected LUVZ Collection product image" loading="eager" onclick="this.classList.toggle('z')"
           decoding="async" />
-        <button type="button" class="gallery-nav gallery-prev" id="gallery-prev" aria-label="Previous image"
+        <button type="button" class="gallery-nav gallery-prev" id="gallery-prev" aria-label="Previous product image"
           onclick="event.stopPropagation();galleryPrev()" style="display:none">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6" />
           </svg>
         </button>
-        <button type="button" class="gallery-nav gallery-next" id="gallery-next" aria-label="Next image"
+        <button type="button" class="gallery-nav gallery-next" id="gallery-next" aria-label="Next product image"
           onclick="event.stopPropagation();galleryNext()" style="display:none">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6" />

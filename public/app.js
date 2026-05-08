@@ -304,9 +304,15 @@ function toggleWish(btn, id) {
     if (adding) {
       b.classList.add('wished');
       b.querySelector('svg')?.setAttribute('fill', 'var(--gold)');
+      // Update aria-label: get product name from DOM or nearby elements
+      const productName = b.closest('.pcard')?.querySelector('.pcard-name')?.textContent || b.closest('[data-p]')?.querySelector('.pcard-name')?.textContent || 'product';
+      b.setAttribute('aria-label', 'Remove ' + productName + ' from wishlist');
     } else {
       b.classList.remove('wished');
       b.querySelector('svg')?.setAttribute('fill', 'none');
+      // Update aria-label: get product name from DOM or nearby elements
+      const productName = b.closest('.pcard')?.querySelector('.pcard-name')?.textContent || b.closest('[data-p]')?.querySelector('.pcard-name')?.textContent || 'product';
+      b.setAttribute('aria-label', 'Add ' + productName + ' to wishlist');
     }
   });
   updateWishCount();
@@ -348,6 +354,9 @@ function removeFromWishlist(id) {
   document.querySelectorAll('.pcard-wish[data-pid="' + id + '"]').forEach(btn => {
     btn.classList.remove('wished');
     btn.querySelector('svg')?.setAttribute('fill', 'none');
+    // Update aria-label when removing from wishlist
+    const productName = btn.closest('.pcard')?.querySelector('.pcard-name')?.textContent || btn.closest('[data-p]')?.querySelector('.pcard-name')?.textContent || 'product';
+    btn.setAttribute('aria-label', 'Add ' + productName + ' to wishlist');
   });
   renderWishDrawer();
 }
@@ -505,7 +514,7 @@ function buildCard(p, sec) {
       <div class="pcard-bloom" aria-hidden="true"></div>
       <div class="pcard-sweep" aria-hidden="true"></div>
       <div class="pcard-quick-view">Quick View</div>
-      <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+      <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="${isWished(pid) ? 'Remove ' + (p.name || 'product') + ' from wishlist' : 'Add ' + (p.name || 'product') + ' to wishlist'}">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="${isWished(pid) ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
       ${badgeHtml}
@@ -679,7 +688,7 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
         <img loading="lazy" src="${p.image || fb}" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${fb}'" decoding="async"/>
         <div class="pcard-img-ov"></div>
         <div class="pcard-quick-view">Quick View</div>
-        <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="Add to wishlist">
+        <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="${isWished(pid) ? 'Remove ' + (p.name || 'product') + ' from wishlist' : 'Add ' + (p.name || 'product') + ' to wishlist'}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="${isWished(pid) ? 'var(--gold)' : 'none'}" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </button>
         ${badgeHtml}
@@ -866,6 +875,14 @@ function ncUpdateWishlist() {
   if (!btn) return;
   const wished = isWished(pid);
   btn.classList.toggle('wished', wished);
+  // Update aria-label and SVG fill based on wishlist state
+  if (wished) {
+    btn.querySelector('svg')?.setAttribute('fill', 'var(--gold)');
+    btn.setAttribute('aria-label', 'Remove ' + (p.name || 'product') + ' from wishlist');
+  } else {
+    btn.querySelector('svg')?.setAttribute('fill', 'none');
+    btn.setAttribute('aria-label', 'Add ' + (p.name || 'product') + ' to wishlist');
+  }
 }
 
 function ncSwitchAngle(dotIdx) {
@@ -977,20 +994,31 @@ async function load() {
           url = `https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json?v=${Date.now()}`;
         }
 
-        const res = await fetch(url, { cache: 'no-cache' });
-        if (!res.ok) throw new Error(`Data ${res.status}`);
+        // PRIMARY: Attempt to fetch from primary CDN URL
+        let res = await fetch(url, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`Primary fetch failed: HTTP ${res.status}`);
         d = await res.json();
-      } catch (fetchErr) {
-        // Network failure � use mock data so page renders without errors
-        console.warn('Data fetch failed, using mock data:', fetchErr.message);
-        d = MOCK_DATA;
-        const _eb = document.createElement('div');
-        _eb.setAttribute('role', 'alert');
-        _eb.className = 'ebanner';
-        _eb.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9998;text-align:center;max-width:90vw;pointer-events:auto';
-        _eb.innerHTML = 'Products could not be loaded. Check your connection and refresh. <span style="cursor:pointer;margin-left:8px;opacity:.5" onclick="this.parentElement.remove()" aria-label="Dismiss">✕</span>';
-        document.body.appendChild(_eb);
-        setTimeout(() => _eb.remove(), 8000);
+      }catch (primaryErr) {
+        // FALLBACK: Try jsDelivr CDN as backup endpoint
+        console.warn('Primary data fetch failed, attempting CDN fallback:', primaryErr.message);
+        try {
+          const fallbackUrl = `https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json?v=${Date.now()}`;
+          const fallbackRes = await fetch(fallbackUrl, { cache: 'no-cache' });
+          if (!fallbackRes.ok) throw new Error(`Fallback fetch failed: HTTP ${fallbackRes.status}`);
+          d = await fallbackRes.json();
+          console.log('Data loaded successfully from fallback CDN');
+        } catch (fallbackErr) {
+          // MOCK_DATA: Both endpoints failed - use mock data so page renders without errors
+          console.warn('Fallback data fetch also failed, using mock data:', fallbackErr.message);
+          d = MOCK_DATA;
+          const _eb = document.createElement('div');
+          _eb.setAttribute('role', 'alert');
+          _eb.className = 'ebanner';
+          _eb.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9998;text-align:center;max-width:90vw;pointer-events:auto';
+          _eb.innerHTML = 'Products could not be loaded. Check your connection and refresh. <span style="cursor:pointer;margin-left:8px;opacity:.5" onclick="this.parentElement.remove()" aria-label="Dismiss">✕</span>';
+          document.body.appendChild(_eb);
+          setTimeout(() => _eb.remove(), 8000);
+        }
       }
     }
     // Store valid referral codes (case-insensitive — normalise to uppercase)
@@ -1062,6 +1090,15 @@ updateWishCount();
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeModal(); closePosterModal(); closeWishlist(); }
+  // Arrow keys for modal gallery navigation
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const overlay = document.getElementById('moverlay');
+    if (overlay && overlay.classList.contains('open') && _gallery.imgs.length > 1) {
+      e.preventDefault();
+      if (e.key === 'ArrowLeft') galleryPrev();
+      else galleryNext();
+    }
+  }
   // Focus trap for product modal
   if (e.key === 'Tab') {
     const overlay = document.getElementById('moverlay');
@@ -2166,181 +2203,207 @@ async function streamLuvzResponse(options) {
     onError
   } = options || {};
 
-  const controller = new AbortController();
-  const timeoutMs = 25000;
-  let timeoutId = null;
-  let streamFailed = false;
-  let streamCompleted = false;
-  let cleanupRan = false;
-  let abortReason = null;
+  // Retry logic: max 3 attempts with delays 1s → 2s → 4s
+  const MAX_RETRIES = 3;
+  const RETRY_DELAYS = [1000, 2000, 4000];
+  let retryCount = 0;
 
-  const abortRequest = (reason) => {
-    abortReason = reason;
-    if (!controller.signal.aborted) controller.abort();
-  };
+  const attemptStream = async () => {
+    const controller = new AbortController();
+    const timeoutMs = 25000;
+    let timeoutId = null;
+    let streamFailed = false;
+    let streamCompleted = false;
+    let cleanupRan = false;
+    let abortReason = null;
 
-  if (activeLuvzStreamController && activeLuvzStreamController.controller !== controller) {
-    activeLuvzStreamController.abort('superseded');
-  }
-  activeLuvzStreamController = {
-    controller,
-    abort: abortRequest
-  };
+    const abortRequest = (reason) => {
+      abortReason = reason;
+      if (!controller.signal.aborted) controller.abort();
+    };
 
-  const cleanup = () => {
-    if (cleanupRan) return;
-    cleanupRan = true;
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
+    if (activeLuvzStreamController && activeLuvzStreamController.controller !== controller) {
+      activeLuvzStreamController.abort('superseded');
     }
-    if (activeLuvzStreamController && activeLuvzStreamController.controller === controller) {
-      activeLuvzStreamController = null;
-    }
-  };
+    activeLuvzStreamController = {
+      controller,
+      abort: abortRequest
+    };
 
-  const resetTimeout = () => {
-    if (streamCompleted || streamFailed) return;
-    if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      abortRequest('timeout');
-    }, timeoutMs);
-  };
+    const cleanup = () => {
+      if (cleanupRan) return;
+      cleanupRan = true;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+      if (activeLuvzStreamController && activeLuvzStreamController.controller === controller) {
+        activeLuvzStreamController = null;
+      }
+    };
 
-  const fail = (messageText, err) => {
-    if (streamFailed) return;
-    streamFailed = true;
-    cleanup();
-    if (typeof onError === 'function') onError(messageText, err);
-    throw err || new Error(messageText);
-  };
+    const resetTimeout = () => {
+      if (streamCompleted || streamFailed) return;
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        abortRequest('timeout');
+      }, timeoutMs);
+    };
 
-  const complete = (payload) => {
-    if (streamCompleted) return;
-    streamCompleted = true;
-    cleanup();
-    if (typeof onComplete === 'function') onComplete(payload);
-  };
+    const fail = (messageText, err) => {
+      if (streamFailed) return;
+      streamFailed = true;
+      cleanup();
+      if (typeof onError === 'function') onError(messageText, err);
+      throw err || new Error(messageText);
+    };
 
-  const handleEvent = (rawEvent) => {
-    if (!rawEvent || !rawEvent.trim()) return;
+    const complete = (payload) => {
+      if (streamCompleted) return;
+      streamCompleted = true;
+      cleanup();
+      if (typeof onComplete === 'function') onComplete(payload);
+    };
 
-    const parsed = parseSSEBlock(rawEvent);
-    const payload = parseSSEJson(parsed.data);
+    const handleEvent = (rawEvent) => {
+      if (!rawEvent || !rawEvent.trim()) return;
 
-    if (parsed.event === 'delta') {
-      const deltaText = payload && typeof payload.text === 'string' ? payload.text : '';
-      if (deltaText && typeof onDelta === 'function') onDelta(deltaText, payload);
-      return;
-    }
+      const parsed = parseSSEBlock(rawEvent);
+      const payload = parseSSEJson(parsed.data);
 
-    if (parsed.event === 'sources') {
-      if (typeof onSources === 'function') onSources(getStreamSources(payload), payload);
-      return;
-    }
+      if (parsed.event === 'delta') {
+        const deltaText = payload && typeof payload.text === 'string' ? payload.text : '';
+        if (deltaText && typeof onDelta === 'function') onDelta(deltaText, payload);
+        return;
+      }
 
-    if (parsed.event === 'done') {
-      complete(payload);
-      return;
-    }
+      if (parsed.event === 'sources') {
+        if (typeof onSources === 'function') onSources(getStreamSources(payload), payload);
+        return;
+      }
 
-    if (parsed.event === 'error') {
-      const errorMessage = getStreamErrorMessage(payload, LUVZ_CONNECTION_LOST_MESSAGE);
-      fail(errorMessage, new Error(errorMessage));
-    }
-  };
+      if (parsed.event === 'done') {
+        complete(payload);
+        return;
+      }
 
-  try {
-    resetTimeout();
+      if (parsed.event === 'error') {
+        const errorMessage = getStreamErrorMessage(payload, LUVZ_CONNECTION_LOST_MESSAGE);
+        fail(errorMessage, new Error(errorMessage));
+      }
+    };
 
-    const response = await fetch(apiUrl || window.LUVZ_CHAT_API_URL, {
-      method: 'POST',
-      headers: {
-        'Accept': 'text/event-stream, application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: message,
-        session_id: sessionId,
-        chat_history: chatHistory
-      }),
-      signal: controller.signal
-    });
-
-    if (!response.ok) {
-      fail(LUVZ_CONNECTION_LOST_MESSAGE, new Error('HTTP ' + response.status));
-    }
-
-    const contentType = (response.headers.get('content-type') || '').toLowerCase();
-    const isJsonResponse = contentType.indexOf('application/json') !== -1;
-
-    if (isJsonResponse) {
-      const payload = await response.json();
-      const responseText = getJsonResponseText(payload);
-      const sources = getStreamSources(payload);
-
-      if (responseText && typeof onDelta === 'function') onDelta(responseText, payload);
-      if (sources.length && typeof onSources === 'function') onSources(sources, payload);
-      complete(payload);
-      return payload;
-    }
-
-    if (!response.body) {
-      const fallbackText = await response.text();
-      const payload = parseSSEJson(fallbackText);
-      const responseText = getJsonResponseText(payload);
-      const sources = getStreamSources(payload);
-
-      if (responseText && typeof onDelta === 'function') onDelta(responseText, payload);
-      if (sources.length && typeof onSources === 'function') onSources(sources, payload);
-      complete(payload);
-      return payload;
-    }
-
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-
-    while (true) {
+    try {
       resetTimeout();
-      const chunk = await reader.read();
-      if (chunk.done) break;
 
-      buffer += decoder.decode(chunk.value, { stream: true });
-      const events = buffer.split(/\r?\n\r?\n/);
-      buffer = events.pop() || '';
+      const response = await fetch(apiUrl || window.LUVZ_CHAT_API_URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'text/event-stream, application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: message,
+          session_id: sessionId,
+          chat_history: chatHistory
+        }),
+        signal: controller.signal
+      });
 
-      for (const rawEvent of events) {
-        handleEvent(rawEvent);
+      if (!response.ok) {
+        fail(LUVZ_CONNECTION_LOST_MESSAGE, new Error('HTTP ' + response.status));
+      }
+
+      const contentType = (response.headers.get('content-type') || '').toLowerCase();
+      const isJsonResponse = contentType.indexOf('application/json') !== -1;
+
+      if (isJsonResponse) {
+        const payload = await response.json();
+        const responseText = getJsonResponseText(payload);
+        const sources = getStreamSources(payload);
+
+        if (responseText && typeof onDelta === 'function') onDelta(responseText, payload);
+        if (sources.length && typeof onSources === 'function') onSources(sources, payload);
+        complete(payload);
+        return payload;
+      }
+
+      if (!response.body) {
+        const fallbackText = await response.text();
+        const payload = parseSSEJson(fallbackText);
+        const responseText = getJsonResponseText(payload);
+        const sources = getStreamSources(payload);
+
+        if (responseText && typeof onDelta === 'function') onDelta(responseText, payload);
+        if (sources.length && typeof onSources === 'function') onSources(sources, payload);
+        complete(payload);
+        return payload;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        resetTimeout();
+        const chunk = await reader.read();
+        if (chunk.done) break;
+
+        buffer += decoder.decode(chunk.value, { stream: true });
+        const events = buffer.split(/\r?\n\r?\n/);
+        buffer = events.pop() || '';
+
+        for (const rawEvent of events) {
+          handleEvent(rawEvent);
+        }
+
+        if (streamCompleted) {
+          await reader.cancel();
+          break;
+        }
       }
 
       if (streamCompleted) {
-        await reader.cancel();
-        break;
+        return;
       }
-    }
 
-    if (streamCompleted) {
-      return;
-    }
+      buffer += decoder.decode();
+      if (buffer.trim()) {
+        handleEvent(buffer.trim());
+      }
 
-    buffer += decoder.decode();
-    if (buffer.trim()) {
-      handleEvent(buffer.trim());
+      complete();
+    } catch (error) {
+      if (streamFailed) throw error;
+      cleanup();
+      if (error && error.name === 'AbortError' && abortReason === 'superseded') {
+        return;
+      }
+      const messageText = error && error.name === 'AbortError' && abortReason === 'timeout'
+        ? LUVZ_STREAM_TIMEOUT_MESSAGE
+        : LUVZ_CONNECTION_LOST_MESSAGE;
+      if (typeof onError === 'function') onError(messageText, error);
+      throw error;
     }
+  };
 
-    complete();
-  } catch (error) {
-    if (streamFailed) throw error;
-    cleanup();
-    if (error && error.name === 'AbortError' && abortReason === 'superseded') {
-      return;
+  // Retry wrapper: attempt stream with exponential backoff
+  while (retryCount < MAX_RETRIES) {
+    try {
+      return await attemptStream();
+    } catch (error) {
+      retryCount++;
+      if (retryCount >= MAX_RETRIES) {
+        // Final failure — show "Connection lost" message
+        if (typeof onError === 'function') onError(LUVZ_CONNECTION_LOST_MESSAGE, error);
+        throw error;
+      }
+      // Show retry message before waiting
+      console.warn(`[LUVZ Chat] Stream failed, retrying (${retryCount}/${MAX_RETRIES})...`);
+      if (typeof onError === 'function') onError('Connection interrupted. Retrying…', null);
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAYS[retryCount - 1]));
     }
-    const messageText = error && error.name === 'AbortError' && abortReason === 'timeout'
-      ? LUVZ_STREAM_TIMEOUT_MESSAGE
-      : LUVZ_CONNECTION_LOST_MESSAGE;
-    if (typeof onError === 'function') onError(messageText, error);
-    throw error;
   }
 }
 

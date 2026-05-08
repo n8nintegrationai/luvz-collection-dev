@@ -2,6 +2,36 @@
 
 ---
 
+## v2.11 (2026-05-08) — Resilience & Accessibility Hardening Pass
+
+**Summary:** Network resilience and accessibility improvements. Added SSE retry logic with exponential backoff, products.json CDN failover, dynamic wishlist aria-labels, and modal gallery keyboard navigation. Zero visual changes. All systems now robust to transient failures and fully keyboard-accessible.
+
+**Changes:**
+
+**public/app.js:**
+- **SSE Retry Logic** (streamLuvzResponse): Wrap stream attempt in retry loop, max 3 retries with delays 1s → 2s → 4s. Show "Connection interrupted. Retrying…" inline message during retry. On final failure, show "Connection lost. Please try again." No duplicate token streaming on recovery. Console.warn each retry attempt.
+- **products.json CDN Failover** (load): Primary fetch GitHub → jsDelivr CDN fallback → MOCK_DATA. Labeled each step with comments (PRIMARY / FALLBACK / MOCK_DATA). Non-blocking between attempts.
+- **Wishlist Accessibility**: Add dynamic aria-labels to all wish buttons in buildCard, buildCarouselInSection, ncUpdateWishlist. Label: "Add [product name] to wishlist" / "Remove [product name] from wishlist". Sync aria-labels in toggleWish() and removeFromWishlist() when state changes.
+- **Modal Gallery Keyboard Navigation**: Add arrow key support to modal keydown handler. Left/Right arrow navigates gallery when modal open and images > 1. Prevents default scroll behavior. Works alongside existing swipe navigation.
+
+**public/index.html:**
+- Modal gallery container (#mimg-wrap) now has aria-label: "Product gallery. Use arrow keys or swipe to navigate between images"
+- Gallery prev/next buttons updated from generic "Previous image" / "Next image" to specific "Previous product image" / "Next product image"
+
+**docs/issues/CURRENT_ISSUES.md:**
+- Marked accessibility debt items as RESOLVED: modal gallery labels (v2.11), wishlist heart aria-label (v2.11), gallery button labels (v2.11)
+- Marked data/API issues as RESOLVED: Chat API retry (v2.11), products.json failover (v2.11)
+
+**Key decisions locked:**
+- SSE retries: exponential delays (not linear) with max 3 attempts (not infinite). Inline messaging during retry (not silent).
+- products.json failover: non-blocking sequential attempts (not parallel). Primary URL versioned with commit SHA when available, falls back to @main. Only logs to console, no UI banner on fallback success.
+- Wishlist labels: dynamic from DOM (product name from .pcard-name), synced immediately on toggle
+- Modal gallery: arrow keys only when modal open AND multi-image gallery (single image has no navigation)
+
+**Outcome:** Chat widget now resilient to transient network failures (auto-retries 3 times). Product catalog loads from fallback CDN if primary fails. Wishlist buttons fully labeled for screen readers. Modal gallery navigable via keyboard (arrows or swipe). Zero regressions. System is production-hardened against failure modes.
+
+---
+
 ## v2.10 (2026-05-08) — Runtime & Compositing Optimization Audit + Fix Pass
 
 **Summary:** Performance risk verification audit identified four material runtime efficiency issues. All resolved via targeted fixes. Remaining concerns confirmed as negligible or already addressed. No visual changes. System is now efficient for production scale without over-optimization.

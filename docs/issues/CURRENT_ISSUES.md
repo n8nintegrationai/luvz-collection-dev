@@ -233,8 +233,8 @@ Editorial sections require distinct identity from transactional carousels. Stack
 
 | Issue | Fix |
 |-------|-----|
-| Chat API has no retry on SSE failure | Exponential backoff, max 3 retries, in `streamLuvzResponse()` |
-| products.json fetches from one GitHub URL with no failover | Add jsDelivr CDN as fallback endpoint |
+| Chat API has no retry on SSE failure | ✓ RESOLVED (v2.11) — Exponential backoff (1s → 2s → 4s), max 3 retries, shows "Connection interrupted. Retrying…" inline |
+| products.json has no CDN failover | ✓ RESOLVED (v2.11) — Primary → jsDelivr fallback → MOCK_DATA, labeled with comments |
 
 ---
 
@@ -309,11 +309,12 @@ Comprehensive verification audit completed. Four material performance issues res
 
 ## Accessibility Debt
 
-| Issue | Fix |
-|-------|-----|
-| Modal gallery has no button labels for keyboard users | Add `aria-label="Use arrow keys to navigate gallery"` |
-| Wishlist heart has no aria-label | Add `aria-label="Add {{product.name}} to wishlist"` |
-| Hover-only affordances (gold border) fail for colorblind users | Add secondary affordance: scale, shadow, or animation |
+| Issue | Status | Fix |
+|-------|--------|-----|
+| Modal gallery has no button labels for keyboard users | ✓ RESOLVED | Added `aria-label` to gallery container: "Use arrow keys or swipe to navigate" + arrow key support |
+| Wishlist heart has no aria-label | ✓ RESOLVED | Added dynamic `aria-label="Add/Remove [product name] to/from wishlist"` on all wish buttons (buildCard, buildCarouselInSection, buildNcEditorial) |
+| Modal gallery buttons lack specific labels | ✓ RESOLVED | Updated gallery-prev/next aria-labels to "Previous product image" / "Next product image" |
+| Hover-only affordances (gold border) fail for colorblind users | Active | Add secondary affordance: scale, shadow, or animation |
 
 ---
 
