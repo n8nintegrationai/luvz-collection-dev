@@ -1691,8 +1691,8 @@
 
       .cat-grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 240px repeat(3, 148px);
-        gap: 6px;
+        grid-template-rows: clamp(340px, 50vw, 420px) repeat(3, clamp(260px, 38vw, 320px));
+        gap: 10px;
       }
 
       .cat-tile[data-anchor="category-necklace"] {
@@ -1745,6 +1745,14 @@
         .cat-glass {
           background: rgba(10, 6, 2, 0.38);
         }
+      }
+
+      .cat-glass {
+        padding: 7px 11px 9px;
+      }
+
+      .cat-tile[data-anchor="category-necklace"] .cat-glass {
+        padding: 10px 14px 12px;
       }
 
       .cat-glass-name {
