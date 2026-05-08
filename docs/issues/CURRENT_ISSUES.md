@@ -141,6 +141,53 @@ State: Production Ready (v2.9)
 
 ---
 
+## Resolved — New Collection Editorial Rebuild (2026-05-08)
+
+**Original Problems:**
+- Ecommerce carousel affordance conflicted with luxury editorial positioning
+- Duplication: featured product appeared in both spotlight and carousel
+- Navigation: pagination controls (dots/arrows) felt mechanical, not editorial
+- Mobile layout: compression sacrificed warmth and emotional pacing
+- Angle navigation: unclear affordance, fragile logic (n+1 issue)
+
+**Architectural Changes:**
+- Stacked composition: featured product image + supporting carousel (no grid)
+- Data model: featured product removed from carousel via `.slice(1)`
+- Image system: unified array logic [product.image, ...product.images]
+- Navigation: subtle angle dots (filmstrip style, not carousel pagination)
+- Gallery: circular modulo navigation (prev/next always enabled)
+- Mobile: full-width stacked layout (restructured, not compressed)
+
+**UX Problems Solved:**
+- Product duplication eliminated (single featured appearance)
+- Angle dot state fixed (single active indicator, not n+1)
+- Gallery navigation circular (no boundary states)
+- Wishlist sync reliable (data-pid attribute, not string parsing)
+- Enquiry continuity preserved (WhatsApp integration works identically)
+- Hash routing integrated (modal opens correctly from #product/{slug})
+
+**Mobile Issues Resolved:**
+- Layout restructured for full-width narrative (not squeezed carousel)
+- Caption readability maintained (100% opacity on all viewports)
+- Touch targets responsive (44px minimum, swipe threshold consistent)
+- Gesture interaction consistent (44px swipe threshold, circular navigation)
+- Wishlist state persists (mobile optimized, no UI drift)
+
+**Final UX Philosophy:**
+Editorial sections require distinct identity from transactional carousels. Stacked layout with cinematic image + subtle navigation signals curation and narrative, not product inventory. Angle dots feel like optional browsing context, not required pagination. Cross-fade transitions feel cinematic. Mobile restructuring (not compression) maintains emotional pacing across all viewports.
+
+### Future Enhancements (Non-blocking)
+
+- Higher quality campaign photography (lifestyle editorial register)
+- Additional angle photography per product (enriched gallery experience)
+- Motion refinement (cinematic timing, parallax effects on desktop)
+- Optional ambient transitions (subtle fade/dissolve between images)
+- Thumbnail image optimization (progressive loading, WebP variants)
+
+**Status: These are polish opportunities, not production blockers. Structural redesign is not required.**
+
+---
+
 ## Recently Resolved (2026-05-06 — UX Behavior Corrections)
 
 | Item | Resolution |

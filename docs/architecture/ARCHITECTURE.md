@@ -75,6 +75,43 @@ SSE events parsed by parseSSEBlock():
 History saved to localStorage['luvz_chat_v3'] with 24h TTL
 ```
 
+### New Collection Section
+
+```
+buildNcFeature(product):
+  - Render featured product with full-bleed image (product.image)
+  - Populate product.name, product.price, product.category (eyebrow)
+  - Build angle-dot navigation from product.images[] array
+  - Register wishlist button with data-pid="${product.id}"
+  - Attach click handlers to angle dots → cross-fade to corresponding image
+  ↓
+Supporting Carousel (buildCarousel):
+  - Use slice(1) to remove featured product from list
+  - Render as standard carousel (not featured container)
+  - Show ~2.3 cards with partial next-card peek
+  - Same wishlist integration (data-pid attribute)
+  ↓
+Image System (Unified Array Logic):
+  - activeImages = [product.image, ...product.images]
+  - product.image = primary campaign image (desktop hero, mobile first)
+  - product.images[] = angle variations (typically 3-5 additional angles)
+  - Total: 4-6 angles per product available for navigation
+  ↓
+Cross-Fade Rendering:
+  - activeAngle tracks current dot selection
+  - On dot click → update activeAngle
+  - Image transition: opacity fade (0.4s cubic-bezier)
+  - GPU accelerated (transform: none, opacity only)
+  ↓
+Wishlist Integration:
+  - Same toggleWish() handler as other card types
+  - data-pid lookup in button sync (reliable, no string parsing)
+  - Heart fill state persists across modal open/close
+  - "Enquire All" uses product.name for WhatsApp message
+```
+
+---
+
 ### Wishlist State
 
 ```
@@ -118,8 +155,12 @@ Owns: `.luvz-trigger`, `.luvz-popup`, `.luvz-messages`, `.luvz-msg`, `.luvz-bubb
 Does NOT own: any site styles (those are in index.html `<style>`).
 
 ### products.json
-Owns: all product fields (`id`, `name`, `category`, `section`, `price`, `badge`, `images[]`, `description`, `whatsapp`), section metadata, review data.  
+Owns: all product fields (`id`, `name`, `category`, `section`, `price`, `badge`, `image`, `images[]`, `description`, `whatsapp`), section metadata, review data.  
 Does NOT own: rendering, styling, or chat RAG context (FastAPI handles that).
+
+**New Collection specific fields:**
+- `product.image` — primary campaign image (required, used for featured hero and mobile-first display)
+- `product.images[]` — angle variations (optional, 0-5 additional angles for filmstrip navigation; if absent, featured product shows single image)
 
 ### Oracle FastAPI Backend
 Owns: POST `/api/chat` SSE handler, sentence-transformers embedding, RAG retrieval, Ollama inference, SSE event streaming, error handling.  

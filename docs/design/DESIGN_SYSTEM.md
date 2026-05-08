@@ -202,6 +202,65 @@ Test carousel math actively at 700px and 1100px — breakpoints are fragile.
 
 ---
 
+## Editorial Campaign Sections
+
+Design principles introduced in New Collection, establishing the reference direction for future luxury editorial experiences.
+
+**Composition Philosophy:**
+- No visible card containers (no borders, no panels, no compartmentalization)
+- Image-led storytelling (visual hierarchy dominates typography)
+- Overlay typography (captions float over images, not below)
+- Atmospheric gradients instead of solid panels (layered subtle glows)
+- Sparse luxury pacing (white space is breathing room, not emptiness)
+- Asymmetry with purpose (21:9 panoramic ratios, offset layouts)
+
+**Navigation & Interaction:**
+- Filmstrip navigation instead of carousel arrows (subtle dots, not mechanical controls)
+- Circular looping (navigation never traps at boundaries)
+- Cross-fade transitions (cinematic, not mechanical)
+- Wishlist integration (persistent state, mobile-optimized touch)
+- Swipe affordance on mobile (44px threshold, gesture-natural)
+
+**Typography on Images:**
+- Overlay captions (name, price, category eyebrow)
+- Text shadows for readability on photographic backgrounds (never drop to transparent fallback)
+- No opacity below 50% on readable content
+- Cormorant Garamond for descriptive prose (editorial register)
+- Cinzel for labels and section heads (architectural register)
+
+**Image Treatment:**
+- Full-bleed primary image (no frame, no mat, extends to viewport edge)
+- Angle variations in gallery (not additional products)
+- Lifestyle editorial register (aspirational, cinematic, not product documentation)
+- Consistent lighting/background treatment across all angles
+- No white or cool-toned backgrounds (maintain dark warm aesthetic)
+
+**Mobile Behavioral Differences:**
+- Stacked layout (full-width images, bottom captions)
+- Image-first narrative (captions below, not overlaid)
+- Simplified caption structure (essential info only, no eyebrows)
+- Swipeable gallery (touch-optimized, no pagination visible)
+- Full viewport width (no padding constraints)
+
+**Motion Rules:**
+- Image transitions: cross-fade (0.4s cubic-bezier, 25–46–45–94)
+- Section entrance: 0.8s ease-out fade-up (slow, deliberate)
+- Ambient motion: 2.8s float / 4s scale (continuous, not triggered)
+- Hover feedback: 0.35s (interactive, snappy)
+- Never bounce, never elastic, never parallax on touch devices
+
+**Performance Considerations:**
+- Featured image preload (desktop priority) or eager load (mobile-first)
+- Supporting carousel images lazy-load on scroll (use `loading="lazy"`)
+- Angle gallery: load on-demand when user opens modal
+- Wishlist button: data-pid attribute for O(1) state lookup
+- No off-screen animation consumption (IntersectionObserver gates)
+
+**Reference Pattern:**
+This section establishes the design and interaction vocabulary for future editorial experiences on LUVZ Collection. Any future section built with similar emotional intent should follow this playbook. Sections with transactional intent (Enquire, Purchase, Add to Cart) should continue using card grids and carousel patterns.
+
+---
+
 ## Design Debt
 
 - Jost not imported — UI falls back to system sans-serif.

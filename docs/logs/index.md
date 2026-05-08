@@ -18,6 +18,30 @@ Visual inconsistencies, UX gaps, performance risks, mobile-specific risks, brows
 
 ---
 
+## Completed Major Systems
+
+- Editorial New Collection section (cinematic desktop, stacked mobile, filmstrip navigation)
+- Luxury typography normalization (Cinzel 700 section heads, Cormorant Garamond body)
+- Gold shimmer isolation system (exclusive to Heritage heading, ≥50% viewport gating)
+- Atmospheric gradient consistency (unified radial glow, transparent falloff)
+- Editorial spacing rhythm (unified `var(--section-gap)` clamp system)
+- Wishlist integration consistency (data-pid attribute-based sync across all card types)
+
+---
+
+## Stable Sections
+
+The following sections have reached editorial and technical stability and should not be fundamentally redesigned without explicit direction:
+
+- **Hero** — cinematic entrance, parallax, scroll chevron (no structural changes planned)
+- **Heritage** — distinct narrative identity, shimmer accent, atelier photography (no redesign)
+- **Why LUVZ** — editorial column, asymmetric layout, community voice (locked)
+- **New Collection** — editorial feature + carousel system, complete with mobile stacking (no redesign)
+
+Status: Production-ready. Future work should focus on refinement (photography, motion, polish) rather than structural overhaul.
+
+---
+
 ## Quick Reference by Role
 
 **Designers:** DESIGN_SYSTEM.md → CURRENT_ISSUES.md (visual section) → CLAUDE.md development rules before proposing changes.
@@ -96,9 +120,10 @@ Prod New Code/
 
 | Version | Date | Summary |
 |---------|------|---------|
+| v3.0 | 2026-05-08 | New Collection editorial redesign complete: stacked feature + carousel, filmstrip navigation, cross-fade transitions, mobile restructuring, zero new frameworks |
 | v2.2 | 2026-05-05 | CSS consistency pass: typography weight 900→700, shimmer isolation, opacity normalization, glow rebalancing, spacing rhythm unification, hover timing standardization |
 | v2.1 | 2026-05-04 | All four docs trimmed; cross-doc duplication removed; functions/ flagged for deletion |
 | v2.0 | 2026-05-04 | AI-optimized documentation suite; full rewrite from redesign-heavy v1.0 |
 | v1.0 | 2026-05-02 | Original CLAUDE.md |
 
-Last updated: 2026-05-05
+Last updated: 2026-05-08

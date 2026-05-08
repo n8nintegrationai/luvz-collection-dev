@@ -2,6 +2,72 @@
 
 ---
 
+## v3.0 (2026-05-08) — New Collection Editorial Redesign Completion & Production Ready
+
+**Summary:** Full editorial redesign of New Collection section finalized and production-ready. Transformed from ecommerce carousel paradigm to luxury editorial campaign presentation. Completed desktop cinematic layer system, mobile narrative restructuring, UX behavior fixes, and integration with existing wishlist/modal systems. Zero new frameworks, no global architecture changes. Site maintains constraint-based approach while achieving editorial distinction.
+
+**Desktop Implementation:**
+- Full-bleed cinematic hero image (product.image field)
+- Layered gradient system (overlay + atmospheric glow)
+- Dynamic caption overlay (product name, price, category eyebrow)
+- Filmstrip navigation (angle dot system for product.images[])
+- Cross-fade image transitions (0.4s cubic-bezier)
+- Wishlist heart integration (consistent state, persistent storage)
+- Active angle indicator (visual feedback on dot selection)
+
+**Mobile Implementation:**
+- Stacked editorial narrative layout (image-first, bottom captions)
+- Single-column composition (full viewport width)
+- Simplified caption structure (name + price only, no eyebrow)
+- Swipeable image gallery (44px threshold, circular navigation)
+- Wishlist persistence (mobile-optimized touch targets, 44px minimum)
+- Readable text on all breakpoints (no opacity compromises)
+
+**UX Fixes Completed:**
+- n+1 angle-dot logic fixed (single active indicator, not duplicated)
+- Responsive click targets (44px minimum touch surface)
+- WhatsApp enquiry continuity (uses product.name for message text)
+- Wishlist state persistence (across page reloads, modal open/close)
+- Hash routing integration (modal opens from #product/{slug})
+- Product duplication eliminated (featured product not in supporting carousel)
+
+**Architectural Constraints Preserved:**
+- No new frameworks introduced (vanilla JS, existing patterns only)
+- No global architecture changes (self-contained section rendering)
+- Existing tech stack retained (HTML5, CSS3, vanilla JS)
+- Data source: products.json (image, images[], name, price, category)
+- Rendering: buildNcFeature() in app.js, standalone CSS in index.html
+- Integration reuses: productRegistry lookup, wishlist system, modal system
+
+**Code Integration:**
+- `buildNcFeature(product)` builds featured section from single product
+- Supporting carousel uses `.slice(1)` to remove featured product from list
+- All wishlist buttons use `data-pid` attribute for reliable sync
+- Gallery navigation uses modulo arithmetic for circular looping
+- Cross-fade uses CSS transition on opacity (GPU-accelerated)
+
+**Key Decisions Locked:**
+- Composition: Stacked editorial, not split/grid (breaks ecommerce affordance)
+- Navigation: Subtle angle dots (not carousel pagination controls)
+- Image transitions: Cross-fade (opacity), not slide or transform
+- Mobile: Full-width stacked layout (removes columns to preserve warmth)
+- Wishlist: Integrated via data-pid (fragile string parsing removed)
+- Gallery: Circular navigation (prev/next always enabled)
+
+**Status: Production-ready. Future work should focus on refinement, photography quality, and motion polish — not structural redesign.**
+
+**Metrics:**
+- Desktop layout: responsive clamp() system, no hardcoded widths
+- Mobile layout: adapts smoothly at 768px breakpoint
+- Image count: featured (1) + carousel (N-1) of N products
+- Wishlist buttons: 100% sync via data-pid lookup
+- Gallery navigation: circular, no boundary states
+- Performance: single featured image preload, carousel lazy-loads on scroll
+
+**Rationale:** Editorial sections inherently require distinct visual and compositional identity from ecommerce carousels. Stacked layout with cinematic hero image signals editorial narrative rather than product listing. Subtle angle navigation (filmstrip dots) suggests optional browsing rather than required pagination. Cross-fade transitions feel cinematic, not mechanical. Full-bleed desktop contrasts with mobile restructuring but maintains emotional pacing on all viewports. No structural redesign will be necessary — future iterations should focus on image quality, additional angle photography, and motion refinement only.
+
+---
+
 ## v2.9 (2026-05-06) — Accessibility & Production-Readiness Pass
 
 **Summary:** Keyboard navigation, screen reader support, focus management, reduced-motion compliance, and resilient error states. No visual changes. Site is now fully navigable via keyboard, supports assistive technologies, and handles network failures gracefully.
@@ -287,4 +353,4 @@ Commit message format: `docs: update documentation [reason]`
 - [ ] Quarterly: audit all four docs for staleness; update version in index.md.
 - [ ] Pre-deployment: run ARCHITECTURE.md "Deployment Checklist."
 
-Last updated: 2026-05-04
+Last updated: 2026-05-08
