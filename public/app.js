@@ -157,7 +157,7 @@ function optimizeCloudinaryUrl(url, width = 800, quality = 85) {
   // Insert transformation params: f_auto (format), q_auto (quality), w (width), c (crop)
   return url.replace(
     /\/image\/upload\//,
-    `/image/upload/f_auto,q_auto:best,w_${width},c_fill/`
+    `/image/upload/f_auto,q_auto:good,w_${width},c_fill/`
   );
 }
 
@@ -509,7 +509,7 @@ function buildCard(p, sec) {
 
   return `<div class="carousel-item"><div class="pcard reveal" role="button" tabindex="0" aria-label="${(p.name || 'View product').replace(/"/g, '&quot;')}" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(JSON.parse(this.dataset.p),'${m.bt}')}" data-p='${ps}'>
     <div class="pcard-img">
-      <img loading="lazy" src="${optimizeCloudinaryUrl(p.image || fb, 600)}" srcset="${generateSrcset(p.image, [400, 600, 800])}" sizes="(max-width: 480px) 90vw, (max-width: 768px) 50vw, (max-width: 1100px) 33vw, 25vw" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${optimizeCloudinaryUrl(fb, 600)}'" decoding="async"/>
+      <img loading="lazy" src="${optimizeCloudinaryUrl(p.image || fb, 320)}" srcset="${generateSrcset(p.image, [400, 600, 800])}" sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${optimizeCloudinaryUrl(fb, 320)}'" decoding="async"/>
       <div class="pcard-img-ov"></div>
       <div class="pcard-bloom" aria-hidden="true"></div>
       <div class="pcard-sweep" aria-hidden="true"></div>
@@ -580,7 +580,7 @@ function buildCategoryBento(data) {
     var img = tile.querySelector('.cat-tile-img');
 
     if (imgUrl && img) {
-      img.src    = optimizeCloudinaryUrl(imgUrl, 600, 85);
+      img.src    = optimizeCloudinaryUrl(imgUrl, 480, 85);
       img.srcset = generateSrcset(imgUrl, [400, 600, 800]);
       img.sizes  = '(max-width:768px) 50vw, 33vw';
     } else if (img) {
@@ -685,7 +685,7 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
 
     return `<div class="carousel-item"><div class="pcard reveal" role="button" tabindex="0" aria-label="${(p.name || 'View product').replace(/"/g, '&quot;')}" onclick="openModal(JSON.parse(this.dataset.p),'${m.bt}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(JSON.parse(this.dataset.p),'${m.bt}')}" data-p='${ps}'>
       <div class="pcard-img">
-        <img loading="lazy" src="${p.image || fb}" alt="${(p.name || '').replace(/"/g, '&quot;')}" loading="lazy" onerror="this.onerror=null;this.src='${fb}'" decoding="async"/>
+        <img loading="lazy" src="${optimizeCloudinaryUrl(p.image || fb, 320)}" srcset="${generateSrcset(p.image, [400, 600, 800])}" sizes="(max-width: 700px) 50vw, (max-width: 1100px) 33vw, 25vw" alt="${(p.name || '').replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='${optimizeCloudinaryUrl(fb, 320)}'" decoding="async"/>
         <div class="pcard-img-ov"></div>
         <div class="pcard-quick-view">Quick View</div>
         <button class="pcard-wish${isWished(pid) ? ' wished' : ''}" data-pid="${pid}" onclick="event.stopPropagation();toggleWish(this,'${pid}')" aria-label="${isWished(pid) ? 'Remove ' + (p.name || 'product') + ' from wishlist' : 'Add ' + (p.name || 'product') + ' to wishlist'}">
