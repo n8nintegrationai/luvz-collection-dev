@@ -345,11 +345,9 @@ function removeFromWishlist(id) {
   _wishedSetCache = null;  // Invalidate cache so isWished() re-reads localStorage
   updateWishCount();
   // Update any visible heart buttons on the page
-  document.querySelectorAll('.pcard-wish').forEach(btn => {
-    if (btn.getAttribute('data-pid') === id) {
-      btn.classList.remove('wished');
-      btn.querySelector('svg')?.setAttribute('fill', 'none');
-    }
+  document.querySelectorAll('.pcard-wish[data-pid="' + id + '"]').forEach(btn => {
+    btn.classList.remove('wished');
+    btn.querySelector('svg')?.setAttribute('fill', 'none');
   });
   renderWishDrawer();
 }
@@ -1638,9 +1636,17 @@ document.getElementById('moverlay').addEventListener('click', e => { if (e.targe
         for (const entry of entries) {
           if (entry.isIntersecting) {
             startLoop();
+            // Restore preserve-3d on vault cards when vault re-enters viewport
+            ring.querySelectorAll('.vault-card').forEach(card => {
+              card.style.transformStyle = 'preserve-3d';
+            });
           } else if (_raf) {
             cancelAnimationFrame(_raf);
             _raf = null;
+            // Remove preserve-3d from vault cards when vault leaves viewport (reduces GPU compositing layers)
+            ring.querySelectorAll('.vault-card').forEach(card => {
+              card.style.transformStyle = 'flat';
+            });
           }
         }
       }, { threshold: 0.05 });
@@ -2045,19 +2051,42 @@ async function askLuvzAI() {
 
 })();
 
-// Hero parallax — desktop only, passive scroll, RAF-gated
+// Hero parallax — desktop only, passive scroll, RAF-gated, IO-guarded
 (function initLuxuryHeroParallax() {
   function bindHeroParallax() {
     const heroImg = document.querySelector('#hero img, .hero-bg, .hero-image, .hero-img');
-    if (!heroImg || window.innerWidth <= 768) return;
+    const hero = document.querySelector('#hero');
+    if (!heroImg || !hero || window.innerWidth <= 768) return;
     let _rafScroll = null;
-    window.addEventListener('scroll', function () {
-      if (_rafScroll) return;
-      _rafScroll = requestAnimationFrame(function () {
-        heroImg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.28) + 'px)';
+    let _scrollListener = null;
+    let _heroIO = null;
+
+    function _startScroll() {
+      if (_scrollListener) return;
+      _scrollListener = function () {
+        if (_rafScroll) return;
+        _rafScroll = requestAnimationFrame(function () {
+          heroImg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.28) + 'px)';
+          _rafScroll = null;
+        });
+      };
+      window.addEventListener('scroll', _scrollListener, { passive: true });
+    }
+
+    function _stopScroll() {
+      if (_scrollListener) {
+        window.removeEventListener('scroll', _scrollListener);
+        _scrollListener = null;
+      }
+      if (_rafScroll) {
+        cancelAnimationFrame(_rafScroll);
         _rafScroll = null;
-      });
-    }, { passive: true });
+      }
+    }
+
+    // Start scroll listener only when hero is visible
+    _heroIO = new IntersectionObserver(([e]) => e.isIntersecting ? _startScroll() : _stopScroll());
+    _heroIO.observe(hero);
   }
 
   if (document.readyState === 'loading') {
