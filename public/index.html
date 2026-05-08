@@ -2553,10 +2553,12 @@
       transition: opacity 600ms ease-in-out;
       pointer-events: none;
     }
+
     #nc-img-back {
       opacity: 1;
       z-index: 1;
     }
+
     #nc-img-front {
       opacity: 0;
       z-index: 2;
@@ -2568,12 +2570,10 @@
       position: absolute;
       inset: 0;
       z-index: 3;
-      background: linear-gradient(
-        to bottom,
-        rgba(10,5,2,0) 0%,
-        rgba(10,5,2,0) 55%,
-        rgba(8,3,1,0.93) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(10, 5, 2, 0) 0%,
+          rgba(10, 5, 2, 0) 55%,
+          rgba(8, 3, 1, 0.93) 100%);
       pointer-events: none;
     }
 
@@ -2583,11 +2583,9 @@
       position: absolute;
       inset: 0;
       z-index: 3;
-      background: linear-gradient(
-        to right,
-        rgba(10,5,2,0.72) 0%,
-        rgba(10,5,2,0)    38%
-      );
+      background: linear-gradient(to right,
+          rgba(10, 5, 2, 0.72) 0%,
+          rgba(10, 5, 2, 0) 38%);
       pointer-events: none;
     }
 
@@ -2612,7 +2610,7 @@
       bottom: 30px;
       width: 1px;
       height: 220px;
-      background: rgba(200,146,58,0.5);
+      background: rgba(200, 146, 58, 0.5);
       z-index: 10;
       pointer-events: none;
     }
@@ -2625,6 +2623,7 @@
       z-index: 10;
       transition: opacity 400ms ease-in-out;
     }
+
     #nc-caption.nc-fading {
       opacity: 0;
     }
@@ -2637,6 +2636,7 @@
       letter-spacing: 3.5px;
       color: #8a6030;
     }
+
     #nc-cap-name {
       position: absolute;
       bottom: 144px;
@@ -2646,6 +2646,7 @@
       letter-spacing: 1px;
       color: #e8c46a;
     }
+
     #nc-cap-desc {
       position: absolute;
       bottom: 108px;
@@ -2661,6 +2662,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
     #nc-cap-hairline {
       position: absolute;
       bottom: 90px;
@@ -2668,6 +2670,7 @@
       height: 0;
       border-top: 0.5px solid #3a2510;
     }
+
     #nc-cap-price {
       position: absolute;
       bottom: 66px;
@@ -2676,6 +2679,7 @@
       letter-spacing: 1px;
       color: #c8923a;
     }
+
     #nc-cap-enquire {
       position: absolute;
       bottom: 30px;
@@ -2730,9 +2734,11 @@
       opacity: 0.6;
       transition: opacity 150ms ease;
     }
+
     .nc-wish:hover {
       opacity: 1;
     }
+
     .nc-wish.wished svg {
       fill: #c8923a;
     }
@@ -2750,6 +2756,7 @@
       max-width: 680px;
       margin: 0 auto;
     }
+
     .nc-thumb {
       flex: 0 0 auto;
       background-size: cover;
@@ -2757,21 +2764,25 @@
       cursor: pointer;
       transition: border-color 200ms ease;
     }
+
     .nc-thumb.nc-thumb-inactive {
       width: 50px;
       height: 56px;
       border: 0.4px solid #2a1a08;
       background-color: #1a0e04;
     }
+
     .nc-thumb.nc-thumb-inactive:hover {
       border-color: #4a2c10;
     }
+
     .nc-thumb.nc-thumb-active {
       width: 55px;
       height: 64px;
       border: 0.75px solid #c8923a;
       background-color: #2e1c0a;
     }
+
     #nc-filmstrip {
       gap: calc((100% - 28px - 305px) / 5);
     }
@@ -2782,7 +2793,7 @@
     /* ══════════════════════════════════════════════════════════════ */
     @media (max-width: 768px) {
 
-      /* 1. OUTER WRAPPER — Flex column for vertical stacking */
+      /* 1. OUTER WRAPPER */
       #nc-editorial {
         display: flex !important;
         flex-direction: column !important;
@@ -2791,80 +2802,93 @@
         overflow: visible !important;
       }
 
-      /* 2. IMAGE ZONE — Fixed height, clips contents inside */
+      /* 2. IMAGE ZONE — becomes flex column so its children can be ordered */
       #nc-img-zone {
+        display: flex !important;
+        flex-direction: column !important;
         order: 0 !important;
         flex-shrink: 0 !important;
         position: relative !important;
-        height: 55vh !important;
-        min-height: 300px !important;
-        max-height: 420px !important;
         width: 100% !important;
-        overflow: hidden !important;
+        height: auto !important;
+        min-height: unset !important;
+        overflow: visible !important;
+        background: #0a0502 !important;
         pointer-events: none !important;
       }
 
-      /* 3. IMAGE LAYERS — Stay inside image zone */
+      /* 3. ::before — image-area height spacer, no gradient on mobile */
+      #nc-img-zone::before {
+        content: '' !important;
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: clamp(300px, 55vh, 420px) !important;
+        flex-shrink: 0 !important;
+        background: none !important;
+        z-index: auto !important;
+        pointer-events: none !important;
+      }
+
+      /* 4. ::after — suppress horizontal gradient */
+      #nc-img-zone::after {
+        display: none !important;
+      }
+
+      /* 5. IMAGE LAYERS — abs-positioned over the spacer only */
       #nc-img-back,
       #nc-img-front {
         position: absolute !important;
-        inset: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: auto !important;
+        height: clamp(300px, 55vh, 420px) !important;
+        width: 100% !important;
         background-size: cover !important;
         background-position: center 15% !important;
         pointer-events: none !important;
       }
 
-      /* 4. GRADIENT OVERLAYS — Hidden on mobile */
-      #nc-img-zone::before,
-      #nc-img-zone::after {
-        display: none !important;
-      }
-
-      /* 5. SECTION LABEL — Hide on mobile (not in spec) */
-      #nc-section-label {
-        display: none !important;
-      }
-
-      /* 6. GOLD RULE — Hide on mobile */
-      #nc-gold-rule {
-        display: none !important;
-      }
-
-      /* 7. WISHLIST BUTTON — Inside zone, stay clickable */
-      #nc-wish {
-        pointer-events: auto !important;
-        z-index: 3 !important;
-      }
-
-      /* 8. COUNTER — Hide on mobile */
+      /* 6. DECORATIVE ELEMENTS — hidden on mobile */
+      #nc-section-label,
+      #nc-gold-rule,
       #nc-counter {
         display: none !important;
       }
 
-      /* 9. DOT ROW (SVG) — Below image, in normal flow */
+      /* 7. WISHLIST BUTTON — abs top-right, clickable above image */
+      #nc-wish {
+        position: absolute !important;
+        top: 16px !important;
+        right: 16px !important;
+        z-index: 10 !important;
+        pointer-events: auto !important;
+      }
+
+      /* 8. ANGLE DOTS — order: 1 in nc-img-zone flex context */
       #nc-angle-dots {
         order: 1 !important;
         position: static !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 14px !important;
-        height: 40px !important;
-        padding: 12px 0 8px 0 !important;
+        display: block !important;
         width: 100% !important;
+        height: 40px !important;
         flex-shrink: 0 !important;
-        pointer-events: auto !important;
-        background: transparent !important;
+        padding: 12px 0 8px 0 !important;
         margin: 0 !important;
+        background: transparent !important;
+        text-align: center !important;
         left: auto !important;
         top: auto !important;
         right: auto !important;
         bottom: auto !important;
         transform: none !important;
         z-index: auto !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
       }
 
-      /* 10. CAPTION CONTAINER — Below dots, in normal flow */
+      /* 9. CAPTION CONTAINER — order: 2 in nc-img-zone flex context */
       #nc-caption {
         order: 2 !important;
         position: static !important;
@@ -2872,10 +2896,9 @@
         width: 100% !important;
         height: auto !important;
         flex-shrink: 0 !important;
-        pointer-events: none !important;
-        background: transparent !important;
         padding: 0 !important;
         margin: 0 !important;
+        background: transparent !important;
         left: auto !important;
         top: auto !important;
         right: auto !important;
@@ -2883,9 +2906,11 @@
         transform: none !important;
         z-index: auto !important;
         overflow: visible !important;
+        pointer-events: none !important;
+        transition: opacity 400ms ease-in-out !important;
       }
 
-      /* 11. CAPTION CHILDREN — Show/hide control */
+      /* 10. HIDE TEXT-HEAVY FIELDS */
       #nc-cap-category,
       #nc-cap-name,
       #nc-cap-desc,
@@ -2893,13 +2918,12 @@
         display: none !important;
       }
 
-      /* 12. PRICE — Visible, gold, left-aligned */
+      /* 11. PRICE */
       #nc-cap-price {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         position: static !important;
-        pointer-events: auto !important;
         font-family: Georgia, serif !important;
         font-size: 17px !important;
         color: #c8923a !important;
@@ -2909,15 +2933,15 @@
         background: transparent !important;
         height: auto !important;
         overflow: visible !important;
+        pointer-events: auto !important;
       }
 
-      /* 13. ENQUIRE — Visible, underlined, left-aligned */
+      /* 12. ENQUIRE LINK */
       #nc-cap-enquire {
         display: inline-block !important;
         visibility: visible !important;
         opacity: 1 !important;
         position: static !important;
-        pointer-events: auto !important;
         font-family: Georgia, serif !important;
         font-size: 10px !important;
         color: #6a4820 !important;
@@ -2934,22 +2958,25 @@
         min-height: 44px !important;
         line-height: 24px !important;
         height: auto !important;
+        pointer-events: auto !important;
       }
 
-      /* 14. FILMSTRIP — Last in flow, fully clickable */
+      /* 13. FILMSTRIP — natural second child of #nc-editorial */
       #nc-filmstrip {
-        order: 3 !important;
         position: relative !important;
+        width: 100% !important;
+        max-width: 100% !important;
         height: 80px !important;
         max-height: 80px !important;
-        width: 100% !important;
         flex-shrink: 0 !important;
+        padding: 8px 14px !important;
+        gap: calc((100% - 28px - 305px) / 5) !important;
         pointer-events: auto !important;
         z-index: 10 !important;
         overflow: visible !important;
       }
 
-      /* 15. FILMSTRIP THUMBNAILS — Fully clickable */
+      /* 14. THUMBNAILS */
       .nc-thumb {
         height: 56px !important;
         pointer-events: auto !important;
@@ -9218,7 +9245,7 @@
       <!-- IMAGE ZONE -->
       <div id="nc-img-zone">
         <!-- Cross-fade layers: back = outgoing, front = incoming -->
-        <div id="nc-img-back"  class="nc-img-layer"></div>
+        <div id="nc-img-back" class="nc-img-layer"></div>
         <div id="nc-img-front" class="nc-img-layer"></div>
 
         <!-- SECTION LABEL -->
@@ -9229,10 +9256,10 @@
         <div id="nc-caption">
           <div id="nc-cap-category"></div>
           <div id="nc-cap-name"></div>
-          <p  id="nc-cap-desc"></p>
+          <p id="nc-cap-desc"></p>
           <div id="nc-cap-hairline"></div>
           <div id="nc-cap-price"></div>
-          <a  id="nc-cap-enquire" tabindex="0">ENQUIRE</a>
+          <a id="nc-cap-enquire" tabindex="0">ENQUIRE</a>
         </div>
 
         <!-- ANGLE DOTS (SVG, built by JS) -->
@@ -9244,7 +9271,8 @@
         <!-- WISHLIST ICON -->
         <button id="nc-wish" class="nc-wish" aria-label="Add to wishlist">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8923a" stroke-width="1.8">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
       </div>
