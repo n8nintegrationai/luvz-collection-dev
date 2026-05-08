@@ -2548,8 +2548,9 @@
     .nc-img-layer {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center 20%;
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
       transition: opacity 600ms ease-in-out;
       pointer-events: none;
     }
@@ -2910,9 +2911,23 @@
         transition: opacity 400ms ease-in-out !important;
       }
 
-      /* 10. HIDE TEXT-HEAVY FIELDS */
+      /* 10. PRODUCT NAME — visible on mobile, styled */
+      #nc-cap-name {
+        display: block !important;
+        position: static !important;
+        font-family: Georgia, serif !important;
+        font-size: 16px !important;
+        font-style: italic !important;
+        color: #e8c46a !important;
+        padding: 14px 24px 0 24px !important;
+        margin: 0 !important;
+        height: auto !important;
+        overflow: visible !important;
+        pointer-events: auto !important;
+      }
+
+      /* 10b. HIDE OTHER TEXT-HEAVY FIELDS */
       #nc-cap-category,
-      #nc-cap-name,
       #nc-cap-desc,
       #nc-cap-hairline {
         display: none !important;
