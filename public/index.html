@@ -1392,7 +1392,7 @@
     .cat-grid {
       display: grid;
       grid-template-columns: 1.6fr 1fr 1fr;
-      grid-template-rows: 400px repeat(3, 300px);
+      grid-template-rows: 480px 360px 360px;
       gap: 16px;
       width: 100%;
     }
@@ -1604,6 +1604,10 @@
     .cat-tile[data-anchor="category-necklace"] .cat-glass,
     .cat-tile[data-anchor="new_collection"] .cat-glass {
       padding: 13px 16px 15px;
+    }
+
+    .cat-tile[data-anchor="new_collection"] .cat-tile-img {
+      object-fit: contain;
     }
 
     .cat-glass-eyebrow {
@@ -9059,7 +9063,7 @@
 
   <!-- SHOP BY CATEGORY — BENTO MOSAIC -->
   <section id="categories" class="sec reveal">
-    <div style="max-width:1360px;margin-inline:auto;padding-block:64px 72px">
+    <div style="max-width:1360px;margin-inline:auto;padding-block:64px 48px">
       <div class="sec-head">
         <div
           style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,201,106,0.48);font-family:'Jost',sans-serif;margin-bottom:6px">
@@ -9075,7 +9079,7 @@
         <!-- Necklaces — hero, spans rows 1–2 -->
         <div class="cat-tile" data-anchor="category-necklace">
           <img class="cat-tile-img" loading="lazy" alt="Necklaces"
-            style="object-position:center 30%;filter:brightness(1.00)">
+            style="object-position:center top;filter:brightness(1.00)">
           <div class="cat-fade-bottom"></div>
           <div class="cat-fade-top"></div>
           <div class="cat-shine"></div>
@@ -9135,7 +9139,7 @@
         <!-- Sets -->
         <div class="cat-tile" data-anchor="category-sets">
           <img class="cat-tile-img" loading="lazy" alt="Sets"
-            style="object-position:center center;filter:brightness(0.88)">
+            style="object-position:center top;filter:brightness(0.88)">
           <div class="cat-fade-bottom"></div>
           <div class="cat-fade-top"></div>
           <div class="cat-shine"></div>
