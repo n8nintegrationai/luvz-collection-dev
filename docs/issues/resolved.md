@@ -4,6 +4,21 @@
 > Last updated: 2026-05-08
 
 ---
+## Hover & Interactive States
+
+| Issue | Fix |
+|-------|-----|
+| Product card hover shadow transition stutters on mobile | Add `will-change: box-shadow`; optimize for GPU |
+| Ghost button hover shows 2px border shift (layout shift) | Transition `border-color` only; use `outline` instead of `border-width` change |
+| Wishlist heart fill inconsistent between card and drawer | Sync `.pcard-wish` fill logic with drawer heart rendering |
+| Contact section card visual hierarchy flat | Make WhatsApp dominant (gold accent), Instagram secondary (gray accent) |
+
+---
+## Accessibility Debt
+
+| Issue | Fix |
+|-------|-----|
+| Hover-only affordances (gold border) fail for colorblind users | Add secondary affordance: scale, shadow, or animation |
 
 ## Visual & CSS Consistency Pass (2026-05-08)
 
