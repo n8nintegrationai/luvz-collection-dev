@@ -758,7 +758,11 @@ const MOCK_DATA = {
   categories: [],
   top_sellers: [],
   new_collection: [],
-  reviews: []
+  reviews: [],
+  referral_codes: [
+    { code: 'PRIYA10', influencer: 'Priya Sharma', discount_percent: 10, active: true },
+    { code: 'MEENA15', influencer: 'Meena Reddy', discount_percent: 15, active: true }
+  ]
 };
 
 // ── NC EDITORIAL STATE ────────────────────────────────
@@ -1021,10 +1025,10 @@ async function load() {
         }
       }
     }
-    // Store valid referral codes (case-insensitive — normalise to uppercase)
-    if (Array.isArray(d.referral_codes)) {
-      _validReferralCodes = d.referral_codes.map(c => String(c).trim().toUpperCase());
-    }
+    // Store valid referral codes — filter inactive, normalise to uppercase
+    _validReferralCodes = (d.referral_codes || [])
+      .filter(r => r.active)
+      .map(r => r.code.toUpperCase());
     renderPoster(d.poster || null);
     renderHeritagePage(d.heritage || null);
     renderAboutSection(d.about || null);
@@ -1818,6 +1822,7 @@ function applyReferralCode() {
   }
 
   // Valid — update WA URL and show success
+  if (applied) applied.textContent = '✓ Referral code applied';
   if (applied) applied.classList.add('show');
   const msg = `Hi! I'm interested in ${name} 🤩\nReferral Code: ${code}`;
   waBtn.href = `https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`;
