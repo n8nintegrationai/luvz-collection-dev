@@ -3,12 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link
-    rel="preload"
-    href="/luvz-chat.css"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-  >
+  <link rel="preload" href="/luvz-chat.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
     <link rel="stylesheet" href="/luvz-chat.css">
   </noscript>
@@ -3197,7 +3192,7 @@
       position: relative;
     }
 
-    #mob-nav li + li::before {
+    #mob-nav li+li::before {
       content: '';
       position: absolute;
       left: -1px;
@@ -8995,30 +8990,31 @@
   <nav id="mob-nav" aria-label="Mobile navigation">
     <ul>
       <li><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" aria-label="Home">
-        <img src="images/footer/home.webp" alt="Home" width="26" height="26" loading="lazy"/>
-        <span>Home</span>
-      </a></li>
+          <img src="images/footer/home.webp" alt="Home" width="26" height="26" loading="lazy" />
+          <span>Home</span>
+        </a></li>
 
       <li><a href="#categories" aria-label="Categories">
-        <img src="images/footer/categories.webp" alt="Categories" width="26" height="26" loading="lazy"/>
-        <span>Categories</span>
-      </a></li>
+          <img src="images/footer/categories.webp" alt="Categories" width="26" height="26" loading="lazy" />
+          <span>Categories</span>
+        </a></li>
 
       <li><a href="#" onclick="openWishlist();return false" aria-label="Wishlist">
-        <img src="images/footer/whishlist.webp" alt="Wishlist" width="26" height="26" loading="lazy"/>
-        <span>Wishlist</span>
-        <span id="mob-wish-count" class="mob-nav-badge" style="display:none">0</span>
-      </a></li>
+          <img src="images/footer/whishlist.webp" alt="Wishlist" width="26" height="26" loading="lazy" />
+          <span>Wishlist</span>
+          <span id="mob-wish-count" class="mob-nav-badge" style="display:none">0</span>
+        </a></li>
 
-      <li><a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <img src="images/footer/watsapp.png" alt="WhatsApp" width="26" height="26" loading="lazy"/>
-        <span>WhatsApp</span>
-      </a></li>
+      <li><a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9"
+          target="_blank" rel="noopener" aria-label="WhatsApp">
+          <img src="images/footer/watsapp.webp" alt="WhatsApp" width="26" height="26" loading="lazy" />
+          <span>WhatsApp</span>
+        </a></li>
 
       <li><a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="images/footer/instagram.webp" alt="Instagram" width="26" height="26" loading="lazy"/>
-        <span>Instagram</span>
-      </a></li>
+          <img src="images/footer/instagram.webp" alt="Instagram" width="26" height="26" loading="lazy" />
+          <span>Instagram</span>
+        </a></li>
     </ul>
   </nav>
 
@@ -9950,7 +9946,8 @@
   <div id="moverlay" class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
     <div class="mbox modal-inner">
       <button class="mclose close-btn" onclick="closeModal()" aria-label="Close product details">✕</button>
-      <div id="mimg-wrap" class="mimg-wrap" aria-label="Product gallery. Use arrow keys or swipe to navigate between images">
+      <div id="mimg-wrap" class="mimg-wrap"
+        aria-label="Product gallery. Use arrow keys or swipe to navigate between images">
         <img id="mimg" alt="Selected LUVZ Collection product image" loading="eager" onclick="this.classList.toggle('z')"
           decoding="async" />
         <button type="button" class="gallery-nav gallery-prev" id="gallery-prev" aria-label="Previous product image"
