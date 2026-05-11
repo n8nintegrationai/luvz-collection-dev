@@ -3226,15 +3226,16 @@
       transform: translateY(-2px);
     }
 
-    #mob-nav svg {
+    #mob-nav img {
       width: 26px;
       height: 26px;
       transition: filter 0.2s ease;
+      display: block;
     }
 
-    #mob-nav a:hover svg,
-    #mob-nav a.active svg,
-    #mob-nav a[aria-current="page"] svg {
+    #mob-nav a:hover img,
+    #mob-nav a.active img,
+    #mob-nav a[aria-current="page"] img {
       filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.7));
     }
 
@@ -8993,80 +8994,28 @@
   <nav id="mob-nav" aria-label="Mobile navigation">
     <ul>
       <li><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" aria-label="Home">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gold1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E17A"/>
-              <stop offset="50%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9A7B1C"/>
-            </linearGradient>
-          </defs>
-          <path d="M3 12L12 3L21 12V21H15V15H9V21H3V12Z" stroke="url(#gold1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <img src="images/footer/home.webp" alt="Home" width="26" height="26" loading="lazy"/>
         <span>Home</span>
       </a></li>
 
       <li><a href="#categories" aria-label="Categories">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gold2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E17A"/>
-              <stop offset="50%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9A7B1C"/>
-            </linearGradient>
-          </defs>
-          <circle cx="12" cy="12" r="9" stroke="url(#gold2)" stroke-width="1.5"/>
-          <path d="M12 3L13.5 8.5H19L14.5 12L16.5 17.5L12 14L7.5 17.5L9.5 12L5 8.5H10.5L12 3Z" stroke="url(#gold2)" stroke-width="1.2" stroke-linejoin="round"/>
-        </svg>
+        <img src="images/footer/categories.webp" alt="Categories" width="26" height="26" loading="lazy"/>
         <span>Categories</span>
       </a></li>
 
       <li><a href="#" onclick="openWishlist();return false" aria-label="Wishlist">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gold3" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E17A"/>
-              <stop offset="50%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9A7B1C"/>
-            </linearGradient>
-          </defs>
-          <path d="M12 21C12 21 3 14 3 8C3 5.24 5.24 3 8 3C9.64 3 11.09 3.81 12 5.08C12.91 3.81 14.36 3 16 3C18.76 3 21 5.24 21 8C21 14 12 21 12 21Z" stroke="url(#gold3)" stroke-width="1.5" stroke-linejoin="round"/>
-          <circle cx="12" cy="10" r="1.5" fill="url(#gold3)"/>
-        </svg>
+        <img src="images/footer/whishlist.webp" alt="Wishlist" width="26" height="26" loading="lazy"/>
         <span>Wishlist</span>
         <span id="mob-wish-count" class="mob-nav-badge" style="display:none">0</span>
       </a></li>
 
       <li><a href="https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20LUVZ%20Collection%20%F0%9F%A4%A9" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gold4" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E17A"/>
-              <stop offset="50%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9A7B1C"/>
-            </linearGradient>
-          </defs>
-          <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.19-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52z"
-                transform="scale(0.9) translate(1.3, 1.3)" stroke="url(#gold4)" stroke-width="0.8"/>
-          <path d="M17 14.5c-.3-.15-1.77-.87-2.04-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.68-1.64-.93-2.24-.24-.59-.49-.51-.68-.52h-.58c-.2 0-.52.07-.79.37-.28.3-1.06 1.03-1.06 2.52s1.09 2.92 1.24 3.12c.15.2 2.14 3.27 5.19 4.58.73.31 1.3.5 1.74.64.73.23 1.4.2 1.92.12.59-.09 1.81-.74 2.07-1.45.26-.71.26-1.32.18-1.45-.07-.13-.28-.2-.58-.35z"
-                transform="scale(0.9) translate(1.3, 1.3)" fill="url(#gold4)"/>
-        </svg>
+        <img src="images/footer/watsapp.webp" alt="WhatsApp" width="26" height="26" loading="lazy"/>
         <span>WhatsApp</span>
       </a></li>
 
       <li><a href="https://www.instagram.com/luvz_collection" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="gold5" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#F5E17A"/>
-              <stop offset="50%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9A7B1C"/>
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="20" height="20" rx="6" stroke="url(#gold5)" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="4" stroke="url(#gold5)" stroke-width="1.5"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="url(#gold5)"/>
-        </svg>
+        <img src="images/footer/instagram.webp" alt="Instagram" width="26" height="26" loading="lazy"/>
         <span>Instagram</span>
       </a></li>
     </ul>
