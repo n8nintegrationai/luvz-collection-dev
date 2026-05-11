@@ -1002,7 +1002,7 @@ async function load() {
         // FALLBACK: Try jsDelivr CDN as backup endpoint
         console.warn('Primary data fetch failed, attempting CDN fallback:', primaryErr.message);
         try {
-          const fallbackUrl = `https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json?v=${Date.now()}`;
+          const fallbackUrl = `/data/products.json?v=${Date.now()}`;
           const fallbackRes = await fetch(fallbackUrl, { cache: 'no-cache' });
           if (!fallbackRes.ok) throw new Error(`Fallback fetch failed: HTTP ${fallbackRes.status}`);
           d = await fallbackRes.json();
