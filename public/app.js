@@ -1029,6 +1029,7 @@ async function load() {
     _validReferralCodes = (d.referral_codes || [])
       .filter(r => r.active)
       .map(r => r.code.toUpperCase());
+    console.log('[LOAD] Referral codes:', _validReferralCodes, 'from source:', d.referral_codes);
     renderPoster(d.poster || null);
     renderHeritagePage(d.heritage || null);
     renderAboutSection(d.about || null);
@@ -1813,6 +1814,7 @@ function applyReferralCode() {
   }
 
   // Validate against list from JSON (empty list = accept any code)
+  console.log('[REFERRAL] Validating:', { code, validCodes: _validReferralCodes, isEmpty: _validReferralCodes.length === 0 });
   const isValid = _validReferralCodes.length === 0 || _validReferralCodes.includes(code);
 
   if (!isValid) {
