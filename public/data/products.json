@@ -473,9 +473,7 @@
       "price": 20000,
       "name": "Lotus Haaram",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Lotus%20Haaram%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "images": [
-        
-      ],
+      "images": [],
       "id": "nc1",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773259203/1_j9qd70.jpg",
       "description": "Long haaram with lotus motifs, natural pearls, and 22K gold polish finish.",
@@ -486,9 +484,7 @@
       "price": 25000,
       "name": "Peacock Vanki",
       "whatsapp": "https://wa.me/918919359961?text=Hi!%20I'm%20interested%20in%20the%20Peacock%20Vanki%20%F0%9F%A4%A9%20Can%20you%20share%20more%20details?",
-      "images": [
-        
-      ],
+      "images": [],
       "id": "nc2",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773259204/2_bbkj6w.jpg",
       "description": "Statement arm vanki with peacock design, emerald & ruby stones in gold polish.",
@@ -501,7 +497,7 @@
       "description": "Elegant kundan maang tikka with delicate gold chain and floral centre.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773259206/3_wltwhi.jpg",
       "images": [
-         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg",
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435933/3_yfwmof.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773435815/3_jojgit.jpg"
       ],
@@ -515,7 +511,7 @@
       "description": "Elegant kundan maang tikka with delicate gold chain and floral centre.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773259206/3_wltwhi.jpg",
       "images": [
-         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg",
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588639/1.1_u09uai.jpg",
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436021/1_ipb025.jpg"
       ],
@@ -559,7 +555,17 @@
     "cta_href": "#categories"
   },
   "referral_codes": [
-    { "code": "PRIYA10", "influencer": "Priya Sharma", "discount_percent": 10, "active": true },
-    { "code": "MEENA15", "influencer": "Meena Reddy", "discount_percent": 15, "active": true }
+    {
+      "code": "PRIYA10",
+      "influencer": "Priya Sharma",
+      "discount_percent": 10,
+      "active": true
+    },
+    {
+      "code": "MEENA15",
+      "influencer": "Meena Reddy",
+      "discount_percent": 15,
+      "active": true
+    }
   ]
 }
