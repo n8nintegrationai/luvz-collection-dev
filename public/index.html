@@ -7983,8 +7983,13 @@
     /* ── LUVZ Wordmark Reveal v1.0 ── */
 
     @keyframes titleReveal {
-      from { opacity: 1; }
-      to   { opacity: 1; }
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes lc-char-in {
@@ -7992,6 +7997,7 @@
         opacity: 0;
         transform: translate3d(0, 5px, 0);
       }
+
       to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
@@ -8003,6 +8009,7 @@
         opacity: 0;
         transform: translate3d(0, 4px, 0);
       }
+
       to {
         opacity: 1;
         transform: translate3d(0, 0, 0);
@@ -8010,19 +8017,37 @@
     }
 
     @keyframes lc-halo-in {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes lc-sweep-loop {
-      0%   { left: -130%; }
-      35%  { left: 160%;  }
-      100% { left: 160%;  }
+      0% {
+        left: -130%;
+      }
+
+      35% {
+        left: 160%;
+      }
+
+      100% {
+        left: 160%;
+      }
     }
 
     @keyframes lc-letters-expand {
-      from { letter-spacing: 0.06em; }
-      to   { letter-spacing: 0.38em; }
+      from {
+        letter-spacing: 0.06em;
+      }
+
+      to {
+        letter-spacing: 0.38em;
+      }
     }
 
     /* ── h1: column layout — letters row on top, COLLECTION below ── */
@@ -8083,12 +8108,15 @@
     #hero .hero-title .lc-char:nth-child(1) {
       animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.10s forwards !important;
     }
+
     #hero .hero-title .lc-char:nth-child(2) {
       animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.30s forwards !important;
     }
+
     #hero .hero-title .lc-char:nth-child(3) {
       animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.50s forwards !important;
     }
+
     #hero .hero-title .lc-char:nth-child(4) {
       animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.70s forwards !important;
     }
@@ -8120,12 +8148,10 @@
       height: 260px !important;
       transform: translate(-48%, -54%) !important;
       border-radius: 50% !important;
-      background: radial-gradient(
-        ellipse at 40% 50%,
-        rgba(201, 146, 58, 0.16) 0%,
-        rgba(201, 146, 58, 0.06) 38%,
-        transparent 68%
-      ) !important;
+      background: radial-gradient(ellipse at 40% 50%,
+          rgba(201, 146, 58, 0.16) 0%,
+          rgba(201, 146, 58, 0.06) 38%,
+          transparent 68%) !important;
       filter: blur(42px) !important;
       pointer-events: none !important;
       z-index: -1 !important;
@@ -8142,14 +8168,12 @@
       left: -130% !important;
       width: 55% !important;
       height: 120% !important;
-      background: linear-gradient(
-        108deg,
-        transparent 20%,
-        rgba(255, 245, 195, 0.03) 46%,
-        rgba(255, 250, 210, 0.055) 50%,
-        rgba(255, 245, 195, 0.03) 54%,
-        transparent 80%
-      ) !important;
+      background: linear-gradient(108deg,
+          transparent 20%,
+          rgba(255, 245, 195, 0.03) 46%,
+          rgba(255, 250, 210, 0.055) 50%,
+          rgba(255, 245, 195, 0.03) 54%,
+          transparent 80%) !important;
       filter: blur(6px) !important;
       pointer-events: none !important;
       z-index: 1 !important;
@@ -8162,12 +8186,19 @@
       #hero .hero-title {
         align-items: center !important;
       }
+
       #hero .hero-title .lc-word-collection {
         text-align: center !important;
       }
+
       @keyframes lc-letters-expand {
-        from { letter-spacing: 0.06em; }
-        to   { letter-spacing: 0.22em; }
+        from {
+          letter-spacing: 0.06em;
+        }
+
+        to {
+          letter-spacing: 0.22em;
+        }
       }
     }
 
@@ -8196,15 +8227,13 @@
       /* Deep gradient fade — image dissolves into dark atmosphere */
       #hero::before {
         background:
-          linear-gradient(
-            to bottom,
+          linear-gradient(to bottom,
             rgba(10, 6, 2, 0.30) 0%,
             rgba(10, 6, 2, 0.10) 20%,
             rgba(10, 6, 2, 0.20) 45%,
             rgba(10, 6, 2, 0.75) 68%,
             rgba(10, 6, 2, 0.97) 85%,
-            rgba(10, 6, 2, 1.00) 100%
-          ) !important;
+            rgba(10, 6, 2, 1.00) 100%) !important;
       }
 
       /* Hero content floats above full-bleed image */
@@ -8212,7 +8241,7 @@
         position: relative !important;
         z-index: 3 !important;
         margin-top: auto !important;
-        margin-bottom: clamp(130px, 26vw, 200px) !important;
+        margin-bottom: clamp(130px, 26vw, 140px) !important;
         padding-bottom: 0 !important;
       }
 
@@ -8295,6 +8324,7 @@
       }
 
     }
+
     /* ── END Mobile Hero Editorial v1.0 ── */
 
     /* ── HERO FIX v1.3 ── */
@@ -9417,14 +9447,14 @@
       <div class="lc-eyebrow">✦ Designer Boutique ✦</div>
 
       <h1 class="hero-title lc-fade-up">
-          <span class="lc-letters-row">
-            <span class="lc-char">L</span>
-            <span class="lc-char">U</span>
-            <span class="lc-char">V</span>
-            <span class="lc-char">Z</span>
-          </span>
-          <span class="lc-word-collection">COLLECTION</span>
-        </h1>
+        <span class="lc-letters-row">
+          <span class="lc-char">L</span>
+          <span class="lc-char">U</span>
+          <span class="lc-char">V</span>
+          <span class="lc-char">Z</span>
+        </span>
+        <span class="lc-word-collection">COLLECTION</span>
+      </h1>
       <div class="lc-micro-copy hero-caption-styled"><span class="hero-cap-part">Handcrafted</span><span
           class="hero-cap-sep"> · </span><span class="hero-cap-part">92.5 Silver</span><span class="hero-cap-sep"> ·
         </span><span class="hero-cap-part">Heritage Design</span></div>
