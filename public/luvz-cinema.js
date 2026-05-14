@@ -34,6 +34,7 @@
   const jewelry    = document.querySelector('.luvz-cin-jewelry');
   const wordmark   = document.querySelector('.luvz-cin-text');
   const transition = document.querySelector('.luvz-cin-transition');
+  const mask       = document.querySelector('.luvz-cin-mask');
 
   if (!hero || !jewelry || !wordmark) return;
 
@@ -206,5 +207,71 @@
       ease: 'none',
       duration: 0.25,
     }, 0.75);
+
+  // ── PHASE 4: CURSOR SYSTEM ──
+  const cursorDot = document.querySelector('.luvz-cin-cursor-dot');
+  const cursorRing = document.querySelector('.luvz-cin-cursor-ring');
+
+
+  if (cursorDot && cursorRing && !IS_TOUCH) {
+    let dotX = 0, dotY = 0;
+    let ringX = 0, ringY = 0;
+    let mouseX = 0, mouseY = 0;
+    const DOT_LERP = 0.12;
+    const RING_LERP = 0.08;
+
+    // Single merged mousemove listener: first-move activation and coordinate tracking
+    hero.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!cursorActive) {
+        cursorActive = true;
+        cursorDot.style.opacity = '1';
+        cursorRing.style.opacity = '1';
+        startCursorRAF();
+      }
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      cursorActive = false;
+      if (cursorRAF) { cancelAnimationFrame(cursorRAF); cursorRAF = null; }
+      cursorDot.style.opacity = '0';
+      cursorRing.style.opacity = '0';
+    });
+
+    hero.addEventListener('mouseenter', () => {
+      if (heroVisible) {
+        cursorDot.style.opacity = '1';
+      }
+    });
+
+    function startCursorRAF() {
+      if (cursorRAF) cancelAnimationFrame(cursorRAF);
+      function tick() {
+        if (!cursorActive || !heroVisible) return;
+        dotX += (mouseX - dotX) * DOT_LERP;
+        dotY += (mouseY - dotY) * DOT_LERP;
+        ringX += (mouseX - ringX) * RING_LERP;
+        ringY += (mouseY - ringY) * RING_LERP;
+        cursorDot.style.transform = `translate3d(${dotX - 5}px, ${dotY - 5}px, 0)`;
+        cursorRing.style.transform = `translate3d(${ringX - 20}px, ${ringY - 20}px, 0)`;
+        cursorRAF = requestAnimationFrame(tick);
+      }
+      cursorRAF = requestAnimationFrame(tick);
+    }
+
+    // ── Jewelry Hover System ──
+    if (mask) {
+      mask.addEventListener('mouseenter', () => {
+        cursorRing.classList.add('is-hovering');
+        gsap.to(cursorDot, { scale: 0.5, overwrite: true, duration: 0.3 });
+      });
+
+      mask.addEventListener('mouseleave', () => {
+        cursorRing.classList.remove('is-hovering');
+        gsap.to(cursorDot, { scale: 1, overwrite: true, duration: 0.3 });
+      });
+    }
+  }
 
 })();
