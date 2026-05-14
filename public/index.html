@@ -8939,8 +8939,9 @@
       max-width: 560px;
       min-width: 300px;
       margin: 0 auto;
-      opacity: 1;
-      transform: none;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: none;
       will-change: transform, opacity;
       pointer-events: auto;
     }
@@ -9334,12 +9335,12 @@
   <section id="hero" class="hero hero-redesign">
 
     <!-- Atmospheric glow layer (behind jewelry) -->
-    <div class="luvz-cin-glow" aria-hidden="true"></div>
+    <div class="luvz-cin-glow" style="opacity:0" aria-hidden="true"></div>
 
     <!-- Jewelry image (the hero piece) -->
     <div class="luvz-cin-stage">
       <!-- v7 ARCHITECTURE — MASK + TRANSFORM SEPARATION (STRONGLY RECOMMENDED) -->
-      <div class="luvz-cin-jewelry">
+      <div class="luvz-cin-jewelry" style="opacity:0;transform:translateY(40px)">
         <div class="luvz-cin-mask">
           <img
             src="images/hero_image.webp"
@@ -9354,7 +9355,7 @@
     </div>
 
     <!-- Brand wordmark -->
-    <div class="luvz-cin-text" aria-label="LUVZ Collection">
+    <div class="luvz-cin-text" style="opacity:0" aria-label="LUVZ Collection">
       <span>LUVZ</span>
     </div>
 

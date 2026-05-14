@@ -124,6 +124,12 @@ function toggleMenu(forceClose) {
   m.classList.toggle('open', willOpen);
   // Lock body scroll while overlay is open
   document.body.style.overflow = willOpen ? 'hidden' : '';
+  // Cinema hero overlay manager
+  if (willOpen) {
+    if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('mobile-nav');
+  } else {
+    if (window.__luvzOverlayClose) window.__luvzOverlayClose('mobile-nav');
+  }
 }
 // Close menu on Escape key
 document.addEventListener('keydown', e => {
@@ -339,12 +345,14 @@ function openWishlist() {
   document.getElementById('wish-overlay').classList.add('open');
   document.getElementById('wish-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('drawer');
 }
 
 function closeWishlist() {
   document.getElementById('wish-overlay').classList.remove('open');
   document.getElementById('wish-drawer').classList.remove('open');
   document.body.style.overflow = '';
+  if (window.__luvzOverlayClose) window.__luvzOverlayClose('drawer');
 }
 
 function removeFromWishlist(id) {
@@ -1206,6 +1214,7 @@ function openModal(p, badge) {
   if (minfoScroll) minfoScroll.scrollTop = 0;
   document.body.style.overflow = 'hidden';
   document.body.classList.add('modal-open');
+  if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('modal');
   renderGalleryFrame();
 
   // Move focus to close button for keyboard/screen reader users
@@ -1239,6 +1248,7 @@ function closeModal() {
   document.getElementById('moverlay').classList.remove('active');
   document.body.style.overflow = '';
   document.body.classList.remove('modal-open');
+  if (window.__luvzOverlayClose) window.__luvzOverlayClose('modal');
   if (_gallery._keyHandler) document.removeEventListener('keydown', _gallery._keyHandler);
   _gallery._keyHandler = null;
   // Task 3B + 4A: restore original meta + clear hash
