@@ -7703,9 +7703,8 @@
 
     .hero-title,
     #hero h1 {
-      animation: titleReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      animation-delay: 0.3s;
-      opacity: 0;
+      animation: none;
+      opacity: 1;
       font-size: clamp(2.6rem, 8vw, 6.5rem) !important;
       line-height: 1.02 !important;
       letter-spacing: 0.07em !important;
@@ -7980,6 +7979,199 @@
       padding-top: clamp(64px, 10vw, 120px);
       padding-bottom: clamp(64px, 10vw, 120px);
     }
+
+    /* ── LUVZ Wordmark Reveal v1.0 ── */
+
+    @keyframes titleReveal {
+      from { opacity: 1; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes lc-char-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 5px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes lc-collection-in {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 4px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes lc-halo-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes lc-sweep-loop {
+      0%   { left: -130%; }
+      35%  { left: 160%;  }
+      100% { left: 160%;  }
+    }
+
+    @keyframes lc-letters-expand {
+      from { letter-spacing: 0.06em; }
+      to   { letter-spacing: 0.38em; }
+    }
+
+    /* ── h1: column layout — letters row on top, COLLECTION below ── */
+    #hero .hero-title {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 8px !important;
+      opacity: 1 !important;
+      transform: none !important;
+      position: relative !important;
+      overflow: visible !important;
+      background: none !important;
+      -webkit-text-fill-color: unset !important;
+      color: unset !important;
+      text-shadow: none !important;
+      letter-spacing: normal !important;
+      animation: none !important;
+      font-size: clamp(2.6rem, 8vw, 6.5rem) !important;
+    }
+
+    /* ── Letters row wrapper: horizontal, expanding ── */
+    #hero .hero-title .lc-letters-row {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: baseline !important;
+      gap: 0 !important;
+      letter-spacing: 0.06em !important;
+      opacity: 1 !important;
+      animation: lc-letters-expand 3.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards !important;
+      will-change: letter-spacing !important;
+      position: relative !important;
+      line-height: 1 !important;
+      min-height: 1em !important;
+      height: auto !important;
+      white-space: nowrap !important;
+    }
+
+    /* ── Each letter: shared style ── */
+    #hero .hero-title .lc-char {
+      display: inline-block !important;
+      opacity: 0;
+      transform: translate3d(0, 5px, 0);
+      will-change: transform, opacity;
+      font-size: inherit !important;
+      line-height: 1 !important;
+      color: #E8C46A !important;
+      -webkit-text-fill-color: #E8C46A !important;
+      background: none !important;
+      text-shadow:
+        0 0 1px rgba(255, 220, 140, 0.40),
+        0 0 12px rgba(201, 146, 58, 0.22),
+        0 0 30px rgba(201, 146, 58, 0.10),
+        0 8px 28px rgba(0, 0, 0, 0.85) !important;
+    }
+
+    /* ── Per-letter stagger — smooth, even pacing ── */
+    #hero .hero-title .lc-char:nth-child(1) {
+      animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.10s forwards !important;
+    }
+    #hero .hero-title .lc-char:nth-child(2) {
+      animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.30s forwards !important;
+    }
+    #hero .hero-title .lc-char:nth-child(3) {
+      animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.50s forwards !important;
+    }
+    #hero .hero-title .lc-char:nth-child(4) {
+      animation: lc-char-in 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.70s forwards !important;
+    }
+
+    /* ── COLLECTION subtext ── */
+    #hero .hero-title .lc-word-collection {
+      display: block !important;
+      font-size: clamp(0.6rem, 1.6vw, 0.85rem) !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.50em !important;
+      text-indent: 0.50em !important;
+      color: rgba(210, 178, 105, 0.70) !important;
+      -webkit-text-fill-color: rgba(210, 178, 105, 0.70) !important;
+      background: none !important;
+      filter: none !important;
+      opacity: 0;
+      transform: translate3d(0, 4px, 0);
+      will-change: transform, opacity;
+      animation: lc-collection-in 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards !important;
+    }
+
+    /* ── Ambient halo ── */
+    #hero .hero-title::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      width: 720px !important;
+      height: 260px !important;
+      transform: translate(-48%, -54%) !important;
+      border-radius: 50% !important;
+      background: radial-gradient(
+        ellipse at 40% 50%,
+        rgba(201, 146, 58, 0.16) 0%,
+        rgba(201, 146, 58, 0.06) 38%,
+        transparent 68%
+      ) !important;
+      filter: blur(42px) !important;
+      pointer-events: none !important;
+      z-index: -1 !important;
+      opacity: 0 !important;
+      animation: lc-halo-in 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards !important;
+      will-change: opacity !important;
+    }
+
+    /* ── Slow light sweep ── */
+    #hero .hero-title::after {
+      content: '' !important;
+      position: absolute !important;
+      top: -10% !important;
+      left: -130% !important;
+      width: 55% !important;
+      height: 120% !important;
+      background: linear-gradient(
+        108deg,
+        transparent 20%,
+        rgba(255, 245, 195, 0.03) 46%,
+        rgba(255, 250, 210, 0.055) 50%,
+        rgba(255, 245, 195, 0.03) 54%,
+        transparent 80%
+      ) !important;
+      filter: blur(6px) !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      animation: lc-sweep-loop 18s cubic-bezier(0.4, 0, 0.6, 1) 3.2s infinite !important;
+      will-change: left !important;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      #hero .hero-title {
+        align-items: center !important;
+      }
+      #hero .hero-title .lc-word-collection {
+        text-align: center !important;
+      }
+      @keyframes lc-letters-expand {
+        from { letter-spacing: 0.06em; }
+        to   { letter-spacing: 0.22em; }
+      }
+    }
+
+    /* ── END LUVZ Wordmark Reveal v1.0 ── */
 
     /* ── HERO FIX v1.3 ── */
 
@@ -9101,9 +9293,14 @@
       <div class="lc-eyebrow">✦ Designer Boutique ✦</div>
 
       <h1 class="hero-title lc-fade-up">
-        <span>LUVZ</span>
-        <span>COLLECTION</span>
-      </h1>
+          <span class="lc-letters-row">
+            <span class="lc-char">L</span>
+            <span class="lc-char">U</span>
+            <span class="lc-char">V</span>
+            <span class="lc-char">Z</span>
+          </span>
+          <span class="lc-word-collection">COLLECTION</span>
+        </h1>
       <div class="lc-micro-copy hero-caption-styled"><span class="hero-cap-part">Handcrafted</span><span
           class="hero-cap-sep"> · </span><span class="hero-cap-part">92.5 Silver</span><span class="hero-cap-sep"> ·
         </span><span class="hero-cap-part">Heritage Design</span></div>
