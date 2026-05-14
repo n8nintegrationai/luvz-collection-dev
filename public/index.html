@@ -9450,7 +9450,7 @@
     .nk-hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 500px;
+      min-height: 450px;
     }
     .nk-hero[data-image-left="false"] { direction: rtl; }
     .nk-hero[data-image-left="false"] > * { direction: ltr; }
@@ -9498,33 +9498,6 @@
       transform: rotate(180deg);
       z-index: 3;
     }
-    .nk-image-brand {
-      position: absolute;
-      bottom: 20px;
-      right: 22px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--nk-gold);
-      font-family: var(--nk-font-d);
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      opacity: 0.8;
-      z-index: 3;
-    }
-    .nk-image-tag {
-      position: absolute;
-      bottom: 26px;
-      left: 20px;
-      font-family: var(--nk-font-s);
-      font-style: italic;
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--nk-gold);
-      z-index: 3;
-    }
-
     /* Text column */
     .nk-textcol {
       padding: 12px 48px;
@@ -9657,8 +9630,84 @@
       align-items: center;
       gap: 7px;
     }
-    .nk-cta-secondary .nk-wish-icon { color: var(--nk-gold); font-size: 15px; }
     .nk-cta-secondary:hover { color: var(--nk-ivory); }
+
+    .nk-cta-secondary-group {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Wishlist icon overlay */
+    .nk-wish-icon-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(201, 163, 90, 0.4);
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+      transition: background 0.24s ease-out, transform 0.24s ease-out, border-color 0.24s ease-out;
+    }
+    .nk-wish-icon-btn:hover {
+      background: rgba(0, 0, 0, 0.6);
+      border-color: rgba(201, 163, 90, 0.8);
+      transform: scale(1.1);
+    }
+    .nk-wish-icon-btn .nk-wish-icon {
+      font-size: 18px;
+      line-height: 1;
+      color: inherit;
+    }
+    .nk-wish-icon-btn.wish-active .nk-wish-icon {
+      color: var(--nk-gold);
+    }
+    .nk-wish-icon-btn:not(.wish-active) .nk-wish-icon {
+      color: var(--nk-warm);
+    }
+    .nk-wish-icon-btn:not(.wish-active) {
+      color: var(--nk-warm);
+    }
+
+    /* Quick View hover overlay */
+    .nk-quick-view-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .nk-imageframe:hover .nk-quick-view-overlay {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+    }
+    .nk-qv-text {
+      font-family: var(--nk-font-s);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--nk-ivory);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+    }
+    .nk-imageframe:hover .nk-qv-text {
+      opacity: 1;
+    }
 
     .nk-fineprint {
       margin-top: 14px;
@@ -9815,8 +9864,24 @@
       }
       .nk-hero[data-image-left="false"] .nk-imagecol { padding: 0 16px; }
       .nk-imageframe { flex: unset; height: 100%; }
-      .nk-imagecaption,
-      .nk-image-brand { display: none; }
+      .nk-imagecaption { display: none; }
+
+      .nk-wish-icon-btn {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+      }
+      .nk-wish-icon-btn .nk-wish-icon { font-size: 16px; }
+
+      .nk-quick-view-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.4);
+        pointer-events: auto;
+      }
+      .nk-qv-text {
+        opacity: 1;
+      }
 
       .nk-textcol {
         padding: 20px 24px 14px;
@@ -9859,6 +9924,24 @@
       .nk-pt-l2 { font-size: 24px; margin-left: 14px; }
       .nk-cta-row { flex-direction: column; align-items: flex-start; gap: 12px; }
       .nk-cta { width: 100%; justify-content: center; }
+      .nk-cta-secondary-group { gap: 12px; }
+      .nk-wish-icon-btn {
+        top: 8px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        background: rgba(0, 0, 0, 0.4);
+      }
+      .nk-wish-icon-btn .nk-wish-icon { font-size: 14px; }
+
+      .nk-quick-view-overlay {
+        background: rgba(0, 0, 0, 0.45);
+      }
+      .nk-qv-text {
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
       .nk-thumbnav { padding: 12px 14px; }
     }
   </style>

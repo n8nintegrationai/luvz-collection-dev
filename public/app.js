@@ -315,6 +315,20 @@ function toggleWish(btn, id) {
       b.setAttribute('aria-label', 'Add ' + productName + ' to wishlist');
     }
   });
+  // Update editorial wishlist icon
+  const editorialBtn = document.querySelector('.nk-wish-icon-btn[data-pid="' + id + '"]');
+  if (editorialBtn) {
+    const iconSpan = editorialBtn.querySelector('.nk-wish-icon');
+    if (adding) {
+      editorialBtn.classList.add('wish-active');
+      if (iconSpan) iconSpan.textContent = '♥';
+      editorialBtn.setAttribute('aria-label', 'Remove from wishlist');
+    } else {
+      editorialBtn.classList.remove('wish-active');
+      if (iconSpan) iconSpan.textContent = '♡';
+      editorialBtn.setAttribute('aria-label', 'Add to wishlist');
+    }
+  }
   updateWishCount();
 }
 
@@ -694,6 +708,7 @@ function buildNecklaceEditorial(products) {
   function render(idx) {
     activeIdx = idx;
     const piece = items[idx];
+    window.necklaceEditorialPiece = piece;
     const imageLeft = idx % 2 === 0;
     const wishList = JSON.parse(localStorage.getItem('luvz-wish') || '[]');
     const wished = wishList.includes(piece.id);
@@ -728,10 +743,14 @@ function buildNecklaceEditorial(products) {
           <div class="nk-imagecol">
             <div class="nk-imageframe">
               <img src="${piece.image}" alt="${piece.displayName} ${piece.displaySub}" loading="lazy">
+              <div class="nk-quick-view-overlay" onclick="openModal(window.necklaceEditorialPiece, 'Necklace'); event.stopPropagation();">
+                <span class="nk-qv-text">Quick View</span>
+              </div>
+              <button class="nk-wish-icon-btn pcard-wish${wished ? ' wish-active' : ''}" data-pid="${piece.id}" onclick="event.stopPropagation();toggleWish(this,'${piece.id}')" aria-label="${wished ? 'Remove from wishlist' : 'Add to wishlist'}">
+                <span class="nk-wish-icon">${wished ? '♥' : '♡'}</span>
+              </button>
               <span class="nk-imagecaption">Photograph · LUVZ Atelier</span>
-              <span class="nk-image-brand">✦ Luvz <em>Collection</em></span>
             </div>
-            <div class="nk-image-tag">— Plate N&#xBA; ${piece.number}</div>
           </div>
 
           <div class="nk-textcol">
@@ -763,10 +782,6 @@ function buildNecklaceEditorial(products) {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.37A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.27 14.07c-.22.63-1.27 1.2-1.78 1.27-.46.07-1.04.1-1.68-.1-.39-.13-.88-.29-1.52-.56-2.67-1.15-4.42-3.83-4.55-4.01-.13-.18-1.09-1.44-1.09-2.75 0-1.31.69-1.95.93-2.22.25-.27.54-.34.72-.34.18 0 .36 0 .52.01.16.01.39-.06.61.47.22.53.76 1.84.83 1.97.07.13.11.29.02.46-.09.18-.13.29-.27.45-.13.16-.28.36-.4.48-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.92 1.91 1.21 2.18 1.34.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.56.74 1.83.87.27.13.45.2.51.31.07.11.07.62-.15 1.21z"/></svg>
                   Enquire on WhatsApp
                 </a>
-                <button class="nk-cta-secondary pcard-wish" data-pid="${piece.id}" onclick="toggleWish('${piece.id}',event)">
-                  <span class="nk-wish-icon">${wished ? '♥' : '♡'}</span>
-                  <span>${wished ? 'Saved' : 'Save to wishlist'}</span>
-                </button>
               </div>
               <div class="nk-fineprint">Each piece is made-to-order. Delivery 4–6 weeks.</div>
             </div>
