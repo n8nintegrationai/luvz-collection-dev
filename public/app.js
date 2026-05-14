@@ -124,12 +124,6 @@ function toggleMenu(forceClose) {
   m.classList.toggle('open', willOpen);
   // Lock body scroll while overlay is open
   document.body.style.overflow = willOpen ? 'hidden' : '';
-  // Cinema hero overlay manager
-  if (willOpen) {
-    if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('mobile-nav');
-  } else {
-    if (window.__luvzOverlayClose) window.__luvzOverlayClose('mobile-nav');
-  }
 }
 // Close menu on Escape key
 document.addEventListener('keydown', e => {
@@ -140,10 +134,7 @@ document.addEventListener('keydown', e => {
 
 /* ── Reveal ─────────────────────────── */
 const ro = new IntersectionObserver(es => {
-  es.forEach(e => {
-    if (e.target.closest('#hero')) return; // cinema hero — GSAP owns all motion inside #hero
-    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) }
-  });
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target) } });
 }, { threshold: .07 });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
@@ -345,14 +336,12 @@ function openWishlist() {
   document.getElementById('wish-overlay').classList.add('open');
   document.getElementById('wish-drawer').classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('drawer');
 }
 
 function closeWishlist() {
   document.getElementById('wish-overlay').classList.remove('open');
   document.getElementById('wish-drawer').classList.remove('open');
   document.body.style.overflow = '';
-  if (window.__luvzOverlayClose) window.__luvzOverlayClose('drawer');
 }
 
 function removeFromWishlist(id) {
@@ -1214,7 +1203,6 @@ function openModal(p, badge) {
   if (minfoScroll) minfoScroll.scrollTop = 0;
   document.body.style.overflow = 'hidden';
   document.body.classList.add('modal-open');
-  if (window.__luvzOverlayOpen) window.__luvzOverlayOpen('modal');
   renderGalleryFrame();
 
   // Move focus to close button for keyboard/screen reader users
@@ -1248,7 +1236,6 @@ function closeModal() {
   document.getElementById('moverlay').classList.remove('active');
   document.body.style.overflow = '';
   document.body.classList.remove('modal-open');
-  if (window.__luvzOverlayClose) window.__luvzOverlayClose('modal');
   if (_gallery._keyHandler) document.removeEventListener('keydown', _gallery._keyHandler);
   _gallery._keyHandler = null;
   // Task 3B + 4A: restore original meta + clear hash
@@ -1940,6 +1927,111 @@ async function askLuvzAI() {
 
 /* ═══ PHASE 3 HERO ENHANCEMENTS ═══ */
 (function lcHeroPhase3() {
+
+  /* ── ENHANCED PARTICLES ── */
+  function lcInitParticles() {
+    const canvas = document.getElementById('hero-particles-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const MOBILE = () => window.innerWidth < 768;
+
+    let W, H, particles = [], raf;
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function makeParticle() {
+      const tier = Math.random();
+      // Three tiers of size for depth illusion
+      const size = tier < 0.3
+        ? 1 + Math.random() * 1.0   // small background: 1.5–2.5px
+        : tier < 0.7
+          ? 2 + Math.random() * 1.5  // mid: 2.5–4px
+          : 3 + Math.random() * 2.0; // large foreground: 3.5–5.5px
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size,
+        speed: 0.10 + Math.random() * 0.28,
+        drift: (Math.random() - 0.5) * 0.4,
+        phase: Math.random() * Math.PI * 2,
+        freq: 0.004 + Math.random() * 0.006,
+        alpha: 0.12 + Math.random() * 0.55,
+        alphaDelta: (Math.random() - 0.5) * 0.003,
+        alphaMin: 0.08,
+        alphaMax: 0.75,
+      };
+    }
+
+    function init() {
+      resize();
+      const COUNT = MOBILE() ? 0 : 58;
+      particles = Array.from({ length: COUNT }, makeParticle);
+    }
+
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      frame++;
+      particles.forEach(p => {
+        // Vertical drift
+        p.y -= p.speed;
+        // Sine wave horizontal
+        p.x += Math.sin(p.phase + frame * p.freq) * p.drift;
+        // Alpha breathe
+        p.alpha += p.alphaDelta;
+        if (p.alpha > p.alphaMax) { p.alpha = p.alphaMax; p.alphaDelta *= -1; }
+        if (p.alpha < p.alphaMin) { p.alpha = p.alphaMin; p.alphaDelta *= -1; }
+        // Wrap
+        if (p.y < -6) { p.y = H + 4; p.x = Math.random() * W; }
+        if (p.x < -10) { p.x = W + 4; }
+        if (p.x > W + 10) { p.x = -4; }
+
+        // Draw with soft glow for larger particles
+        if (p.size >= 3) {
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2.2);
+          grd.addColorStop(0, `rgba(245,215,138,${p.alpha})`);
+          grd.addColorStop(0.4, `rgba(212,175,55,${p.alpha * 0.6})`);
+          grd.addColorStop(1, `rgba(200,140,44,0)`);
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        }
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(245,215,138,${p.alpha})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    }
+
+    // Pause on hidden tab
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(draw);
+    });
+
+    // Stop RAF when canvas leaves viewport
+    const _canvasIO = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
+      } else if (!raf) {
+        raf = requestAnimationFrame(draw);
+      }
+    }, { threshold: 0 });
+    _canvasIO.observe(canvas);
+
+    window.addEventListener('resize', () => { resize(); }, { passive: true });
+
+    init();
+    raf = requestAnimationFrame(draw);
+  }
+
   /* ── PARALLAX (enhanced sensitivity) ── */
   function lcEnhanceParallax() {
     const hero = document.querySelector('.hero-redesign');
@@ -1991,6 +2083,7 @@ async function askLuvzAI() {
 
   /* ── INIT ── */
   function lcInit() {
+    lcInitParticles();
     lcEnhanceParallax();
   }
 
