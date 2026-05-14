@@ -656,6 +656,169 @@ function goPage(sec, p) { const s = CS[sec]; if (!s) return; s.page = Math.max(0
 function nextPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page + 1) }
 function prevPage(sec) { const s = CS[sec]; if (s) goPage(sec, s.page - 1) }
 
+/* ── Necklace Editorial Metadata ── */
+const NK_META = {
+  nl1: { number:'01', eyebrow:'Heritage · South Indian', chapter:'A Royal Court Recalled', displayName:'Temple Coin', displaySub:'Necklace' },
+  nl2: { number:'02', eyebrow:'Bridal · Statement', chapter:'Worn by Empresses', displayName:'Guttapusalu', displaySub:'Haram' },
+  nl3: { number:'03', eyebrow:'Heritage · Choker', chapter:'The Mango Motif', displayName:'Manga Mala', displaySub:'Choker' },
+  nl4: { number:'04', eyebrow:'Modern · Diamantine', chapter:'A Constellation Worn Low', displayName:'Tara', displaySub:'Layered Chain' },
+  nl5: { number:'05', eyebrow:'Heritage · Navratna', chapter:'Nine Gems, One Story', displayName:'Navratna', displaySub:'Aura Haar' },
+};
+
+function buildNecklaceEditorial(products) {
+  const mount = document.getElementById('nk-editorial-mount');
+  if (!mount || !products.length) return;
+
+  // Merge products with editorial metadata
+  const items = products.map(p => {
+    productRegistry[p.id] = p;
+    const meta = NK_META[p.id] || {};
+    return Object.assign({}, p, meta, {
+      displayPrice: '₹' + Number(p.price).toLocaleString('en-IN'),
+    });
+  });
+
+  let activeIdx = 0;
+  const total = items.length;
+
+  function fleurSVG(w) {
+    return `<svg class="nk-fleur" width="${w}" height="12" viewBox="0 0 80 12" fill="none" aria-hidden="true">
+      <line x1="0" y1="6" x2="32" y2="6" stroke="var(--nk-gold)" stroke-width="0.5"/>
+      <line x1="48" y1="6" x2="80" y2="6" stroke="var(--nk-gold)" stroke-width="0.5"/>
+      <circle cx="40" cy="6" r="1.6" fill="var(--nk-gold)"/>
+      <circle cx="34" cy="6" r="0.8" fill="var(--nk-gold)" opacity="0.5"/>
+      <circle cx="46" cy="6" r="0.8" fill="var(--nk-gold)" opacity="0.5"/>
+    </svg>`;
+  }
+
+  function render(idx) {
+    activeIdx = idx;
+    const piece = items[idx];
+    const imageLeft = idx % 2 === 0;
+    const wishList = JSON.parse(localStorage.getItem('luvz-wish') || '[]');
+    const wished = wishList.includes(piece.id);
+
+    mount.innerHTML = `
+      <div class="nk-ed">
+        <div class="nk-head">
+          <div class="nk-head-left">
+            <span class="nk-eyebrow"><span class="nk-eyebrow-tick"></span>The Necklace Index</span>
+          </div>
+          <div class="nk-head-center">
+            <div class="nk-section-title">
+              <span class="nk-title-thin">The</span>
+              <span class="nk-title-main">Necklace</span>
+              <span class="nk-title-italic">edit</span>
+            </div>
+            ${fleurSVG(120)}
+            <div class="nk-section-sub">Delicate layers. Everyday glamour.</div>
+          </div>
+          <div class="nk-head-right">
+            <div class="nk-lb-num">
+              <span class="nk-lb-pre">N&#xBA;</span>
+              <span class="nk-lb-active">${piece.number}</span>
+              <span class="nk-lb-slash">/</span>
+              <span class="nk-lb-total">${String(total).padStart(2,'0')}</span>
+              <span class="nk-lb-label">VOL. I</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nk-hero" data-image-left="${imageLeft}">
+          <div class="nk-imagecol">
+            <div class="nk-imageframe">
+              <img src="${piece.image}" alt="${piece.displayName} ${piece.displaySub}" loading="lazy">
+              <span class="nk-imagecaption">Photograph · LUVZ Atelier</span>
+              <span class="nk-image-brand">✦ Luvz <em>Collection</em></span>
+            </div>
+            <div class="nk-image-tag">— Plate N&#xBA; ${piece.number}</div>
+          </div>
+
+          <div class="nk-textcol">
+            <div class="nk-textinner">
+              <div class="nk-meta-row">
+                <span class="nk-eyebrow"><span class="nk-eyebrow-tick"></span>${piece.eyebrow}</span>
+                <span class="nk-meta-dot">·</span>
+                <span class="nk-meta-chapter">${piece.chapter}</span>
+              </div>
+
+              <div class="nk-piece-title">
+                <span class="nk-pt-l1">${piece.displayName}</span>
+                <span class="nk-pt-l2"><em>${piece.displaySub}</em></span>
+              </div>
+
+              <div class="nk-priceline">
+                <span class="nk-from">From</span>
+                <span class="nk-amount">${piece.displayPrice}</span>
+              </div>
+
+              <div class="nk-rule">${fleurSVG(88)}</div>
+
+              <p class="nk-story">
+                ${piece.description || 'Handcrafted gold-polished silver jewelry.'}
+              </p>
+
+              <div class="nk-cta-row">
+                <a href="${waURL(piece.name)}" class="nk-cta" target="_blank" rel="noopener">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.37A9.94 9.94 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.27 14.07c-.22.63-1.27 1.2-1.78 1.27-.46.07-1.04.1-1.68-.1-.39-.13-.88-.29-1.52-.56-2.67-1.15-4.42-3.83-4.55-4.01-.13-.18-1.09-1.44-1.09-2.75 0-1.31.69-1.95.93-2.22.25-.27.54-.34.72-.34.18 0 .36 0 .52.01.16.01.39-.06.61.47.22.53.76 1.84.83 1.97.07.13.11.29.02.46-.09.18-.13.29-.27.45-.13.16-.28.36-.4.48-.13.13-.27.27-.12.53.16.27.7 1.16 1.51 1.88 1.04.92 1.91 1.21 2.18 1.34.27.13.43.11.59-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.61-.13.25.09 1.56.74 1.83.87.27.13.45.2.51.31.07.11.07.62-.15 1.21z"/></svg>
+                  Enquire on WhatsApp
+                </a>
+                <button class="nk-cta-secondary pcard-wish" data-pid="${piece.id}" onclick="toggleWish('${piece.id}',event)">
+                  <span class="nk-wish-icon">${wished ? '♥' : '♡'}</span>
+                  <span>${wished ? 'Saved' : 'Save to wishlist'}</span>
+                </button>
+              </div>
+              <div class="nk-fineprint">Each piece is made-to-order. Delivery 4–6 weeks.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nk-thumbnav">
+          <div class="nk-tn-left">
+            <span class="nk-tn-counter">
+              <span class="nk-tnc-active">${piece.number}</span>
+              <span class="nk-tnc-slash"> / </span>
+              <span class="nk-tnc-total">${String(total).padStart(2,'0')}</span>
+            </span>
+            <span class="nk-tn-piecename">The ${piece.displayName} ${piece.displaySub}</span>
+          </div>
+          <div class="nk-tn-strip">
+            <button class="nk-tn-arrow" data-nk-prev aria-label="Previous">&#8592;</button>
+            ${items.map((n, i) => `
+              <button class="nk-thumb${i===idx?' is-active':''}" data-nk-idx="${i}" aria-label="${n.displayName}">
+                <img src="${n.image}" alt="${n.displayName}" loading="lazy">
+                <span class="nk-th-num">${n.number}</span>
+                <span class="nk-th-name">${n.displayName}</span>
+              </button>`).join('')}
+            <button class="nk-tn-arrow" data-nk-next aria-label="Next">&#8594;</button>
+          </div>
+          <div class="nk-tn-right">
+            <span class="nk-tn-meta">View full detail</span>
+            <span class="nk-tn-arr">&#8594;</span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Attach event listeners
+    const prevBtn = mount.querySelector('[data-nk-prev]');
+    const nextBtn = mount.querySelector('[data-nk-next]');
+    const thumbs = mount.querySelectorAll('[data-nk-idx]');
+    const rightMeta = mount.querySelector('.nk-tn-right');
+
+    if (prevBtn) prevBtn.addEventListener('click', () => render((activeIdx - 1 + total) % total));
+    if (nextBtn) nextBtn.addEventListener('click', () => render((activeIdx + 1) % total));
+    thumbs.forEach(btn => {
+      btn.addEventListener('click', () => render(Number(btn.dataset.nkIdx)));
+    });
+    if (rightMeta) {
+      rightMeta.addEventListener('click', () => openModal(piece, 'Necklace'));
+      rightMeta.style.cursor = 'pointer';
+    }
+  }
+
+  render(0);
+}
 
 /* ── Build carousel into any track/nav pair ── */
 function buildCarouselInSection(trackId, navId, items, categoryKey) {
@@ -1087,7 +1250,11 @@ async function load() {
       if (subEl && catDef && catDef.subtitle) subEl.textContent = catDef.subtitle;
       if (storyEl && catDef && catDef.story) storyEl.textContent = catDef.story;
       if (products.length) {
-        buildCarouselInSection(trackId, navId, products, key);
+        if (key === 'necklace') {
+          buildNecklaceEditorial(products);
+        } else {
+          buildCarouselInSection(trackId, navId, products, key);
+        }
       }
 
     });
