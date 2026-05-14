@@ -8173,6 +8173,130 @@
 
     /* ── END LUVZ Wordmark Reveal v1.0 ── */
 
+    /* ── Mobile Hero Editorial v1.0 ── */
+    @media (max-width: 768px) {
+
+      /* Full-bleed image — no two-block split */
+      #hero {
+        display: flex !important;
+        flex-direction: column !important;
+        min-height: 100svh !important;
+      }
+
+      #hero img.hero-img {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+        z-index: 0 !important;
+      }
+
+      /* Deep gradient fade — image dissolves into dark atmosphere */
+      #hero::before {
+        background:
+          linear-gradient(
+            to bottom,
+            rgba(10, 6, 2, 0.30) 0%,
+            rgba(10, 6, 2, 0.10) 20%,
+            rgba(10, 6, 2, 0.20) 45%,
+            rgba(10, 6, 2, 0.75) 68%,
+            rgba(10, 6, 2, 0.97) 85%,
+            rgba(10, 6, 2, 1.00) 100%
+          ) !important;
+      }
+
+      /* Hero content floats above full-bleed image */
+      #hero .hero-content {
+        position: relative !important;
+        z-index: 3 !important;
+        margin-top: auto !important;
+        margin-bottom: clamp(130px, 26vw, 200px) !important;
+        padding-bottom: 0 !important;
+      }
+
+      /* Hide eyebrow line */
+      #hero .lc-eyebrow {
+        display: none !important;
+      }
+
+      /* Hide micro-copy line */
+      #hero .lc-micro-copy,
+      #hero .hero-caption-styled {
+        display: none !important;
+      }
+
+      /* Hide discover / scroll indicator */
+      #hero .hero-discover,
+      #hero [class*="discover"],
+      #hero [class*="scroll"] {
+        display: none !important;
+      }
+
+      /* Hide proof / trust bar directly below hero */
+      .proof-bar,
+      .trust-bar,
+      .rating-strip,
+      [class*="proof-bar"],
+      [class*="trust-bar"],
+      [class*="rating-strip"] {
+        display: none !important;
+      }
+
+      /* LUVZ uppercase */
+      #hero .hero-title .lc-char {
+        text-transform: uppercase !important;
+      }
+
+      /* Center wordmark on mobile */
+      #hero .hero-title {
+        align-items: center !important;
+      }
+
+      #hero .hero-title .lc-letters-row {
+        justify-content: center !important;
+      }
+
+      #hero .hero-title .lc-word-collection {
+        text-align: center !important;
+      }
+
+      /* Buttons: full width, stacked, centered */
+      #hero .hero-btns {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 14px !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+      }
+
+      #hero .hero-btn-primary,
+      #hero a[href*="wa.me"] {
+        width: 100% !important;
+        max-width: 280px !important;
+        text-align: center !important;
+        border: 0.5px solid rgba(196, 136, 44, 0.45) !important;
+        background: transparent !important;
+        box-shadow: none !important;
+      }
+
+      #hero .hero-btn-secondary {
+        width: auto !important;
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 0.5px solid rgba(196, 136, 44, 0.22) !important;
+        border-radius: 0 !important;
+        padding: 2px 0 !important;
+        font-size: 9px !important;
+        letter-spacing: 0.22em !important;
+        color: rgba(196, 136, 44, 0.45) !important;
+        box-shadow: none !important;
+      }
+
+    }
+    /* ── END Mobile Hero Editorial v1.0 ── */
+
     /* ── HERO FIX v1.3 ── */
 
     /* FIX 2 + CHANGE 5: LUVZ title — atmospheric diffuse glow */
