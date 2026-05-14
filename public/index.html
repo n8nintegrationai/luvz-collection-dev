@@ -864,17 +864,6 @@
       }
     }
 
-    /* Particles Canvas */
-    #hero-particles-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-      will-change: transform;
-    }
-
     /* Parallax Wrapper – RESET */
     .hero-img-parallax,
     .hero-text-parallax {
@@ -6060,56 +6049,10 @@
     .lc-fade-up {
       opacity: 0;
       transform: translateY(24px);
-      animation: lcFadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .hero-title span:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-
-    .hero-title span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .hero-rule {
-      animation-delay: 0.3s;
-    }
-
-    .hero-subtitle {
-      animation-delay: 0.4s;
-    }
-
-    .hero-btns {
-      animation-delay: 0.5s;
-    }
-
-    @keyframes lcFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* ── JEWELRY IMAGE FLOATING MOTION ── */
     .hero-img {
-      animation: lcImageFloat 7s ease-in-out infinite;
-    }
-
-    @keyframes lcImageFloat {
-
-      0%,
-      100% {
-        transform: scale(1.04) translateY(0);
-      }
-
-      50% {
-        transform: scale(1.04) translateY(-8px);
-      }
     }
 
     /* ── JEWELRY IMAGE GLOW & RIM LIGHTING ── */
@@ -6128,24 +6071,6 @@
           rgba(212, 175, 55, 0.3) 0%,
           rgba(212, 175, 55, 0.05) 50%,
           transparent 100%) 1;
-      animation: lcImageGlowPulse 4s ease-in-out infinite;
-    }
-
-    @keyframes lcImageGlowPulse {
-      0% {
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.1),
-          inset 0 0 40px rgba(212, 175, 55, 0.05);
-      }
-
-      50% {
-        box-shadow: 0 0 35px rgba(212, 175, 55, 0.2),
-          inset 0 0 50px rgba(212, 175, 55, 0.1);
-      }
-
-      100% {
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.1),
-          inset 0 0 40px rgba(212, 175, 55, 0.05);
-      }
     }
 
     /* ── CTA BUTTON ENHANCEMENTS: SHIMMER SWEEP ── */
@@ -6357,21 +6282,6 @@
       opacity: 0.35;
       pointer-events: none;
       z-index: 1;
-      animation: lc-pulse-glow 8s ease-in-out infinite;
-    }
-
-    @keyframes lc-pulse-glow {
-
-      0%,
-      100% {
-        opacity: 0.28;
-        transform: translateY(-50%) scale(1);
-      }
-
-      50% {
-        opacity: 0.42;
-        transform: translateY(-50%) scale(1.06);
-      }
     }
 
     .hero-redesign::before,
@@ -6401,8 +6311,6 @@
       color: var(--gold);
       opacity: 0;
       margin-bottom: 0.75rem;
-      animation: lc-fade-up 0.9s ease forwards;
-      animation-delay: 0.2s;
     }
 
 
@@ -7658,7 +7566,7 @@
           transparent 65%);
     }
 
-    #hero img,
+    #hero img:not(.luvz-cin-mask *),
     #hero .hero-bg,
     #hero video {
       position: absolute !important;
@@ -8960,6 +8868,367 @@
       outline-offset: 3px;
       border-radius: 2px;
     }
+
+    /* ── CINEMA HERO START ── */
+
+    /* ── z-index Hierarchy — Do Not Alter Without Updating This Map ──
+       1   .luvz-cin-glow        atmospheric glow (behind everything)
+       2   .luvz-cin-stage       jewelry stage wrapper
+       4   .luvz-cin-text        LUVZ wordmark
+       5   .luvz-cin-transition  scroll-out gradient
+       6   .luvz-cin-grain       filmic grain overlay
+       100 .luvz-cin-cursor-dot  gold cursor dot
+       100 .luvz-cin-cursor-ring cursor ring
+    ── */
+
+    /* ── Hero Foundation ── */
+    #hero {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      min-height: 600px;
+      background: #141008;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+    }
+
+    /* Override legacy hero-redesign padding and height that offset cinema layout */
+    #hero.hero-redesign,
+    #hero {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+      height: auto !important;
+    }
+
+    /* ── Atmospheric Glow (Sabyasachi atmosphere layer) ── */
+    .luvz-cin-glow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      background:
+        radial-gradient(
+          ellipse 55% 50% at 50% 48%,
+          rgba(90, 32, 18, 0.18) 0%,
+          rgba(42, 18, 8, 0.12) 35%,
+          rgba(14, 28, 20, 0.10) 60%,
+          transparent 100%
+        );
+      will-change: transform, opacity;
+      contain: layout paint style;
+    }
+
+    /* ── Jewelry Stage ── */
+    .luvz-cin-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Jewelry Wrapper — owns transforms and opacity ONLY (v7 split) ── */
+    .luvz-cin-jewelry {
+      position: relative;
+      width: 52%;
+      max-width: 560px;
+      min-width: 300px;
+      margin: 0 auto;
+      opacity: 1;
+      transform: none;
+      will-change: transform, opacity;
+      pointer-events: auto;
+    }
+
+    /* ── Mask Wrapper — owns mask on img ONLY (v7 addition) ── */
+    .luvz-cin-mask {
+      display: block;
+      width: 100%;
+      -webkit-mask-image: radial-gradient(
+        ellipse 72% 68% at 50% 46%,
+        black 28%,
+        rgba(0,0,0,0.95) 40%,
+        rgba(0,0,0,0.7) 55%,
+        rgba(0,0,0,0.3) 72%,
+        transparent 100%
+      );
+      mask-image: radial-gradient(
+        ellipse 72% 68% at 50% 46%,
+        black 28%,
+        rgba(0,0,0,0.95) 40%,
+        rgba(0,0,0,0.7) 55%,
+        rgba(0,0,0,0.3) 72%,
+        transparent 100%
+      );
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      -webkit-mask-composite: source-over;
+      mask-composite: add;
+    }
+
+    .luvz-cin-mask img {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ── LUVZ Wordmark ── */
+    .luvz-cin-text {
+      position: absolute;
+      bottom: 16%;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      text-align: center;
+      opacity: 0;
+      will-change: opacity;
+      pointer-events: none;
+    }
+
+    .luvz-cin-text span {
+      font-family: 'Cinzel', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(18px, 2.4vw, 38px);
+      letter-spacing: 0.28em;
+      color: rgba(201, 169, 110, 0.78);
+      text-indent: 0.28em;
+    }
+
+    /* ── Transition Gradient (hero → next section) ── */
+    .luvz-cin-transition {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(20, 16, 8, 0.6) 50%,
+        #18110A 100%
+      );
+      will-change: opacity;
+    }
+
+    /* ── Filmic Atmospheric Grain ── */
+    .luvz-cin-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      animation: luvzCinGrainShift 0.18s steps(1) infinite;
+      mix-blend-mode: overlay;
+    }
+
+    @keyframes luvzCinGrainShift {
+      0%   { background-position: 0 0; }
+      25%  { background-position: -60px 40px; }
+      50%  { background-position: 40px -60px; }
+      75%  { background-position: -80px -30px; }
+      100% { background-position: 20px 70px; }
+    }
+
+    /* ── Custom Cursor — Dot ── */
+    .luvz-cin-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      background: rgba(201, 169, 110, 0.9);
+      border-radius: 50%;
+      z-index: 100;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      will-change: transform;
+      box-shadow: 0 0 4px rgba(201, 169, 110, 0.3);
+    }
+
+    /* ── Custom Cursor — Ring ── */
+    .luvz-cin-cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(201, 169, 110, 0.45);
+      border-radius: 50%;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: 0 0 8px rgba(201, 169, 110, 0.15);
+      will-change: transform, opacity;
+    }
+
+    /* ── Nav transparency over hero ── */
+    #nav.luvz-cin-nav-transparent {
+      background: transparent !important;
+      background-color: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border-bottom-color: transparent !important;
+      box-shadow: none !important;
+      transition: background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+    }
+    #nav {
+      transition: background 0.6s ease, border-color 0.6s ease;
+    }
+
+    /* ── WhatsApp CTA Button Positioning ── */
+    #hero .hero-whatsapp-btn,
+    #hero [href*="wa.me"],
+    #hero [href*="whatsapp"] {
+      position: absolute;
+      bottom: 7%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    /* ── Mobile Override (≤ 768px) ── */
+    @media (max-width: 768px) {
+      #hero {
+        height: 100svh;
+        min-height: 580px;
+        cursor: auto;
+        overflow: hidden;
+      }
+
+      /* Stage fills hero, aligns content to top */
+      .luvz-cin-stage {
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 18%;
+      }
+
+      .luvz-cin-jewelry {
+        width: 84%;
+        max-width: 380px;
+        min-width: unset;
+        opacity: 1;
+        transform: none;
+        animation: luvzCinFadeIn 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      .luvz-cin-mask {
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        -webkit-mask-image: radial-gradient(
+          ellipse 85% 78% at 50% 46%,
+          black 30%,
+          rgba(0,0,0,0.9) 50%,
+          rgba(0,0,0,0.5) 70%,
+          transparent 100%
+        );
+        mask-image: radial-gradient(
+          ellipse 85% 78% at 50% 46%,
+          black 30%,
+          rgba(0,0,0,0.9) 50%,
+          rgba(0,0,0,0.5) 70%,
+          transparent 100%
+        );
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: cover;
+        mask-size: cover;
+      }
+
+      .luvz-cin-mask img {
+        position: relative !important;
+        inset: unset !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+      }
+
+      .luvz-cin-text {
+        position: absolute;
+        bottom: 18%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        opacity: 1;
+        z-index: 4;
+        animation: luvzCinFadeIn 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+      }
+
+      .luvz-cin-text span {
+        font-size: clamp(16px, 5vw, 24px);
+        letter-spacing: 0.22em;
+      }
+
+      .luvz-cin-glow {
+        opacity: 1;
+        animation: luvzCinFadeIn 2.4s ease both, luvzCinGlowBreathe 6s ease-in-out 2.4s infinite;
+      }
+
+      #hero [href*="wa.me"],
+      #hero [href*="whatsapp"] {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        opacity: 0.85;
+        white-space: nowrap;
+      }
+
+      .luvz-cin-cursor-dot,
+      .luvz-cin-cursor-ring {
+        display: none;
+      }
+
+      .luvz-cin-transition {
+        display: none;
+      }
+    }
+
+    /* ── Reduced Motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .luvz-cin-jewelry,
+      .luvz-cin-text,
+      .luvz-cin-glow {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ── Mobile keyframes (CSS-only, no GSAP on mobile) ── */
+    @keyframes luvzCinFadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes luvzCinGlowBreathe {
+      0%, 100% { opacity: 0.85; }
+      50%       { opacity: 1; }
+    }
+
+    @keyframes luvzCinFloatMobile {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-5px); }
+    }
+
+    /* ── CINEMA HERO END ── */
   </style>
 
 <body>
@@ -9062,77 +9331,52 @@
   <div class="gem-bar" aria-hidden="true"></div>
 
   <!-- HERO — FULL BLEED CINEMATIC REDESIGN -->
-  <section id="hero" class="hero hero-redesign" style="margin-top:30px">
-    <!-- Phase 3: Corner ornaments -->
-    <div class="lc-corner lc-corner-tl"></div>
-    <div class="lc-corner lc-corner-tr"></div>
-    <div class="lc-corner lc-corner-bl"></div>
-    <div class="lc-corner lc-corner-br"></div>
+  <section id="hero" class="hero hero-redesign">
 
-    <!-- Hero Image Layer: full bleed cinematic backdrop -->
-    <img src="images/hero_image.webp" alt="LUVZ Collection — handcrafted silver jewellery" class="hero-img"
-      loading="eager" fetchpriority="high" decoding="async" />
+    <!-- Atmospheric glow layer (behind jewelry) -->
+    <div class="luvz-cin-glow" aria-hidden="true"></div>
 
-    <!-- Gradient Veil Layer: diagonal darkening from left to center -->
-    <div class="hero-veil" aria-hidden="true"></div>
-
-    <!-- Bottom Fade Transition Layer -->
-    <div class="hero-veil-bottom" aria-hidden="true"></div>
-
-    <!-- Gem Glow: repositioned to center of image -->
-    <div class="hero-gem-light" aria-hidden="true"></div>
-
-    <!-- Particle Canvas: fills entire hero -->
-    <canvas id="hero-particles-canvas" aria-hidden="true"></canvas>
-
-    <!-- Parallax Wrapper for Image and Text -->
-    <div class="hero-parallax-wrapper" aria-hidden="true">
-      <!-- Image parallax layer -->
-      <div class="hero-img-parallax"></div>
-      <!-- Text parallax layer -->
-      <div class="hero-text-parallax"></div>
-    </div>
-
-    <!-- Phase 3: Ambient glow blob -->
-    <div class="lc-ambient-glow"></div>
-
-    <!-- Text Content Layer: overlay positioned left-center -->
-    <div class="hero-content stagger-text">
-      <div class="lc-eyebrow">✦ Designer Boutique ✦</div>
-
-      <h1 class="hero-title lc-fade-up">
-        <span>LUVZ</span>
-        <span>COLLECTION</span>
-      </h1>
-      <div class="lc-micro-copy hero-caption-styled"><span class="hero-cap-part">Handcrafted</span><span
-          class="hero-cap-sep"> · </span><span class="hero-cap-part">92.5 Silver</span><span class="hero-cap-sep"> ·
-        </span><span class="hero-cap-part">Heritage Design</span></div>
-      <div class="lc-rule-enhanced">
-        <span class="lc-rule-line"></span>
-        <span class="lc-rule-diamond"></span>
-        <span class="lc-rule-line"></span>
-      </div>
-      <div class="hero-btns lc-fade-up">
-        <a href="https://wa.me/918919359961?text=Hi!%20I%20found%20LUVZ%20Collection%20and%20want%20to%20enquire%20%F0%9F%A4%A9"
-          target="_blank" rel="noopener noreferrer" class="hero-btn hero-btn-primary">
-          Order on WhatsApp
-        </a>
-        <a href="#categories" class="hero-btn hero-btn-secondary">
-          Browse Collection
-        </a>
+    <!-- Jewelry image (the hero piece) -->
+    <div class="luvz-cin-stage">
+      <!-- v7 ARCHITECTURE — MASK + TRANSFORM SEPARATION (STRONGLY RECOMMENDED) -->
+      <div class="luvz-cin-jewelry">
+        <div class="luvz-cin-mask">
+          <img
+            src="images/hero_image.webp"
+            alt="LUVZ Collection — Handcrafted Indian Choker Necklace"
+            draggable="false"
+            fetchpriority="high"
+            width="1536"
+            height="1024"
+          />
+        </div>
       </div>
     </div>
 
-    <!-- Discover Indicator: centered at bottom -->
-    <div class="hero-discover" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">
-      <span>DISCOVER COLLECTION</span>
-      <div class="hero-chevrons">
-        <div class="hero-chev"></div>
-        <div class="hero-chev"></div>
-        <div class="hero-chev"></div>
-      </div>
+    <!-- Brand wordmark -->
+    <div class="luvz-cin-text" aria-label="LUVZ Collection">
+      <span>LUVZ</span>
     </div>
+
+    <!-- Transition gradient (fades hero into next section) -->
+    <div class="luvz-cin-transition" aria-hidden="true"></div>
+
+    <!-- Filmic grain — 2–3% opacity animated noise. Cinematic texture, not visible effect. -->
+    <div class="luvz-cin-grain" aria-hidden="true"></div>
+
+    <!-- Preserve existing WhatsApp CTA button -->
+    <a href="https://wa.me/918919359961?text=Hi!%20I%20found%20LUVZ%20Collection%20and%20want%20to%20enquire%20%F0%9F%A4%A9"
+      target="_blank" rel="noopener noreferrer" class="hero-whatsapp-btn">
+      Order on WhatsApp
+    </a>
+
   </section>
+
+  <!-- Custom cursor elements — placed on <body>, NOT inside #hero -->
+  <!-- Fixed position elements inside #hero with transformed ancestors can create -->
+  <!-- stacking context bugs in Safari. Body-level placement avoids this entirely. -->
+  <div class="luvz-cin-cursor-dot" aria-hidden="true"></div>
+  <div class="luvz-cin-cursor-ring" aria-hidden="true"></div>
 
   <!-- SOCIAL PROOF BAR -->
   <div class="proof-bar" aria-label="Social proof">
@@ -10183,6 +10427,14 @@
   </script>
 
   <script src="/luvz-chat.js" defer></script>
+
+  <!-- NEW: Cinema dependencies (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- NEW: Cinema module (last) -->
+  <script src="luvz-cinema.js"></script>
 </body>
 
 </html>
