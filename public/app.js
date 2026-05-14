@@ -757,8 +757,6 @@ function buildNecklaceEditorial(products) {
             <div class="nk-textinner">
               <div class="nk-meta-row">
                 <span class="nk-eyebrow"><span class="nk-eyebrow-tick"></span>${piece.eyebrow}</span>
-                <span class="nk-meta-dot">·</span>
-                <span class="nk-meta-chapter">${piece.chapter}</span>
               </div>
 
               <div class="nk-piece-title">
