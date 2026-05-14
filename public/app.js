@@ -624,7 +624,8 @@ function buildCarousel(sec, items) {
   function render() {
     const s = CS[sec];
     const tr = document.getElementById('ct-' + sec); if (!tr) return;
-    const w = (tr.parentElement.clientWidth - 16 * (s.vis - 1)) / s.vis;
+    const containerWidth = s._cw !== undefined ? s._cw : tr.parentElement.clientWidth;
+    const w = (containerWidth - 16 * (s.vis - 1)) / s.vis;
     tr.style.transform = `translateX(-${s.page * (w + 16) * s.vis}px)`;
     const nv = document.getElementById('cn-' + sec); if (!nv) return;
     nv.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === s.page));
@@ -711,7 +712,8 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
   function render() {
     const s = CS[trackId];
     const tr = document.getElementById(trackId); if (!tr) return;
-    const w = (tr.parentElement.clientWidth - 16 * (s.vis - 1)) / s.vis;
+    const containerWidth = s._cw !== undefined ? s._cw : tr.parentElement.clientWidth;
+    const w = (containerWidth - 16 * (s.vis - 1)) / s.vis;
     tr.style.transform = `translateX(-${s.page * (w + 16) * s.vis}px)`;
     const nv = document.getElementById(navId); if (!nv) return;
     nv.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === s.page));
@@ -736,11 +738,26 @@ function buildCarouselInSection(trackId, navId, items, categoryKey) {
   track.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 44) dx < 0 ? goPage(trackId, CS[trackId].page + 1) : goPage(trackId, CS[trackId].page - 1) }, { passive: true });
 }
 window.addEventListener('resize', _debounce(() => {
-  Object.keys(CS).forEach(key => {
-    const s = CS[key]; if (!s || !s._r) return;
-    s.vis = getVis(); s.pages = Math.max(1, Math.ceil(s.total / s.vis));
-    s.page = Math.min(s.page, s.pages - 1); s._r();
+  const vis = getVis();
+  const keys = Object.keys(CS).filter(k => CS[k] && CS[k]._r);
+
+  // Phase 1: batch all DOM reads
+  keys.forEach(key => {
+    const tr = document.getElementById(key);
+    if (tr) CS[key]._cw = tr.parentElement.clientWidth;
   });
+
+  // Phase 2: batch all writes via render()
+  keys.forEach(key => {
+    const s = CS[key];
+    s.vis = vis;
+    s.pages = Math.max(1, Math.ceil(s.total / s.vis));
+    s.page = Math.min(s.page, s.pages - 1);
+    s._r();
+  });
+
+  // Clear cache after writes are done
+  keys.forEach(key => { delete CS[key]._cw; });
 }, 100), { passive: true });
 
 /* ── Poster (kept for compatibility, no-op if no poster element) ── */
