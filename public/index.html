@@ -11695,6 +11695,801 @@
   .jz-divider { height: 130px; }
   .jz-div-nav { flex-direction: column; gap: 10px; }
 }
+
+/* ============================================================
+   LUVZ — Earrings Section · Cinematic Split-Hero + Rail
+   All rules scoped inside #category-earrings / .er-* prefix
+   ============================================================ */
+
+#category-earrings {
+  --er-bg:          #060402;
+  --er-card-bg:     #0e0906;
+  --er-gold:        #c9a35a;
+  --er-gold-bright: #e6c98a;
+  --er-gold-dim:    rgba(201,163,90,0.35);
+  --er-gold-ghost:  rgba(201,163,90,0.09);
+  --er-ivory:       #ede0c8;
+  --er-warm:        #c7b696;
+  --er-mute:        #8a7a5e;
+  --er-dim:         #5f5341;
+  --er-hairline:    rgba(201,163,90,0.06);
+  background: var(--er-bg);
+}
+
+/* ── ZONE 1: SPLIT HERO ───────────────────────────────────── */
+
+.er-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  background: var(--er-bg);
+  overflow: hidden;
+}
+
+/* Left text block */
+.er-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 64px 72px 80px;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    #060402 70%,
+    rgba(6,4,2,0.6) 90%,
+    transparent 100%
+  );
+}
+
+.er-hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--er-gold);
+  margin: 0 0 20px;
+}
+
+.er-hero-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 96px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--er-ivory);
+  margin: 0 0 16px;
+  line-height: 0.9;
+}
+
+.er-hero-rule {
+  width: 56px;
+  height: 1px;
+  background: var(--er-gold);
+  opacity: 0.5;
+  margin: 0 0 24px;
+}
+
+.er-hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--er-gold);
+  margin: 0 0 18px;
+}
+
+.er-hero-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--er-warm);
+  margin: 0 0 36px;
+  letter-spacing: 0.02em;
+}
+
+.er-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--er-mute);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,163,90,0.3);
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  width: fit-content;
+}
+
+.er-hero-cta:hover {
+  color: var(--er-gold);
+  border-color: var(--er-gold);
+}
+
+.er-hero-cta-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.er-hero-cta:hover .er-hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Right: product photo */
+.er-hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.er-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72) saturate(0.85);
+  transform: scale(1.03);
+  transition: transform 12s ease;
+}
+
+.er-hero-right:hover .er-hero-img {
+  transform: scale(1.06);
+}
+
+.er-hero-img-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,  rgba(6,4,2,0.85) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(6,4,2,0.3)  0%, transparent 40%,
+                               transparent 55%, rgba(6,4,2,0.5) 100%);
+  pointer-events: none;
+}
+
+/* ── ZONE 2: FILTER BAR + COUNTER/ARROWS ─────────────────── */
+
+.er-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 80px;
+  background: var(--er-bg);
+  border-top: 1px solid var(--er-hairline);
+  border-bottom: 1px solid var(--er-hairline);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.er-chips {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.er-chip {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--er-mute);
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.er-chip::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--er-gold);
+  transition: width 0.3s ease;
+}
+
+.er-chip:hover {
+  opacity: 0.7;
+  color: var(--er-warm);
+}
+
+.er-chip--active {
+  opacity: 1;
+  color: var(--er-gold);
+}
+
+.er-chip--active::after {
+  width: 24px;
+}
+
+.er-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.er-counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--er-mute);
+  min-width: 48px;
+  text-align: right;
+}
+
+.er-arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.er-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(201,163,90,0.15);
+  background: transparent;
+  color: var(--er-mute);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  line-height: 1;
+}
+
+.er-arrow:hover {
+  border-color: var(--er-gold);
+  color: var(--er-gold);
+}
+
+/* ── ZONE 3: SIDEBAR + RAIL ───────────────────────────────── */
+
+.er-rail-zone {
+  display: flex;
+  align-items: stretch;
+  background: var(--er-bg);
+  padding: 40px 0 0;
+}
+
+/* Editor's Picks sidebar */
+.er-sidebar {
+  flex: 0 0 200px;
+  padding: 16px 32px 32px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  border-right: 1px solid var(--er-hairline);
+}
+
+.er-sidebar-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--er-gold);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.er-sidebar-lotus {
+  font-size: 22px;
+  color: var(--er-gold);
+  opacity: 0.22;
+  animation: erLotusBreathe 6s ease-in-out infinite;
+}
+
+.er-sidebar-lotus--bottom {
+  animation-delay: 3s;
+}
+
+@keyframes erLotusBreathe {
+  0%, 100% { opacity: 0.22; transform: scale(1); }
+  50%       { opacity: 0.38; transform: scale(1.1); }
+}
+
+.er-sidebar-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--er-mute);
+  margin: 0;
+}
+
+/* Rail wrapper */
+.er-rail-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.er-scroll {
+  display: flex;
+  gap: 20px;
+  padding: 12px 32px 32px 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
+}
+
+.er-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Rail edge arrow buttons (overlaid on scroll area) */
+.er-rail-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,163,90,0.2);
+  background: rgba(6,4,2,0.75);
+  backdrop-filter: blur(8px);
+  color: var(--er-mute);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  line-height: 1;
+}
+
+.er-rail-arrow:hover {
+  border-color: var(--er-gold);
+  color: var(--er-gold);
+  background: rgba(201,163,90,0.08);
+}
+
+.er-rail-arrow--prev { left: 8px; }
+.er-rail-arrow--next { right: 8px; }
+
+/* ── PRODUCT CARD ─────────────────────────────────────────── */
+
+.er-card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  background: var(--er-card-bg);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(201,163,90,0.06);
+  border-radius: 2px;
+  animation: erCardIn 0.55s ease both;
+}
+
+.er-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Inner gold border on hover */
+.er-card::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(201,163,90,0);
+  transition: border-color 0.5s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.er-card:hover::after {
+  border-color: rgba(201,163,90,0.18);
+}
+
+/* Image wrap */
+.er-card-img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.er-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.88);
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.er-card:hover .er-card-img {
+  filter: brightness(0.96);
+  transform: scale(1.02);
+}
+
+/* Collectible number */
+.er-card-num {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--er-gold);
+  opacity: 0.45;
+  letter-spacing: 0.12em;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Quick View + Wishlist action buttons */
+.er-card-actions {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+.er-card:hover .er-card-actions {
+  opacity: 1;
+}
+
+/* Quick View button styling */
+.er-card-actions .pcard-quick-view {
+  width: auto;
+  height: auto;
+  padding: 8px 12px;
+  background: rgba(6,4,2,0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,163,90,0.22);
+  border-radius: 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--er-ivory);
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.er-card-actions .pcard-quick-view:hover {
+  background: rgba(201,163,90,0.1);
+  border-color: var(--er-gold);
+}
+
+/* Wishlist button styling (uses global absolute positioning) */
+#category-earrings .pcard-wish {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: rgba(6,4,2,0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#category-earrings .er-card:hover .pcard-wish {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#category-earrings .pcard-wish:hover {
+  background: rgba(201,163,90,0.15);
+}
+
+#category-earrings .pcard-wish svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--er-gold);
+}
+
+#category-earrings .pcard-wish.wished svg {
+  fill: var(--er-gold);
+}
+
+/* Enquire CTA */
+.er-card-cta {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.er-card:hover .er-card-cta {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.er-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--er-ivory);
+  background: rgba(6,4,2,0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,163,90,0.22);
+  padding: 11px 24px;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.er-cta-btn:hover {
+  background: rgba(201,163,90,0.1);
+  border-color: var(--er-gold);
+}
+
+.er-cta-icon {
+  width: 13px;
+  height: 13px;
+  fill: var(--er-gold);
+  flex-shrink: 0;
+}
+
+/* Card metadata */
+.er-card-meta {
+  padding: 18px 18px 22px;
+  border-top: 1px solid rgba(201,163,90,0.06);
+}
+
+.er-card-name {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--er-ivory);
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.er-card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--er-gold);
+  letter-spacing: 0.05em;
+  margin: 0 0 4px;
+}
+
+.er-card-mat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--er-mute);
+  margin: 0;
+}
+
+/* ── PROGRESS BAR ─────────────────────────────────────────── */
+
+.er-progress-track {
+  margin: 0 80px 0;
+  height: 1px;
+  background: rgba(201,163,90,0.1);
+  position: relative;
+  border-radius: 1px;
+}
+
+.er-progress-bar {
+  height: 100%;
+  background: var(--er-gold);
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.er-progress-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  background: var(--er-gold);
+  left: 0%;
+  transition: left 0.3s ease;
+}
+
+/* ── ZONE 4: FOOTER STRIP ─────────────────────────────────── */
+
+.er-footer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 18px 80px;
+  margin-top: 28px;
+  border-top: 1px solid var(--er-hairline);
+  border-bottom: 1px solid var(--er-hairline);
+}
+
+.er-footer-glyph {
+  font-size: 14px;
+  color: var(--er-gold);
+  opacity: 0.35;
+}
+
+.er-footer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--er-dim);
+}
+
+.er-footer-bullet {
+  color: var(--er-gold);
+  opacity: 0.3;
+  font-size: 12px;
+}
+
+/* ── ZONE 5: ATMOSPHERIC DIVIDER ─────────────────────────── */
+
+.er-divider {
+  position: relative;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--er-bg);
+}
+
+.er-divider-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,163,90,0.022), transparent);
+  pointer-events: none;
+}
+
+.er-divider-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, var(--er-bg), transparent);
+  pointer-events: none;
+}
+
+.er-divider-bot {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to top, var(--er-bg), transparent);
+  pointer-events: none;
+}
+
+.er-divider-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.er-div-glyph {
+  font-size: 14px;
+  color: var(--er-gold);
+  opacity: 0.28;
+  display: block;
+  animation: erGlyphBreathe 5s ease-in-out infinite;
+}
+
+@keyframes erGlyphBreathe {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50%       { opacity: 0.42; transform: scale(1.12); }
+}
+
+.er-div-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--er-dim);
+  margin: 0;
+}
+
+.er-div-nav {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+
+.er-div-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--er-mute);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.er-div-link:hover {
+  color: var(--er-gold);
+}
+
+/* ── CARD ENTRANCE ANIMATION ─────────────────────────────── */
+
+@keyframes erCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBILE ───────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Hero stacks vertically */
+  .er-hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .er-hero-right {
+    height: 280px;
+    order: -1;
+  }
+
+  .er-hero-left {
+    padding: 48px 24px 40px;
+    background: var(--er-bg);
+  }
+
+  .er-hero-title { font-size: 56px; }
+  .er-hero-tagline { font-size: 15px; }
+  .er-hero-body { font-size: 14px; }
+
+  /* Controls */
+  .er-controls { padding: 14px 20px; }
+  .er-chip { padding: 6px 12px; font-size: 9px; }
+
+  /* Rail: sidebar hidden on mobile */
+  .er-rail-zone { flex-direction: column; padding: 24px 0 0; }
+  .er-sidebar { display: none; }
+  .er-scroll { padding: 8px 20px 24px; gap: 14px; }
+  .er-card { flex: 0 0 260px; }
+  .er-card-name { font-size: 14px; }
+  .er-card-cta { bottom: 72px; }
+  .er-cta-btn { padding: 9px 18px; font-size: 9px; }
+
+  .er-progress-track { margin: 0 20px; }
+
+  .er-footer-strip { padding: 14px 20px; gap: 10px; }
+
+  .er-divider { height: 130px; }
+  .er-div-nav { flex-direction: column; gap: 10px; }
+}
   </style>
 
 <body>
@@ -12302,22 +13097,98 @@
 
   <section id="category-earrings" class="sec reveal">
     <div id="earrings" style="position:absolute;top:-80px;"></div>
-    <div style="max-width:1360px;margin:0 auto">
-      <div class="sec-head">
-        <div class="eyebrow">Browse by Type</div>
-        <h2 class="sec-title gold-text" id="title-category-earrings">Earrings</h2>
-        <p class="cat-sec-subtitle" id="sub-category-earrings">From subtle to statement — all handcrafted.</p>
+<!-- ZONE 1: SPLIT HERO -->
+<div class="er-hero">
+  <!-- Left: text block -->
+  <div class="er-hero-left">
+    <p class="er-hero-eyebrow">Browse by type</p>
+    <h2 class="er-hero-title">EARRINGS</h2>
+    <div class="er-hero-rule"></div>
+    <p class="er-hero-tagline">Frame your face in gold</p>
+    <p class="er-hero-body">
+      From timeless jhumkas to modern silhouettes —<br>
+      a celebration of craftsmanship, tradition and you.
+    </p>
+    <a class="er-hero-cta" href="#er-rail-zone">
+      Explore the Collection
+      <span class="er-hero-cta-arrow" aria-hidden="true">&#8250;</span>
+    </a>
+  </div>
+  <!-- Right: product photo -->
+  <div class="er-hero-right">
+    <img class="er-hero-img" id="erHeroImg" src="" alt="Earrings Collection" aria-hidden="true">
+    <div class="er-hero-img-vignette"></div>
+  </div>
+</div>
 
-      </div>
-      <div class="carousel-wrap">
-        <div class="carousel-track" id="ct-category-earrings">
-          <p class="cat-empty-msg"
-            style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--txt2);opacity:.28;padding:32px 24px;text-align:center;width:100%">
-            Coming Soon — Products will appear here</p>
-        </div>
-      </div>
-      <div class="carousel-nav" id="cn-category-earrings"></div>
+<!-- ZONE 2: FILTER BAR + COUNTER / ARROWS -->
+<div class="er-controls">
+  <div class="er-chips" id="erChips">
+    <!-- Chips injected by JS -->
+  </div>
+  <div class="er-controls-right">
+    <span class="er-counter" id="erCounter">01 / 00</span>
+    <div class="er-arrows">
+      <button class="er-arrow er-arrow--prev" id="erPrev" aria-label="Previous">&#8249;</button>
+      <button class="er-arrow er-arrow--next" id="erNext" aria-label="Next">&#8250;</button>
     </div>
+  </div>
+</div>
+
+<!-- ZONE 3: EDITOR'S PICKS SIDEBAR + HORIZONTAL RAIL -->
+<div class="er-rail-zone" id="er-rail-zone">
+  <!-- Left: Editor's Picks sidebar -->
+  <div class="er-sidebar">
+    <p class="er-sidebar-label">Editor's<br>Picks</p>
+    <div class="er-sidebar-lotus" aria-hidden="true">&#10047;</div>
+    <p class="er-sidebar-desc">
+      Handcrafted pieces<br>that blend heritage<br>with modern grace.
+    </p>
+    <div class="er-sidebar-lotus er-sidebar-lotus--bottom" aria-hidden="true">&#10047;</div>
+  </div>
+
+  <!-- Rail wrapper (holds prev arrow, scroll track, next arrow) -->
+  <div class="er-rail-wrapper">
+    <button class="er-rail-arrow er-rail-arrow--prev" id="erRailPrev" aria-label="Previous">&#8249;</button>
+    <div class="er-scroll" id="erScroll">
+      <!-- Cards injected by JS -->
+    </div>
+    <button class="er-rail-arrow er-rail-arrow--next" id="erRailNext" aria-label="Next">&#8250;</button>
+  </div>
+</div>
+
+<!-- Progress bar -->
+<div class="er-progress-track" id="erProgressTrack">
+  <div class="er-progress-bar" id="erProgressBar"></div>
+  <div class="er-progress-dot" id="erProgressDot"></div>
+</div>
+
+<!-- ZONE 4: FOOTER STRIP -->
+<div class="er-footer-strip" aria-hidden="true">
+  <span class="er-footer-glyph">&#10047;</span>
+  <span class="er-footer-text">Handcrafted</span>
+  <span class="er-footer-bullet">&bull;</span>
+  <span class="er-footer-text">Heritage</span>
+  <span class="er-footer-bullet">&bull;</span>
+  <span class="er-footer-text">Timeless</span>
+  <span class="er-footer-glyph">&#10047;</span>
+</div>
+
+<!-- ZONE 5: ATMOSPHERIC DIVIDER -->
+<div class="er-divider">
+  <div class="er-divider-ambient" aria-hidden="true"></div>
+  <div class="er-divider-top"    aria-hidden="true"></div>
+  <div class="er-divider-bot"    aria-hidden="true"></div>
+  <div class="er-divider-content">
+    <span class="er-div-glyph" aria-hidden="true">&#10022;</span>
+    <p class="er-div-label">Continue exploring</p>
+    <nav class="er-div-nav" aria-label="Explore other categories">
+      <a href="#category-pendant"    class="er-div-link">Pendants</a>
+      <a href="#category-bangles"    class="er-div-link">Bangles</a>
+      <a href="#category-pendant"    class="er-div-link">Pendants</a>
+    </nav>
+  </div>
+</div>
   </section>
 
   <section id="category-bangles" class="sec sec-alt reveal">
@@ -13671,6 +14542,290 @@
       })
       .catch(function (err) {
         console.warn('[Jhumkas] Failed to load products:', err);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
+(function () {
+  'use strict';
+
+  /* ── CONFIG: fill in from Step 1 reconnaissance ── */
+  var CDN_URL      = 'https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json';
+  var CATEGORY_VAL = 'earrings';
+  var NAME_KEY     = 'name';
+  var IMAGE_KEY    = 'image';
+  var PRICE_KEY    = 'price';
+  var ID_KEY       = 'id';
+  var MATERIAL_KEY = 'description';
+  var STYLE_KEY    = null;
+  var WA_NUM       = '918919359961';
+  /* ─────────────────────────────────────────────── */
+
+  var WHATSAPP_SVG =
+    '<svg class="er-cta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15' +
+    '-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075' +
+    '-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059' +
+    '-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52' +
+    '.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52' +
+    '-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51' +
+    '-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372' +
+    '-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074' +
+    '.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625' +
+    '.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413' +
+    '.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>' +
+    '<path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.418' +
+    'A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z' +
+    'm0 18.154a8.119 8.119 0 0 1-4.146-1.132l-.297-.176-3.08.876.845-3.159-.194-.314' +
+    'A8.154 8.154 0 0 1 3.846 12C3.846 7.49 7.49 3.846 12 3.846' +
+    'c4.508 0 8.154 3.644 8.154 8.154 0 4.508-3.646 8.154-8.155 8.154z"/>' +
+    '</svg>';
+
+  function waHref(name) {
+    var msg = 'I am interested in ' + (name || 'this earring') + ' from LUVZ Collection.';
+    return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg);
+  }
+
+  function buildQuickViewBtn(product) {
+    var pid = product[ID_KEY] || '';
+    return '<div class="pcard-quick-view" data-pid="' + pid + '">Quick View</div>';
+  }
+
+  function buildWishlistBtn(product) {
+    var pid = product[ID_KEY] || '';
+    var name = product[NAME_KEY] || '';
+    return '<button class="pcard-wish" data-pid="' + pid + '" onclick="event.stopPropagation();toggleWish(this,\'' + pid.replace(/'/g, '\\\'') + '\')" aria-label="Add ' + name.replace(/'/g, '&#39;') + ' to wishlist">' +
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+    '</button>';
+  }
+
+  function formatPrice(val) {
+    if (!val && val !== 0) return '';
+    var num = parseFloat(String(val).replace(/[^0-9.]/g, ''));
+    if (isNaN(num)) return String(val);
+    return '₹' + num.toLocaleString('en-IN');
+  }
+
+  function buildCard(product, index) {
+    var num  = String(index + 1).padStart(2, '0');
+    var card = document.createElement('div');
+    card.className = 'er-card';
+    card.style.animationDelay = (index * 60) + 'ms';
+
+    if (STYLE_KEY && product[STYLE_KEY]) {
+      card.setAttribute('data-style', product[STYLE_KEY]);
+    }
+
+    card.innerHTML =
+      '<div class="er-card-img-wrap">' +
+        '<span class="er-card-num">N&ordm;&nbsp;' + num + '</span>' +
+        '<img' +
+          ' class="er-card-img"' +
+          ' src="'  + (product[IMAGE_KEY] || '') + '"' +
+          ' alt="'  + (product[NAME_KEY]  || '') + '"' +
+          ' loading="lazy"' +
+        '>' +
+        buildWishlistBtn(product) +
+        '<div class="er-card-actions">' +
+          buildQuickViewBtn(product) +
+        '</div>' +
+        '<div class="er-card-cta">' +
+          '<a class="er-cta-btn" href="' + waHref(product[NAME_KEY]) + '" target="_blank" rel="noopener">' +
+            WHATSAPP_SVG +
+            'Enquire Now' +
+          '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="er-card-meta">' +
+        '<p class="er-card-name">'  + (product[NAME_KEY]            || '') + '</p>' +
+        '<p class="er-card-price">' + formatPrice(product[PRICE_KEY])      + '</p>' +
+        '<p class="er-card-mat">'   + (product[MATERIAL_KEY]        || '') + '</p>' +
+      '</div>';
+
+    card.onclick = function (e) {
+      if (e.target.closest('.pcard-wish') || e.target.closest('.pcard-quick-view')) return;
+      if (typeof openModal === 'function') openModal(product, 'Earrings');
+    };
+
+    return card;
+  }
+
+  function buildChips(products) {
+    var chipsEl = document.getElementById('erChips');
+    if (!chipsEl) return;
+
+    var labels = ['All'];
+
+    if (STYLE_KEY) {
+      var seen = {};
+      products.forEach(function (p) {
+        var val = p[STYLE_KEY];
+        if (val && !seen[val]) { seen[val] = true; labels.push(val); }
+      });
+    } else {
+      labels = labels.concat(['Jhumkas', 'Studs', 'Danglers', 'Hoops', 'Temple', 'Bridal']);
+    }
+
+    labels.forEach(function (label, i) {
+      var btn = document.createElement('button');
+      btn.className = 'er-chip' + (i === 0 ? ' er-chip--active' : '');
+      btn.textContent = label;
+      btn.setAttribute('data-filter', label);
+      chipsEl.appendChild(btn);
+    });
+
+    chipsEl.addEventListener('click', function (e) {
+      var chip = e.target.closest('.er-chip');
+      if (!chip) return;
+
+      chipsEl.querySelectorAll('.er-chip').forEach(function (c) {
+        c.classList.remove('er-chip--active');
+      });
+      chip.classList.add('er-chip--active');
+
+      var filter   = chip.getAttribute('data-filter');
+      var scrollEl = document.getElementById('erScroll');
+      if (!scrollEl) return;
+
+      var cards   = scrollEl.querySelectorAll('.er-card');
+      var visible = 0;
+      cards.forEach(function (card) {
+        var style = card.getAttribute('data-style') || '';
+        var show  = filter === 'All' || style.toLowerCase() === filter.toLowerCase();
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      updateCounter(1, visible);
+    });
+  }
+
+  function updateCounter(current, total) {
+    var el = document.getElementById('erCounter');
+    if (el) {
+      el.textContent =
+        String(current).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+  }
+
+  function updateProgress(scrollEl) {
+    var bar = document.getElementById('erProgressBar');
+    var dot = document.getElementById('erProgressDot');
+    if (!bar) return;
+
+    var maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+    var pct       = maxScroll > 0 ? (scrollEl.scrollLeft / maxScroll) * 100 : 0;
+
+    bar.style.width = pct + '%';
+    if (dot) dot.style.left = pct + '%';
+
+    var cards = scrollEl.querySelectorAll('.er-card:not([style*="display: none"])');
+    if (!cards.length) return;
+    var cardW = cards[0].offsetWidth + 20;
+    var idx   = Math.round(scrollEl.scrollLeft / cardW) + 1;
+    updateCounter(Math.min(idx, cards.length), cards.length);
+  }
+
+  function setHeroImage(src, sourceLabel) {
+    var img = document.getElementById('erHeroImg');
+    if (img && src) {
+      img.src = src;
+      console.log('[Earrings] Hero image source:', sourceLabel);
+    }
+  }
+
+  function init() {
+    var scrollEl  = document.getElementById('erScroll');
+    var prevBtn   = document.getElementById('erPrev');
+    var nextBtn   = document.getElementById('erNext');
+    var railPrev  = document.getElementById('erRailPrev');
+    var railNext  = document.getElementById('erRailNext');
+
+    if (!scrollEl) return;
+
+    fetch(CDN_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+
+        var heroSrc = null;
+        if (Array.isArray(data.categories)) {
+          var cat = data.categories.find(function (c) {
+            return String(c.key || c.name || c.id || '').toLowerCase() === 'earrings';
+          });
+          if (cat && cat.image) { heroSrc = cat.image; }
+        } else if (data.categories && typeof data.categories === 'object') {
+          var catEntry = data.categories['earrings'] || data.categories['Earrings'];
+          if (catEntry && catEntry.image) { heroSrc = catEntry.image; }
+        }
+
+        var products = Array.isArray(data.earrings) ? data.earrings : [];
+
+        if (!heroSrc && products.length && products[0][IMAGE_KEY]) {
+          heroSrc = products[0][IMAGE_KEY];
+          setHeroImage(heroSrc, 'first-product-fallback');
+        } else if (heroSrc) {
+          setHeroImage(heroSrc, 'categories-key');
+        }
+
+        if (!products.length) {
+          console.warn('[Earrings] No products found for category:', CATEGORY_VAL);
+          return;
+        }
+
+        console.log('[Earrings] Using price field:',    PRICE_KEY);
+        console.log('[Earrings] Using material field:', MATERIAL_KEY);
+
+        updateCounter(1, products.length);
+
+        buildChips(products);
+
+        products.forEach(function (product, i) {
+          scrollEl.appendChild(buildCard(product, i));
+
+          /* Register product to global registry for wishlist drawer */
+          var pid = product[ID_KEY] || btoa(product[NAME_KEY] || Math.random()).slice(0, 8);
+          /* Wait for app.js to load (it uses defer) */
+          var registerAttempts = 0;
+          var registerInterval = setInterval(function() {
+            if (typeof window.productRegistry !== 'undefined' || (typeof productRegistry !== 'undefined' && productRegistry)) {
+              var reg = window.productRegistry || productRegistry;
+              if (reg) {
+                reg[pid] = Object.assign({}, product, { category: 'Earrings' });
+                clearInterval(registerInterval);
+              }
+            }
+            registerAttempts++;
+            if (registerAttempts > 50) clearInterval(registerInterval); // Give up after 5s
+          }, 100);
+        });
+
+        function getStep() {
+          var first = scrollEl.querySelector('.er-card');
+          return first ? first.offsetWidth + 20 : 360;
+        }
+
+        function scrollPrev() { scrollEl.scrollBy({ left: -getStep(), behavior: 'smooth' }); }
+        function scrollNext() { scrollEl.scrollBy({ left:  getStep(), behavior: 'smooth' }); }
+
+        if (prevBtn)   prevBtn.addEventListener('click',  scrollPrev);
+        if (nextBtn)   nextBtn.addEventListener('click',  scrollNext);
+        if (railPrev)  railPrev.addEventListener('click', scrollPrev);
+        if (railNext)  railNext.addEventListener('click', scrollNext);
+
+        scrollEl.addEventListener('scroll', function () {
+          updateProgress(scrollEl);
+        }, { passive: true });
+
+        updateProgress(scrollEl);
+      })
+      .catch(function (err) {
+        console.warn('[Earrings] Failed to load products:', err);
       });
   }
 
