@@ -11152,6 +11152,549 @@
   .bz-div-nav { flex-direction: column; align-items: center; gap: 12px; }
   .bz-divider { height: 130px; }
 }
+
+/* ============================================================
+   LUVZ — Jhumkas Section · Cinematic Gallery Rail
+   All rules scoped inside #category-jhumkas / .jz-* prefix
+   ============================================================ */
+
+#category-jhumkas {
+  --jz-bg:          #060402;
+  --jz-card-bg:     #0e0906;
+  --jz-gold:        #c9a35a;
+  --jz-gold-bright: #e6c98a;
+  --jz-gold-dim:    rgba(201,163,90,0.35);
+  --jz-gold-ghost:  rgba(201,163,90,0.09);
+  --jz-ivory:       #ede0c8;
+  --jz-warm:        #c7b696;
+  --jz-mute:        #8a7a5e;
+  --jz-dim:         #5f5341;
+  --jz-hairline:    rgba(201,163,90,0.06);
+  background: var(--jz-bg);
+}
+
+/* ── ZONE 1: HERO ─────────────────────────────────────────── */
+
+.jz-hero {
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--jz-bg);
+}
+
+.jz-hero-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 20%, #2a1606 0%, #130a02 50%, #060402 85%),
+    radial-gradient(ellipse 40% 30% at 15% 80%, #1a0d03 0%, transparent 70%),
+    radial-gradient(ellipse 30% 40% at 85% 65%, #160b02 0%, transparent 70%);
+}
+
+.jz-hero-bloom {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 50% 45%, rgba(201,163,90,0.04) 0%, transparent 70%);
+  animation: jzBloomPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes jzBloomPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.06); }
+}
+
+.jz-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.jz-hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: var(--jz-mute);
+  margin: 0 0 24px;
+}
+
+.jz-hero-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 88px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--jz-ivory);
+  margin: 0 0 12px;
+  line-height: 1;
+}
+
+.jz-hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--jz-gold);
+  letter-spacing: 0.1em;
+  margin: 0 0 28px;
+}
+
+.jz-hero-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--jz-gold);
+  opacity: 0.4;
+  margin: 0 auto 24px;
+}
+
+.jz-hero-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--jz-dim);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── ZONE 2: FILTER BAR + COUNTER/ARROWS ─────────────────── */
+
+.jz-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 80px 28px;
+  background: var(--jz-bg);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.jz-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.jz-chip {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--jz-mute);
+  background: transparent;
+  border: 1px solid rgba(201,163,90,0.08);
+  padding: 7px 16px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.jz-chip:hover {
+  opacity: 0.75;
+  color: var(--jz-warm);
+  border-color: rgba(201,163,90,0.15);
+}
+
+.jz-chip--active {
+  opacity: 1;
+  color: var(--jz-gold);
+  border-color: rgba(201,163,90,0.3);
+  background: rgba(201,163,90,0.04);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(201,163,90,0.4);
+}
+
+.jz-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.jz-counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--jz-mute);
+  min-width: 48px;
+  text-align: right;
+}
+
+.jz-arrows {
+  display: flex;
+  gap: 6px;
+}
+
+.jz-arrow {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201,163,90,0.15);
+  background: transparent;
+  color: var(--jz-mute);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  line-height: 1;
+}
+
+.jz-arrow:hover {
+  border-color: var(--jz-gold);
+  color: var(--jz-gold);
+}
+
+/* ── ZONE 3: GALLERY RAIL ─────────────────────────────────── */
+
+.jz-rail-zone {
+  background: var(--jz-bg);
+  padding: 0 0 40px;
+}
+
+.jz-scroll {
+  display: flex;
+  gap: 24px;
+  padding: 0 80px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.jz-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── PRODUCT CARD ────────────────────────────────────────── */
+
+.jz-card {
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+  background: var(--jz-card-bg);
+  cursor: pointer;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(201,163,90,0.06);
+  border-radius: 2px;
+}
+
+.jz-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Inner gold border on hover */
+.jz-card::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(201,163,90,0);
+  transition: border-color 0.5s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.jz-card:hover::after {
+  border-color: rgba(201,163,90,0.18);
+}
+
+/* Image wrap */
+.jz-card-img-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.jz-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.88);
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.jz-card:hover .jz-card-img {
+  filter: brightness(0.96);
+  transform: scale(1.02);
+}
+
+/* Collectible number */
+.jz-card-num {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--jz-gold);
+  opacity: 0.45;
+  letter-spacing: 0.12em;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Star glyph top-right */
+.jz-card-star {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 13px;
+  color: var(--jz-gold);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.jz-card:hover .jz-card-star {
+  opacity: 0.55;
+}
+
+/* Quick View + Wishlist action buttons */
+.jz-card-actions {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+.jz-card:hover .jz-card-actions {
+  opacity: 1;
+}
+
+/* Enquire CTA */
+.jz-card-cta {
+  position: absolute;
+  bottom: 86px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.jz-card:hover .jz-card-cta {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.jz-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--jz-ivory);
+  background: rgba(6,4,2,0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,163,90,0.22);
+  padding: 11px 24px;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
+}
+
+.jz-cta-btn:hover {
+  background: rgba(201,163,90,0.1);
+  border-color: var(--jz-gold);
+}
+
+.jz-cta-icon {
+  width: 13px;
+  height: 13px;
+  fill: var(--jz-gold);
+  flex-shrink: 0;
+}
+
+/* Card metadata */
+.jz-card-meta {
+  padding: 20px 20px 24px;
+  border-top: 1px solid rgba(201,163,90,0.06);
+}
+
+.jz-card-name {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--jz-ivory);
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.jz-card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--jz-gold);
+  letter-spacing: 0.05em;
+  margin: 0 0 4px;
+}
+
+.jz-card-mat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--jz-mute);
+  margin: 0;
+}
+
+/* ── PROGRESS BAR ────────────────────────────────────────── */
+
+.jz-progress-track {
+  margin: 28px 80px 0;
+  height: 1px;
+  background: rgba(201,163,90,0.1);
+  position: relative;
+  border-radius: 1px;
+}
+
+.jz-progress-bar {
+  height: 100%;
+  background: var(--jz-gold);
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+/* ── ZONE 4: ATMOSPHERIC DIVIDER ─────────────────────────── */
+
+.jz-divider {
+  position: relative;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--jz-bg);
+}
+
+.jz-divider-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,163,90,0.022), transparent);
+  pointer-events: none;
+}
+
+.jz-divider-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, var(--jz-bg), transparent);
+  pointer-events: none;
+}
+
+.jz-divider-bot {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to top, var(--jz-bg), transparent);
+  pointer-events: none;
+}
+
+.jz-divider-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.jz-div-glyph {
+  font-size: 14px;
+  color: var(--jz-gold);
+  opacity: 0.28;
+  display: block;
+  animation: jzGlyphBreathe 5s ease-in-out infinite;
+}
+
+@keyframes jzGlyphBreathe {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50%       { opacity: 0.42; transform: scale(1.12); }
+}
+
+.jz-div-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--jz-dim);
+  margin: 0;
+}
+
+.jz-div-nav {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+
+.jz-div-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--jz-mute);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.jz-div-link:hover {
+  color: var(--jz-gold);
+}
+
+/* ── CARD ENTRANCE ANIMATION ─────────────────────────────── */
+
+@keyframes jzCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.jz-card {
+  animation: jzCardIn 0.55s ease both;
+}
+
+/* ── MOBILE ───────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .jz-hero-title { font-size: 52px; }
+  .jz-hero-tagline { font-size: 14px; }
+  .jz-hero { min-height: 240px; }
+
+  .jz-controls { padding: 0 20px 20px; gap: 12px; }
+  .jz-chip { padding: 6px 12px; }
+
+  .jz-scroll { padding: 0 20px; gap: 14px; }
+  .jz-card { flex: 0 0 270px; }
+  .jz-card-name { font-size: 14px; }
+  .jz-card-cta { bottom: 72px; }
+  .jz-cta-btn { padding: 9px 18px; font-size: 9px; }
+
+  .jz-progress-track { margin: 20px 20px 0; }
+
+  .jz-divider { height: 130px; }
+  .jz-div-nav { flex-direction: column; gap: 10px; }
+}
   </style>
 
 <body>
@@ -11849,22 +12392,57 @@
   </section>
 
   <section id="category-jhumkas" class="sec reveal">
-    <div id="jhumkas" style="position:absolute;top:-80px;"></div>
-    <div style="max-width:1360px;margin:0 auto">
-      <div class="sec-head">
-        <div class="eyebrow">Browse by Type</div>
-        <h2 class="sec-title gold-text" id="title-category-jhumkas">Jhumkas</h2>
-        <p class="cat-sec-subtitle" id="sub-category-jhumkas">India's favourite earring. Reimagined in silver.</p>
-
+    <!-- ZONE 1: CINEMATIC HERO -->
+    <div class="jz-hero">
+      <div class="jz-hero-base"></div>
+      <div class="jz-hero-bloom"></div>
+      <div class="jz-hero-content">
+        <p class="jz-hero-eyebrow">Browse by type</p>
+        <h2 class="jz-hero-title">JHUMKAS</h2>
+        <p class="jz-hero-tagline">The Jhumka — India's most beloved earring</p>
+        <div class="jz-hero-rule"></div>
+        <p class="jz-hero-count">The Collection · <span id="jzPieceCount">0</span> Pieces</p>
       </div>
-      <div class="carousel-wrap">
-        <div class="carousel-track" id="ct-category-jhumkas">
-          <p class="cat-empty-msg"
-            style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--txt2);opacity:.28;padding:32px 24px;text-align:center;width:100%">
-            Coming Soon — Products will appear here</p>
+    </div>
+
+    <!-- ZONE 2: FILTER BAR + COUNTER/ARROWS -->
+    <div class="jz-controls">
+      <div class="jz-chips" id="jzChips">
+        <!-- Chips injected by JS -->
+      </div>
+      <div class="jz-controls-right">
+        <span class="jz-counter" id="jzCounter">01 / 00</span>
+        <div class="jz-arrows">
+          <button class="jz-arrow jz-arrow--prev" id="jzPrev" aria-label="Previous">&#8249;</button>
+          <button class="jz-arrow jz-arrow--next" id="jzNext" aria-label="Next">&#8250;</button>
         </div>
       </div>
-      <div class="carousel-nav" id="cn-category-jhumkas"></div>
+    </div>
+
+    <!-- ZONE 3: HORIZONTAL GALLERY RAIL -->
+    <div class="jz-rail-zone">
+      <div class="jz-scroll" id="jzScroll">
+        <!-- Cards injected by JS -->
+      </div>
+      <div class="jz-progress-track" id="jzProgressTrack">
+        <div class="jz-progress-bar" id="jzProgressBar"></div>
+      </div>
+    </div>
+
+    <!-- ZONE 4: ATMOSPHERIC DIVIDER -->
+    <div class="jz-divider">
+      <div class="jz-divider-ambient" aria-hidden="true"></div>
+      <div class="jz-divider-top" aria-hidden="true"></div>
+      <div class="jz-divider-bot" aria-hidden="true"></div>
+      <div class="jz-divider-content">
+        <span class="jz-div-glyph" aria-hidden="true">&#10022;</span>
+        <p class="jz-div-label">Continue exploring</p>
+        <nav class="jz-div-nav" aria-label="Explore other categories">
+          <a href="#category-bangles" class="jz-div-link">Bangles</a>
+          <a href="#category-sets"   class="jz-div-link">Sets</a>
+          <a href="#category-pendant"   class="jz-div-link">Pendants</a>
+        </nav>
+      </div>
     </div>
   </section>
 
@@ -12856,6 +13434,255 @@
 
 })();
   </script>
+
+  <script>
+(function () {
+  'use strict';
+
+  /* ── CONFIG: fill in from Step 1 reconnaissance ── */
+  var CDN_URL      = 'https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json';
+  var CATEGORY_VAL = 'Jhumkas';
+  var NAME_KEY     = 'name';
+  var IMAGE_KEY    = 'image';
+  var PRICE_KEY    = 'price';
+  var ID_KEY       = 'id';
+  var MATERIAL_KEY = 'description';
+  var STYLE_KEY    = null;
+  var WA_NUM       = '918919359961';
+  /* ─────────────────────────────────────────────── */
+
+  var WHATSAPP_SVG =
+    '<svg class="jz-cta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15' +
+    '-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075' +
+    '-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059' +
+    '-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52' +
+    '.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52' +
+    '-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51' +
+    '-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372' +
+    '-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074' +
+    '.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625' +
+    '.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413' +
+    '.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>' +
+    '<path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.418' +
+    'A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z' +
+    'm0 18.154a8.119 8.119 0 0 1-4.146-1.132l-.297-.176-3.08.876.845-3.159-.194-.314' +
+    'A8.154 8.154 0 0 1 3.846 12C3.846 7.49 7.49 3.846 12 3.846' +
+    'c4.508 0 8.154 3.644 8.154 8.154 0 4.508-3.646 8.154-8.155 8.154z"/>' +
+    '</svg>';
+
+  function buildQuickViewBtn(product) {
+    return '<div class="pcard-quick-view">Quick View</div>';
+  }
+
+  function buildWishlistBtn(product) {
+    var pid = product[ID_KEY] || '';
+    var name = product[NAME_KEY] || '';
+    return '<button class="pcard-wish" data-pid="' + pid + '" onclick="event.stopPropagation();toggleWish(this,\'' + pid.replace(/'/g, '\\\'') + '\')" aria-label="Add ' + name.replace(/'/g, '&#39;') + ' to wishlist">' +
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+    '</button>';
+  }
+
+  function formatPrice(val) {
+    if (!val && val !== 0) return '';
+    var num = parseFloat(String(val).replace(/[^0-9.]/g, ''));
+    if (isNaN(num)) return String(val);
+    return '₹' + num.toLocaleString('en-IN');
+  }
+
+  function waHref(name) {
+    var msg = 'I am interested in ' + (name || 'this jhumka') + ' from LUVZ Collection.';
+    return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg);
+  }
+
+  function buildCard(product, index) {
+    var num  = String(index + 1).padStart(2, '0');
+    var card = document.createElement('div');
+    card.className = 'jz-card';
+    card.style.animationDelay = (index * 60) + 'ms';
+
+    if (STYLE_KEY && product[STYLE_KEY]) {
+      card.setAttribute('data-style', product[STYLE_KEY]);
+    }
+
+    card.innerHTML =
+      '<div class="jz-card-img-wrap">' +
+        '<span class="jz-card-num">N&ordm;&nbsp;' + num + '</span>' +
+        '<span class="jz-card-star" aria-hidden="true">&#10022;</span>' +
+        '<img' +
+          ' class="jz-card-img"' +
+          ' src="' + (product[IMAGE_KEY] || '') + '"' +
+          ' alt="' + (product[NAME_KEY]  || '') + '"' +
+          ' loading="lazy"' +
+        '>' +
+        '<div class="jz-card-actions">' +
+          buildQuickViewBtn(product) +
+          buildWishlistBtn(product) +
+        '</div>' +
+        '<div class="jz-card-cta">' +
+          '<a class="jz-cta-btn" href="' + waHref(product[NAME_KEY]) + '" target="_blank" rel="noopener">' +
+            WHATSAPP_SVG +
+            'Enquire Now' +
+          '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="jz-card-meta">' +
+        '<p class="jz-card-name">'  + (product[NAME_KEY]     || '') + '</p>' +
+        '<p class="jz-card-price">' + formatPrice(product[PRICE_KEY]) + '</p>' +
+        '<p class="jz-card-mat">'   + (product[MATERIAL_KEY] || '') + '</p>' +
+      '</div>';
+
+    card.onclick = function (e) {
+      if (e.target.closest('.pcard-wish') || e.target.closest('.pcard-quick-view')) return;
+      if (typeof openModal === 'function') openModal(product, 'Jhumkas');
+    };
+
+    if (window.productRegistry) {
+      window.productRegistry[product[ID_KEY]] = product;
+    }
+
+    return card;
+  }
+
+  function buildChips(products) {
+    var chipsEl = document.getElementById('jzChips');
+    if (!chipsEl) return;
+
+    var labels = ['All'];
+
+    if (STYLE_KEY) {
+      var seen = {};
+      products.forEach(function (p) {
+        var val = p[STYLE_KEY];
+        if (val && !seen[val]) { seen[val] = true; labels.push(val); }
+      });
+    } else {
+      labels = labels.concat(['Temple', 'Peacock', 'Floral', 'Minimal', 'Bridal']);
+    }
+
+    labels.forEach(function (label, i) {
+      var btn = document.createElement('button');
+      btn.className = 'jz-chip' + (i === 0 ? ' jz-chip--active' : '');
+      btn.textContent = label;
+      btn.setAttribute('data-filter', label);
+      chipsEl.appendChild(btn);
+    });
+
+    chipsEl.addEventListener('click', function (e) {
+      var chip = e.target.closest('.jz-chip');
+      if (!chip) return;
+
+      chipsEl.querySelectorAll('.jz-chip').forEach(function (c) {
+        c.classList.remove('jz-chip--active');
+      });
+      chip.classList.add('jz-chip--active');
+
+      var filter  = chip.getAttribute('data-filter');
+      var scrollEl = document.getElementById('jzScroll');
+      if (!scrollEl) return;
+
+      var cards   = scrollEl.querySelectorAll('.jz-card');
+      var visible = 0;
+      cards.forEach(function (card) {
+        var style = card.getAttribute('data-style') || '';
+        var show  = filter === 'All' || style.toLowerCase() === filter.toLowerCase();
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      updateCounter(1, visible);
+    });
+  }
+
+  function updateCounter(current, total) {
+    var el = document.getElementById('jzCounter');
+    if (el) {
+      el.textContent =
+        String(current).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+  }
+
+  function updateProgress(scrollEl) {
+    var bar      = document.getElementById('jzProgressBar');
+    if (!bar) return;
+    var maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+    var pct       = maxScroll > 0 ? (scrollEl.scrollLeft / maxScroll) * 100 : 0;
+    bar.style.width = pct + '%';
+
+    var cards  = scrollEl.querySelectorAll('.jz-card:not([style*="display: none"])');
+    if (!cards.length) return;
+    var cardW  = cards[0].offsetWidth + 24;
+    var idx    = Math.round(scrollEl.scrollLeft / cardW) + 1;
+    updateCounter(Math.min(idx, cards.length), cards.length);
+  }
+
+  function init() {
+    var scrollEl = document.getElementById('jzScroll');
+    var countEl  = document.getElementById('jzPieceCount');
+    var prevBtn  = document.getElementById('jzPrev');
+    var nextBtn  = document.getElementById('jzNext');
+
+    if (!scrollEl) return;
+
+    fetch(CDN_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var products = Array.isArray(data.jhumkas) ? data.jhumkas : [];
+
+        if (!products.length) {
+          console.warn('[Jhumkas] No products found for category:', CATEGORY_VAL);
+          return;
+        }
+
+        console.log('[Jhumkas] Using price field:', PRICE_KEY);
+        console.log('[Jhumkas] Using material field:', MATERIAL_KEY);
+
+        if (countEl) countEl.textContent = products.length;
+        updateCounter(1, products.length);
+
+        buildChips(products);
+
+        products.forEach(function (product, i) {
+          scrollEl.appendChild(buildCard(product, i));
+        });
+
+        function getStep() {
+          var first = scrollEl.querySelector('.jz-card');
+          var gap   = 24;
+          return first ? first.offsetWidth + gap : 360 + gap;
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function () {
+            scrollEl.scrollBy({ left: -getStep(), behavior: 'smooth' });
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function () {
+            scrollEl.scrollBy({ left: getStep(), behavior: 'smooth' });
+          });
+        }
+
+        scrollEl.addEventListener('scroll', function () {
+          updateProgress(scrollEl);
+        }, { passive: true });
+
+        updateProgress(scrollEl);
+      })
+      .catch(function (err) {
+        console.warn('[Jhumkas] Failed to load products:', err);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+  </script>
+
 </body>
 
 </html>
