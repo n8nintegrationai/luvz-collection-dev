@@ -12490,6 +12490,769 @@
   .er-divider { height: 130px; }
   .er-div-nav { flex-direction: column; gap: 10px; }
 }
+
+/* ============================================================
+   LUVZ — Sets Section · Cinematic Featured Showcase
+   All rules scoped inside #category-sets / .st-* prefix
+   ============================================================ */
+
+#category-sets {
+  --st-bg:          #060402;
+  --st-card-bg:     #0c0806;
+  --st-gold:        #c9a35a;
+  --st-gold-bright: #e6c98a;
+  --st-gold-dim:    rgba(201,163,90,0.35);
+  --st-gold-ghost:  rgba(201,163,90,0.09);
+  --st-ivory:       #ede0c8;
+  --st-warm:        #c7b696;
+  --st-mute:        #8a7a5e;
+  --st-dim:         #5f5341;
+  --st-hairline:    rgba(201,163,90,0.06);
+  background: var(--st-bg);
+}
+
+/* ── ZONE 1: SPLIT HERO ───────────────────────────────────── */
+
+.st-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  background: var(--st-bg);
+  overflow: hidden;
+}
+
+.st-hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 64px 80px 80px;
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    #060402 65%,
+    rgba(6,4,2,0.55) 88%,
+    transparent 100%
+  );
+}
+
+.st-hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--st-gold);
+  margin: 0 0 18px;
+}
+
+.st-hero-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 110px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--st-ivory);
+  margin: 0 0 14px;
+  line-height: 0.88;
+}
+
+.st-hero-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--st-gold);
+  opacity: 0.5;
+  margin: 0 0 22px;
+}
+
+.st-hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st-gold);
+  margin: 0 0 16px;
+}
+
+.st-hero-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--st-warm);
+  margin: 0 0 36px;
+  letter-spacing: 0.02em;
+}
+
+.st-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--st-mute);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,163,90,0.3);
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  width: fit-content;
+}
+
+.st-hero-cta:hover {
+  color: var(--st-gold);
+  border-color: var(--st-gold);
+}
+
+.st-hero-cta-arrow {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.st-hero-cta:hover .st-hero-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Lotus watermark */
+.st-hero-lotus {
+  position: absolute;
+  bottom: 24px;
+  left: 80px;
+  font-size: 80px;
+  color: var(--st-gold);
+  opacity: 0.06;
+  pointer-events: none;
+  line-height: 1;
+  animation: stLotusBreathe 8s ease-in-out infinite;
+}
+
+@keyframes stLotusBreathe {
+  0%, 100% { opacity: 0.06; transform: scale(1); }
+  50%       { opacity: 0.1;  transform: scale(1.04); }
+}
+
+/* Right: banner photo */
+.st-hero-right {
+  position: relative;
+  overflow: hidden;
+}
+
+.st-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.68) saturate(0.82);
+  transform: scale(1.03);
+  transition: transform 12s ease;
+}
+
+.st-hero-right:hover .st-hero-img {
+  transform: scale(1.06);
+}
+
+.st-hero-img-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,  rgba(6,4,2,0.9) 0%, transparent 35%),
+    linear-gradient(to bottom, rgba(6,4,2,0.3) 0%, transparent 40%,
+                               transparent 55%, rgba(6,4,2,0.55) 100%);
+  pointer-events: none;
+}
+
+/* ── ZONE 2: FILTER BAR ───────────────────────────────────── */
+
+.st-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 80px;
+  background: var(--st-bg);
+  border-top: 1px solid var(--st-hairline);
+  border-bottom: 1px solid var(--st-hairline);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.st-chips {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.st-chip {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--st-mute);
+  background: transparent;
+  border: none;
+  padding: 8px 20px;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.st-chip::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--st-gold);
+  transition: width 0.3s ease;
+}
+
+.st-chip:hover { opacity: 0.7; color: var(--st-warm); }
+
+.st-chip--active {
+  opacity: 1;
+  color: var(--st-gold);
+}
+
+.st-chip--active::after { width: 24px; }
+
+.st-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.st-counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--st-mute);
+  min-width: 48px;
+  text-align: right;
+}
+
+.st-arrows { display: flex; gap: 6px; }
+
+.st-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(201,163,90,0.15);
+  background: transparent;
+  color: var(--st-mute);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  line-height: 1;
+}
+
+.st-arrow:hover {
+  border-color: var(--st-gold);
+  color: var(--st-gold);
+}
+
+/* ── ZONE 3: FEATURED + MINI-GRID ─────────────────────────── */
+
+.st-showcase {
+  background: var(--st-bg);
+  padding: 0 0 48px;
+}
+
+/* Row A: featured */
+.st-featured-row {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  min-height: 480px;
+  border-bottom: 1px solid var(--st-hairline);
+}
+
+/* Large image */
+.st-featured-img-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--st-card-bg);
+}
+
+.st-featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+  min-height: 480px;
+}
+
+.st-featured-img-wrap:hover .st-featured-img {
+  filter: brightness(0.95);
+  transform: scale(1.02);
+}
+
+/* Featured Wishlist button (always visible, positioned absolutely) */
+#stFeaturedWishlist {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+}
+
+/* Featured Quick View (shows on hover) */
+.st-featured-actions {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+.st-featured-img-wrap:hover .st-featured-actions {
+  opacity: 1;
+}
+
+/* Detail panel */
+.st-featured-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 64px 56px 56px;
+  background: var(--st-card-bg);
+  border-left: 1px solid var(--st-hairline);
+  position: relative;
+}
+
+/* Subtle background texture on detail panel */
+.st-featured-detail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 80% 40%, rgba(201,163,90,0.025), transparent);
+  pointer-events: none;
+}
+
+.st-feat-num {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--st-gold);
+  opacity: 0.55;
+  letter-spacing: 0.14em;
+  margin: 0 0 18px;
+}
+
+.st-feat-name {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--st-ivory);
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+.st-feat-rule {
+  width: 36px;
+  height: 1px;
+  background: var(--st-gold);
+  opacity: 0.4;
+  margin: 0 0 20px;
+}
+
+.st-feat-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--st-mute);
+  margin: 0 0 36px;
+  letter-spacing: 0.02em;
+}
+
+.st-feat-enquire {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--st-gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,163,90,0.3);
+  padding-bottom: 3px;
+  transition: color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+  width: fit-content;
+}
+
+.st-feat-enquire:hover {
+  color: var(--st-gold-bright);
+  border-color: var(--st-gold);
+  gap: 18px;
+}
+
+.st-feat-enquire-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.st-feat-enquire:hover .st-feat-enquire-arrow {
+  transform: translateX(4px);
+}
+
+/* ── ROW B: MINI-GRID ─────────────────────────────────────── */
+
+.st-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--st-hairline);
+}
+
+.st-mini-card {
+  position: relative;
+  border-right: 1px solid var(--st-hairline);
+  background: var(--st-card-bg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+
+.st-mini-card:last-child { border-right: none; }
+
+.st-mini-card:hover { background: #100d08; }
+
+/* Mini card image */
+.st-mini-img-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.st-mini-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.82);
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.st-mini-card:hover .st-mini-img {
+  filter: brightness(0.96);
+  transform: scale(1.03);
+}
+
+/* Collectible number on mini card */
+.st-mini-num {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--st-gold);
+  opacity: 0.5;
+  letter-spacing: 0.12em;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Mini Wishlist button (always visible, positioned absolutely) */
+.st-mini-card .pcard-wish {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+}
+
+/* Mini Quick View (shows on hover) */
+.st-mini-actions {
+  position: absolute;
+  top: 12px;
+  right: 50px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+}
+
+.st-mini-card:hover .st-mini-actions { opacity: 1; }
+
+/* Next arrow overlaid on last mini card (right edge) */
+.st-mini-nav-arrow {
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,163,90,0.2);
+  background: rgba(6,4,2,0.8);
+  backdrop-filter: blur(6px);
+  color: var(--st-mute);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.st-mini-nav-arrow:hover {
+  border-color: var(--st-gold);
+  color: var(--st-gold);
+}
+
+/* Mini card metadata */
+.st-mini-meta {
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--st-hairline);
+}
+
+.st-mini-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--st-ivory);
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+.st-mini-enquire {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--st-mute);
+  text-decoration: none;
+  transition: color 0.3s ease, gap 0.3s ease;
+}
+
+.st-mini-enquire:hover {
+  color: var(--st-gold);
+  gap: 12px;
+}
+
+.st-mini-enquire-arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.st-mini-enquire:hover .st-mini-enquire-arrow {
+  transform: translateX(3px);
+}
+
+/* ── ZONE 4: LOTUS STRIP ──────────────────────────────────── */
+
+.st-lotus-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 80px;
+  background: var(--st-bg);
+}
+
+.st-lotus-strip-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--st-hairline);
+  max-width: 320px;
+}
+
+.st-lotus-strip-glyph {
+  font-size: 18px;
+  color: var(--st-gold);
+  opacity: 0.25;
+  animation: stLotusStripBreathe 6s ease-in-out infinite;
+}
+
+@keyframes stLotusStripBreathe {
+  0%, 100% { opacity: 0.25; transform: scale(1) rotate(0deg); }
+  50%       { opacity: 0.42; transform: scale(1.12) rotate(8deg); }
+}
+
+/* ── ZONE 5: ATMOSPHERIC DIVIDER ─────────────────────────── */
+
+.st-divider {
+  position: relative;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--st-bg);
+}
+
+.st-divider-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 45% at 50% 50%, rgba(201,163,90,0.022), transparent);
+  pointer-events: none;
+}
+
+.st-divider-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, var(--st-bg), transparent);
+  pointer-events: none;
+}
+
+.st-divider-bot {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to top, var(--st-bg), transparent);
+  pointer-events: none;
+}
+
+.st-divider-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.st-div-glyph {
+  font-size: 14px;
+  color: var(--st-gold);
+  opacity: 0.28;
+  display: block;
+  animation: stDivGlyph 5s ease-in-out infinite;
+}
+
+@keyframes stDivGlyph {
+  0%, 100% { opacity: 0.28; transform: scale(1); }
+  50%       { opacity: 0.42; transform: scale(1.12); }
+}
+
+.st-div-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--st-dim);
+  margin: 0;
+}
+
+.st-div-nav {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+
+.st-div-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--st-mute);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.st-div-link:hover { color: var(--st-gold); }
+
+/* ── TRANSITIONS ──────────────────────────────────────────── */
+
+/* Featured card swap animation */
+@keyframes stFeatIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.st-feat-animating .st-featured-img,
+.st-feat-animating .st-feat-num,
+.st-feat-animating .st-feat-name,
+.st-feat-animating .st-feat-desc {
+  animation: stFeatIn 0.45s ease both;
+}
+
+/* Mini card entrance */
+@keyframes stMiniIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.st-mini-card { animation: stMiniIn 0.4s ease both; }
+
+/* ── MOBILE ───────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Hero stacks */
+  .st-hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .st-hero-right {
+    height: 260px;
+    order: -1;
+  }
+
+  .st-hero-left {
+    padding: 40px 24px 48px;
+    background: var(--st-bg);
+  }
+
+  .st-hero-title  { font-size: 64px; }
+  .st-hero-tagline { font-size: 14px; }
+  .st-hero-body   { font-size: 13px; }
+  .st-hero-lotus  { font-size: 56px; left: 24px; }
+
+  /* Controls */
+  .st-controls { padding: 12px 20px; }
+  .st-chip { padding: 6px 10px; font-size: 9px; }
+
+  /* Featured: stack vertically */
+  .st-featured-row {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .st-featured-img { min-height: 280px; }
+
+  .st-featured-detail {
+    padding: 32px 24px;
+    border-left: none;
+    border-top: 1px solid var(--st-hairline);
+  }
+
+  .st-feat-name { font-size: 28px; }
+  .st-feat-desc { font-size: 14px; }
+
+  /* Mini: 1 column on mobile */
+  .st-mini-grid { grid-template-columns: 1fr; }
+  .st-mini-card { border-right: none; border-bottom: 1px solid var(--st-hairline); }
+  .st-mini-card:last-child { border-bottom: none; }
+  .st-mini-nav-arrow { display: none; }
+
+  /* Lotus strip */
+  .st-lotus-strip { padding: 16px 24px; }
+
+  /* Divider */
+  .st-divider { height: 130px; }
+  .st-div-nav { flex-direction: column; gap: 10px; }
+}
   </style>
 
 <body>
@@ -13317,23 +14080,105 @@
     </div>
   </section>
 
-  <section id="category-sets" class="sec sec-alt reveal">
+  <section id="category-sets" class="sec reveal">
     <div id="sets" style="position:absolute;top:-80px;"></div>
-    <div style="max-width:1360px;margin:0 auto">
-      <div class="sec-head">
-        <div class="eyebrow">Browse by Type</div>
-        <h2 class="sec-title gold-text" id="title-category-sets">Sets</h2>
-        <p class="cat-sec-subtitle" id="sub-category-sets">One look. Perfectly matched.</p>
 
+    <!-- ZONE 1: SPLIT HERO -->
+    <div class="st-hero">
+      <!-- Left: text block -->
+      <div class="st-hero-left">
+        <p class="st-hero-eyebrow">Browse by type</p>
+        <h2 class="st-hero-title">SETS</h2>
+        <div class="st-hero-rule"></div>
+        <p class="st-hero-tagline">Complete the look, effortlessly</p>
+        <p class="st-hero-body">
+          Curated combinations that bring together<br>
+          heritage craftsmanship and timeless design.
+        </p>
+        <a class="st-hero-cta" href="#st-showcase">
+          Explore the Collection
+          <span class="st-hero-cta-arrow" aria-hidden="true">&#8250;</span>
+        </a>
+        <!-- Lotus watermark bottom-left -->
+        <div class="st-hero-lotus" aria-hidden="true">&#10047;</div>
       </div>
-      <div class="carousel-wrap">
-        <div class="carousel-track" id="ct-category-sets">
-          <p class="cat-empty-msg"
-            style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--txt2);opacity:.28;padding:32px 24px;text-align:center;width:100%">
-            Coming Soon — Products will appear here</p>
+      <!-- Right: banner photo -->
+      <div class="st-hero-right">
+        <img class="st-hero-img" id="stHeroImg" src="" alt="Sets Collection" aria-hidden="true">
+        <div class="st-hero-img-vignette"></div>
+      </div>
+    </div>
+
+    <!-- ZONE 2: FILTER BAR + COUNTER / ARROWS -->
+    <div class="st-controls">
+      <div class="st-chips" id="stChips">
+        <!-- Chips injected by JS -->
+      </div>
+      <div class="st-controls-right">
+        <span class="st-counter" id="stCounter">01 / 00</span>
+        <div class="st-arrows">
+          <button class="st-arrow st-arrow--prev" id="stPrev" aria-label="Previous">&#8249;</button>
+          <button class="st-arrow st-arrow--next" id="stNext" aria-label="Next">&#8250;</button>
         </div>
       </div>
-      <div class="carousel-nav" id="cn-category-sets"></div>
+    </div>
+
+    <!-- ZONE 3: FEATURED + MINI-GRID SHOWCASE -->
+    <div class="st-showcase" id="st-showcase">
+
+      <!-- Row A: Featured card + detail panel -->
+      <div class="st-featured-row">
+        <!-- Large image -->
+        <div class="st-featured-img-wrap">
+          <img class="st-featured-img" id="stFeaturedImg" src="" alt="">
+          <!-- Wishlist button (positioned absolutely at top-right) -->
+          <div id="stFeaturedWishlist"></div>
+          <!-- Quick View button (inside hover container) -->
+          <div class="st-featured-actions" id="stFeaturedActions">
+            <!-- Quick View injected by JS -->
+          </div>
+        </div>
+        <!-- Detail panel -->
+        <div class="st-featured-detail">
+          <p class="st-feat-num" id="stFeatNum">N&ordm;&nbsp;01</p>
+          <h3 class="st-feat-name" id="stFeatName"></h3>
+          <div class="st-feat-rule"></div>
+          <p class="st-feat-desc" id="stFeatDesc"></p>
+          <a class="st-feat-enquire" id="stFeatEnquire" href="#" target="_blank" rel="noopener">
+            Enquire
+            <span class="st-feat-enquire-arrow" aria-hidden="true">&#8594;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Row B: Mini-grid (3 cards) -->
+      <div class="st-mini-grid" id="stMiniGrid">
+        <!-- Mini cards injected by JS -->
+      </div>
+
+    </div>
+
+    <!-- ZONE 4: LOTUS STRIP -->
+    <div class="st-lotus-strip" aria-hidden="true">
+      <div class="st-lotus-strip-rule"></div>
+      <span class="st-lotus-strip-glyph">&#10047;</span>
+      <div class="st-lotus-strip-rule"></div>
+    </div>
+
+    <!-- ZONE 5: ATMOSPHERIC DIVIDER -->
+    <div class="st-divider">
+      <div class="st-divider-ambient" aria-hidden="true"></div>
+      <div class="st-divider-top"    aria-hidden="true"></div>
+      <div class="st-divider-bot"    aria-hidden="true"></div>
+      <div class="st-divider-content">
+        <span class="st-div-glyph" aria-hidden="true">&#10022;</span>
+        <p class="st-div-label">Continue exploring</p>
+        <nav class="st-div-nav" aria-label="Explore other categories">
+          <a href="#category-jhumkas" class="st-div-link">Jhumkas</a>
+          <a href="#customer-love" class="st-div-link">Loved by You</a>
+          <a href="#category-pendant" class="st-div-link">Pendants</a>
+        </nav>
+      </div>
     </div>
   </section>
 
@@ -14826,6 +15671,330 @@
       })
       .catch(function (err) {
         console.warn('[Earrings] Failed to load products:', err);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
+(function () {
+  'use strict';
+
+  /* ── CONFIG: fill in from Step 1 reconnaissance ── */
+  var CDN_URL      = 'https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json';
+  var CATEGORY_VAL = 'sets';       /* label only */
+  var NAME_KEY     = 'name';
+  var IMAGE_KEY    = 'image';
+  var ID_KEY       = 'id';
+  var DESC_KEY     = 'description';   /* hardcoded */
+  var STYLE_KEY    = null;            /* no style field */
+  var WA_NUM       = '918919359961';
+  /* ─────────────────────────────────────────────── */
+
+  function waHref(name) {
+    var msg = 'I am interested in ' + (name || 'this set') + ' from LUVZ Collection.';
+    return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg);
+  }
+
+  function buildQuickViewBtn(product) {
+    var pid = product[ID_KEY] || '';
+    return '<div class="pcard-quick-view" data-pid="' + pid + '">Quick View</div>';
+  }
+
+  function buildWishlistBtn(product) {
+    var pid = product[ID_KEY] || '';
+    var name = product[NAME_KEY] || '';
+    return '<button class="pcard-wish" data-pid="' + pid + '" onclick="event.stopPropagation();toggleWish(this,\'' + pid.replace(/'/g, '\\\'') + '\')" aria-label="Add ' + name.replace(/'/g, '&#39;') + ' to wishlist">' +
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+    '</button>';
+  }
+
+  /* ── State ── */
+  var allProducts    = [];
+  var featuredIndex  = 0;
+
+  /* ── DOM refs ── */
+  var featImg     = document.getElementById('stFeaturedImg');
+  var featActions = document.getElementById('stFeaturedActions');
+  var featNum     = document.getElementById('stFeatNum');
+  var featName    = document.getElementById('stFeatName');
+  var featDesc    = document.getElementById('stFeatDesc');
+  var featEnquire = document.getElementById('stFeatEnquire');
+  var miniGrid    = document.getElementById('stMiniGrid');
+  var counterEl   = document.getElementById('stCounter');
+  var prevBtn     = document.getElementById('stPrev');
+  var nextBtn     = document.getElementById('stNext');
+
+  function updateCounter(idx, total) {
+    if (counterEl) {
+      counterEl.textContent =
+        String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+  }
+
+  function renderFeatured(product, idx) {
+    if (!product) return;
+    var num = String(idx + 1).padStart(2, '0');
+
+    if (featImg) {
+      featImg.src = product[IMAGE_KEY] || '';
+      featImg.alt = product[NAME_KEY]  || '';
+    }
+    if (featNum)  featNum.innerHTML  = 'N&ordm;&nbsp;' + num;
+    if (featName) featName.textContent = product[NAME_KEY] || '';
+    if (featDesc) featDesc.textContent = product[DESC_KEY]  || '';
+    if (featEnquire) featEnquire.href  = waHref(product[NAME_KEY]);
+
+    /* Rebuild Quick View in featured actions */
+    if (featActions) {
+      featActions.innerHTML = buildQuickViewBtn(product);
+    }
+
+    /* Rebuild Wishlist button separately (positioned absolutely) */
+    var wishlistEl = document.getElementById('stFeaturedWishlist');
+    if (wishlistEl) {
+      wishlistEl.innerHTML = buildWishlistBtn(product);
+    }
+
+    /* Add click handler to featured image to open modal */
+    var imgWrap = document.querySelector('.st-featured-img-wrap');
+    if (imgWrap) {
+      imgWrap.onclick = function (e) {
+        if (e.target.closest('.pcard-wish')) return;
+        if (typeof openModal === 'function') openModal(product, 'Sets');
+      };
+      imgWrap.style.cursor = 'pointer';
+    }
+
+    /* Animate swap */
+    var row = document.querySelector('.st-featured-row');
+    if (row) {
+      row.classList.remove('st-feat-animating');
+      void row.offsetWidth; /* force reflow */
+      row.classList.add('st-feat-animating');
+    }
+  }
+
+  function buildMiniCard(product, idx) {
+    var card = document.createElement('div');
+    card.className = 'st-mini-card';
+    card.style.animationDelay = (idx * 80) + 'ms';
+
+    var num = String(product._globalIdx + 1).padStart(2, '0');
+
+    card.innerHTML =
+      '<div class="st-mini-img-wrap">' +
+        '<span class="st-mini-num">N&ordm;&nbsp;' + num + '</span>' +
+        '<img' +
+          ' class="st-mini-img"' +
+          ' src="'  + (product[IMAGE_KEY] || '') + '"' +
+          ' alt="'  + (product[NAME_KEY]  || '') + '"' +
+          ' loading="lazy"' +
+        '>' +
+        buildWishlistBtn(product) +
+        '<div class="st-mini-actions">' +
+          buildQuickViewBtn(product) +
+        '</div>' +
+      '</div>' +
+      '<div class="st-mini-meta">' +
+        '<p class="st-mini-name">' + (product[NAME_KEY] || '') + '</p>' +
+        '<a class="st-mini-enquire" href="' + waHref(product[NAME_KEY]) + '" target="_blank" rel="noopener">' +
+          'Enquire' +
+          '<span class="st-mini-enquire-arrow" aria-hidden="true">&#8594;</span>' +
+        '</a>' +
+      '</div>';
+
+    /* Add click handler to open modal */
+    card.onclick = function (e) {
+      if (e.target.closest('.pcard-wish')) return;
+      if (typeof openModal === 'function') openModal(product, 'Sets');
+    };
+    card.style.cursor = 'pointer';
+
+    return card;
+  }
+
+  function renderMiniGrid(products, featIdx) {
+    if (!miniGrid) return;
+    miniGrid.innerHTML = '';
+
+    /* Show the 3 products immediately after the featured one, wrapping around */
+    var total = products.length;
+    for (var i = 1; i <= 3; i++) {
+      var idx  = (featIdx + i) % total;
+      var prod = products[idx];
+      if (!prod) continue;
+      prod._globalIdx = idx;
+      var card = buildMiniCard(prod, i - 1);
+
+      /* Add next-arrow overlay to the last mini card */
+      if (i === 3) {
+        var navArrow = document.createElement('button');
+        navArrow.className = 'st-mini-nav-arrow';
+        navArrow.setAttribute('aria-label', 'Next');
+        navArrow.innerHTML = '&#8250;';
+        navArrow.addEventListener('click', advance);
+        card.style.position = 'relative';
+        card.style.overflow = 'visible';
+        card.appendChild(navArrow);
+      }
+
+      miniGrid.appendChild(card);
+    }
+  }
+
+  function advance() {
+    if (!allProducts.length) return;
+    featuredIndex = (featuredIndex + 1) % allProducts.length;
+    renderFeatured(allProducts[featuredIndex], featuredIndex);
+    renderMiniGrid(allProducts, featuredIndex);
+    updateCounter(featuredIndex, allProducts.length);
+  }
+
+  function retreat() {
+    if (!allProducts.length) return;
+    featuredIndex = (featuredIndex - 1 + allProducts.length) % allProducts.length;
+    renderFeatured(allProducts[featuredIndex], featuredIndex);
+    renderMiniGrid(allProducts, featuredIndex);
+    updateCounter(featuredIndex, allProducts.length);
+  }
+
+  function applyFilter(filter) {
+    /* Re-derive the visible list from the raw CDN products */
+    var source = (window._stRawProducts || []);
+    if (filter === 'All' || !filter) {
+      allProducts = source.slice();
+    } else if (STYLE_KEY) {
+      allProducts = source.filter(function (p) {
+        return String(p[STYLE_KEY] || '').toLowerCase() === filter.toLowerCase();
+      });
+    } else {
+      allProducts = source.slice(); /* no style field — filter is decorative */
+    }
+    featuredIndex = 0;
+    if (allProducts.length) {
+      renderFeatured(allProducts[0], 0);
+      renderMiniGrid(allProducts, 0);
+    }
+    updateCounter(0, allProducts.length);
+  }
+
+  function buildChips(products) {
+    var chipsEl = document.getElementById('stChips');
+    if (!chipsEl) return;
+
+    var labels = ['All'];
+    if (STYLE_KEY) {
+      var seen = {};
+      products.forEach(function (p) {
+        var val = p[STYLE_KEY];
+        if (val && !seen[val]) { seen[val] = true; labels.push(val); }
+      });
+    } else {
+      labels = labels.concat(['Temple', 'Bridal', 'Peacock', 'Floral', 'Minimal']);
+    }
+
+    labels.forEach(function (label, i) {
+      var btn = document.createElement('button');
+      btn.className = 'st-chip' + (i === 0 ? ' st-chip--active' : '');
+      btn.textContent = label;
+      btn.setAttribute('data-filter', label);
+      chipsEl.appendChild(btn);
+    });
+
+    chipsEl.addEventListener('click', function (e) {
+      var chip = e.target.closest('.st-chip');
+      if (!chip) return;
+      chipsEl.querySelectorAll('.st-chip').forEach(function (c) {
+        c.classList.remove('st-chip--active');
+      });
+      chip.classList.add('st-chip--active');
+      applyFilter(chip.getAttribute('data-filter'));
+    });
+  }
+
+  function setHeroImage(src, sourceLabel) {
+    var img = document.getElementById('stHeroImg');
+    if (img && src) {
+      img.src = src;
+      console.log('[Sets] Hero image source:', sourceLabel);
+    }
+  }
+
+  function init() {
+    if (!featImg) return; /* section not present */
+
+    if (prevBtn) prevBtn.addEventListener('click', retreat);
+    if (nextBtn) nextBtn.addEventListener('click', advance);
+
+    fetch(CDN_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+
+        /* ── Hero banner image ── */
+        var heroSrc = null;
+        if (Array.isArray(data.categories)) {
+          var cat = data.categories.find(function (c) {
+            return String(c.key || c.name || c.id || '').toLowerCase() === 'sets';
+          });
+          if (cat && cat.image) heroSrc = cat.image;
+        } else if (data.categories && typeof data.categories === 'object') {
+          var catEntry = data.categories['sets'] || data.categories['Sets'];
+          if (catEntry && catEntry.image) heroSrc = catEntry.image;
+        }
+
+        /* Load sets from top-level key (not via category filter) */
+        var products = Array.isArray(data.sets) ? data.sets : [];
+
+        /* Fallback hero */
+        if (!heroSrc && products.length && products[0][IMAGE_KEY]) {
+          heroSrc = products[0][IMAGE_KEY];
+          setHeroImage(heroSrc, 'first-product-fallback');
+        } else if (heroSrc) {
+          setHeroImage(heroSrc, 'categories-key');
+        }
+
+        if (!products.length) {
+          console.warn('[Sets] No products found');
+          return;
+        }
+
+        /* Store raw for filter resets */
+        window._stRawProducts = products;
+        allProducts = products.slice();
+
+        /* Register products to global registry for wishlist drawer */
+        products.forEach(function (product) {
+          var pid = product[ID_KEY] || btoa(product[NAME_KEY] || Math.random()).slice(0, 8);
+          /* Wait for app.js to load */
+          var registerAttempts = 0;
+          var registerInterval = setInterval(function() {
+            if (typeof window.productRegistry !== 'undefined' || (typeof productRegistry !== 'undefined' && productRegistry)) {
+              var reg = window.productRegistry || productRegistry;
+              if (reg) {
+                reg[pid] = Object.assign({}, product, { category: 'Sets' });
+                clearInterval(registerInterval);
+              }
+            }
+            registerAttempts++;
+            if (registerAttempts > 50) clearInterval(registerInterval);
+          }, 100);
+        });
+
+        buildChips(products);
+
+        /* Initial render */
+        renderFeatured(allProducts[0], 0);
+        renderMiniGrid(allProducts, 0);
+        updateCounter(0, allProducts.length);
+      })
+      .catch(function (err) {
+        console.warn('[Sets] Failed to load products:', err);
       });
   }
 
