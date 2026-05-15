@@ -10498,6 +10498,660 @@
         align-items: center;
       }
     }
+
+/* ============================================================
+   LUVZ — Bangles Section · Cinematic Dense Mini-Grid
+   All rules scoped inside #category-bangles / .bz-* prefix
+   ============================================================ */
+
+#category-bangles {
+  --bz-bg:          #060402;
+  --bz-card-bg:     #0a0705;
+  --bz-gold:        #c9a35a;
+  --bz-gold-bright: #e6c98a;
+  --bz-gold-dim:    rgba(201,163,90,0.35);
+  --bz-gold-ghost:  rgba(201,163,90,0.09);
+  --bz-ivory:       #ede0c8;
+  --bz-warm:        #c7b696;
+  --bz-mute:        #8a7a5e;
+  --bz-dim:         #5f5341;
+  --bz-hairline:    rgba(201,163,90,0.05);
+  background: var(--bz-bg);
+}
+
+/* ── ZONE 1: HERO ─────────────────────────────────────────── */
+
+.bz-hero {
+  position: relative;
+  min-height: 272px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bz-bg);
+}
+
+.bz-hero-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 75% 95% at 50% 18%, #301b07 0%, #150c03 48%, #060402 82%),
+    radial-gradient(ellipse 45% 35% at 18% 82%, #1e1004 0%, transparent 70%),
+    radial-gradient(ellipse 35% 45% at 82% 68%, #180d03 0%, transparent 70%);
+}
+
+/* Silk-texture undertone */
+.bz-hero-silk {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.028;
+  pointer-events: none;
+}
+
+/* Grain overlay */
+.bz-hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.045;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Warm bloom behind tagline — pulses slowly */
+.bz-hero-bloom {
+  position: absolute;
+  width: 420px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse 100% 100%, rgba(201,163,90,0.07) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  pointer-events: none;
+  animation: bzBloomPulse 7s ease-in-out infinite;
+}
+
+@keyframes bzBloomPulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, 10px) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, 6px)  scale(1.06); }
+}
+
+/* Concentric rings */
+.bz-hero-rings {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.bz-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--bz-gold);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+}
+
+.bz-ring-a { animation: bzRingDrift 12s ease-in-out infinite; }
+.bz-ring-b { animation: bzRingDrift 16s ease-in-out infinite reverse; }
+.bz-ring-c { animation: bzRingDrift 20s ease-in-out infinite; }
+.bz-ring-d { animation: bzRingDrift  9s ease-in-out infinite reverse; }
+
+@keyframes bzRingDrift {
+  0%, 100% { opacity: var(--ro, 0.05); }
+  50%       { opacity: calc(var(--ro, 0.05) * 1.7); }
+}
+
+/* Floating dust container */
+.bz-hero-dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.bz-particle {
+  position: absolute;
+  width: 1.5px;
+  height: 1.5px;
+  background: var(--bz-gold);
+  border-radius: 50%;
+  opacity: 0;
+  animation: bzFloatUp linear infinite;
+}
+
+@keyframes bzFloatUp {
+  0%         { opacity: 0;              transform: translateY(0)    translateX(0); }
+  20%        { opacity: var(--po, 0.2); }
+  80%        { opacity: var(--po, 0.2); }
+  100%       { opacity: 0;              transform: translateY(-80px) translateX(var(--dx, 8px)); }
+}
+
+.bz-hero-fog {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,4,2,0.40) 0%,
+    transparent 30%,
+    transparent 58%,
+    rgba(6,4,2,0.98) 100%
+  );
+  pointer-events: none;
+}
+
+.bz-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 46px 24px 54px;
+}
+
+.bz-hero-eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: var(--bz-mute);
+  margin: 0 0 18px;
+  animation: bzFadeUp 1.2s ease both;
+  animation-delay: 0.1s;
+}
+
+.bz-hero-title {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 62px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bz-ivory);
+  margin: 0 0 8px;
+  line-height: 1;
+  animation: bzFadeUp 1.2s ease both;
+  animation-delay: 0.28s;
+}
+
+.bz-hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--bz-gold);
+  letter-spacing: 0.08em;
+  margin: 0 0 22px;
+  animation: bzFadeUp 1.2s ease both;
+  animation-delay: 0.44s;
+}
+
+.bz-hero-rule {
+  width: 38px;
+  height: 1px;
+  background: var(--bz-gold);
+  opacity: 0.38;
+  margin: 0 auto 16px;
+  animation: bzFadeUp 1.2s ease both;
+  animation-delay: 0.58s;
+}
+
+.bz-hero-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--bz-dim);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0;
+  animation: bzFadeUp 1.2s ease both;
+  animation-delay: 0.70s;
+}
+
+@keyframes bzFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ZONE 2: FILTER BAR ───────────────────────────────────── */
+
+.bz-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 16px;
+  background: var(--bz-bg);
+  border-bottom: 1px solid var(--bz-hairline);
+}
+
+.bz-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bz-chip {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(201,163,90,0.38);
+  border: 1px solid rgba(201,163,90,0.08);
+  background: transparent;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.bz-chip:hover {
+  color: rgba(201,163,90,0.7);
+  border-color: rgba(201,163,90,0.2);
+}
+
+.bz-chip.bz-chip--active {
+  color: var(--bz-gold);
+  border-color: rgba(201,163,90,0.22);
+  background: rgba(201,163,90,0.06);
+}
+
+.bz-filter-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(95,83,65,0.45);
+}
+
+/* ── ZONE 3: DENSE MINI-GRID ──────────────────────────────── */
+
+.bz-grid-zone {
+  background: var(--bz-bg);
+  padding: 3px 3px 0;
+}
+
+.bz-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+}
+
+/* ── PRODUCT CARDS ────────────────────────────────────────── */
+
+.bz-card {
+  position: relative;
+  background: var(--bz-card-bg);
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Staggered entrance */
+.bz-card { animation: bzCardReveal 0.9s ease both; }
+.bz-card:nth-child(1) { animation-delay: 0.05s; }
+.bz-card:nth-child(2) { animation-delay: 0.15s; }
+.bz-card:nth-child(3) { animation-delay: 0.22s; }
+.bz-card:nth-child(4) { animation-delay: 0.30s; }
+.bz-card:nth-child(5) { animation-delay: 0.38s; }
+.bz-card:nth-child(6) { animation-delay: 0.45s; }
+.bz-card:nth-child(7) { animation-delay: 0.52s; }
+.bz-card:nth-child(n+8) { animation-delay: 0.58s; }
+
+@keyframes bzCardReveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bz-card:hover { transform: translateY(-2px); }
+
+/* Hover light sweep */
+.bz-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,163,90,0) 0%, transparent 100%);
+  transition: background 0.8s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+.bz-card:hover::before {
+  background: radial-gradient(ellipse 70% 70% at 50% 40%, rgba(201,163,90,0.04) 0%, transparent 70%);
+}
+
+/* Grid span helpers */
+.bz-card--w2 { grid-column: span 2; }
+.bz-card--r2 { grid-row: span 2; }
+
+/* Asymmetric rhythm offsets (controlled imperfection) */
+.bz-card--nudge-up   .bz-wrap { margin-top: -22px; }
+.bz-card--nudge-down .bz-wrap { margin-top: 14px; }
+
+/* Image wrap */
+.bz-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Default aspect ratios per card type */
+.bz-card--w2.bz-card--r2 .bz-wrap { aspect-ratio: 2 / 2.35; }
+.bz-card--w2:not(.bz-card--r2) .bz-wrap { aspect-ratio: 2 / 1.02; }
+.bz-card--r2:not(.bz-card--w2) .bz-wrap { aspect-ratio: 1 / 2.1; }
+.bz-card:not(.bz-card--w2):not(.bz-card--r2) .bz-wrap { aspect-ratio: 1 / 1.15; }
+
+/* Gold inner border on hover */
+.bz-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(201,163,90,0);
+  transition: border-color 0.5s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+.bz-card:hover .bz-wrap::after {
+  border-color: rgba(201,163,90,0.18);
+}
+
+/* Product image */
+.bz-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.82);
+  display: block;
+  transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bz-card:hover .bz-img {
+  filter: brightness(0.96);
+  transform: scale(1.03);
+}
+
+/* Collectible number */
+.bz-num {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  font-family: 'Bodoni Moda', serif;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--bz-gold);
+  opacity: 0.35;
+  letter-spacing: 0.12em;
+  z-index: 5;
+}
+
+/* Badge (Signature / Pair / Set of 3 etc.) */
+.bz-badge {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bz-gold);
+  border: 1px solid rgba(201,163,90,0.28);
+  padding: 3px 7px;
+  z-index: 5;
+  background: rgba(6,4,2,0.55);
+}
+
+/* Site action buttons — Quick View + Wishlist */
+.bz-card__actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.bz-card:hover .bz-card__actions {
+  opacity: 1;
+}
+
+/* Hover overlay — name, material, CTA */
+.bz-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(6,4,2,0.92) 0%, rgba(6,4,2,0.4) 55%, transparent 100%);
+  padding: 36px 14px 14px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.bz-card:hover .bz-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bz-card-name {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--bz-ivory);
+  letter-spacing: 0.04em;
+  margin: 0 0 3px;
+  line-height: 1.2;
+}
+
+.bz-card-mat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  font-style: italic;
+  color: var(--bz-mute);
+  margin: 0 0 9px;
+}
+
+/* Enquire Now CTA */
+.bz-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8px;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--bz-ivory);
+  border: 1px solid rgba(201,163,90,0.22);
+  padding: 6px 12px;
+  background: rgba(6,4,2,0.45);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.bz-cta:hover {
+  border-color: var(--bz-gold);
+  background: rgba(201,163,90,0.08);
+}
+
+.bz-cta-icon {
+  width: 13px;
+  height: 13px;
+  fill: var(--bz-gold);
+  flex-shrink: 0;
+}
+
+.bz-cta-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--bz-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* ── ZONE 4: CINEMATIC DISSOLVE BRIDGE ────────────────────── */
+
+.bz-dissolve {
+  position: relative;
+  height: 80px;
+  background: var(--bz-bg);
+  overflow: hidden;
+}
+
+.bz-dissolve::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(201,163,90,0.038) 0%, transparent 70%);
+  animation: bzAmbientGlow 8s ease-in-out infinite;
+}
+
+@keyframes bzAmbientGlow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.bz-dissolve::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(6,4,2,0) 0%, rgba(6,4,2,0.5) 55%, rgba(6,4,2,0.98) 100%);
+}
+
+/* ── ZONE 5: ATMOSPHERIC DIVIDER ──────────────────────────── */
+
+.bz-divider {
+  position: relative;
+  height: 156px;
+  background: var(--bz-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bz-divider-ambient {
+  position: absolute;
+  width: 320px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(201,163,90,0.04) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: bzDivGlow 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bzDivGlow {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -54%) scale(1.1); }
+}
+
+.bz-divider-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, rgba(6,4,2,0.95), transparent);
+  pointer-events: none;
+}
+
+.bz-divider-bot {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(6,4,2,0.98), transparent);
+  pointer-events: none;
+}
+
+.bz-divider-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+}
+
+.bz-div-glyph {
+  font-family: 'Bodoni Moda', serif;
+  font-size: 13px;
+  color: var(--bz-gold);
+  opacity: 0.22;
+  animation: bzGlyphBreath 6s ease-in-out infinite;
+}
+
+@keyframes bzGlyphBreath {
+  0%, 100% { opacity: 0.22; }
+  50%       { opacity: 0.38; }
+}
+
+.bz-div-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  font-style: italic;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(95,83,65,0.50);
+  margin: 0;
+}
+
+.bz-div-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+}
+
+.bz-div-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(138,122,94,0.55);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.bz-div-link:hover {
+  color: var(--bz-gold);
+}
+
+/* ── RESPONSIVE — MOBILE ──────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .bz-hero { min-height: 320px; }
+  .bz-hero-title { font-size: 42px; letter-spacing: 0.12em; }
+  .bz-hero-tagline { font-size: 15px; }
+  .bz-hero-bloom { width: 280px; height: 80px; }
+
+  .bz-filters { padding: 16px 16px 12px; }
+  .bz-chip { font-size: 9px; padding: 4px 10px; }
+
+  .bz-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; }
+  .bz-grid-zone { padding: 2px 2px 0; }
+
+  /* On mobile all cards become standard 2-col — no wide/tall spanning */
+  .bz-card--w2 { grid-column: span 1; }
+  .bz-card--r2 { grid-row: span 1; }
+  .bz-card--w2 .bz-wrap,
+  .bz-card--r2 .bz-wrap,
+  .bz-card--w2.bz-card--r2 .bz-wrap { aspect-ratio: 1 / 1.2; }
+  .bz-card--nudge-up .bz-wrap,
+  .bz-card--nudge-down .bz-wrap { margin-top: 0; }
+
+  .bz-num { font-size: 10px; top: 10px; left: 10px; }
+  .bz-overlay { padding: 24px 10px 10px; }
+  .bz-card-name { font-size: 12px; }
+  .bz-card-mat { font-size: 9px; }
+  .bz-cta { font-size: 7px; padding: 5px 10px; }
+
+  .bz-div-nav { flex-direction: column; align-items: center; gap: 12px; }
+  .bz-divider { height: 130px; }
+}
   </style>
 
 <body>
@@ -11125,21 +11779,72 @@
 
   <section id="category-bangles" class="sec sec-alt reveal">
     <div id="bangles" style="position:absolute;top:-80px;"></div>
-    <div style="max-width:1360px;margin:0 auto">
-      <div class="sec-head">
-        <div class="eyebrow">Browse by Type</div>
-        <h2 class="sec-title gold-text" id="title-category-bangles">Bangles</h2>
-        <p class="cat-sec-subtitle" id="sub-category-bangles">Grace in every gesture.</p>
 
+    <!-- ZONE 1: CINEMATIC HERO -->
+    <div class="bz-hero">
+      <div class="bz-hero-base"></div>
+      <svg class="bz-hero-silk" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="bzSilk" x="0" y="0" width="8" height="8"
+                   patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#c9a35a" stroke-width="0.4"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#bzSilk)"/>
+      </svg>
+      <div class="bz-hero-grain"></div>
+      <div class="bz-hero-bloom"></div>
+      <div class="bz-hero-rings">
+        <div class="bz-ring bz-ring-a" style="width:500px;height:500px;--ro:0.042;"></div>
+        <div class="bz-ring bz-ring-b" style="width:360px;height:360px;--ro:0.055;"></div>
+        <div class="bz-ring bz-ring-c" style="width:220px;height:220px;--ro:0.065;"></div>
+        <div class="bz-ring bz-ring-d" style="width:100px;height:100px;--ro:0.07;"></div>
       </div>
-      <div class="carousel-wrap">
-        <div class="carousel-track" id="ct-category-bangles">
-          <p class="cat-empty-msg"
-            style="font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--txt2);opacity:.28;padding:32px 24px;text-align:center;width:100%">
-            Coming Soon — Products will appear here</p>
-        </div>
+      <div class="bz-hero-dust" id="bzHeroDust"></div>
+      <div class="bz-hero-fog"></div>
+      <div class="bz-hero-content">
+        <p class="bz-hero-eyebrow">Browse by type</p>
+        <h2 class="bz-hero-title">BANGLES</h2>
+        <p class="bz-hero-tagline">Stacked with intention, worn with grace</p>
+        <div class="bz-hero-rule"></div>
+        <p class="bz-hero-count">
+          The Collection &middot; <span id="bzPieceCount">0</span> Pieces
+        </p>
       </div>
-      <div class="carousel-nav" id="cn-category-bangles"></div>
+    </div>
+
+    <!-- ZONE 2: FILTER BAR -->
+    <div class="bz-filters">
+      <div class="bz-chips" id="bzChips">
+        <!-- Chips injected by JS -->
+      </div>
+      <span class="bz-filter-count" id="bzFilterCount">0 pieces</span>
+    </div>
+
+    <!-- ZONE 3: DENSE ASYMMETRIC MINI-GRID -->
+    <div class="bz-grid-zone">
+      <div class="bz-grid" id="bzGrid">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- ZONE 4: CINEMATIC DISSOLVE BRIDGE -->
+    <div class="bz-dissolve" aria-hidden="true"></div>
+
+    <!-- ZONE 5: ATMOSPHERIC DIVIDER -->
+    <div class="bz-divider">
+      <div class="bz-divider-top" aria-hidden="true"></div>
+      <div class="bz-divider-bot" aria-hidden="true"></div>
+      <div class="bz-divider-ambient" aria-hidden="true"></div>
+      <div class="bz-divider-content">
+        <span class="bz-div-glyph" aria-hidden="true">&#10022;</span>
+        <p class="bz-div-label">Continue exploring</p>
+        <nav class="bz-div-nav" aria-label="Explore other categories">
+          <a href="#category-earrings" class="bz-div-link">Earrings</a>
+          <a href="#category-jhumkas"  class="bz-div-link">Jhumkas</a>
+          <a href="#category-pendant"    class="bz-div-link">Pendants</a>
+        </nav>
+      </div>
     </div>
   </section>
 
@@ -11891,6 +12596,264 @@
   } else {
     initPendantSection();
   }
+})();
+  </script>
+
+  <script>
+(function () {
+  'use strict';
+
+  /* ── CONFIG ── fill from Step 1 reconnaissance ── */
+  var CDN_URL       = 'https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json';
+  var NAME_KEY      = 'name';
+  var IMAGE_KEY     = 'image';
+  var ID_KEY        = 'id';
+  var MATERIAL_KEY  = 'description';
+  var STYLE_KEY     = null;
+  var CATEGORY_VAL  = 'Bangles';
+  var WA_NUM        = '918919359961';
+  /* ──────────────────────────────────────────────── */
+
+  /* Dust particle config */
+  var DUST_CONFIGS = [
+    { left:'18%', delay:'0s',   dur:'9s',   dx:'-8px',  po:0.18 },
+    { left:'34%', delay:'2.4s', dur:'12s',  dx:'6px',   po:0.14 },
+    { left:'52%', delay:'1.1s', dur:'10s',  dx:'-5px',  po:0.20 },
+    { left:'67%', delay:'3.8s', dur:'8s',   dx:'10px',  po:0.16 },
+    { left:'81%', delay:'0.6s', dur:'14s',  dx:'-4px',  po:0.12 },
+    { left:'28%', delay:'5.2s', dur:'11s',  dx:'7px',   po:0.15 },
+    { left:'73%', delay:'4.0s', dur:'9.5s', dx:'-9px',  po:0.17 },
+    { left:'45%', delay:'7.0s', dur:'13s',  dx:'5px',   po:0.13 }
+  ];
+
+  /* Grid layout pattern — cycles through for each product */
+  var CARD_LAYOUTS = [
+    { w2: true,  r2: true,  nudge: null,   extraAspect: null },
+    { w2: false, r2: false, nudge: null,   extraAspect: '1/1.02' },
+    { w2: false, r2: false, nudge: null,   extraAspect: '1/1.02' },
+    { w2: true,  r2: false, nudge: null,   extraAspect: '2/1.02' },
+    { w2: false, r2: true,  nudge: null,   extraAspect: '1/2.1',  marginTop: '-18px' },
+    { w2: false, r2: false, nudge: 'up',   extraAspect: '1/1.15' },
+    { w2: false, r2: false, nudge: null,   extraAspect: '1/1.32' }
+  ];
+
+  var WHATSAPP_SVG = '<svg class="bz-cta-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15' +
+    '-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075' +
+    '-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059' +
+    '-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52' +
+    '.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52' +
+    '-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51' +
+    '-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372' +
+    '-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074' +
+    '.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625' +
+    '.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413' +
+    '.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>' +
+    '<path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.418' +
+    'A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z' +
+    'm0 18.154a8.119 8.119 0 0 1-4.146-1.132l-.297-.176-3.08.876.845-3.159-.194-.314' +
+    'A8.154 8.154 0 0 1 3.846 12C3.846 7.49 7.49 3.846 12 3.846' +
+    'c4.508 0 8.154 3.644 8.154 8.154 0 4.508-3.646 8.154-8.155 8.154z"/>' +
+    '</svg>';
+
+  function buildQuickViewBtn(product) {
+    return '<div class="pcard-quick-view">Quick View</div>';
+  }
+
+  function buildWishlistBtn(product) {
+    var pid = product[ID_KEY] || '';
+    var name = product[NAME_KEY] || '';
+    return '<button class="pcard-wish" data-pid="' + pid + '" onclick="event.stopPropagation();toggleWish(this,\'' + pid.replace(/'/g, '\\\'') + '\')" aria-label="Add ' + name.replace(/'/g, '&#39;') + ' to wishlist">' +
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+    '</button>';
+  }
+
+  function waHref(name) {
+    var msg = 'I am interested in ' + (name || 'this bangle') + ' from LUVZ Collection.';
+    return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(msg);
+  }
+
+  function getLayout(index) {
+    return CARD_LAYOUTS[index % CARD_LAYOUTS.length];
+  }
+
+  function buildCard(product, index) {
+    var layout = getLayout(index);
+    var num = String(index + 1).padStart(2, '0');
+
+    var card = document.createElement('div');
+    var classes = 'bz-card';
+    if (layout.w2) classes += ' bz-card--w2';
+    if (layout.r2) classes += ' bz-card--r2';
+    if (layout.nudge === 'up')   classes += ' bz-card--nudge-up';
+    if (layout.nudge === 'down') classes += ' bz-card--nudge-down';
+    card.className = classes;
+
+    var wrapStyle = '';
+    if (layout.extraAspect) wrapStyle += 'aspect-ratio:' + layout.extraAspect + ';';
+    if (layout.marginTop)   wrapStyle += 'margin-top:' + layout.marginTop + ';';
+
+    /* Badge logic: first product = Signature */
+    var badge = '';
+    if (index === 0) {
+      badge = '<span class="bz-badge">Signature</span>';
+    }
+
+    card.innerHTML =
+      '<div class="bz-wrap" style="' + wrapStyle + '">' +
+        '<img class="bz-img"' +
+          ' src="' + (product[IMAGE_KEY] || '') + '"' +
+          ' alt="' + (product[NAME_KEY]  || '').replace(/"/g, '&quot;') + '"' +
+          ' loading="lazy">' +
+        '<span class="bz-num">N&ordm;&nbsp;' + num + '</span>' +
+        badge +
+        '<div class="bz-card__actions">' +
+          buildQuickViewBtn(product) +
+          buildWishlistBtn(product) +
+        '</div>' +
+        '<div class="bz-overlay">' +
+          '<p class="bz-card-name">' + (product[NAME_KEY]     || '') + '</p>' +
+          '<p class="bz-card-mat">'  + (product[MATERIAL_KEY] || '') + '</p>' +
+          '<a class="bz-cta" href="' + waHref(product[NAME_KEY]) + '" target="_blank" rel="noopener">' +
+            WHATSAPP_SVG +
+            'Enquire Now' +
+          '</a>' +
+        '</div>' +
+      '</div>';
+
+    /* Card click opens modal */
+    card.onclick = function (e) {
+      if (e.target.closest('.pcard-wish') || e.target.closest('.pcard-quick-view')) return;
+      if (typeof openModal === 'function') openModal(product, 'Bangles');
+    };
+
+    /* Store in productRegistry for openModal lookup */
+    if (window.productRegistry) {
+      window.productRegistry[product[ID_KEY]] = product;
+    }
+
+    return card;
+  }
+
+  function buildChips(products) {
+    var chipsEl = document.getElementById('bzChips');
+    if (!chipsEl) return;
+
+    var labels = ['All'];
+
+    if (STYLE_KEY) {
+      /* Dynamic: collect unique values from style subfield */
+      var seen = {};
+      products.forEach(function (p) {
+        var val = p[STYLE_KEY];
+        if (val && !seen[val]) { seen[val] = true; labels.push(val); }
+      });
+    } else {
+      /* Static fallback */
+      labels = labels.concat(['Temple', 'Kundan', 'Plain', 'Sets']);
+    }
+
+    labels.forEach(function (label, i) {
+      var btn = document.createElement('button');
+      btn.className = 'bz-chip' + (i === 0 ? ' bz-chip--active' : '');
+      btn.textContent = label;
+      btn.setAttribute('data-filter', label);
+      chipsEl.appendChild(btn);
+    });
+
+    /* Filter interaction */
+    chipsEl.addEventListener('click', function (e) {
+      var chip = e.target.closest('.bz-chip');
+      if (!chip) return;
+      chipsEl.querySelectorAll('.bz-chip').forEach(function (c) {
+        c.classList.remove('bz-chip--active');
+      });
+      chip.classList.add('bz-chip--active');
+
+      var filter = chip.getAttribute('data-filter');
+      var grid = document.getElementById('bzGrid');
+      if (!grid) return;
+
+      var cards = grid.querySelectorAll('.bz-card');
+      var visible = 0;
+      cards.forEach(function (card) {
+        var style = card.getAttribute('data-style') || '';
+        var show = filter === 'All' || style.toLowerCase() === filter.toLowerCase();
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      var countEl = document.getElementById('bzFilterCount');
+      if (countEl) countEl.textContent = visible + ' pieces';
+    });
+  }
+
+  function spawnDust() {
+    var dustEl = document.getElementById('bzHeroDust');
+    if (!dustEl) return;
+    DUST_CONFIGS.forEach(function (cfg) {
+      var el = document.createElement('div');
+      el.className = 'bz-particle';
+      el.style.cssText =
+        'left:' + cfg.left + ';' +
+        'bottom:0;' +
+        'animation-delay:' + cfg.delay + ';' +
+        'animation-duration:' + cfg.dur + ';' +
+        '--dx:' + cfg.dx + ';' +
+        '--po:' + cfg.po + ';';
+      dustEl.appendChild(el);
+    });
+  }
+
+  function init() {
+    var gridEl    = document.getElementById('bzGrid');
+    var countEl   = document.getElementById('bzPieceCount');
+    var filterCountEl = document.getElementById('bzFilterCount');
+
+    if (!gridEl) return;
+
+    spawnDust();
+
+    fetch(CDN_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        /* Access bangles data — match pendant pattern (keyed object) */
+        var products = Array.isArray(data.bangles) ? data.bangles : [];
+        if (!products.length) {
+          console.log('[Bangles] No products found.');
+          return;
+        }
+
+        console.log('[Bangles] Using material field: description');
+
+        /* Update piece count */
+        if (countEl) countEl.textContent = products.length;
+        if (filterCountEl) filterCountEl.textContent = products.length + ' pieces';
+
+        /* Build filter chips */
+        buildChips(products);
+
+        /* Build cards */
+        products.forEach(function (product, i) {
+          var card = buildCard(product, i);
+          /* Store style for filter */
+          if (STYLE_KEY && product[STYLE_KEY]) {
+            card.setAttribute('data-style', product[STYLE_KEY]);
+          }
+          gridEl.appendChild(card);
+        });
+      })
+      .catch(function (err) {
+        console.warn('[Bangles] Failed to load products:', err);
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
 })();
   </script>
 </body>

@@ -7,10 +7,7 @@
       "description": "Elegant floral design bangle. Lightweight and perfect for everyday and festive wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436108/1_u8ljv9.jpg",
       "images": [
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436108/1_u8ljv9.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588586/2.1_fqztjv.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436108/1_u8ljv9.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588590/2.2_gup3cv.jpg"
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436108/1_u8ljv9.jpg"
       ],
       "price": 1200
     },
@@ -21,10 +18,7 @@
       "description": "Elegant Mayura Floral Kadas bangle. Lightweight and perfect for everyday and festive wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
       "images": [
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588575/1.1_p7unei.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588578/1.2_yz5wvn.jpg"
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436107/2_jy3eix.jpg"
       ],
       "price": 8400
     },
@@ -35,10 +29,62 @@
       "description": "Elegant Rajputi Gokhru Bangles. Lightweight and perfect for everyday and festive wear.",
       "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
       "images": [
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588598/3.1_bnhahm.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg",
-        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773588603/3.2_cfrxvk.jpg"
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436106/3_qymdjr.jpg"
+      ],
+      "price": 14999
+    },
+    {
+      "id": "bg4",
+      "name": " Vedic Bangle",
+      "category": "Bangles",
+      "description": "Traditional ethnic silver bangle featuring deep 24k gold plating and intricate cultural motifs.",
+      "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436105/4_amh8dj.jpg",
+      "images": [
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436105/4_amh8dj.jpg"
+      ],
+      "price": 14999
+    },
+    {
+      "id": "bg5",
+      "name": "Urban Stack",
+      "category": "Bangles",
+      "description": "Contemporary minimalist gold-polished silver bangle designed for modern lightweight layering.",
+      "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436101/5_q0feix.jpg",
+      "images": [
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436101/5_q0feix.jpg"
+      ],
+      "price": 14999
+    },
+    {
+      "id": "bg6",
+      "name": "Royal Kada",
+      "category": "Bangles",
+      "description": " Heavy 925 sterling silver cuff finished in rich, antique micron gold plating.",
+      "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858946/Bangles_4_niuao0.webp",
+      "images": [
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858946/Bangles_4_niuao0.webp"
+      ],
+      "price": 14999
+    },
+    {
+      "id": "bg7",
+      "name": "Sleek Chudi",
+      "category": "Bangles",
+      "description": "Slender high-shine gold-polished silver bangles made for effortless daily stacking.",
+      "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_6_a9gke0.webp",
+      "images": [
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_6_a9gke0.webp"
+      ],
+      "price": 14999
+    },
+    {
+      "id": "bg8",
+      "name": "Aura Kangan",
+      "category": "Bangles",
+      "description": "Premium gold-plated silver statement bangle adorned with brilliant handset zircon stones.",
+      "image": "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_5_ap7wod.webp",
+      "images": [
+        "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_5_ap7wod.webp"
       ],
       "price": 14999
     }
