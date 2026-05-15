@@ -9470,8 +9470,8 @@
       position: relative;
       background: var(--bg2);
       overflow: hidden;
-      box-shadow: var(--nk-shadow);
     }
+
     .nk-imageframe::after {
       content: '';
       position: absolute;
@@ -9651,7 +9651,6 @@
     .nk-wish-icon-btn:hover {
       background: rgba(0, 0, 0, 0.6);
       border-color: rgba(201, 163, 90, 0.8);
-      transform: scale(1.1);
     }
     .nk-wish-icon-btn .nk-wish-icon {
       font-size: 18px;
@@ -9783,7 +9782,6 @@
       height: 52px;
       object-fit: cover;
       display: block;
-      filter: grayscale(0.45) brightness(0.68);
       transition: filter 200ms ease;
     }
     .nk-thumb .nk-th-num {
@@ -9808,6 +9806,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    .nk-thumb:hover {
+      border-color: var(--nk-gold);
     }
     .nk-thumb.is-active {
       border-color: var(--nk-gold);
