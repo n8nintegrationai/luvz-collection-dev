@@ -53,7 +53,7 @@
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1773436101/5_q0feix.jpg"
       ],
-      "price": 14999
+      "price": 8000
     },
     {
       "id": "bg6",
@@ -64,7 +64,7 @@
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858946/Bangles_4_niuao0.webp"
       ],
-      "price": 14999
+      "price": 1599
     },
     {
       "id": "bg7",
@@ -75,7 +75,7 @@
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_6_a9gke0.webp"
       ],
-      "price": 14999
+      "price": 5000
     },
     {
       "id": "bg8",
@@ -86,7 +86,21 @@
       "images": [
         "https://res.cloudinary.com/ddtlwlbgg/image/upload/v1778858947/Bangles_5_ap7wod.webp"
       ],
-      "price": 14999
+      "price": 2500
+    }
+  ],
+  "referral_codes": [
+    {
+      "code": "PRIYA10",
+      "influencer": "Priya Sharma",
+      "discount_percent": 10,
+      "active": true
+    },
+    {
+      "code": "MEENA15",
+      "influencer": "Meena Reddy",
+      "discount_percent": 15,
+      "active": true
     }
   ],
   "jhumkas": [
@@ -599,19 +613,5 @@
     "body": "Every LUVZ piece begins as raw 92.5 sterling silver...",
     "cta_text": "Explore the Collection →",
     "cta_href": "#categories"
-  },
-  "referral_codes": [
-    {
-      "code": "PRIYA10",
-      "influencer": "Priya Sharma",
-      "discount_percent": 10,
-      "active": true
-    },
-    {
-      "code": "MEENA15",
-      "influencer": "Meena Reddy",
-      "discount_percent": 15,
-      "active": true
-    }
-  ]
+  }
 }
