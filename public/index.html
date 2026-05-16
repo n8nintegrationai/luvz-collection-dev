@@ -1382,409 +1382,319 @@
       margin-right: auto
     }
 
-    /* ── SHOP BY CATEGORY BENTO ─────────────────────────── */
+    /* ============================================================
+       LUVZ — Shop By Category · Cinematic Bento Grid
+       All rules scoped to #categories / .sbc-* prefix
+       ============================================================ */
+
     #categories {
-      padding: 64px 24px 48px;
+      --sbc-bg:          #060402;
+      --sbc-card-bg:     #0c0806;
+      --sbc-gold:        #c9a35a;
+      --sbc-gold-bright: #e6c98a;
+      --sbc-gold-ghost:  rgba(201,163,90,0.08);
+      --sbc-ivory:       #ede0c8;
+      --sbc-warm:        #c7b696;
+      --sbc-mute:        #8a7a5e;
+      --sbc-dim:         #5f5341;
+      --sbc-hairline:    rgba(201,163,90,0.1);
+      background: var(--sbc-bg);
+      padding: 80px 40px 80px;
     }
 
-    .ai-style-change-1 {
-      max-width: 100%;
-      width: 100%;
+    /* ── HEADER ───────────────────────────────────────────────── */
+
+    .sbc-header {
+      text-align: center;
+      margin-bottom: 56px;
     }
 
-    .cat-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      grid-template-rows: 480px 360px 360px;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .cat-tile[data-anchor="category-necklace"] {
-      grid-column: 1;
-      grid-row: 1 / 3;
-    }
-
-    .cat-tile[data-anchor="category-pendant"] {
-      grid-column: 2;
-      grid-row: 1;
-    }
-
-    .cat-tile[data-anchor="category-earrings"] {
-      grid-column: 3;
-      grid-row: 1;
-    }
-
-    .cat-tile[data-anchor="category-sets"] {
-      grid-column: 2;
-      grid-row: 2;
-    }
-
-    .cat-tile[data-anchor="new_collection"] {
-      grid-column: 3;
-      grid-row: 2 / 4;
-    }
-
-    .cat-tile[data-anchor="category-bangles"] {
-      grid-column: 1;
-      grid-row: 3;
-    }
-
-    .cat-tile[data-anchor="category-jhumkas"] {
-      grid-column: 2;
-      grid-row: 3;
-    }
-
-    .cat-tile {
-      position: relative;
-      height: 100%;
-      border-radius: 9px;
-      overflow: hidden;
-      background: #1c1208;
-      border: 1px solid rgba(240, 201, 106, 0.04);
-      cursor: pointer;
-      transform: translateZ(0);
-      will-change: transform;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        box-shadow 0.5s ease;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
-    }
-
-    @media (hover: hover) {
-      .cat-tile:hover {
-        transform: translateY(-5px) translateZ(0);
-        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.52),
-          0 0 0 1px rgba(200, 140, 44, 0.09),
-          0 3px 10px rgba(200, 140, 44, 0.05);
-      }
-
-      .cat-tile:hover .cat-glass {
-        background: rgba(10, 6, 2, 0.62);
-      }
-
-      .cat-tile:hover .cat-tile-img {
-        transform: scale(1.03) translateZ(0);
-      }
-
-      .cat-tile:hover .cat-glass-name {
-        color: #f8f0de;
-      }
-
-      .cat-tile:hover .cat-glass-eyebrow {
-        color: rgba(240, 201, 106, 0.68);
-      }
-
-      .cat-tile:hover .cat-glass-arrow {
-        border-color: rgba(240, 201, 106, 0.32);
-      }
-    }
-
-    .cat-tile-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transform: translateZ(0);
-      will-change: transform;
-    }
-
-    .cat-tile::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #050302;
-      opacity: 0;
-      z-index: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-
-    @media (hover: hover) {
-      .cat-tile:hover::after {
-        opacity: 0.10;
-      }
-    }
-
-    .cat-fade-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 65%;
-      background: linear-gradient(to top,
-          rgba(6, 3, 1, 0.72) 0%,
-          rgba(6, 3, 1, 0.28) 45%,
-          transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .cat-tile[data-anchor="category-necklace"] .cat-fade-bottom,
-    .cat-tile[data-anchor="new_collection"] .cat-fade-bottom {
-      height: 55%;
-      background: linear-gradient(to top,
-          rgba(6, 3, 1, 0.68) 0%,
-          rgba(6, 3, 1, 0.22) 40%,
-          transparent 100%);
-    }
-
-    .cat-fade-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 30%;
-      background: linear-gradient(to bottom, rgba(6, 3, 1, 0.18) 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .cat-shine {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(240, 201, 106, 0.12) 50%, transparent 100%);
-      z-index: 2;
-    }
-
-    .cat-badge {
-      position: absolute;
-      top: 9px;
-      right: 9px;
-      z-index: 4;
-      font-size: 8px;
-      letter-spacing: 0.1em;
+    .sbc-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.55em;
       text-transform: uppercase;
-      color: rgba(240, 201, 106, 0.50);
-      background: rgba(12, 7, 2, 0.55);
-      border: 1px solid rgba(240, 201, 106, 0.08);
-      border-radius: 20px;
-      padding: 2px 8px;
-      font-family: 'Jost', sans-serif;
+      color: var(--sbc-gold);
+      margin: 0 0 18px;
     }
 
-    @supports (backdrop-filter: blur(1px)) {
-      .cat-badge {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
-    }
-
-    .cat-badge-new {
-      background: rgba(160, 45, 45, 0.50);
-      border-color: rgba(255, 120, 120, 0.18);
-      color: #ffcaca;
-    }
-
-    .cat-glass {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 4;
-      background: rgba(10, 6, 2, 0.82);
-      border-top: 1px solid rgba(240, 201, 106, 0.10);
-      padding: 9px 13px 11px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      transition: background 0.5s ease;
-    }
-
-    @supports (backdrop-filter: blur(1px)) {
-      .cat-glass {
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        background: rgba(10, 6, 2, 0.42);
-      }
-    }
-
-    .cat-tile[data-anchor="category-necklace"] .cat-glass,
-    .cat-tile[data-anchor="new_collection"] .cat-glass {
-      padding: 13px 16px 15px;
-    }
-
-    .cat-tile[data-anchor="new_collection"] .cat-tile-img {
-      object-fit: contain;
-    }
-
-    .cat-glass-eyebrow {
-      font-size: 8px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(240, 201, 106, 0.50);
-      margin-bottom: 2px;
-      font-family: 'Jost', sans-serif;
-      transition: color 0.4s ease;
-    }
-
-    .cat-glass-name {
-      font-size: 12px;
-      color: #f0e8d5;
-      letter-spacing: 0.06em;
-      font-family: 'Cinzel', serif;
+    .sbc-title {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 72px;
       font-weight: 400;
-      transition: color 0.4s ease;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sbc-ivory);
+      margin: 0 0 16px;
+      line-height: 1;
     }
 
-    .cat-tile[data-anchor="category-necklace"] .cat-glass-name,
-    .cat-tile[data-anchor="new_collection"] .cat-glass-name {
-      font-size: 14px;
+    .sbc-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--sbc-gold);
+      opacity: 0.45;
+      margin: 0 auto 20px;
     }
 
-    .cat-glass-arrow {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      border: 1px solid rgba(240, 201, 106, 0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .sbc-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--sbc-warm);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+
+    /* ── BENTO GRID ───────────────────────────────────────────── */
+
+    .sbc-grid {
+      display: grid;
+      /*
+        Left column (hero card): ~35% width
+        Right 3 columns: equal, filling the remaining ~65%
+      */
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      max-width: 1360px;
+      margin: 0 auto;
+      height: 780px; /* total bento height */
+    }
+
+    /* ── CARD BASE ────────────────────────────────────────────── */
+
+    .sbc-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      border: 1px solid rgba(201,163,90,0.08);
+      background: var(--sbc-card-bg);
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
       transition: border-color 0.4s ease;
     }
 
-    .cat-bangles-split {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .sbc-card:hover {
+      border-color: rgba(201,163,90,0.22);
     }
 
-    .cat-bangles-half {
-      position: relative;
-      overflow: hidden;
+    /* Hero card spans both rows */
+    .sbc-card--hero {
+      grid-row: 1 / 3;
     }
 
-    .cat-bangles-half img {
+    /* ── CARD IMAGE ───────────────────────────────────────────── */
+
+    .sbc-card-img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      filter: brightness(0.55) saturate(0.8);
+      transform: scale(1.04);
+      transition:
+        filter   0.7s ease,
+        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      display: block;
     }
 
-    .cat-bangles-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: rgba(240, 201, 106, 0.08);
-      z-index: 2;
+    .sbc-card:hover .sbc-card-img {
+      filter: brightness(0.72) saturate(0.9);
+      transform: scale(1.0);
     }
 
-    .cat-tile-noimg {
+    /* ── CARD VIGNETTE ────────────────────────────────────────── */
+
+    .sbc-card-vignette {
       position: absolute;
       inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(6,4,2,0.15) 0%,
+          transparent 35%,
+          transparent 45%,
+          rgba(6,4,2,0.75) 100%
+        );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Hero card: stronger gradient from bottom */
+    .sbc-card--hero .sbc-card-vignette {
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(6,4,2,0.1) 0%,
+          transparent 25%,
+          transparent 50%,
+          rgba(6,4,2,0.85) 100%
+        );
+    }
+
+    /* ── CARD CONTENT ─────────────────────────────────────────── */
+
+    .sbc-card-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Cinzel', serif;
-      font-size: 13px;
-      color: rgba(240, 201, 106, 0.35);
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px 24px 22px;
+    }
+
+    /* Top section: number + subtitle tag + name */
+    .sbc-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sbc-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
       letter-spacing: 0.08em;
+      color: var(--sbc-mute);
+      margin: 0;
+      line-height: 1;
     }
 
-    @media (max-width: 768px) {
-      #categories {
-        padding: 44px 14px 32px;
-      }
+    .sbc-card-tag {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--sbc-mute);
+      margin: 0;
+      opacity: 0.8;
+    }
 
-      .cat-grid {
+    .sbc-card-name {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--sbc-ivory);
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    /* Hero card gets a larger name */
+    .sbc-card--hero .sbc-card-name {
+      font-size: 36px;
+    }
+
+    /* ── EXPLORE LINK (bottom) ────────────────────────────────── */
+
+    .sbc-card-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--sbc-mute);
+      text-decoration: none;
+      transition: color 0.3s ease, gap 0.3s ease;
+      width: fit-content;
+      /* This is inside the card <a> but acts as a visual label */
+      pointer-events: none; /* the whole card <a> is clickable */
+    }
+
+    .sbc-card:hover .sbc-card-explore {
+      color: var(--sbc-gold);
+      gap: 14px;
+    }
+
+    .sbc-card-explore-arrow {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .sbc-card:hover .sbc-card-explore-arrow {
+      transform: translateX(3px);
+    }
+
+    /* ── HOVER GOLD INNER BORDER ─────────────────────────────── */
+
+    .sbc-card::after {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(201,163,90,0);
+      border-radius: 3px;
+      transition: border-color 0.5s ease;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .sbc-card:hover::after {
+      border-color: rgba(201,163,90,0.15);
+    }
+
+    /* ── CARD ENTRANCE ANIMATION ─────────────────────────────── */
+
+    @keyframes sbcCardIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .sbc-card {
+      animation: sbcCardIn 0.6s ease both;
+    }
+
+    /* ── MOBILE ───────────────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      #categories { padding: 56px 20px 56px; }
+
+      .sbc-title { font-size: 44px; }
+      .sbc-tagline { font-size: 15px; }
+      .sbc-header { margin-bottom: 36px; }
+
+      /* On mobile: single column, all cards equal height */
+      .sbc-grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: clamp(360px, 52vw, 440px) repeat(3, clamp(280px, 40vw, 340px));
-        gap: 10px;
+        grid-template-rows: auto;
+        height: auto;
+        gap: 8px;
       }
 
-      .cat-tile[data-anchor="category-necklace"] {
-        grid-column: span 2;
-        grid-row: 1;
+      /* Hero card no longer spans rows */
+      .sbc-card--hero {
+        grid-row: auto;
+        grid-column: 1 / 3; /* full width on mobile */
       }
 
-      .cat-tile[data-anchor="category-pendant"] {
-        grid-column: unset;
-        grid-row: unset;
+      .sbc-card {
+        height: 220px;
       }
 
-      .cat-tile[data-anchor="category-earrings"] {
-        grid-column: unset;
-        grid-row: unset;
+      .sbc-card--hero {
+        height: 280px;
       }
 
-      .cat-tile[data-anchor="category-sets"] {
-        grid-column: unset;
-        grid-row: unset;
-      }
-
-      .cat-tile[data-anchor="new_collection"] {
-        grid-column: unset;
-        grid-row: unset;
-      }
-
-      .cat-tile[data-anchor="category-bangles"] {
-        grid-column: unset;
-        grid-row: unset;
-      }
-
-      .cat-tile[data-anchor="category-jhumkas"] {
-        grid-column: unset;
-        grid-row: unset;
-      }
-
-      .cat-fade-bottom {
-        background: linear-gradient(to top,
-            rgba(6, 3, 1, 0.60) 0%,
-            rgba(6, 3, 1, 0.22) 45%,
-            transparent 100%);
-      }
-
-      .cat-glass {
-        background: rgba(10, 6, 2, 0.40);
-      }
-
-      @supports (backdrop-filter: blur(1px)) {
-        .cat-glass {
-          background: rgba(10, 6, 2, 0.38);
-        }
-      }
-
-      .cat-glass {
-        padding: 7px 11px 9px;
-      }
-
-      .cat-tile[data-anchor="category-necklace"] .cat-glass {
-        padding: 10px 14px 12px;
-      }
-
-      .cat-glass-name {
-        font-size: 11px;
-      }
-
-      .cat-tile[data-anchor="category-necklace"] .cat-glass-name {
-        font-size: 13px;
-      }
-
-      .cat-tile[data-anchor="new_collection"] .cat-glass-name {
-        font-size: 13px;
-      }
-
-      .cat-glass-eyebrow {
-        font-size: 7px;
-      }
-
-      .cat-badge {
-        font-size: 7px;
-      }
+      .sbc-card-name      { font-size: 20px; }
+      .sbc-card--hero .sbc-card-name { font-size: 24px; }
     }
 
+    @media (max-width: 480px) {
+      .sbc-grid {
+        grid-template-columns: 1fr;
+      }
 
+      .sbc-card--hero {
+        grid-column: auto;
+      }
 
+      .sbc-title { font-size: 36px; }
+    }
 
 
 
@@ -13446,167 +13356,19 @@
   <!-- TRUST STRIP — SVG Quality Pillars -->
 
 
-  <!-- SHOP BY CATEGORY — BENTO MOSAIC -->
-  <section id="categories" class="sec reveal">
-    <div style="max-width:1360px;margin-inline:auto;padding-block:64px 48px">
-      <div class="sec-head">
-        <div
-          style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,201,106,0.48);font-family:'Jost',sans-serif;margin-bottom:6px">
-          COLLECTIONS</div>
-        <h2 class="sec-title"
-          style="font-family:'Cinzel',serif;font-size:clamp(22px,3.5vw,38px);font-weight:400;letter-spacing:0.08em;color:#f0ead8">
-          Shop by Category</h2>
-        <div style="width:36px;height:1px;background:rgba(240,201,106,0.28);margin:10px auto 22px"></div>
-      </div>
+  <!-- SHOP BY CATEGORY — CINEMATIC BENTO GRID REDESIGN -->
+  <section id="categories">
+    <!-- HEADER -->
+    <div class="sbc-header">
+      <p class="sbc-eyebrow">Collections</p>
+      <h2 class="sbc-title">Shop by Category</h2>
+      <div class="sbc-rule"></div>
+      <p class="sbc-tagline">Discover timeless pieces, each with a story to be treasured.</p>
+    </div>
 
-      <div class="cat-grid" id="cat-bento">
-
-        <!-- Necklaces — hero, spans rows 1–2 -->
-        <div class="cat-tile" data-anchor="category-necklace">
-          <img class="cat-tile-img" loading="lazy" alt="Necklaces"
-            style="object-position:center top;filter:brightness(1.00)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Signature</div>
-              <div class="cat-glass-name">Necklaces</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- Pendants -->
-        <div class="cat-tile" data-anchor="category-pendant">
-          <img class="cat-tile-img" loading="lazy" alt="Pendants"
-            style="object-position:center top;filter:brightness(0.92)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Everyday</div>
-              <div class="cat-glass-name">Pendants</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- Earrings -->
-        <div class="cat-tile" data-anchor="category-earrings">
-          <img class="cat-tile-img" loading="lazy" alt="Earrings"
-            style="object-position:center top;filter:brightness(0.96)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Statement</div>
-              <div class="cat-glass-name">Earrings</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- Sets -->
-        <div class="cat-tile" data-anchor="category-sets">
-          <img class="cat-tile-img" loading="lazy" alt="Sets"
-            style="object-position:center top;filter:brightness(0.88)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Bridal</div>
-              <div class="cat-glass-name">Sets</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- New Collection — hero, spans rows 2–3 -->
-        <div class="cat-tile" data-anchor="new_collection">
-          <img class="cat-tile-img" loading="lazy" alt="New Collection"
-            style="object-position:center top;filter:brightness(1.04)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge cat-badge-new">New</div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Latest</div>
-              <div class="cat-glass-name">New Collection</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- Bangles — two-image split -->
-        <div class="cat-tile" data-anchor="category-bangles">
-          <div class="cat-bangles-split">
-            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles"
-                style="object-position:center center;filter:brightness(0.94)"></div>
-            <div class="cat-bangles-half"><img loading="lazy" alt="Bangles"
-                style="object-position:center center;filter:brightness(0.90)"></div>
-          </div>
-          <div class="cat-bangles-divider"></div>
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Stacking</div>
-              <div class="cat-glass-name">Bangles</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-        <!-- Jhumkas -->
-        <div class="cat-tile" data-anchor="category-jhumkas">
-          <img class="cat-tile-img" loading="lazy" alt="Jhumkas"
-            style="object-position:center 20%;filter:brightness(0.96)">
-          <div class="cat-fade-bottom"></div>
-          <div class="cat-fade-top"></div>
-          <div class="cat-shine"></div>
-          <div class="cat-badge" data-badge></div>
-          <div class="cat-glass">
-            <div>
-              <div class="cat-glass-eyebrow">Heritage</div>
-              <div class="cat-glass-name">Jhumkas</div>
-            </div>
-            <div class="cat-glass-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M7 3l3 3-3 3" stroke="rgba(240,201,106,0.75)" stroke-width="1.2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></div>
-          </div>
-        </div>
-
-      </div>
+    <!-- BENTO GRID — populated by JS -->
+    <div class="sbc-grid" id="sbcGrid">
+      <!-- Cards injected by JS -->
     </div>
   </section>
 
@@ -14644,6 +14406,190 @@
     </div>
   </div>
 
+
+  <!-- Shop by Category — Cinematic Bento Grid JS IIFE -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── CONFIG: fill in from Step 1 reconnaissance ── */
+    var CDN_URL    = 'https://cdn.jsdelivr.net/gh/n8nintegrationai/luvz-collection-dev@main/public/data/products.json';
+    var IMAGE_KEY  = 'image';   /* adjust from Step 1 item 3 */
+    var NAME_KEY   = 'name';    /* adjust from Step 1 item 4 */
+    var KEY_FIELD  = 'key';     /* adjust from Step 1 item 5 — the slug/id field */
+    var TAG_FIELD  = null;      /* set to field name if found in Step 1 item 6, else null */
+    /* ─────────────────────────────────────────────── */
+
+    /* Hardcoded subtitle fallback map (used if TAG_FIELD is null or missing) */
+    var SUBTITLE_FALLBACK = {
+      'necklaces':      'Signature',
+      'necklace':       'Signature',
+      'pendants':       'Everyday',
+      'pendant':        'Everyday',
+      'earrings':       'Statement',
+      'sets':           'Regal',
+      'bangles':        'Stacked in Style',
+      'bangle':         'Stacked in Style',
+      'jhumkas':        'Heritage',
+      'jhumka':         'Heritage',
+      'new-collection': 'New In',
+      'new_collection': 'New In',
+      'new collection': 'New In',
+      'new':            'New In'
+    };
+
+    /*
+      EXISTING LINK MAP — Step 1 item 7.
+      Claude Code: read every <a href="..."> inside section#categories and populate
+      this object before proceeding. Format: { 'categoryKey': 'href' }
+      Example: { 'necklaces': '#category-necklaces', 'pendants': '#category-pendant' }
+      Leave empty if no existing links found — fallback will be used.
+    */
+    var EXISTING_LINKS = {
+      'necklace':    '#category-necklace',
+      'pendant':     '#category-pendant',
+      'earrings':    '#category-earrings',
+      'sets':        '#category-sets',
+      'bangles':     '#category-bangles',
+      'jhumkas':     '#category-jhumkas'
+    };
+
+    function getSubtitle(cat) {
+      /* Try dynamic field first */
+      if (TAG_FIELD && cat[TAG_FIELD]) {
+        console.log('[SBC] Subtitle source: dynamic field "' + TAG_FIELD + '"');
+        return cat[TAG_FIELD];
+      }
+      /* Fallback to hardcoded map */
+      var key = String(cat[KEY_FIELD] || cat[NAME_KEY] || '').toLowerCase().trim();
+      var sub = SUBTITLE_FALLBACK[key] || '';
+      console.log('[SBC] Subtitle source: fallback map for key "' + key + '" → "' + sub + '"');
+      return sub;
+    }
+
+    function getLink(cat, index) {
+      var key = String(cat[KEY_FIELD] || cat[NAME_KEY] || '').toLowerCase().trim();
+
+      /* 1. Existing link from reconnaissance */
+      if (EXISTING_LINKS[key]) return EXISTING_LINKS[key];
+
+      /* 2. Try common key variations */
+      var variations = [key, key.replace(/-/g, '_'), key.replace(/_/g, '-')];
+      for (var i = 0; i < variations.length; i++) {
+        if (EXISTING_LINKS[variations[i]]) return EXISTING_LINKS[variations[i]];
+      }
+
+      /* 3. Construct fallback anchor */
+      return '#category-' + key.replace(/\s+/g, '-').replace(/_/g, '-');
+    }
+
+    function slugify(str) {
+      return String(str).toLowerCase().trim().replace(/\s+/g, '-').replace(/_/g, '-');
+    }
+
+    function buildCard(cat, index) {
+      var num      = String(index + 1).padStart(2, '0');
+      var name     = cat[NAME_KEY]  || '';
+      var imgSrc   = cat[IMAGE_KEY] || '';
+      var subtitle = getSubtitle(cat);
+      var href     = getLink(cat, index);
+      var isHero   = index === 0;
+
+      var card = document.createElement('a');
+      card.className = 'sbc-card' + (isHero ? ' sbc-card--hero' : '');
+      card.href      = href;
+      card.style.animationDelay = (index * 80) + 'ms';
+
+      card.innerHTML =
+        '<img' +
+          ' class="sbc-card-img"' +
+          ' src="'  + imgSrc + '"' +
+          ' alt="'  + name   + '"' +
+          ' loading="lazy"'  +
+        '>' +
+        '<div class="sbc-card-vignette"></div>' +
+        '<div class="sbc-card-content">' +
+          '<div class="sbc-card-top">' +
+            '<p class="sbc-card-num">'  + num      + '</p>' +
+            '<p class="sbc-card-tag">'  + subtitle + '</p>' +
+            '<p class="sbc-card-name">' + name     + '</p>' +
+          '</div>' +
+          '<span class="sbc-card-explore">' +
+            'Explore' +
+            '<span class="sbc-card-explore-arrow" aria-hidden="true">&#8594;</span>' +
+          '</span>' +
+        '</div>';
+
+      return card;
+    }
+
+    function normaliseCategoriesData(data) {
+      /*
+        Handle both array and object shapes from the CDN.
+        Always returns a flat array of category objects.
+      */
+      if (Array.isArray(data.categories)) {
+        return data.categories;
+      }
+      if (data.categories && typeof data.categories === 'object') {
+        /* Object shape: { necklaces: { image, name, ... }, pendants: {...}, ... } */
+        return Object.keys(data.categories).map(function (k) {
+          var entry = data.categories[k];
+          /* Ensure key field is set */
+          if (!entry[KEY_FIELD]) entry[KEY_FIELD] = k;
+          if (!entry[NAME_KEY])  entry[NAME_KEY]  = k;
+          return entry;
+        });
+      }
+      return [];
+    }
+
+    function init() {
+      var grid = document.getElementById('sbcGrid');
+      if (!grid) return;
+
+      fetch(CDN_URL)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+
+          console.log('[SBC] Categories structure:', JSON.stringify(data.categories, null, 2));
+
+          var categories = normaliseCategoriesData(data);
+
+          if (!categories.length) {
+            console.warn('[SBC] No categories found in JSON. Check KEY_FIELD and data shape.');
+            return;
+          }
+
+          /* Check for NEW COLLECTION entry */
+          var newCat = categories.find(function (c) {
+            var k = String(c[KEY_FIELD] || c[NAME_KEY] || '').toLowerCase();
+            return k.indexOf('new') !== -1;
+          });
+          if (newCat) {
+            console.log('[SBC] New Collection entry found:', newCat);
+          } else {
+            console.warn('[SBC] No "new collection" entry found in categories.');
+          }
+
+          /* Render cards */
+          categories.forEach(function (cat, i) {
+            grid.appendChild(buildCard(cat, i));
+          });
+        })
+        .catch(function (err) {
+          console.warn('[SBC] Failed to load categories:', err);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+  })();
+  </script>
 
   <script defer src="app.js"></script>
   <footer class="mini-footer" style="padding-bottom:max(40px,calc(70px + env(safe-area-inset-bottom)))">
