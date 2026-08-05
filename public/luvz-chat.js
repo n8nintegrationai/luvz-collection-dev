@@ -7,6 +7,14 @@
 (function () {
   'use strict';
 
+  // Feature flag guard — see window.ENABLE_STYLIST in index.html <head>.
+  // Also guards against the null-deref below (trigger/closeBtn) on any page
+  // where the chat markup is absent or renamed.
+  if (window.ENABLE_STYLIST === false) {
+    window.openLuvzChat = function () { };
+    return;
+  }
+
   // === Environment-aware API endpoint ===
   const LUVZ_API_URL = (() => {
     const host = window.location.hostname;

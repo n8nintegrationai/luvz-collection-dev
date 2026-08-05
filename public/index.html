@@ -3,10 +3,28 @@
 
 <head>
   <meta charset="UTF-8" />
+
+  <!-- ══════════════ STYLIST FEATURE FLAG ══════════════
+       Set ENABLE_STYLIST = true and uncomment the two blocks marked
+       "STYLIST DISABLED" (luvz-chat.css preload below; luvz-chat.js
+       script tag near </body>) to fully restore the AI chat.
+       Nothing else needs to change. -->
+  <script>
+    window.ENABLE_STYLIST = false;
+    if (!window.ENABLE_STYLIST) {
+      // Safety net: the inline onclick handlers on the nav and menu buttons
+      // reference this global, which luvz-chat.js normally defines.
+      window.openLuvzChat = function () { };
+    }
+  </script>
+
+  <!-- STYLIST DISABLED — uncomment both tags to re-enable
   <link rel="preload" href="/luvz-chat.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
     <link rel="stylesheet" href="/luvz-chat.css">
   </noscript>
+  -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUVZ Collection | 92.5 Silver Jewelry with 22K Gold Polish | Handcrafted Indian Jewellery</title>
   <meta name="description"
@@ -13163,9 +13181,24 @@
   .st-divider { height: 130px; }
   .st-div-nav { flex-direction: column; gap: 10px; }
 }
+
+/* ══ STYLIST FEATURE — global kill switch ══
+   Controlled by window.ENABLE_STYLIST in <head>.
+   Inert when the flag is true (body class is never applied).
+   Top-level rule, deliberately outside all @media blocks. */
+body.stylist-disabled .stylist-feature {
+  display: none !important;
+}
   </style>
 
 <body>
+  <script>
+    // Applies the kill-switch class — see window.ENABLE_STYLIST in <head>.
+    // Must run here, not in <head>: document.body does not exist yet there,
+    // and this lands before the nav renders so the pill never flashes.
+    if (!window.ENABLE_STYLIST) document.body.classList.add('stylist-disabled');
+  </script>
+
 
   <!-- ANNOUNCEMENT BAR -->
   <div id="ann-bar">
@@ -13246,7 +13279,7 @@
         </svg>
         <span class="nav-wish-count" id="nav-wish-count">0</span>
       </button>
-      <button id="nav-askai-icon" class="nav-stylist-btn" onclick="window.openLuvzChat(event);"
+      <button id="nav-askai-icon" class="nav-stylist-btn stylist-feature" onclick="window.openLuvzChat(event);"
         aria-label="Ask Jewellery Stylist">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8">
           <path d="M12 2a5 5 0 1 1 0 10A5 5 0 0 1 12 2zm0 12c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z" />
@@ -14379,7 +14412,7 @@
         Wishlist
       </button>
       <!-- Ask AI nav link - mobile only, triggers same chat drawer -->
-      <button id="mob-askai-btn" onclick="window.openLuvzChat(event); toggleMenu();" style="
+      <button id="mob-askai-btn" class="stylist-feature" onclick="window.openLuvzChat(event); toggleMenu();" style="
           background: none;
           border: none;
           cursor: pointer;
@@ -14606,7 +14639,7 @@
   </script>
 
   <!-- Floating pill trigger button -->
-  <button id="luvz-chat-trigger" aria-label="Chat with your Jewellery Stylist">
+  <button id="luvz-chat-trigger" class="stylist-feature" aria-label="Chat with your Jewellery Stylist">
     <svg class="luvz-trigger-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="luvzGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -14622,7 +14655,7 @@
   </button>
 
   <!-- Chat popup -->
-  <div id="luvz-chat-popup" role="dialog" aria-modal="true" aria-label="Luvz Style Assistant">
+  <div id="luvz-chat-popup" class="stylist-feature" role="dialog" aria-modal="true" aria-label="Luvz Style Assistant">
 
     <!-- Header (close button lives here — never overlaps input) -->
     <div class="luvz-chat-header">
@@ -14690,7 +14723,9 @@
     }
   </script>
 
+  <!-- STYLIST DISABLED — uncomment to re-enable
   <script src="/luvz-chat.js" defer></script>
+  -->
 
   <script>
 (function () {
